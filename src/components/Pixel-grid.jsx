@@ -4,25 +4,21 @@ import {connect} from 'react-redux';
 
 export const Grid = React.createClass({
   getCells: function() {
-    console.log('********* PIXLE-GRID getCells');
-    console.log(this.props);
-    const { gridData, cellSize, columns, padding } = this.props;
+    //console.log('********* PIXLE-GRID getCells');
+    //console.log(this.props);
+    const { gridData, cellSize, columns, padding, currentColor } = this.props;
     const width = Math.floor(100 / columns);
 
-    return gridData.toJS().map(row =>
-      row.map(currentCell =>
-          <Cell width={width} padding={padding} color={currentCell.color}/>
-      )
+    return gridData.toJS().map((currentCell, i) =>
+      <Cell key={i} width={width} padding={padding} color={currentCell.color} currentColor={currentColor}/>
     );
   },
   render: function() {
     const style = {
-      lineHeight: "0px",
-      width: "50%",
-      float: "left"
+      lineHeight: "0px"
     }
 
-    return <div className="grid" style={style}>
+    return <div className="grid-container" style={style}>
       {this.getCells()}
     </div>;
   }
@@ -33,7 +29,8 @@ function mapStateToProps(state) {
     gridData: state.get('grid'),
     cellSize: state.get('cellSize'),
     columns: state.get('columns'),
-    padding: state.get('padding')
+    padding: state.get('padding'),
+    currentColor: state.get('currentColor')
   };
 }
 export const GridContainer = connect(mapStateToProps)(Grid);

@@ -6,17 +6,11 @@ import reducer from './reducer';
 import App from './components/App';
 import {fromJS} from 'immutable';
 
-const store = createStore(reducer, fromJS({
-  grid: [
-    [{color: 'black'},{color: 'black'},{color: 'black'}],
-    [{color: 'black'},{color: 'black'},{color: 'black'}],
-    [{color: 'black'},{color: 'black'},{color: 'black'}]
-  ],
-  cellSize: 10,
-  columns: 3,
-  rows: 3,
-  padding: 0.1
-}));
+const store = createStore(reducer, fromJS({}));
+store.dispatch({
+  type: 'SET_INITIAL_STATE',
+  state: {}
+});
 
 ReactDOM.render(
   <Provider store={store}>

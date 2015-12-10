@@ -1,25 +1,21 @@
 import React from 'react';
 
 export default React.createClass({
-  getInitialState: function() {
-    return {color: '000'};
-  },
   handleClick: function(event) {
-    this.setState({color: this.props.currentColor});
+    this.setState({currentColor: this.props.color});
   },
   render: function() {
-    const { padding, color, width } = this.props;
-    let selectedColor = this.state.color;
+    const { width, color } = this.props;
+    let cellColor = color;
 
     const styles = {
       cellWrapper: {
         display: "inline-block",
         width: `${width}%`,
-        boxSizing: "border-box",
-        padding: padding + 'em'
+        padding: "0.1em"
       },
       cell: {
-        backgroundColor: '#' + selectedColor,
+        backgroundColor: '#' + cellColor,
         color: 'white',
         position: "relative",
         width: "100%",
