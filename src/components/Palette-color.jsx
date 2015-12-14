@@ -1,8 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
-export default React.createClass({
+export const PaletteColor = React.createClass({
   handleClick: function(event) {
     this.setState({currentColor: this.props.color});
+    console.log(this.props);
+    this.props.setColorSelected(this.props.color);
   },
   render: function() {
     const { width, color } = this.props;
@@ -28,3 +32,13 @@ export default React.createClass({
       </div>;
   }
 });
+
+function mapStateToProps(state) {
+  return {
+    currentColor: state.get('currentColor'),
+  };
+}
+export const PaletteColorContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(PaletteColor);

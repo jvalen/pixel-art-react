@@ -1,14 +1,20 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
-export default React.createClass({
+export const PixelCell = React.createClass({
   getInitialState: function() {
-    return {color: '000'};
+    return {color: '484747'};
   },
   handleClick: function(event) {
-    this.setState({color: this.props.currentColor});
+    this.setState({
+      color: this.props.currentColor,
+      used: true
+    });
+    this.props.setGridCellValue(this.props.currentColor, true, this.props.id);
   },
   render: function() {
-    const { padding, color, width } = this.props;
+    const { padding, color, width, id } = this.props;
     let selectedColor = this.state.color;
 
     const styles = {
@@ -32,3 +38,11 @@ export default React.createClass({
       </div>;
   }
 });
+
+function mapStateToProps(state) {
+  return {};
+}
+export const PixelCellContainer = connect(
+  mapStateToProps,
+  actionCreators
+)(PixelCell);

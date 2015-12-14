@@ -1,5 +1,5 @@
 import React from 'react';
-import PaletteColor from './Palette-color';
+import {PaletteColorContainer} from './Palette-color';
 import {connect} from 'react-redux';
 
 export const Palette = React.createClass({
@@ -8,7 +8,7 @@ export const Palette = React.createClass({
     const width = 12;
 
     return paletteGridData.toJS().map((currentColor, i) =>
-      <PaletteColor key={i} width={width} color={currentColor.color} />
+      <PaletteColorContainer key={i} width={width} color={currentColor.color} />
     );
   },
   render: function() {

@@ -12,7 +12,7 @@ function createGrid(cellsCount, initialColor, createGamma) {
   } else {
     //Set every cell with the initial color
     for (var i = 0; i < cellsCount; i++) {
-      newGrid.push({color: initialColor});
+      newGrid.push({color: initialColor, used: false});
     }
   }
 
@@ -27,7 +27,7 @@ function setInitialState(state, newState) {
       padding = 0.1,
       currentColor = '2CF518',
       pixelGrid = createGrid(columns * rows, '000'),
-      paletteGrid = createGrid(4095, '000', true);
+      paletteGrid = createGrid(4095, '484747', true);
 
   let initialState = {
     grid: pixelGrid,
@@ -38,25 +38,32 @@ function setInitialState(state, newState) {
     padding: padding,
     currentColor: currentColor
   };
-  console.log(initialState);
 
   return state.merge(initialState);
 }
 
 function setGridDimension(state, columns, rows) {
-  console.log('********* setGridDimension action launched');
-  console.log(columns);
-  console.log(rows);
-
   let newState = {
     grid: createGrid(columns * rows, '000'),
     rows: parseInt(rows, 10),
     columns: parseInt(columns, 10)
   }
 
-  console.log(state.merge(newState).toJS());
-
   return state.merge(newState);
+}
+
+function setColorSelected(state, newColorSelected) {
+  let newState = {
+    currentColor: newColorSelected
+  }
+  return state.merge(newState);
+}
+
+function setGridCellValue(state, color, used, id) {
+  return state.setIn(['grid', parseInt(id, 10)], {
+    color: color,
+    used: used
+  });
 }
 
 export default function(state = Map(), action) {
@@ -65,6 +72,10 @@ export default function(state = Map(), action) {
     return setInitialState(state, action.state);
   case 'SET_GRID_DIMENSION':
     return setGridDimension(state, action.columns, action.rows);
+  case 'SET_COLOR_SELECTED':
+    return setColorSelected(state, action.newColorSelected);
+  case 'SET_GRID_CELL_VALUE':
+    return setGridCellValue(state, action.color, action.used, action.id);
   }
   return state;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import {GridContainer} from './Pixel-grid';
 import {DimensionsContainer} from './Dimensions';
 import {PaletteContainer} from './Palette-grid';
+import {CssDisplayContainer} from './Css-display';
 
 export default React.createClass({
   render: function() {
@@ -16,6 +17,9 @@ export default React.createClass({
           <div className="col-1-4">
             <DimensionsContainer />
           </div>
+        </div>
+        <div>
+          <CssDisplayContainer />
         </div>
       </div>;
   }

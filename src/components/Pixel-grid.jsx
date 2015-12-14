@@ -1,5 +1,5 @@
 import React from 'react';
-import Cell from './Pixel-cell';
+import {PixelCellContainer} from './Pixel-cell';
 import {connect} from 'react-redux';
 
 export const Grid = React.createClass({
@@ -10,7 +10,7 @@ export const Grid = React.createClass({
     const width = Math.floor(100 / columns);
 
     return gridData.toJS().map((currentCell, i) =>
-      <Cell key={i} width={width} padding={padding} color={currentCell.color} currentColor={currentColor}/>
+      <PixelCellContainer key={i} id={i} width={width} padding={padding} color={currentCell.color} currentColor={currentColor}/>
     );
   },
   render: function() {

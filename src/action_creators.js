@@ -12,3 +12,19 @@ export function setGridDimension(columns, rows) {
     rows
   };
 }
+
+export function setColorSelected(newColorSelected) {
+  return {
+    type: 'SET_COLOR_SELECTED',
+    newColorSelected
+  };
+}
+
+export function setGridCellValue(color, used, id) {
+  return {
+    type: 'SET_GRID_CELL_VALUE',
+    color,
+    used,
+    id
+  };
+}
