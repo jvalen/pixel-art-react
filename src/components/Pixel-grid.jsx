@@ -26,11 +26,11 @@ export const Grid = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    gridData: state.get('grid'),
-    cellSize: state.get('cellSize'),
-    columns: state.get('columns'),
-    padding: state.get('padding'),
-    currentColor: state.get('currentColor')
+    gridData: state.present.get('grid'),
+    cellSize: state.present.get('cellSize'),
+    columns: state.present.get('columns'),
+    padding: state.present.get('padding'),
+    currentColor: state.present.get('currentColor')
   };
 }
 export const GridContainer = connect(mapStateToProps)(Grid);

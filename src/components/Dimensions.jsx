@@ -30,14 +30,16 @@ export const Dimensions = React.createClass({
         <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
         <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
         <button style={styles.button} onClick={() => this.props.setGridDimension(columnsValue, rowsValue)}>RESIZE</button>
+        <button onClick={() => this.props.undo()}>back</button>
+        <button onClick={() => this.props.redo()}>forward</button>
       </div>;
   }
 });
 
 function mapStateToProps(state) {
   return {
-    columns: state.get('columns'),
-    rows: state.get('rows')
+    columns: state.present.get('columns'),
+    rows: state.present.get('rows')
   };
 }
 export const DimensionsContainer = connect(

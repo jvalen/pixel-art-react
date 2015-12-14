@@ -1,3 +1,5 @@
+import { ActionCreators } from 'redux-undo';
+
 export function setState(state) {
   return {
     type: 'SET_STATE',
@@ -27,4 +29,12 @@ export function setGridCellValue(color, used, id) {
     used,
     id
   };
+}
+
+export function undo() {
+  return (ActionCreators.undo());
+}
+
+export function redo() {
+  return (ActionCreators.redo());
 }

@@ -38,10 +38,10 @@ export const CssDisplay = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    grid: state.get('grid'),
-    columns: state.get('columns'),
-    rows: state.get('rows'),
-    cellSize: state.get('cellSize')
+    grid: state.present.get('grid'),
+    columns: state.present.get('columns'),
+    rows: state.present.get('rows'),
+    cellSize: state.present.get('cellSize')
   };
 }
 export const CssDisplayContainer = connect(

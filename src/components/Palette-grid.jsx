@@ -29,7 +29,7 @@ export const Palette = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    paletteGridData: state.get('paletteGridData')
+    paletteGridData: state.present.get('paletteGridData')
   };
 }
 export const PaletteContainer = connect(mapStateToProps)(Palette);

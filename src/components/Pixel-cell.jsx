@@ -4,7 +4,10 @@ import * as actionCreators from '../action_creators';
 
 export const PixelCell = React.createClass({
   handleClick: function(event) {
-    this.props.setGridCellValue(this.props.currentColor, true, this.props.id);
+    this.props.setGridCellValue(
+      this.props.currentColor,
+      true,
+      this.props.id);
   },
   render: function() {
     const { padding, color, width, id } = this.props;
