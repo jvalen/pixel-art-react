@@ -7,7 +7,7 @@ export const Grid = React.createClass({
     //console.log('********* PIXLE-GRID getCells');
     //console.log(this.props);
     const { gridData, cellSize, columns, padding, currentColor } = this.props;
-    const width = Math.floor(100 / columns);
+    const width = 100 / columns;
 
     return gridData.toJS().map((currentCell, i) =>
       <PixelCellContainer key={i} id={i} width={width} padding={padding} color={currentCell.color} currentColor={currentColor}/>
