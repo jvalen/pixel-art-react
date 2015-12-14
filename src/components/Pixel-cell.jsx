@@ -3,19 +3,12 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
 export const PixelCell = React.createClass({
-  getInitialState: function() {
-    return {color: '484747'};
-  },
   handleClick: function(event) {
-    this.setState({
-      color: this.props.currentColor,
-      used: true
-    });
     this.props.setGridCellValue(this.props.currentColor, true, this.props.id);
   },
   render: function() {
     const { padding, color, width, id } = this.props;
-    let selectedColor = this.state.color;
+    let selectedColor = color;
 
     const styles = {
       cellWrapper: {

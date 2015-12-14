@@ -21,18 +21,15 @@ export const Dimensions = React.createClass({
     const { columns, rows } = this.props;
 
     const styles = {
-      textInput: {
-        width: "50%"
-      },
       button: {
         width: "100%"
       }
     };
 
     return <div className="dimensions">
-        <input style={styles.textInput} type="text" placeholder="Columns" className="columns" value={columnsValue} onChange={this.handleChange} />
-        <input style={styles.textInput} type="text" placeholder="Rows" className="rows" value={rowsValue} onChange={this.handleChange}/>
-        <button style={styles.button} onClick={() => this.props.setGridDimension(columnsValue, rowsValue)}>New layout</button>
+        <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
+        <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
+        <button style={styles.button} onClick={() => this.props.setGridDimension(columnsValue, rowsValue)}>RESIZE</button>
       </div>;
   }
 });

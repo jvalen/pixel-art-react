@@ -6,7 +6,7 @@ import {CssDisplayContainer} from './Css-display';
 
 export default React.createClass({
   render: function() {
-    return <div className="pixelArtApp">
+    return <div id="pixel-art-app">
         <div className="grid">
           <div className="col-1-4">
             <PaletteContainer />
@@ -18,7 +18,7 @@ export default React.createClass({
             <DimensionsContainer />
           </div>
         </div>
-        <div>
+        <div className="css-container">
           <CssDisplayContainer />
         </div>
       </div>;

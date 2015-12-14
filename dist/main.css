@@ -1,3 +1,5 @@
+/* General */
+
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -44,4 +46,80 @@
 
 .grid-pad > [class*='col-']:last-of-type {
   padding-right: 20px;
+}
+
+/* App */
+html {
+  background-color: #585858;
+}
+
+html, body, #app, #pixel-art-app, .css-container, .css-display {
+  height: 100%;
+}
+
+.css-display {
+    background-color: #313131;
+    padding: 1em;
+    margin-top: 1em;
+    color: #BBBBBB;
+}
+
+/* Inputs */
+
+input[type="text"] {
+  margin: 0;
+  font-family: sans-serif;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  text-align: center;
+  font-size: 3em;
+  color: #BBBBBB;
+  background-color: #313131;
+  width: 50%
+}
+input[type="text"]:focus {
+  outline: none;
+}
+
+input[type="text"] {
+  padding: 10px 0px;
+  border: solid 5px #757575;
+  box-shadow: inset 0 0 0 1px #707070;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+input[type="text"]:focus,
+input[type="text"].focus {
+  border: solid 5px #969696;
+}
+
+.multiply-symbol {
+  text-align: center;
+  font-size: 4em;
+  color: #313131;
+}
+
+/* Buttons */
+
+button, .button, input[type=submit] {
+  margin-top: 0.8em;
+  border: 0;
+  background: #5786c1;
+  color: #BBBBBB;
+  padding: 8px 14px;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+  /* needed for anchors */
+  position: relative;
+  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae, 3px 2px #3a587f, 2px 3px #4171ae, 4px 3px #3a587f, 3px 4px #4171ae, 5px 4px #3a587f, 4px 5px #4171ae, 6px 5px #3a587f, 5px 6px #4171ae;
+}
+button:hover, button:focus, button.hover, button.focus, .button:hover, .button:focus, .button.hover, .button.focus, input[type=submit]:hover, input[type=submit]:focus, input[type=submit].hover, input[type=submit].focus {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae, 3px 2px #3a587f, 2px 3px #4171ae, 4px 3px #3a587f, 3px 4px #4171ae;
+}
+button:active, button.active, .button:active, .button.active, input[type=submit]:active, input[type=submit].active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae;
 }

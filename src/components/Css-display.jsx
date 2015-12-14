@@ -30,10 +30,7 @@ export const CssDisplay = React.createClass({
     return <div>{cssString}</div>;
   },
   render: function() {
-    const style = {
-      backgroundColor: '#CCCCCC'
-    };
-    return <div className="css-display" style={style}>
+    return <div className="css-display">
       {this.generateCss()}
     </div>;
   }

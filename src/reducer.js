@@ -1,11 +1,13 @@
 import {Map, toJS} from 'immutable';
 
+const GRID_INITIAL_COLOR = '313131';
+
 function createGrid(cellsCount, initialColor, createGamma) {
   let newGrid = [];
 
   if (createGamma) {
     // Create colors gamma
-    for(var i = 0; i <= cellsCount ; i += 32) {
+    for(var i = 0; i <= cellsCount ; i += 42) {
       let hex = ((0xe000|i).toString(16)).slice(1);
       newGrid.push({color: hex});
     }
@@ -26,8 +28,8 @@ function setInitialState(state, newState) {
       rows = 10,
       padding = 0.1,
       currentColor = '2CF518',
-      pixelGrid = createGrid(columns * rows, '000'),
-      paletteGrid = createGrid(4095, '484747', true);
+      pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR),
+      paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true);
 
   let initialState = {
     grid: pixelGrid,
@@ -44,7 +46,7 @@ function setInitialState(state, newState) {
 
 function setGridDimension(state, columns, rows) {
   let newState = {
-    grid: createGrid(columns * rows, '000'),
+    grid: createGrid(columns * rows, GRID_INITIAL_COLOR),
     rows: parseInt(rows, 10),
     columns: parseInt(columns, 10)
   }

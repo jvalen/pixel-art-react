@@ -23,7 +23,7 @@ export const PaletteColor = React.createClass({
         color: 'white',
         position: "relative",
         width: "100%",
-        paddingBottom: "100%",
+        paddingBottom: "100%"
       }
     };
 
