@@ -27,7 +27,7 @@ function setInitialState(state, newState) {
       columns = 10,
       rows = 10,
       padding = 0.1,
-      currentColor = '2CF518',
+      currentColor = '000',
       pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR),
       paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true);
 
