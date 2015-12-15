@@ -7,11 +7,22 @@ export const Dimensions = React.createClass({
     return {columnsValue: 10, rowsValue: 10};
   },
   handleChange: function(event) {
-    if (event.target.className === 'columns') {
-      this.setState({columnsValue: event.target.value});
-    } else if (event.target.className === 'rows') {
-      this.setState({rowsValue: event.target.value});
+    let propertyName, newLocalState = {};
+    switch (event.target.className) {
+      case 'columns':
+        propertyName = 'columnsValue';
+        break;
+      case 'rows':
+        propertyName = 'rowsValue';
+        break;
     }
+
+    newLocalState[propertyName] = event.target.value;
+    this.setState(newLocalState, function(){
+      this.props.setGridDimension(
+        this.state.columnsValue, this.state.rowsValue
+      );
+    });
   },
   render: function() {
     //console.log('********* DIMENSIONS getCells');

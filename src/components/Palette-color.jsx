@@ -4,7 +4,7 @@ import * as actionCreators from '../action_creators';
 
 export const PaletteColor = React.createClass({
   handleClick: function(event) {
-    this.setState({currentColor: this.props.color});
+    this.setState({test: this.props.color});
     this.props.setColorSelected(this.props.color);
   },
   render: function() {
