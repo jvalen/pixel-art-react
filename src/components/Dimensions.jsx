@@ -25,24 +25,26 @@ export const Dimensions = React.createClass({
     });
   },
   render: function() {
-    //console.log('********* DIMENSIONS getCells');
     let columnsValue = this.state.columnsValue;
     let rowsValue = this.state.rowsValue;
-    //console.log(columnsValue + ' ' + rowsValue);
     const { columns, rows } = this.props;
 
     const styles = {
-      button: {
-        width: "100%"
+      undo: {
+        width: '48%',
+        float: 'left'
+      },
+      redo: {
+        width: '48%',
+        float: 'right'
       }
     };
 
     return <div className="dimensions">
         <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
         <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
-        <button style={styles.button} onClick={() => this.props.setGridDimension(columnsValue, rowsValue)}>RESIZE</button>
-        <button onClick={() => this.props.undo()}>back</button>
-        <button onClick={() => this.props.redo()}>forward</button>
+        <button style={styles.undo} onClick={() => this.props.undo()}>UNDO</button>
+        <button style={styles.redo} onClick={() => this.props.redo()}>REDO</button>
       </div>;
   }
 });
