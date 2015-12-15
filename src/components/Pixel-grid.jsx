@@ -15,7 +15,8 @@ export const Grid = React.createClass({
   },
   render: function() {
     const style = {
-      lineHeight: "0px"
+      lineHeight: '0px',
+      minHeight: '1px'
     }
 
     return <div className="grid-container" style={style}>
