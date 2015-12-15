@@ -4,7 +4,6 @@ import * as actionCreators from '../action_creators';
 
 export const PaletteColor = React.createClass({
   handleClick: function(event) {
-    this.setState({test: this.props.color});
     this.props.setColorSelected(this.props.color);
   },
   render: function() {
@@ -25,6 +24,12 @@ export const PaletteColor = React.createClass({
         paddingBottom: "100%"
       }
     };
+
+    if (this.props.currentColor === cellColor) {
+      styles.cellWrapper.border = '4px solid white';
+    } else {
+      styles.cellWrapper.border = 'none';
+    }
 
     return <div className="cellWrapper" style={styles.cellWrapper}>
         <div className="cell" onClick={this.handleClick} style={styles.cell}></div>
