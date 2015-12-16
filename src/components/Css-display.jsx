@@ -1,32 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
+import {generatePixelDrawCss} from '../utils/helpers';
 
 export const CssDisplay = React.createClass({
   generateCss: function() {
     const { grid, columns, rows, cellSize } = this.props;
-    let cssString = grid.toJS().reduce((accumulator, currentValue, i) => {
-      if (currentValue.used) {
-        let xCoord = ((i % columns) * cellSize) + cellSize;
-        let yCoord = (parseInt(i / rows, 10) * cellSize) + cellSize;
-
-        return accumulator +
-          ' ' +
-          (xCoord + 'px ') +
-          (yCoord + 'px')
-          + ' 0 '
-          + '#' + currentValue.color
-          + ',';
-      } else {
-        return accumulator;
-      }
-    }, '');
+    let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
 
     if (!!cssString) {
       cssString = cssString.slice(0, -1);
       cssString = 'box-shadow:' + cssString + '; '
       cssString +=  'height: ' + cellSize + 'px; width: ' + cellSize + 'px;';
     }
+
     return <div>{cssString}</div>;
   },
   render: function() {
