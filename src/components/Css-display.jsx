@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actionCreators from '../action_creators';
 import {generatePixelDrawCss} from '../utils/helpers';
 
 export const CssDisplay = React.createClass({
@@ -32,6 +31,5 @@ function mapStateToProps(state) {
   };
 }
 export const CssDisplayContainer = connect(
-  mapStateToProps,
-  actionCreators
+  mapStateToProps
 )(CssDisplay);
