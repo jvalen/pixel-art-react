@@ -40,7 +40,7 @@ export const Dimensions = React.createClass({
       }
     };
 
-    return <div className="dimensions">
+    return <div className="dimensions self_clear">
         <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
         <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
         <button style={styles.undo} onClick={() => this.props.undo()}>UNDO</button>

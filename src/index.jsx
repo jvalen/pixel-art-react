@@ -7,12 +7,6 @@ import App from './components/App';
 import {Map, fromJS} from 'immutable';
 import undoable from 'redux-undo';
 
-// const store = createStore(reducer, fromJS({}));
-// store.dispatch({
-//   type: 'SET_INITIAL_STATE',
-//   state: {}
-// });
-
 const store = createStore(undoable(reducer, {
   initialState: new Map({}),
   initTypes: ['@@redux/SET_INITIAL_STATE', '@@SET_INITIAL_STATE'], // history will be (re)set upon init action type

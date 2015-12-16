@@ -3,6 +3,7 @@ import {GridContainer} from './Pixel-grid';
 import {DimensionsContainer} from './Dimensions';
 import {PaletteContainer} from './Palette-grid';
 import {CssDisplayContainer} from './Css-display';
+import {PreviewContainer} from './Preview';
 
 export default React.createClass({
   render: function() {
@@ -16,6 +17,7 @@ export default React.createClass({
           </div>
           <div className="col-1-4">
             <DimensionsContainer />
+            <PreviewContainer />
           </div>
         </div>
         <div className="css-container">
