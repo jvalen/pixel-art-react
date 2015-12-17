@@ -69,6 +69,8 @@ function setGridCellValue(state, color, used, id) {
 }
 
 function setDrawing(state, grid, cellSize, columns, rows) {
+  console.log(columns);
+  console.log(rows);
   let newState = {
     grid: grid,
     cellSize: cellSize,

@@ -17,7 +17,7 @@ export const Dimensions = React.createClass({
         break;
     }
 
-    newLocalState[propertyName] = event.target.value;
+    newLocalState[propertyName] = event.target.value | 0;
     this.setState(newLocalState, function(){
       this.props.setGridDimension(
         this.state.columnsValue, this.state.rowsValue
@@ -25,9 +25,9 @@ export const Dimensions = React.createClass({
     });
   },
   render: function() {
-    let columnsValue = this.state.columnsValue;
-    let rowsValue = this.state.rowsValue;
     const { columns, rows } = this.props;
+    let columnsValue = columns;
+    let rowsValue = rows;
 
     const styles = {
       undo: {

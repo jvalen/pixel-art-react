@@ -27,7 +27,7 @@ export default React.createClass({
           </div>
           <div className="col-1-4">
             <DimensionsContainer />
-            <PreviewContainer />
+            <PreviewContainer key="0" />
           </div>
         </div>
         <div className="css-container">

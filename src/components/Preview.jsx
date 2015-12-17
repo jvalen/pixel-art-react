@@ -4,20 +4,34 @@ import {generatePixelDrawCss} from '../utils/helpers';
 
 export const Preview = React.createClass({
   generatePreview: function() {
-    const { grid, columns, rows, cellSize } = this.props;
-    let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
-
-    let style =  {
-      boxShadow: cssString,
-      height: cellSize,
-      width: cellSize,
-      marginTop: '1em'
-    };
+    let dataFromParent = !!this.props.loadData;
+    const { grid, columns, rows, cellSize } =
+      dataFromParent ? this.props.loadData : this.props;
+    let cssString = generatePixelDrawCss(
+      dataFromParent ? grid : grid.toJS(),
+      columns, rows, cellSize),
+        style =  {
+          boxShadow: cssString,
+          height: cellSize,
+          width: cellSize,
+          marginTop: '1em'
+        };
 
     return <div style={style}></div>;
   },
   render: function() {
-    return <div className="preview">
+    let dataFromParent = !!this.props.loadData;
+    const { grid, columns, rows, cellSize } =
+      dataFromParent ? this.props.loadData : this.props;
+
+    const wrapperStyle = {
+      width: columns * cellSize,
+      height: rows * cellSize,
+      float: 'left',
+      margin: '1em'
+    };
+
+    return <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>
       {this.generatePreview()}
     </div>;
   }
