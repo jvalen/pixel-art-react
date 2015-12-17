@@ -27,16 +27,8 @@ export const LoadDrawing = React.createClass({
         <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
       );
     } else {
-      return 'Nothing awesome yet :('
+      return ['Nothing awesome yet...'];
     }
-  },
-  load: function() {
-    console.log("LoadDrawing");
-    let dataStored = localStorage.getItem('pixel-art-react'),
-        test = JSON.parse(dataStored)[0];
-
-    this.openModal();
-    // this.props.setDrawing(test.grid, test.cellSize, test.columns, test.rows);
   },
   render: function() {
     const customStyles = {
@@ -53,7 +45,7 @@ export const LoadDrawing = React.createClass({
     };
     return (
       <div>
-        <button className="load-drawing red" onClick={this.load}>LOAD</button>
+        <button className="load-drawing red" onClick={this.openModal}>LOAD</button>
         <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}

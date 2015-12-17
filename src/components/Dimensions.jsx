@@ -37,10 +37,28 @@ export const Dimensions = React.createClass({
       redo: {
         width: '48%',
         float: 'right'
+      },
+      columnsLabel: {
+        width: '48%',
+        float: 'left',
+        textAlign: 'center',
+        fontSize: '1.4em',
+        marginBottom: '0.3em',
+        color: '#BBBBBB'
+      },
+      rowsLabel: {
+        width: '48%',
+        float: 'right',
+        textAlign: 'center',
+        fontSize: '1.4em',
+        marginBottom: '0.3em',
+        color: '#BBBBBB'
       }
     };
 
     return <div className="dimensions self_clear">
+        <div style={styles.columnsLabel}>Columns</div>
+        <div style={styles.rowsLabel}>Rows</div>
         <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
         <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
         <button style={styles.undo} onClick={() => this.props.undo()}>UNDO</button>

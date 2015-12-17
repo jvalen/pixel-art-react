@@ -18,7 +18,8 @@ export const Grid = React.createClass({
       lineHeight: '0px',
       minHeight: '1px',
       margin: '0 auto',
-      width: '86%'
+      width: '86%',
+      marginTop: '1em'
     }
 
     return <div className="grid-container" style={style}>
