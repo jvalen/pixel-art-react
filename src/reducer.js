@@ -68,6 +68,17 @@ function setGridCellValue(state, color, used, id) {
   });
 }
 
+function setDrawing(state, grid, cellSize, columns, rows) {
+  let newState = {
+    grid: grid,
+    cellSize: cellSize,
+    columns: columns,
+    rows: rows,
+  };
+
+  return state.merge(newState);
+}
+
 export default function(state = Map(), action) {
   switch (action.type) {
   case 'SET_INITIAL_STATE':
@@ -78,6 +89,8 @@ export default function(state = Map(), action) {
     return setColorSelected(state, action.newColorSelected);
   case 'SET_GRID_CELL_VALUE':
     return setGridCellValue(state, action.color, action.used, action.id);
+  case 'SET_DRAWING':
+    return setDrawing(state, action.grid, action.cellSize, action.columns, action.rows);
   }
   return state;
 }

@@ -12,8 +12,14 @@ export default React.createClass({
     return <div id="pixel-art-app">
         <div className="grid">
           <div className="col-1-4">
-            <LoadDrawingContainer />
-            <SaveDrawingContainer />
+            <div className="self_clear">
+              <div className="load-button-wrapper">
+                <LoadDrawingContainer />
+              </div>
+              <div className="save-button-wrapper">
+                <SaveDrawingContainer />
+              </div>
+            </div>
             <PaletteContainer />
           </div>
           <div className="col-1-2">

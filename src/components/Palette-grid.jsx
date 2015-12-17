@@ -15,7 +15,7 @@ export const Palette = React.createClass({
     const style = {
       lineHeight: "0px",
       backgroundColor: '#333333',
-      margin: '0 auto',
+      margin: '1em auto',
       display: 'table',
       textAlign: 'center',
       padding: '0.2em'

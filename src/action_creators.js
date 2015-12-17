@@ -31,6 +31,16 @@ export function setGridCellValue(color, used, id) {
   };
 }
 
+export function setDrawing(grid, cellSize, columns, rows) {
+  return {
+    type: 'SET_DRAWING',
+    grid,
+    cellSize,
+    columns,
+    rows
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

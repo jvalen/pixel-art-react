@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actionCreators from '../action_creators';
 import {generatePixelDrawCss} from '../utils/helpers';
 
 export const SaveDrawing = React.createClass({
@@ -30,7 +29,7 @@ export const SaveDrawing = React.createClass({
     }
   },
   render: function() {
-    return <button className="save-drawing" onClick={this.save}>SAVE</button>;
+    return <button className="save-drawing red" onClick={this.save}>SAVE</button>;
   }
 });
 

@@ -107,6 +107,7 @@ input[type="text"].focus {
 
 /* Buttons */
 
+/* Default button */
 button, .button, input[type=submit] {
   margin-top: 0.8em;
   border: 0;
@@ -117,7 +118,6 @@ button, .button, input[type=submit] {
   font-size: 18px;
   text-decoration: none;
   display: inline-block;
-  /* needed for anchors */
   position: relative;
   box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae, 3px 2px #3a587f, 2px 3px #4171ae, 4px 3px #3a587f, 3px 4px #4171ae, 5px 4px #3a587f, 4px 5px #4171ae, 6px 5px #3a587f, 5px 6px #4171ae;
 }
@@ -128,4 +128,34 @@ button:hover, button:focus, button.hover, button.focus, .button:hover, .button:f
 button:active, button.active, .button:active, .button.active, input[type=submit]:active, input[type=submit].active {
   transform: translate(4px, 4px);
   box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae;
+}
+
+/* Red button */
+button.red {
+  background: #961818;
+  box-shadow: 1px 0px #6B1010, 0px 1px #741515, 2px 1px #6B1010, 1px 2px #741515, 3px 2px #6B1010, 2px 3px #741515, 4px 3px #6B1010, 3px 4px #741515, 5px 4px #6B1010, 4px 5px #741515, 6px 5px #6B1010, 5px 6px #741515;
+  margin-top: 0;
+}
+button.red:hover, button.red:focus, button.red.hover, button.red.focus, .button.red:hover, .button.red:focus, .button.red.hover, .button.red.focus {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 0px #6B1010, 0px 1px #741515, 2px 1px #6B1010, 1px 2px #741515, 3px 2px #6B1010, 2px 3px #741515, 4px 3px #6B1010, 3px 4px #741515;
+}
+button.red:active, button.red.active, .button.red:active, .button.red.active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 0px #6B1010, 0px 1px #741515, 2px 1px #6B1010, 1px 2px #741515;
+}
+
+.load-button-wrapper {
+  width: 50%;
+  float: left;
+}
+.save-button-wrapper {
+  width: 50%;
+  float: right;
+}
+
+.load-button-wrapper button, .save-button-wrapper button {
+  margin: 0 auto;
+  display: table;
+  width: 80%;
 }
