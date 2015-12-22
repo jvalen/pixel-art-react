@@ -4,10 +4,19 @@ import * as actionCreators from '../action_creators';
 
 export const PixelCell = React.createClass({
   handleClick: function(event) {
-    this.props.setGridCellValue(
-      this.props.currentColor,
-      true,
-      this.props.id);
+    if (this.props.currentColor !== null) {
+      //Apply the new color
+      this.props.setGridCellValue(
+        this.props.currentColor,
+        true,
+        this.props.id);
+    } else {
+      //Color removed
+      this.props.setGridCellValue(
+        this.props.initialColor,
+        false,
+        this.props.id);
+    }
   },
   render: function() {
     const { padding, color, width, id } = this.props;
@@ -36,7 +45,9 @@ export const PixelCell = React.createClass({
 });
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    initialColor: state.present.get('initialColor')
+  };
 }
 export const PixelCellContainer = connect(
   mapStateToProps,

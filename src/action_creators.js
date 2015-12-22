@@ -41,6 +41,12 @@ export function setDrawing(grid, cellSize, columns, rows) {
   };
 }
 
+export function setEraser() {
+  return {
+    type: 'SET_ERASER'
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

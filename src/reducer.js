@@ -38,7 +38,8 @@ function setInitialState(state, newState) {
     columns: columns,
     rows: rows,
     padding: padding,
-    currentColor: currentColor
+    currentColor: currentColor,
+    initialColor: GRID_INITIAL_COLOR
   };
 
   return state.merge(initialState);
@@ -81,6 +82,14 @@ function setDrawing(state, grid, cellSize, columns, rows) {
   return state.merge(newState);
 }
 
+function setEraser(state) {
+  let newState = {
+    currentColor: null
+  };
+
+  return state.merge(newState);
+}
+
 export default function(state = Map(), action) {
   switch (action.type) {
   case 'SET_INITIAL_STATE':
@@ -93,6 +102,8 @@ export default function(state = Map(), action) {
     return setGridCellValue(state, action.color, action.used, action.id);
   case 'SET_DRAWING':
     return setDrawing(state, action.grid, action.cellSize, action.columns, action.rows);
+  case 'SET_ERASER':
+    return setEraser(state);
   }
   return state;
 }

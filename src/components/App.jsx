@@ -6,6 +6,7 @@ import {CssDisplayContainer} from './Css-display';
 import {PreviewContainer} from './Preview';
 import {LoadDrawingContainer} from './LoadDrawing';
 import {SaveDrawingContainer} from './SaveDrawing';
+import {EraserContainer} from './Eraser';
 
 export default React.createClass({
   render: function() {
@@ -13,6 +14,7 @@ export default React.createClass({
         <div className="grid grid-pad">
           <div className="col-1-4">
             <PaletteContainer />
+            <EraserContainer />
             <div className="self_clear">
               <div className="load-button-wrapper">
                 <LoadDrawingContainer />

@@ -39,7 +39,7 @@ export const PaletteColor = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    currentColor: state.present.get('currentColor'),
+    currentColor: state.present.get('currentColor')
   };
 }
 export const PaletteColorContainer = connect(
