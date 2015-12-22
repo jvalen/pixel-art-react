@@ -48,8 +48,8 @@ export const Eraser = React.createClass({
         left: '20px', top: '18px', width: '100%', height: '100%',
         backgroundColor: '#C38282',
         transform: 'rotateX( 0deg ) translateZ( 18px )',
-        paddingTop: '0.5em',
-        color: 'black'
+        paddingTop: '0.7em',
+        color: '#7A5252'
       },
       back:   {
         left: '-18px', width: '100%', height: '100%',

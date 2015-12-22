@@ -130,6 +130,7 @@ button, .button, input[type=submit] {
   padding: 8px 14px;
   font-weight: bold;
   font-size: 18px;
+  font-family: 'silkscreen_expandednormal';
   text-decoration: none;
   display: inline-block;
   position: relative;
