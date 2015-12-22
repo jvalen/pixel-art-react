@@ -12,6 +12,19 @@
   display: table;
 }
 
+/* Fonts */
+@font-face {
+  font-family: 'silkscreen_expandednormal';
+  src: url('fonts/slkscre-webfont.eot');
+  src: url('fonts/slkscre-webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/slkscre-webfont.woff2') format('woff2'),
+       url('fonts/slkscre-webfont.woff') format('woff'),
+       url('fonts/slkscre-webfont.ttf') format('truetype'),
+       url('fonts/slkscre-webfont.svg#silkscreen_expandednormal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Grid */
 
 [class*='col-'] {
@@ -47,7 +60,7 @@
 }
 
 .grid-pad {
-  padding: 20px 0 20px 20px;
+  padding: 0px 0 20px 20px;
 }
 
 .grid-pad > [class*='col-']:last-of-type {
@@ -57,6 +70,7 @@
 /* App */
 html {
   background-color: #585858;
+  font-family: 'silkscreen_expandednormal';
 }
 
 html, body, #app, #pixel-art-app, .css-container, .css-display {
@@ -158,4 +172,9 @@ button.red:active, button.red.active, .button.red:active, .button.red.active {
   margin: 0 auto;
   display: table;
   width: 80%;
+}
+
+header {
+  padding: 0 1.4em;
+  color: #BBBBBB;
 }
