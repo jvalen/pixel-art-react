@@ -10,14 +10,16 @@ export const Eraser = React.createClass({
     const styles = {
       eraserWrapper: {
         width: '70%',
-        height: '150px',
-        padding: '0 2em',
+        height: '50px',
         position: 'relative',
         //Transform style
         perspective: '1000px',
         WebkitPerspective: '1000px',
         MozPerspective: '1000px',
-        OPerspective: '1000px'
+        OPerspective: '1000px',
+        margin: '0 auto',
+        marginBottom: '3em',
+        display: 'table'
       },
       eraser: {
         position: 'absolute',
@@ -43,22 +45,22 @@ export const Eraser = React.createClass({
         textAlign: 'center'
       },
       front:  {
-        left: '20px', top: '18px', width: '100%', height: '30%',
+        left: '20px', top: '18px', width: '100%', height: '100%',
         backgroundColor: '#C38282',
         transform: 'rotateX( 0deg ) translateZ( 18px )',
         paddingTop: '0.5em',
         color: 'black'
       },
       back:   {
-        left: '-18px', width: '100%', height: '30%',
+        left: '-18px', width: '100%', height: '100%',
         backgroundColor: '#C38282',
         transform: 'rotateX( 180deg ) translateY( -18px ) translateZ( 17px )' },
       right:  {
-        right: '208px', width: '56px', height: '30%',
+        right: '208px', width: '56px', height: '100%',
         backgroundColor: '#C38282',
         transform: 'rotateX( 0deg ) rotateY( 140deg ) translateY( 18px ) translateX( -180px ) translateZ( 150px )' },
       left:   {
-        left: '-260px', width: '56px', height: '30%',
+        left: '-260px', width: '56px', height: '100%',
         backgroundColor: '#C38282',
         transform: 'rotateX( 0deg ) rotateY( 140deg ) translateY( 18px ) translateX( -180px ) translateZ( 150px )' },
       top:    {
@@ -69,7 +71,7 @@ export const Eraser = React.createClass({
       bottom: {
         top: '20px', width: '100%', height: '36px',
         backgroundColor: '#C38282',
-        transform: 'rotateX( -90deg ) translateZ( 24px ) skew(-50deg, 0deg)'
+        transform: 'rotateX( -90deg ) translateZ( 29px ) skew(-50deg, 0deg)'
       },
       square: {
         width: '30%',
@@ -80,7 +82,7 @@ export const Eraser = React.createClass({
     erarerId = null;
 
     if (this.props.currentColor === erarerId) {
-      styles.eraser.transform = 'translateZ( -50px ) rotateY( 24deg ) rotateX( 20deg )';
+      styles.eraser.transform = 'translateZ( -50px ) rotateY( 26deg ) rotateX( 56deg )';
 
       styles.front.backgroundColor = '#975C5C';
       styles.back.backgroundColor = '#975C5C';
@@ -98,12 +100,6 @@ export const Eraser = React.createClass({
     }, {});
   },
   render: function() {
-    // return (
-    //   <div className="eraserWrapper self_clear" style={styles.eraserWrapper}>
-    //     <div className="eraser" onClick={this.handleClick} style={styles.eraser}>
-    //       <div style={styles.square}></div>
-    //     </div>
-    //   </div>);
     return (
       <div className="eraserWrapper self_clear" style={this.getStyles('eraserWrapper')}>
         <div className="eraser" onClick={this.handleClick} style={this.getStyles('eraser')}>
