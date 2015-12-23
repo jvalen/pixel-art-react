@@ -20,7 +20,9 @@ export const PixelCell = React.createClass({
   },
   render: function() {
     const { padding, color, width, id } = this.props;
-    let selectedColor = color;
+    let selectedColor = color,
+        customCursor = this.props.currentColor === null ?
+          'context-menu' : 'cell';
 
     const styles = {
       cellWrapper: {
@@ -35,6 +37,7 @@ export const PixelCell = React.createClass({
         position: "relative",
         width: "100%",
         paddingBottom: "100%",
+        cursor: customCursor
       }
     };
 

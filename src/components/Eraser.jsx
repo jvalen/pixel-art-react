@@ -3,8 +3,18 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
 export const Eraser = React.createClass({
+  getInitialState: function() {
+    return {previousColor: null};
+  },
   handleClick: function(event) {
-    this.props.setEraser();
+    if (this.props.currentColor === null) {
+      //Disable eraser
+      this.props.setColorSelected(this.state.previousColor);
+    } else {
+      //Enable eraser
+      this.setState({previousColor: this.props.currentColor});
+      this.props.setEraser();
+    }
   },
   getStyles: function (...args) {
     const styles = {
@@ -116,7 +126,7 @@ export const Eraser = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    currentColor: state.present.get('currentColor'),
+    currentColor: state.present.get('currentColor')
   };
 }
 export const EraserContainer = connect(
