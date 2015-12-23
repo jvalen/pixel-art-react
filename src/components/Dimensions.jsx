@@ -1,10 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
+import Modal from 'react-modal';
+import {PreviewContainer} from './Preview';
 
 export const Dimensions = React.createClass({
   getInitialState: function() {
-    return {columnsValue: 10, rowsValue: 10, cellSizeValue: 10};
+    return {columnsValue: 10, rowsValue: 10, cellSizeValue: 10, modalIsOpen: false};
+  },
+  showPreview: function() {
+    this.setState({modalIsOpen: true});
+  },
+  hidePreview: function() {
+    this.setState({modalIsOpen: false});
   },
   handleChange: function(event) {
     let propertyName, newLocalState = {};
@@ -60,6 +68,25 @@ export const Dimensions = React.createClass({
         color: '#BBBBBB',
         margin: '1em 0',
         textAlign: 'center'
+      },
+      cellSizeLabel: {
+        marginBottom: '0.3em'
+      },
+      modal : {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        textAlign: 'center',
+        border: '4px solid #C5C5C5'
+      },
+      showPreviewWrapper: {
+        margin: '1em 0'
+      },
+      showPreviewButton: {
+        width: '100%'
       }
     };
 
@@ -72,8 +99,23 @@ export const Dimensions = React.createClass({
           <div style={styles.cellSizeLabel}>Tile Size</div>
           <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleChange}/>
         </div>
-        <button style={styles.undo} onClick={() => this.props.undo()}>UNDO</button>
-        <button style={styles.redo} onClick={() => this.props.redo()}>REDO</button>
+        <div className="self_clear">
+          <button style={styles.undo} onClick={() => this.props.undo()}>UNDO</button>
+          <button style={styles.redo} onClick={() => this.props.redo()}>REDO</button>
+        </div>
+        <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
+          <button style={styles.showPreviewButton} onClick={this.showPreview}>Preview</button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.hidePreview}
+            style={styles.modal} >
+
+            <button onClick={this.hidePreview}>CLOSE</button>
+            <div>
+              <PreviewContainer key="0" />
+            </div>
+          </Modal>
+        </div>
       </div>;
   }
 });

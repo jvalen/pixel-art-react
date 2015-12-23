@@ -31,7 +31,6 @@ export default React.createClass({
             </div>
             <ResetContainer />
             <DimensionsContainer />
-            <PreviewContainer key="0" />
           </div>
         </div>
         <div className="css-container">
