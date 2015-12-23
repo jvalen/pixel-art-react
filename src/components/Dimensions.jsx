@@ -14,6 +14,14 @@ export const Dimensions = React.createClass({
   hidePreview: function() {
     this.setState({modalIsOpen: false});
   },
+  handleCellSizeChange: function(event) {
+    let newLocalState = {
+      cellSizeValue: event.target.value | 0
+    };
+    this.setState(newLocalState, function() {
+      this.props.setCellSize(this.state.cellSizeValue);
+    });
+  },
   handleChange: function(event) {
     let propertyName, newLocalState = {};
     switch (event.target.className) {
@@ -22,9 +30,6 @@ export const Dimensions = React.createClass({
         break;
       case 'rows':
         propertyName = 'rowsValue';
-        break;
-      case 'cell-size':
-        propertyName = 'cellSizeValue';
         break;
     }
 
@@ -97,7 +102,7 @@ export const Dimensions = React.createClass({
         <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
         <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
           <div style={styles.cellSizeLabel}>Tile Size</div>
-          <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleChange}/>
+          <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
         </div>
         <div className="self_clear">
           <button style={styles.undo} onClick={() => this.props.undo()}>UNDO</button>

@@ -89,6 +89,14 @@ function setEraser(state) {
   return state.merge(newState);
 }
 
+function setCellSize(state, cellSize) {
+  let newState = {
+    cellSize: cellSize
+  };
+
+  return state.merge(newState);
+}
+
 function resetGrid(state, columns, rows) {
   let newState = {
     grid: createGrid(
@@ -114,6 +122,8 @@ export default function(state = Map(), action) {
     return setDrawing(state, action.grid, action.cellSize, action.columns, action.rows);
   case 'SET_ERASER':
     return setEraser(state);
+  case 'SET_CELL_SIZE':
+    return setCellSize(state, action.cellSize);
   case 'SET_RESET_GRID':
     return resetGrid(state, action.columns, action.rows);
   }

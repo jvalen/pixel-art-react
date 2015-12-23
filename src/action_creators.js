@@ -48,6 +48,13 @@ export function setEraser() {
   };
 }
 
+export function setCellSize(cellSize) {
+  return {
+    type: 'SET_CELL_SIZE',
+    cellSize
+  };
+}
+
 export function resetGrid(columns, rows) {
   return {
     type: 'SET_RESET_GRID',
