@@ -161,21 +161,25 @@ button.red:active, button.red.active, .button.red:active, .button.red.active {
 }
 
 .load-button-wrapper {
-  width: 50%;
+  width: 48%;
   float: left;
 }
 .save-button-wrapper {
-  width: 50%;
+  width: 48%;
   float: right;
 }
 
 .load-button-wrapper button, .save-button-wrapper button {
   margin: 0 auto;
   display: table;
-  width: 80%;
+  width: 100%;
 }
 
 header {
   padding: 0 1.4em;
   color: #BBBBBB;
+}
+
+.load-save-container {
+  margin: 1em 0;
 }

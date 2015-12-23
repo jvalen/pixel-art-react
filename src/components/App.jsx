@@ -7,6 +7,7 @@ import {PreviewContainer} from './Preview';
 import {LoadDrawingContainer} from './LoadDrawing';
 import {SaveDrawingContainer} from './SaveDrawing';
 import {EraserContainer} from './Eraser';
+import {ResetContainer} from './Reset';
 
 export default React.createClass({
   render: function() {
@@ -15,7 +16,12 @@ export default React.createClass({
           <div className="col-1-4">
             <PaletteContainer />
             <EraserContainer />
-            <div className="self_clear">
+          </div>
+          <div className="col-1-2">
+            <GridContainer />
+          </div>
+          <div className="col-1-4">
+            <div className="load-save-container self_clear">
               <div className="load-button-wrapper">
                 <LoadDrawingContainer />
               </div>
@@ -23,11 +29,7 @@ export default React.createClass({
                 <SaveDrawingContainer />
               </div>
             </div>
-          </div>
-          <div className="col-1-2">
-            <GridContainer />
-          </div>
-          <div className="col-1-4">
+            <ResetContainer />
             <DimensionsContainer />
             <PreviewContainer key="0" />
           </div>

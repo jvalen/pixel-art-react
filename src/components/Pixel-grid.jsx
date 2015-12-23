@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 
 export const Grid = React.createClass({
   getCells: function() {
-    //console.log('********* PIXLE-GRID getCells');
-    //console.log(this.props);
     const { gridData, cellSize, columns, padding, currentColor } = this.props;
     const width = 100 / columns;
 

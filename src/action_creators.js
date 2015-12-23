@@ -47,6 +47,14 @@ export function setEraser() {
   };
 }
 
+export function resetGrid(columns, rows) {
+  return {
+    type: 'SET_RESET_GRID',
+    columns,
+    rows
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

@@ -70,8 +70,6 @@ function setGridCellValue(state, color, used, id) {
 }
 
 function setDrawing(state, grid, cellSize, columns, rows) {
-  console.log(columns);
-  console.log(rows);
   let newState = {
     grid: grid,
     cellSize: cellSize,
@@ -85,6 +83,17 @@ function setDrawing(state, grid, cellSize, columns, rows) {
 function setEraser(state) {
   let newState = {
     currentColor: null
+  };
+
+  return state.merge(newState);
+}
+
+function resetGrid(state, columns, rows) {
+  let newState = {
+    grid: createGrid(
+      parseInt(columns, 10) * parseInt(rows, 10),
+      GRID_INITIAL_COLOR
+    )
   };
 
   return state.merge(newState);
@@ -104,6 +113,8 @@ export default function(state = Map(), action) {
     return setDrawing(state, action.grid, action.cellSize, action.columns, action.rows);
   case 'SET_ERASER':
     return setEraser(state);
+  case 'SET_RESET_GRID':
+    return resetGrid(state, action.columns, action.rows);
   }
   return state;
 }
