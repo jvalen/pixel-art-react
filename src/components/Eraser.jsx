@@ -28,7 +28,7 @@ export const Eraser = React.createClass({
         MozPerspective: '1000px',
         OPerspective: '1000px',
         margin: '0 auto',
-        marginBottom: '3em',
+        marginBottom: '0.2em',
         display: 'table'
       },
       eraser: {
