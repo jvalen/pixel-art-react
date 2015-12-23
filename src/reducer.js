@@ -45,11 +45,12 @@ function setInitialState(state, newState) {
   return state.merge(initialState);
 }
 
-function setGridDimension(state, columns, rows) {
+function setGridDimension(state, columns, rows, cellSize) {
   let newState = {
     grid: createGrid(columns * rows, GRID_INITIAL_COLOR),
     rows: parseInt(rows, 10),
-    columns: parseInt(columns, 10)
+    columns: parseInt(columns, 10),
+    cellSize: parseInt(cellSize, 10)
   }
 
   return state.merge(newState);
@@ -104,7 +105,7 @@ export default function(state = Map(), action) {
   case 'SET_INITIAL_STATE':
     return setInitialState(state, action.state);
   case 'SET_GRID_DIMENSION':
-    return setGridDimension(state, action.columns, action.rows);
+    return setGridDimension(state, action.columns, action.rows, action.cellSize);
   case 'SET_COLOR_SELECTED':
     return setColorSelected(state, action.newColorSelected);
   case 'SET_GRID_CELL_VALUE':
