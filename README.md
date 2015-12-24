@@ -8,4 +8,6 @@ Handy and fun pixel art tool, where your drawing will be transformed to CSS.
 
 The project is built with **React**, **Redux** and **ImmutableJS**. Trying to avoid side-effects in a functional way of programming.
 
-See it live at [www.jvrpath.com/pixel-art-react/](http://www.jvrpath.com/pixel-art-react/). Help me to improve the app, share and enjoy :)
+You will be able to **load** and **save** drawings, **undo** **redo** your actions, change grid properties...everything in a very easy and fast way.  
+
+See it live at ![www.jvrpath.com/pixel-art-react/](http://www.jvrpath.com/pixel-art-react/). Help me to improve the app, share and enjoy :)
