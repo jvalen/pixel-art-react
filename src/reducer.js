@@ -2,7 +2,7 @@ import {Map, toJS} from 'immutable';
 
 const GRID_INITIAL_COLOR = '313131';
 
-function createGrid(cellsCount, initialColor, createGamma) {
+export function createGrid(cellsCount, initialColor, createGamma) {
   let newGrid = [];
 
   if (createGamma) {
