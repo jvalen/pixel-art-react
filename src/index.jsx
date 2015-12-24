@@ -8,13 +8,7 @@ import {Map, fromJS} from 'immutable';
 import undoable from 'redux-undo';
 
 const store = createStore(undoable(reducer, {
-  initialState: new Map({}),
   initTypes: ['@@redux/SET_INITIAL_STATE', '@@SET_INITIAL_STATE'], // history will be (re)set upon init action type
-  initialHistory: {
-  past: [],
-  present: new Map({}),
-  future: []
-  },
   debug: true
 }));
 

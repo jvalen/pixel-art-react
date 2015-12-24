@@ -40,6 +40,14 @@ export const Dimensions = React.createClass({
       );
     });
   },
+  undo: function() {
+    if (this.props.pastStatesCount > 1) {
+      this.props.undo();
+    }
+  },
+  redo: function() {
+    this.props.redo();
+  },
   render: function() {
     const { columns, rows, cellSize } = this.props;
     let columnsValue = columns;
@@ -106,8 +114,8 @@ export const Dimensions = React.createClass({
           <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
         </div>
         <div className="self_clear">
-          <button style={styles.undo} onClick={() => this.props.undo()}>UNDO</button>
-          <button style={styles.redo} onClick={() => this.props.redo()}>REDO</button>
+          <button style={styles.undo} onClick={this.undo}>UNDO</button>
+          <button style={styles.redo} onClick={this.redo}>REDO</button>
         </div>
         <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
           <button style={styles.showPreviewButton} onClick={this.showPreview}>Preview</button>
@@ -130,7 +138,8 @@ function mapStateToProps(state) {
   return {
     columns: state.present.get('columns'),
     rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
+    cellSize: state.present.get('cellSize'),
+    pastStatesCount: state.past.length
   };
 }
 export const DimensionsContainer = connect(
