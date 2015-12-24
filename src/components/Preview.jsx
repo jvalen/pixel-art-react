@@ -27,9 +27,13 @@ export const Preview = React.createClass({
     const wrapperStyle = {
       width: columns * cellSize,
       height: rows * cellSize,
-      margin: '1em auto',
+      margin: '1em 1em',
       display: 'table'
     };
+
+    if (dataFromParent) {
+      wrapperStyle.float = 'left';
+    }
 
     return <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>
       {this.generatePreview()}

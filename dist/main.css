@@ -175,6 +175,19 @@ button.red:active, button.red.active, .button.red:active, .button.red.active {
   width: 100%;
 }
 
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 0.8em;
+  padding-right: 1em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
 header {
   padding: 0 1.4em;
   color: #BBBBBB;
@@ -182,4 +195,56 @@ header {
 
 .load-save-container {
   margin: 1em 0;
+}
+
+.credits-wrapper {
+  text-align: right;
+  margin-top: 1em;
+}
+
+.credits-wrapper a {
+  text-decoration: none;
+  color: #B17E7E;
+}
+
+body {
+  width: 90%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 1200px) {
+  button {
+    font-size: 2em;
+  }
+
+  label {
+    font-size: 2em;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+}
+
+@media only screen and (max-width: 794px) {
+  button {
+    font-size: 0.8em;
+  }
+
+  label {
+    font-size: 0.8em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  input[type="text"] {
+    font-size: 1em;
+  }
+
+  figure.figure.front {
+    font-size: 1em !important;
+    padding-top: 1em !important;
+  }
 }

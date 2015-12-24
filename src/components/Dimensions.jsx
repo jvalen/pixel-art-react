@@ -75,7 +75,8 @@ export const Dimensions = React.createClass({
         textAlign: 'center'
       },
       cellSizeLabel: {
-        marginBottom: '0.3em'
+        marginBottom: '0.3em',
+        display: 'block'
       },
       modal : {
         top: '50%',
@@ -96,12 +97,12 @@ export const Dimensions = React.createClass({
     };
 
     return <div className="dimensions self_clear">
-        <div style={styles.columnsLabel}>Col</div>
-        <div style={styles.rowsLabel}>Row</div>
+        <label style={styles.columnsLabel}>Col</label>
+        <label style={styles.rowsLabel}>Row</label>
         <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
         <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
         <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
-          <div style={styles.cellSizeLabel}>Tile Size</div>
+          <label style={styles.cellSizeLabel}>Tile Size</label>
           <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
         </div>
         <div className="self_clear">

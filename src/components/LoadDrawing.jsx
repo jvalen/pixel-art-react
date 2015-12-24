@@ -41,6 +41,10 @@ export const LoadDrawing = React.createClass({
         transform: 'translate(-50%, -50%)',
         textAlign: 'center',
         border: '4px solid #C5C5C5'
+      },
+      h2 : {
+        padding: '2em 0',
+        fontSize: '1em'
       }
     };
     return (
@@ -52,7 +56,7 @@ export const LoadDrawing = React.createClass({
             style={customStyles} >
 
             <button onClick={this.closeModal}>CLOSE</button>
-            <h2>Select one of your awesome drawings</h2>
+            <h2 style={customStyles.h2}>Select one of your awesome drawings</h2>
             <div>
               {this.giveMeDrawings()}
             </div>
