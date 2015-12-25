@@ -48,6 +48,12 @@ export function setEraser() {
   };
 }
 
+export function setEyedropper() {
+  return {
+    type: 'SET_EYEDROPPER'
+  };
+}
+
 export function setCellSize(cellSize) {
   return {
     type: 'SET_CELL_SIZE',

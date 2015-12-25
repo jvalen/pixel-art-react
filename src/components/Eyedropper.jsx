@@ -2,23 +2,20 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export const Eraser = React.createClass({
-  getInitialState: function() {
-    return {previousColor: null};
-  },
+export const Eyedropper = React.createClass({
   handleClick: function(event) {
-    this.props.setEraser();
+    this.props.setEyedropper();
   },
   render: function() {
     let style = {};
 
-    if (this.props.eraserOn) {
+    if (this.props.eyedropperOn) {
       style.color = '#BBBBBB';
       style.border = '2px solid #BBBBBB';
     }
 
     return (
-      <div className="fa fa-eraser" onClick={this.handleClick} style={style}></div>
+      <div className="fa fa-eyedropper" onClick={this.handleClick} style={style}></div>
     );
   }
 });
@@ -26,10 +23,10 @@ export const Eraser = React.createClass({
 function mapStateToProps(state) {
   return {
     currentColor: state.present.get('currentColor'),
-    eraserOn: state.present.get('eraserOn')
+    eyedropperOn: state.present.get('eyedropperOn'),
   };
 }
-export const EraserContainer = connect(
+export const EyedropperContainer = connect(
   mapStateToProps,
   actionCreators
-)(Eraser);
+)(Eyedropper);

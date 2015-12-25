@@ -39,7 +39,10 @@ function setInitialState(state, newState) {
     rows: rows,
     padding: padding,
     currentColor: currentColor,
-    initialColor: GRID_INITIAL_COLOR
+    initialColor: GRID_INITIAL_COLOR,
+    eraserOn: false,
+    eyedropperOn: false,
+    colorPickerOn: false
   };
 
   return state.merge(initialState);
@@ -58,7 +61,10 @@ function setGridDimension(state, columns, rows, cellSize) {
 
 function setColorSelected(state, newColorSelected) {
   let newState = {
-    currentColor: newColorSelected
+    currentColor: newColorSelected,
+    eraserOn: false,
+    eyedropperOn: false,
+    colorPickerOn: false
   }
   return state.merge(newState);
 }
@@ -83,7 +89,20 @@ function setDrawing(state, grid, cellSize, columns, rows) {
 
 function setEraser(state) {
   let newState = {
-    currentColor: null
+    currentColor: null,
+    eraserOn: true,
+    eyedropperOn: false,
+    colorPickerOn: false
+  };
+
+  return state.merge(newState);
+}
+
+function setEyedropper(state) {
+  let newState = {
+    eraserOn: false,
+    eyedropperOn: true,
+    colorPickerOn: false
   };
 
   return state.merge(newState);
@@ -122,6 +141,8 @@ export default function(state = Map(), action) {
     return setDrawing(state, action.grid, action.cellSize, action.columns, action.rows);
   case 'SET_ERASER':
     return setEraser(state);
+  case 'SET_EYEDROPPER':
+    return setEyedropper(state);
   case 'SET_CELL_SIZE':
     return setCellSize(state, action.cellSize);
   case 'SET_RESET_GRID':
