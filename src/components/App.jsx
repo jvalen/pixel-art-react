@@ -9,6 +9,7 @@ import {SaveDrawingContainer} from './SaveDrawing';
 import {EraserContainer} from './Eraser';
 import {ResetContainer} from './Reset';
 import {EyedropperContainer} from './Eyedropper';
+import {ColorPickerContainer} from './ColorPicker';
 
 export default React.createClass({
   render: function() {
@@ -16,11 +17,13 @@ export default React.createClass({
         <div className="grid grid-pad">
           <div className="col-1-4">
             <PaletteContainer />
-            <div className="grid">
+            <div className="grid color-tools-wrapper">
               <div className="col-1-3">
                 <EraserContainer />
               </div>
-              <div className="fa fa-paint-brush col-1-3"></div>
+              <div className="col-1-3">
+                <ColorPickerContainer />
+              </div>
               <div className="col-1-3">
                 <EyedropperContainer />
               </div>

@@ -61,7 +61,7 @@
   text-align: center;
   font-size: 2em;
   color: #313131;
-  padding: 0.7em;
+  padding: 16%;
 }
 
 /* Grid */
@@ -249,6 +249,10 @@ header {
 body {
   width: 90%;
   margin: 0 auto;
+}
+
+.color-tools-wrapper {
+  text-align: center;
 }
 
 @media only screen and (min-width: 1200px) {

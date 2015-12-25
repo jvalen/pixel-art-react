@@ -69,6 +69,24 @@ function setColorSelected(state, newColorSelected) {
   return state.merge(newState);
 }
 
+function setCustomColor(state, customColor) {
+  let currentColor = state.get('currentColor'),
+      paletteGrid = state.get('paletteGridData');
+
+  let newState = {
+    currentColor: customColor,
+    paletteGridData: paletteGrid.map((paletteColor) => {
+      if(paletteColor.toJS().color === currentColor) {
+        return Map({color: customColor});
+      } else {
+        return paletteColor;
+      }
+    })
+  };
+
+  return state.merge(newState);
+}
+
 function setGridCellValue(state, color, used, id) {
   return state.setIn(['grid', parseInt(id, 10)], {
     color: color,
@@ -108,6 +126,16 @@ function setEyedropper(state) {
   return state.merge(newState);
 }
 
+function setColorPicker(state) {
+  let newState = {
+    eraserOn: false,
+    eyedropperOn: false,
+    colorPickerOn: true
+  };
+
+  return state.merge(newState);
+}
+
 function setCellSize(state, cellSize) {
   let newState = {
     cellSize: cellSize
@@ -135,6 +163,8 @@ export default function(state = Map(), action) {
     return setGridDimension(state, action.columns, action.rows, action.cellSize);
   case 'SET_COLOR_SELECTED':
     return setColorSelected(state, action.newColorSelected);
+  case 'SET_CUSTOM_COLOR':
+    return setCustomColor(state, action.customColor);
   case 'SET_GRID_CELL_VALUE':
     return setGridCellValue(state, action.color, action.used, action.id);
   case 'SET_DRAWING':
@@ -143,6 +173,8 @@ export default function(state = Map(), action) {
     return setEraser(state);
   case 'SET_EYEDROPPER':
     return setEyedropper(state);
+  case 'SET_COLOR_PICKER':
+    return setColorPicker(state);
   case 'SET_CELL_SIZE':
     return setCellSize(state, action.cellSize);
   case 'SET_RESET_GRID':
