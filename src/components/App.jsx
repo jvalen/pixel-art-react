@@ -1,6 +1,7 @@
 import React from 'react';
 import {GridContainer} from './Pixel-grid';
 import {DimensionsContainer} from './Dimensions';
+import {UndoRedoContainer} from './UndoRedo';
 import {PaletteContainer} from './Palette-grid';
 import {CssDisplayContainer} from './Css-display';
 import {PreviewContainer} from './Preview';
@@ -16,7 +17,10 @@ export default React.createClass({
   render: function() {
     return <div id="pixel-art-app">
         <div className="grid grid-pad">
-          <div className="col-3-4">
+          <div className="col-1-4">
+            <UndoRedoContainer />
+          </div>
+          <div className="col-1-2">
             <TwitterButtonContainer maxChars="140" />
           </div>
           <div className="col-1-4">
@@ -49,8 +53,8 @@ export default React.createClass({
             <GridContainer />
           </div>
           <div className="col-1-4">
-            <ResetContainer />
             <DimensionsContainer />
+            <ResetContainer />
           </div>
         </div>
         <div className="css-container">
