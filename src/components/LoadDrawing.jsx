@@ -4,6 +4,12 @@ import * as actionCreators from '../action_creators';
 import Modal from 'react-modal';
 import {PreviewContainer} from './Preview';
 
+/*
+  Avoid error when server-side render doesn't recognize
+  localstorage (browser feature)
+*/
+let browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
+
 export const LoadDrawing = React.createClass({
   getInitialState: function() {
     return { modalIsOpen: false };
@@ -19,15 +25,17 @@ export const LoadDrawing = React.createClass({
     this.closeModal();
   },
   giveMeDrawings: function() {
-    let dataStored = localStorage.getItem('pixel-art-react');
-    if (dataStored) {
-      dataStored = JSON.parse(dataStored);
+    if (!!browserStorage) {
+      let dataStored = browserStorage.getItem('pixel-art-react');
+      if (dataStored) {
+        dataStored = JSON.parse(dataStored);
 
-      return dataStored.map((data, i) =>
-        <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
-      );
-    } else {
-      return ['Nothing awesome yet...'];
+        return dataStored.map((data, i) =>
+          <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
+        );
+      } else {
+        return ['Nothing awesome yet...'];
+      }
     }
   },
   render: function() {

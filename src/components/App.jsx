@@ -10,10 +10,26 @@ import {EraserContainer} from './Eraser';
 import {ResetContainer} from './Reset';
 import {EyedropperContainer} from './Eyedropper';
 import {ColorPickerContainer} from './ColorPicker';
+import {TwitterButtonContainer} from './TwitterButton';
 
 export default React.createClass({
   render: function() {
     return <div id="pixel-art-app">
+        <div className="grid grid-pad">
+          <div className="col-3-4">
+            <TwitterButtonContainer maxChars="140" />
+          </div>
+          <div className="col-1-4">
+            <div className="load-save-container self_clear">
+              <div className="load-button-wrapper">
+                <LoadDrawingContainer />
+              </div>
+              <div className="save-button-wrapper">
+                <SaveDrawingContainer />
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="grid grid-pad">
           <div className="col-1-4">
             <PaletteContainer />
@@ -33,14 +49,6 @@ export default React.createClass({
             <GridContainer />
           </div>
           <div className="col-1-4">
-            <div className="load-save-container self_clear">
-              <div className="load-button-wrapper">
-                <LoadDrawingContainer />
-              </div>
-              <div className="save-button-wrapper">
-                <SaveDrawingContainer />
-              </div>
-            </div>
             <ResetContainer />
             <DimensionsContainer />
           </div>

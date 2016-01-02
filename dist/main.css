@@ -57,6 +57,12 @@
   content: "\f12d";
 }
 
+.fa-twitter:before {
+  content: "\f099";
+  padding-right: 1em;
+  color: "#BBBBBB";
+}
+
 .fa.fa-eyedropper, .fa.fa-paint-brush, .fa.fa-eraser {
   text-align: center;
   font-size: 2em;
@@ -87,6 +93,10 @@
 }
 .col-1-4 {
   width: 25%;
+}
+
+.col-3-4 {
+  width: 75%;
 }
 .col-1-8 {
   width: 12.5%;
@@ -214,6 +224,11 @@ button.red:active, button.red.active, .button.red:active, .button.red.active {
   width: 100%;
 }
 
+.twitter-button {
+  margin: 0 auto;
+  display: table;
+}
+
 h1 {
   font-size: 2em;
 }
@@ -221,6 +236,9 @@ h1 {
 h2 {
   font-size: 0.8em;
   padding-right: 1em;
+  display: inline;
+  position: relative;
+  top: -0.6em;
 }
 
 h3 {
@@ -256,7 +274,7 @@ body {
 }
 
 @media only screen and (min-width: 1200px) {
-  button {
+  button, .button {
     font-size: 2em;
   }
 
@@ -267,10 +285,15 @@ body {
   h1 {
     font-size: 3em;
   }
+
+  .credits-wrapper {
+    top: 1.4em;
+    position: relative;
+  }
 }
 
 @media only screen and (max-width: 794px) {
-  button {
+  button, .button {
     font-size: 0.8em;
   }
 

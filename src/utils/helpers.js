@@ -17,3 +17,37 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize) {
   }, '');
   return cssString;
 }
+
+export function shareDrawing(cssImageData, columns, rows, cellSize, text) {
+  let cssParsedData = cssImageData.split(',').filter(
+      function(elem){
+        return elem !== ''
+      }).map(
+        function(elem){
+          if (elem !== '') {
+            return elem.trim().split(' ').reduce(
+              function(acum, elem){
+                acum.push(elem.split('px').shift());
+                return acum;
+              },
+              [])
+          }
+        }
+      );
+
+  var css =  {
+      'cols': columns,
+      'rows': rows,
+      'pixelSize': cellSize,
+      'boxShadow': cssParsedData,
+      'text': text
+    };
+
+  $.ajax({
+    method: "POST",
+    url: "http://127.0.0.1:3000/auth/twitter",
+    data: css
+  }).done(function(data) {
+    window.location = data;
+  });
+}
