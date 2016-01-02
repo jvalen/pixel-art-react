@@ -3,3 +3,10 @@ dist/bundle.js
 npm-debug.log
 build/*
 deploy/*
+
+config.json
+public
+routes
+views
+npm-debug.log
+.directory
