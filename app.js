@@ -8,40 +8,41 @@ import reducer from './src/reducer'
 import App from './src/components/App'
 import gm from 'gm'
 
-var express = require('express')
-  , routes = require('./routes')
-  , bodyParser = require('body-parser')
-  , cookieParser = require('cookie-parser')
-  , temp = require('temp')
-  , fs = require('fs')
-  , path = require('path')
-  , Twitter = require('twitter')
-  , OAuth= require('oauth').OAuth
-  , session = require('express-session')
-  , React = require('react')
-  , redux = require('redux')
-  ;
+import express from 'express'
+import routes from './routes'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import temp from 'temp'
+import fs from 'fs'
+import path from 'path'
+import Twitter from 'twitter'
+import {OAuth} from 'oauth'
+import session from 'express-session'
+import React from 'react'
+import { createStore } from 'redux'
 
-var app = module.exports = express(),
-    configData = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+let app = module.exports = express(),
+    configData,
+    ipServer = '127.0.0.1',
+    portServer = 3000;
 
 /**
  * Configuration
  */
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {
-  configData = configData.dev;
+  configData = JSON.parse(fs.readFileSync('config.json', 'utf8')).dev;
 } else {
-  configData = configData.prod;
+  configData = process.env;
 }
 
 var oa = new OAuth(
       "https://api.twitter.com/oauth/request_token",
       "https://api.twitter.com/oauth/access_token",
-      configData.twitter.consumer_key,
-      configData.twitter.consumer_secret,
+      configData.TWITTER_CONSUMER_KEY,
+      configData.TWITTER_CONSUMER_SECRET,
       "1.0A",
-      "http://127.0.0.1:3000/auth/twitter/callback",
+      configData.TWITTER_CALLBACK_URL,
       "HMAC-SHA1"
     );
 
@@ -51,7 +52,7 @@ app.use(express.static(__dirname + '/deploy'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({ secret: configData.express.session_secret, resave: true, saveUninitialized: true }));
+app.use(session({ secret: configData.EXPRESS_SESSION_SECRET, resave: true, saveUninitialized: true }));
 
 /**
  * Routes
@@ -95,8 +96,8 @@ app.get('/auth/twitter/callback', function(req, res, next){
         req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
 
         var client = new Twitter({
-          consumer_key: configData.twitter.consumer_key,
-          consumer_secret: configData.twitter.consumer_secret,
+          consumer_key: configData.TWITTER_CONSUMER_KEY,
+          consumer_secret: configData.TWITTER_CONSUMER_SECRET,
           access_token_key: oauthAccessToken,
           access_token_secret: oauthAccessTokenSecret
         });
@@ -135,8 +136,8 @@ app.get('/auth/twitter/callback', function(req, res, next){
     next(new Error("auth twitter callback: error"))
 });
 
-app.listen(3000, '127.0.0.1', function(){
-  console.log("Express server listening on port %d in %s mode", 3000, app.settings.env);
+app.listen(portServer, ipServer, function(){
+  console.log("Express server listening on port %d in %s mode", portServer, app.settings.env);
 });
 
 /**
@@ -144,7 +145,7 @@ app.listen(3000, '127.0.0.1', function(){
  */
 function handleRender(req, res) {
   // Create a new Redux store instance
-  const store = redux.createStore(undoable(reducer, {
+  const store = createStore(undoable(reducer, {
     initTypes: ['@@redux/SET_INITIAL_STATE', '@@SET_INITIAL_STATE'], // history will be (re)set upon init action type
     debug: false
   }));
