@@ -6,7 +6,7 @@ import {PreviewContainer} from './Preview';
 
 export const Dimensions = React.createClass({
   getInitialState: function() {
-    return {columnsValue: 10, rowsValue: 10, cellSizeValue: 10, modalIsOpen: false};
+    return {columnsValue: 20, rowsValue: 20, cellSizeValue: 10, modalIsOpen: false};
   },
   showPreview: function() {
     this.setState({modalIsOpen: true});
@@ -52,14 +52,22 @@ export const Dimensions = React.createClass({
         float: 'left',
         textAlign: 'center',
         marginBottom: '0.3em',
-        color: '#BBBBBB'
+        color: '#BBBBBB',
+        top: '0.4em',
+        position: 'relative'
       },
       rowsLabel: {
         width: '48%',
-        float: 'right',
+        float: 'left',
         textAlign: 'center',
         marginBottom: '0.3em',
-        color: '#BBBBBB'
+        color: '#BBBBBB',
+        top: '0.4em',
+        position: 'relative'
+      },
+      colRowWrappers: {
+        width: '80%',
+        margin: '0 auto'
       },
       cellSizeWrapper: {
         color: '#BBBBBB',
@@ -81,24 +89,29 @@ export const Dimensions = React.createClass({
         border: '4px solid #C5C5C5'
       },
       showPreviewWrapper: {
-        margin: '1em 0'
+        width: '80%',
+        margin: '2em auto',
+        display: 'table'
       },
       showPreviewButton: {
         width: '100%'
+      },
+      dimensions: {
+        marginTop: '1em'
       }
     };
 
-    return <div className="dimensions self_clear">
-        <label style={styles.columnsLabel}>Col</label>
-        <label style={styles.rowsLabel}>Row</label>
-        <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
-        <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
-        <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
-          <label style={styles.cellSizeLabel}>Tile Size</label>
-          <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
+    return <div className="dimensions self_clear" style={styles.dimensions}>
+        <div>
+          <label style={styles.columnsLabel}>Col</label>
+          <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
+        </div>
+        <div>
+          <label style={styles.rowsLabel}>Row</label>
+          <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
         </div>
         <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
-          <button style={styles.showPreviewButton} onClick={this.showPreview}>Preview</button>
+          <button className="gray" style={styles.showPreviewButton} onClick={this.showPreview}>Preview</button>
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.hidePreview}
@@ -109,6 +122,10 @@ export const Dimensions = React.createClass({
               <PreviewContainer key="0" />
             </div>
           </Modal>
+        </div>
+        <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
+          <label style={styles.cellSizeLabel}>Tile Size</label>
+          <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
         </div>
       </div>;
   }

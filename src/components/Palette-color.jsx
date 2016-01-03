@@ -13,8 +13,8 @@ export const PaletteColor = React.createClass({
     const styles = {
       cellWrapper: {
         display: "inline-block",
-        width: `${width}%`,
-        padding: "0.1em"
+        width: `${width}%`
+        //padding: "0.1em"
       },
       cell: {
         backgroundColor: '#' + cellColor,

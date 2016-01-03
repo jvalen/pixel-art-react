@@ -10,7 +10,10 @@ export const Eraser = React.createClass({
     this.props.setEraser();
   },
   render: function() {
-    let style = {};
+    let style = {
+      border: '2px solid #313131',
+      backgroundColor: '#585858'
+    };
 
     if (this.props.eraserOn) {
       style.color = '#BBBBBB';

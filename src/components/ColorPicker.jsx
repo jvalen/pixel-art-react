@@ -25,7 +25,10 @@ export const ColorPicker = React.createClass({
   },
   render: function() {
     let styles = {
-      button: {},
+      button: {
+        border: '2px solid #313131',
+        backgroundColor: '#585858'
+      },
       picker: {
         position: 'relative',
         bottom: '18.4em'

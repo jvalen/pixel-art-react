@@ -67,18 +67,22 @@ export const TwitterButton = React.createClass({
       },
       button: {
         margin: '1em auto'
+      },
+      hyperlink: {
+        marginTop: '1em'
       }
     };
     return (
       <div>
-      <a
-        className="twitter-button button"
-        href="javascript:void(0);"
-        onClick={this.openModal}>
-        <span className="fa fa-twitter"></span>
-        SHARE YOUR ART
-      </a>
-      <Modal
+        <a
+          className="twitter-button button"
+          href="javascript:void(0);"
+          style={customStyles.hyperlink}
+          onClick={this.openModal}>
+          <span className="fa fa-twitter"></span>
+          SHARE
+        </a>
+        <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={customStyles} >

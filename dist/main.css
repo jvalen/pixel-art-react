@@ -63,11 +63,20 @@
   color: "#BBBBBB";
 }
 
+.fa-undo:before {
+  content: "\f0e2";
+}
+
+.fa-repeat:before {
+  content: "\f01e";
+}
+
 .fa.fa-eyedropper, .fa.fa-paint-brush, .fa.fa-eraser {
   text-align: center;
   font-size: 2em;
   color: #313131;
   padding: 16%;
+  margin: 0.5em 0;
 }
 
 /* Grid */
@@ -109,7 +118,7 @@
 }
 
 .grid-pad {
-  padding: 0px 0 20px 20px;
+  padding: 1em 0.5em 1em 0.5em;
 }
 
 .grid-pad > [class*='col-']:last-of-type {
@@ -122,15 +131,8 @@ html {
   font-family: 'silkscreen_expandednormal';
 }
 
-html, body, #app, #pixel-art-app, .css-container, .css-display {
+html, body {
   height: 100%;
-}
-
-.css-display {
-    background-color: #313131;
-    padding: 1em;
-    margin-top: 1em;
-    color: #BBBBBB;
 }
 
 /* Inputs */
@@ -142,7 +144,7 @@ input[type="text"] {
   box-shadow: none;
   border-radius: none;
   text-align: center;
-  font-size: 3em;
+  font-size: 2em;
   color: #BBBBBB;
   background-color: #313131;
   width: 50%
@@ -172,7 +174,6 @@ input[type="text"].focus {
 
 /* Default button */
 button, .button, input[type=submit] {
-  margin-top: 0.8em;
   border: 0;
   background: #5786c1;
   color: #BBBBBB;
@@ -209,6 +210,21 @@ button.red:active, button.red.active, .button.red:active, .button.red.active {
   box-shadow: 1px 0px #6B1010, 0px 1px #741515, 2px 1px #6B1010, 1px 2px #741515;
 }
 
+/* Gray button */
+button.gray {
+  background: #313131;
+  box-shadow: 1px 0px #676767, 0px 1px #515151, 2px 1px #676767, 1px 2px #515151, 3px 2px #676767, 2px 3px #515151, 4px 3px #676767, 3px 4px #515151, 5px 4px #676767, 4px 5px #515151, 6px 5px #676767, 5px 6px #515151;
+  margin-top: 0;
+}
+button.gray:hover, button.gray:focus, button.gray.hover, button.gray.focus, .button.gray:hover, .button.gray:focus, .button.gray.hover, .button.gray.focus {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 0px #676767, 0px 1px #515151, 2px 1px #676767, 1px 2px #515151, 3px 2px #676767, 2px 3px #515151, 4px 3px #676767, 3px 4px #515151;
+}
+button.gray:active, button.gray.active, .button.gray:active, .button.gray.active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 0px #676767, 0px 1px #515151, 2px 1px #676767, 1px 2px #515151;
+}
+
 .load-button-wrapper {
   width: 48%;
   float: left;
@@ -224,9 +240,8 @@ button.red:active, button.red.active, .button.red:active, .button.red.active {
   width: 100%;
 }
 
-.twitter-button {
-  margin: 0 auto;
-  display: table;
+.twitter-button-wrapper {
+  text-align: center;
 }
 
 h1 {
@@ -238,7 +253,7 @@ h2 {
   padding-right: 1em;
   display: inline;
   position: relative;
-  top: -0.6em;
+  top: -0.9em;
 }
 
 h3 {
@@ -248,10 +263,6 @@ h3 {
 header {
   padding: 0 1.4em;
   color: #BBBBBB;
-}
-
-.load-save-container {
-  margin: 1em 0;
 }
 
 .credits-wrapper {
@@ -273,7 +284,15 @@ body {
   text-align: center;
 }
 
-@media only screen and (min-width: 1200px) {
+.tools-wrapper {
+  text-align: center;
+}
+
+.load-save-container {
+  margin-bottom: 1.5em;
+}
+
+@media only screen and (min-width: 1177px) {
   button, .button {
     font-size: 2em;
   }
@@ -286,23 +305,32 @@ body {
     font-size: 3em;
   }
 
+  input[type="text"] {
+    font-size: 2em;
+  }
+
   .credits-wrapper {
     top: 1.4em;
     position: relative;
   }
 }
 
-@media only screen and (max-width: 794px) {
+@media only screen and (max-width: 1176px) {
   button, .button {
-    font-size: 0.8em;
+    font-size: 1em;
   }
 
   label {
     font-size: 0.8em;
+    top: 1.4em !important;
   }
 
   h1 {
     font-size: 2em;
+  }
+
+  .fa.fa-eyedropper, .fa.fa-paint-brush, .fa.fa-eraser {
+    font-size: 1.2em;
   }
 
   input[type="text"] {

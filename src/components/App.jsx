@@ -12,18 +12,13 @@ import {ResetContainer} from './Reset';
 import {EyedropperContainer} from './Eyedropper';
 import {ColorPickerContainer} from './ColorPicker';
 import {TwitterButtonContainer} from './TwitterButton';
+import {CopyCSSContainer} from './CopyCSS';
 
 export default React.createClass({
   render: function() {
     return <div id="pixel-art-app">
-        <div className="grid grid-pad">
-          <div className="col-1-4">
-            <UndoRedoContainer />
-          </div>
-          <div className="col-1-2">
-            <TwitterButtonContainer maxChars="140" />
-          </div>
-          <div className="col-1-4">
+        <div className="grid grid-pad main-block">
+          <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
               <div className="load-button-wrapper">
                 <LoadDrawingContainer />
@@ -32,29 +27,24 @@ export default React.createClass({
                 <SaveDrawingContainer />
               </div>
             </div>
-          </div>
-        </div>
-        <div className="grid grid-pad">
-          <div className="col-1-4">
-            <PaletteContainer />
-            <div className="grid color-tools-wrapper">
-              <div className="col-1-3">
-                <EraserContainer />
-              </div>
-              <div className="col-1-3">
-                <ColorPickerContainer />
-              </div>
-              <div className="col-1-3">
-                <EyedropperContainer />
-              </div>
+            <div className="col-3-4">
+              <PaletteContainer />
             </div>
+            <div className="col-1-4 tools-wrapper">
+                <EraserContainer />
+                <ColorPickerContainer />
+                <EyedropperContainer />
+            </div>
+            <TwitterButtonContainer maxChars="140" />
           </div>
           <div className="col-1-2">
             <GridContainer />
           </div>
           <div className="col-1-4">
+            <UndoRedoContainer />
             <DimensionsContainer />
             <ResetContainer />
+            <CopyCSSContainer />
           </div>
         </div>
         <div className="css-container">

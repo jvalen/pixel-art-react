@@ -16,7 +16,17 @@ export const CssDisplay = React.createClass({
     return <div>{cssString}</div>;
   },
   render: function() {
-    return <div className="css-display">
+    let styleContainer = {
+      position: 'absolute',
+      top: '-1.6em',
+      left: '0',
+      opacity: '0.1',
+      zIndex: '-1',
+      padding: '1em',
+      marginTop: '1em',
+      color: '#000000'
+    };
+    return <div className="css-display" style={styleContainer}>
       {this.generateCss()}
     </div>;
   }

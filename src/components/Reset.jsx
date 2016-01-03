@@ -8,11 +8,12 @@ export const Reset = React.createClass({
   },
   render: function() {
     const style = {
-      width: '100%',
-      margin: '1em 0'
+      width: '80%',
+      margin: '1em auto',
+      display: 'table'
     };
     return (
-      <button style={style} onClick={this.handleClick}>RESET</button>
+      <button className="gray" style={style} onClick={this.handleClick}>RESET</button>
     );
   }
 });

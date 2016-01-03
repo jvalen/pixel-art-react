@@ -24,8 +24,8 @@ export function createGrid(cellsCount, initialColor, createGamma) {
 function setInitialState(state, newState) {
   //Create initial grid
   let cellSize = 10,
-      columns = 10,
-      rows = 10,
+      columns = 20,
+      rows = 20,
       padding = 0.1,
       currentColor = '000',
       pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR),

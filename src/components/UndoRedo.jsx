@@ -24,8 +24,8 @@ export const UndoRedo = React.createClass({
     };
 
     return <div className="self_clear">
-          <button style={styles.undo} onClick={this.undo}>UNDO</button>
-          <button style={styles.redo} onClick={this.redo}>REDO</button>
+          <button className="gray" style={styles.undo} onClick={this.undo}><span className="fa fa-undo"></span></button>
+          <button className="gray" style={styles.redo} onClick={this.redo}><span className="fa fa-repeat"></span></button>
         </div>;
   }
 });

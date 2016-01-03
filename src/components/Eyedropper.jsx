@@ -7,7 +7,10 @@ export const Eyedropper = React.createClass({
     this.props.setEyedropper();
   },
   render: function() {
-    let style = {};
+    let style = {
+      border: '2px solid #313131',
+      backgroundColor: '#585858'
+    };
 
     if (this.props.eyedropperOn) {
       style.color = '#BBBBBB';
