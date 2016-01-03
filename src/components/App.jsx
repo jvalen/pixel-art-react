@@ -27,13 +27,15 @@ export default React.createClass({
                 <SaveDrawingContainer />
               </div>
             </div>
-            <div className="col-3-4">
-              <PaletteContainer />
-            </div>
-            <div className="col-1-4 tools-wrapper">
-                <EraserContainer />
-                <ColorPickerContainer />
-                <EyedropperContainer />
+            <div className="grid">
+              <div className="col-3-4">
+                <PaletteContainer />
+              </div>
+              <div className="col-1-4 tools-wrapper">
+                  <EraserContainer />
+                  <ColorPickerContainer />
+                  <EyedropperContainer />
+              </div>
             </div>
             <TwitterButtonContainer maxChars="140" />
           </div>
