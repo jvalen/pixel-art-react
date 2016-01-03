@@ -8,7 +8,8 @@
     "test:watch": "npm run test -- --watch",
     "development": "webpack-dev-server",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
-    "server": "node server"
+    "server": "node server",
+    "start": "node server"
   },
   "keywords": [],
   "author": "Javier Valencia Romero",
@@ -61,5 +62,8 @@
     "redux-undo": "^0.5.0",
     "temp": "^0.8.3",
     "twitter": "^1.2.5"
+  },
+  "engines": {
+    "node": "5.2.0"
   }
 }

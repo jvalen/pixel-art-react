@@ -146,7 +146,7 @@ function handleRender(req, res) {
   // Create a new Redux store instance
   const store = redux.createStore(undoable(reducer, {
     initTypes: ['@@redux/SET_INITIAL_STATE', '@@SET_INITIAL_STATE'], // history will be (re)set upon init action type
-    debug: true
+    debug: false
   }));
 
   //Dispatch initial state
