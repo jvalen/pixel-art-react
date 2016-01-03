@@ -9,7 +9,7 @@ export const Reset = React.createClass({
   render: function() {
     const style = {
       width: '80%',
-      margin: '1em auto',
+      margin: '0.5em auto',
       display: 'table'
     };
     return (

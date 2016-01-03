@@ -65,18 +65,35 @@ export const Dimensions = React.createClass({
         top: '0.4em',
         position: 'relative'
       },
-      colRowWrappers: {
-        width: '80%',
-        margin: '0 auto'
-      },
       cellSizeWrapper: {
         color: '#BBBBBB',
-        margin: '1em 0',
-        textAlign: 'center'
+        margin: '1em auto',
+        textAlign: 'center',
+        padding: '0',
+        width: '80%',
+        display: 'table',
+        marginBottom: '2em'
+      },
+      colWrapper: {
+        margin: '1em auto',
+        padding: '0',
+        width: '80%',
+        display: 'table'
+      },
+      rowWrapper: {
+        margin: '1em auto',
+        padding: '0',
+        width: '80%',
+        display: 'table'
       },
       cellSizeLabel: {
+        width: '48%',
+        float: 'left',
+        textAlign: 'center',
         marginBottom: '0.3em',
-        display: 'block'
+        color: '#BBBBBB',
+        top: '0',
+        position: 'relative'
       },
       modal : {
         top: '50%',
@@ -90,25 +107,29 @@ export const Dimensions = React.createClass({
       },
       showPreviewWrapper: {
         width: '80%',
-        margin: '2em auto',
+        margin: '1em auto',
         display: 'table'
       },
       showPreviewButton: {
         width: '100%'
       },
       dimensions: {
-        marginTop: '1em'
+        marginTop: '1.5em'
       }
     };
 
     return <div className="dimensions self_clear" style={styles.dimensions}>
-        <div>
+        <div className="column-wrapper self_clear" style={styles.colWrapper}>
           <label style={styles.columnsLabel}>Col</label>
           <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
         </div>
-        <div>
+        <div className="row-wrapper self_clear" style={styles.rowWrapper}>
           <label style={styles.rowsLabel}>Row</label>
           <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
+        </div>
+        <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
+          <label className="tile-size-label" style={styles.cellSizeLabel}>Tile Size</label>
+          <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
         </div>
         <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
           <button className="gray" style={styles.showPreviewButton} onClick={this.showPreview}>Preview</button>
@@ -122,10 +143,6 @@ export const Dimensions = React.createClass({
               <PreviewContainer key="0" />
             </div>
           </Modal>
-        </div>
-        <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
-          <label style={styles.cellSizeLabel}>Tile Size</label>
-          <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
         </div>
       </div>;
   }

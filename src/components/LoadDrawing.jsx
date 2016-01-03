@@ -52,7 +52,8 @@ export const LoadDrawing = React.createClass({
       },
       h2 : {
         padding: '2em 0',
-        fontSize: '1em'
+        fontSize: '1em',
+        display: 'block'
       }
     };
     return (
