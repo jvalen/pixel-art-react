@@ -1,9 +1,16 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 var config = {
   entry: [
     './src/index.jsx'
+  ],
+  plugins: [
+    new CopyWebpackPlugin([
+        { from: 'dist/main.css', to: 'main.css' },
+        { from: 'dist/fonts', to: 'fonts' }
+    ])
   ],
   module: {
     loaders: [{
