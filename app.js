@@ -80,6 +80,7 @@ app.get('/auth/twitter/callback', function(req, res, next){
   // console.log(">>" + req.session.oauthRequestToken);
   // console.log(">>" + req.session.oauthRequestTokenSecret);
   // console.log(">>" + req.query.oauth_verifier);
+  
 
   if (req.query) {
     oa.getOAuthAccessToken(req.session.oauthRequestToken, req.session.oauthRequestTokenSecret, req.query.oauth_verifier,
