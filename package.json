@@ -9,7 +9,9 @@
     "development": "webpack-dev-server",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "server": "node server",
-    "start": "node server"
+    "preinstall": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "start": "node server",
+    "postinstall": "echo installation finish",
   },
   "keywords": [],
   "author": "Javier Valencia Romero",
