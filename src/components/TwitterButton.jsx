@@ -96,7 +96,7 @@ export const TwitterButton = React.createClass({
             onChange={this.handleTextChange}
             defaultValue="
             made with
-            http://goo.gl/t8tpy3
+            http://goo.gl/73F1JR
             by @sprawlWalker
             #pixelart
             ">
