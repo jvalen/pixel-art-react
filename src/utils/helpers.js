@@ -45,7 +45,8 @@ export function shareDrawing(cssImageData, columns, rows, cellSize, text) {
 
   $.ajax({
     method: "POST",
-    url: "http://127.0.0.1:3000/auth/twitter",
+    // url: "http://127.0.0.1:3000/auth/twitter",
+    url: "http://pixelart-to-css-react.herokuapp.com/auth/twitter",
     data: css
   }).done(function(data) {
     window.location = data;
