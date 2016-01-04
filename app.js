@@ -132,8 +132,8 @@ app.get('/auth/twitter/callback', function(req, res, next){
     next(new Error("auth twitter callback: error"))
 });
 
-app.listen(portServer, ipServer, function(){
-  console.log("Express server listening on port %d in %s mode", portServer, app.settings.env);
+app.listen(process.env.PORT || portServer, function(){
+  console.log("Express server listening on port %d in %s mode", process.env.PORT || portServer, app.settings.env);
 });
 
 /**
