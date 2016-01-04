@@ -7,7 +7,6 @@ import undoable from 'redux-undo'
 import reducer from './src/reducer'
 import App from './src/components/App'
 import gm from 'gm'
-
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
@@ -45,8 +44,6 @@ var oa = new OAuth(
       "HMAC-SHA1"
     );
 
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/deploy'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
