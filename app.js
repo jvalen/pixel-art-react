@@ -9,7 +9,6 @@ import App from './src/components/App'
 import gm from 'gm'
 
 import express from 'express'
-import routes from './routes'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import temp from 'temp'
