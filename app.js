@@ -44,10 +44,6 @@ var oa = new OAuth(
       "HMAC-SHA1"
     );
 
-console.log(configData.TWITTER_CONSUMER_KEY);
-console.log(configData.TWITTER_CONSUMER_SECRET);
-console.log(configData.TWITTER_CALLBACK_URL);
-
 app.use(express.static(__dirname + '/deploy'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
