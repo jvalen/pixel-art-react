@@ -20,9 +20,7 @@ import React from 'react'
 import { createStore } from 'redux'
 
 let app = module.exports = express(),
-    configData,
-    ipServer = '127.0.0.1',
-    portServer = 3000;
+    configData;
 
 /**
  * Configuration

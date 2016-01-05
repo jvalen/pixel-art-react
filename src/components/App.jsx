@@ -13,10 +13,19 @@ import {EyedropperContainer} from './Eyedropper';
 import {ColorPickerContainer} from './ColorPicker';
 import {TwitterButtonContainer} from './TwitterButton';
 import {CopyCSSContainer} from './CopyCSS';
+import Loader from 'react-loader';
+import {connect} from 'react-redux';
 
-export default React.createClass({
+export const App = React.createClass({
+  getInitialState: function () {
+    return { loaded: false };
+  },
+  onSuccess: function (profile) {
+    this.setState({ profile: profile, loaded: true });
+  },
   render: function() {
     return <div id="pixel-art-app">
+      <Loader loaded={!this.props.loading}>
         <div className="grid grid-pad main-block">
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
@@ -52,6 +61,16 @@ export default React.createClass({
         <div className="css-container">
           <CssDisplayContainer />
         </div>
+        </Loader>
       </div>;
   }
 });
+
+function mapStateToProps(state) {
+  return {
+    loading: state.present.get('loading')
+  };
+}
+export const AppContainer = connect(
+  mapStateToProps
+)(App);

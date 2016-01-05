@@ -82,6 +82,12 @@ export function resetGrid(columns, rows) {
   };
 }
 
+export function showSpinner() {
+  return {
+    type: 'SHOW_SPINNER'
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

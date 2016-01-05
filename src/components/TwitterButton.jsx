@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {generatePixelDrawCss, shareDrawing} from '../utils/helpers';
 import Modal from 'react-modal';
+import * as actionCreators from '../action_creators';
 
 export const TwitterButton = React.createClass({
   getInitialState: function() {
@@ -16,6 +17,7 @@ export const TwitterButton = React.createClass({
       const { grid, columns, rows, cellSize } = this.props;
       let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
       shareDrawing(cssString, columns, rows, cellSize, this.refs.tweetText.value);
+      this.props.showSpinner();
     }
   },
   openModal: function() {
@@ -126,5 +128,6 @@ function mapStateToProps(state) {
   };
 }
 export const TwitterButtonContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  actionCreators
 )(TwitterButton);

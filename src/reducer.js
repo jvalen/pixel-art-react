@@ -42,7 +42,8 @@ function setInitialState(state, newState) {
     initialColor: GRID_INITIAL_COLOR,
     eraserOn: false,
     eyedropperOn: false,
-    colorPickerOn: false
+    colorPickerOn: false,
+    loading: false
   };
 
   return state.merge(initialState);
@@ -155,6 +156,12 @@ function resetGrid(state, columns, rows) {
   return state.merge(newState);
 }
 
+function showSpinner(state, columns, rows) {
+  let newState = {loading: true};
+
+  return state.merge(newState);
+}
+
 export default function(state = Map(), action) {
   switch (action.type) {
   case 'SET_INITIAL_STATE':
@@ -179,6 +186,8 @@ export default function(state = Map(), action) {
     return setCellSize(state, action.cellSize);
   case 'SET_RESET_GRID':
     return resetGrid(state, action.columns, action.rows);
+  case 'SHOW_SPINNER':
+    return showSpinner(state);
   }
   return state;
 }
