@@ -14,10 +14,28 @@ export const TwitterButton = React.createClass({
   },
   tweetDrawing: function() {
     if (this.state.charsLeft >= 0) {
-      const { grid, columns, rows, cellSize } = this.props;
+      const { grid, paletteGridData, columns, rows, cellSize } = this.props;
+      //Store current drawing in the web storage
+      let dataStored = localStorage.getItem('pixel-art-react'),
+          drawingToSave = {
+            id: 0,
+            grid: grid,
+            paletteGridData: paletteGridData,
+            cellSize: cellSize,
+            columns: columns,
+            rows: rows
+          };
+
+      if (dataStored) {
+        dataStored = JSON.parse(dataStored);
+        dataStored.current = drawingToSave;
+        localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+      }
+
+      //Generate CSS and send to the server
       let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
-      shareDrawing(cssString, columns, rows, cellSize, this.refs.tweetText.value);
       this.props.showSpinner();
+      shareDrawing(cssString, columns, rows, cellSize, this.refs.tweetText.value);
     }
   },
   openModal: function() {
@@ -122,6 +140,7 @@ export const TwitterButton = React.createClass({
 function mapStateToProps(state) {
   return {
     grid: state.present.get('grid'),
+    paletteGridData: state.present.get('paletteGridData'),
     columns: state.present.get('columns'),
     rows: state.present.get('rows'),
     cellSize: state.present.get('cellSize')

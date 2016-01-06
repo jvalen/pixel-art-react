@@ -21,7 +21,7 @@ export const LoadDrawing = React.createClass({
     this.setState({modalIsOpen: false});
   },
   drawingClick: function (data) {
-    this.props.setDrawing(data.grid, data.cellSize, data.columns, data.rows);
+    this.props.setDrawing(data.grid, data.paletteGridData, data.cellSize, data.columns, data.rows);
     this.closeModal();
   },
   giveMeDrawings: function() {
@@ -30,9 +30,11 @@ export const LoadDrawing = React.createClass({
       if (dataStored) {
         dataStored = JSON.parse(dataStored);
 
-        return dataStored.map((data, i) =>
-          <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
-        );
+        if (dataStored.stored.length > 0) {
+          return dataStored.stored.map((data, i) =>
+            <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
+          );
+        }
       } else {
         return ['Nothing awesome yet...'];
       }

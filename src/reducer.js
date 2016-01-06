@@ -95,9 +95,10 @@ function setGridCellValue(state, color, used, id) {
   });
 }
 
-function setDrawing(state, grid, cellSize, columns, rows) {
+function setDrawing(state, grid, paletteGridData, cellSize, columns, rows) {
   let newState = {
     grid: grid,
+    paletteGridData: paletteGridData,
     cellSize: cellSize,
     columns: columns,
     rows: rows,
@@ -175,7 +176,7 @@ export default function(state = Map(), action) {
   case 'SET_GRID_CELL_VALUE':
     return setGridCellValue(state, action.color, action.used, action.id);
   case 'SET_DRAWING':
-    return setDrawing(state, action.grid, action.cellSize, action.columns, action.rows);
+    return setDrawing(state, action.grid, action.paletteGridData, action.cellSize, action.columns, action.rows);
   case 'SET_ERASER':
     return setEraser(state);
   case 'SET_EYEDROPPER':

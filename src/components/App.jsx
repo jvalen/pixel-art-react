@@ -15,10 +15,35 @@ import {TwitterButtonContainer} from './TwitterButton';
 import {CopyCSSContainer} from './CopyCSS';
 import Loader from 'react-loader';
 import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 
 export const App = React.createClass({
   getInitialState: function () {
     return { loaded: false };
+  },
+  componentDidMount: function () {
+    let dataStored = localStorage.getItem('pixel-art-react');
+    if (dataStored) {
+      dataStored = JSON.parse(dataStored);
+      if (dataStored.current) {
+          //Load data from web storage
+          const { grid, paletteGridData, columns, rows, cellSize } = dataStored.current;
+          this.props.setDrawing(
+            grid,
+            paletteGridData,
+            cellSize,
+            columns,
+            rows
+          );
+      }
+    } else {
+      //Initialize web storage
+      dataStored = {
+        'stored': [],
+        'current': null
+      };
+      localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+    }
   },
   onSuccess: function (profile) {
     this.setState({ profile: profile, loaded: true });
@@ -72,5 +97,6 @@ function mapStateToProps(state) {
   };
 }
 export const AppContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  actionCreators
 )(App);

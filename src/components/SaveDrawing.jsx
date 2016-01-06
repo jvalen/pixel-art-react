@@ -5,28 +5,34 @@ import {generatePixelDrawCss} from '../utils/helpers';
 export const SaveDrawing = React.createClass({
   save: function() {
     console.log("SaveDrawing");
-    const { grid, columns, rows, cellSize } = this.props;
+    const { grid, columns, rows, cellSize, paletteGridData } = this.props;
     let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize),
         dataStored = localStorage.getItem('pixel-art-react'),
         drawingToSave = {
           id: 0,
           grid: grid,
+          paletteGridData: paletteGridData,
           cellSize: cellSize,
           columns: columns,
           rows: rows
         };
 
     if (dataStored) {
+      //Data exist in the web storage
       dataStored = JSON.parse(dataStored);
 
       let drawingsCount = dataStored.length;
       drawingToSave.id = drawingsCount;
-      dataStored.push(drawingToSave);
-
-      localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+      dataStored.stored.push(drawingToSave);
     } else {
-      localStorage.setItem('pixel-art-react', JSON.stringify([drawingToSave]));
+      //No data in the web storage
+      dataStored = {
+        'stored': [drawingToSave],
+        'current': null
+      };
     }
+
+    localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
   },
   render: function() {
     return <button className="save-drawing red" onClick={this.save}>SAVE</button>;
@@ -36,9 +42,10 @@ export const SaveDrawing = React.createClass({
 function mapStateToProps(state) {
   return {
     grid: state.present.get('grid'),
+    paletteGridData: state.present.get('paletteGridData'),
     columns: state.present.get('columns'),
     rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
+    cellSize: state.present.get('cellSize'),
   };
 }
 export const SaveDrawingContainer = connect(
