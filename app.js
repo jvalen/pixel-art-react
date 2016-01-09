@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import undoable from 'redux-undo'
 import reducer from './src/reducer'
-import App from './src/components/App'
+import {AppContainer} from './src/components/App'
 import gm from 'gm'
 import express from 'express'
 import bodyParser from 'body-parser'
@@ -154,7 +154,7 @@ function handleRender(req, res) {
   // Render the component to a string
   const html = renderToString(
     <Provider store={store}>
-      <App />
+      <AppContainer />
     </Provider>
   );
 

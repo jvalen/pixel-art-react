@@ -292,6 +292,39 @@ body {
   margin-bottom: 1.5em;
 }
 
+.react-cookie-banner {
+  position: relative;
+  background-color: #484848;
+  width: 100%;
+  z-index: 10000;
+  clear: both;
+  display: table;
+  padding: 0.5em;
+  font-size: 0.9em;
+}
+
+.react-cookie-banner .button-close {
+  position: relative;
+  line-height: 24px;
+  opacity: 0.5;
+  background-color: white;
+  font-weight: 500;
+  color: #242424;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.2em;
+  margin: 0.5em auto;
+  width: 11em;
+}
+
+.react-cookie-banner .cookie-message {
+  font-weight: 500;
+  color: #F0F0F0;
+  text-align: left;
+  position: relative;
+  display: block;
+}
+
 @media only screen and (min-width: 1177px) {
   button, .button {
     font-size: 2em;
@@ -315,40 +348,6 @@ body {
   }
 }
 
-.react-cookie-banner {
-  position: relative;
-  background-color: #484848;
-  width: 100%;
-  z-index: 10000;
-  clear: both;
-  display: table;
-  padding: 0.5em;
-  font-size: 0.9em;
-}
-
-.react-cookie-banner .button-close {
-  position: relative;
-  line-height: 24px;
-  opacity: 0.5;
-  background-color: white;
-  border-radius: 3px;
-  font-weight: 500;
-  color: #242424;
-  cursor: pointer;
-  text-align: center;
-  width: 20%;
-  float: left;
-}
-
-.react-cookie-banner .cookie-message {
-  font-weight: 500;
-  color: #F0F0F0;
-  text-align: left;
-  width: 80%;
-  position: relative;
-  display: block;
-  float: left;
-}
 
 @media only screen and (max-width: 1176px) {
   button, .button {
