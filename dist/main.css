@@ -315,6 +315,41 @@ body {
   }
 }
 
+.react-cookie-banner {
+  position: relative;
+  background-color: #484848;
+  width: 100%;
+  z-index: 10000;
+  clear: both;
+  display: table;
+  padding: 0.5em;
+  font-size: 0.9em;
+}
+
+.react-cookie-banner .button-close {
+  position: relative;
+  line-height: 24px;
+  opacity: 0.5;
+  background-color: white;
+  border-radius: 3px;
+  font-weight: 500;
+  color: #242424;
+  cursor: pointer;
+  text-align: center;
+  width: 20%;
+  float: left;
+}
+
+.react-cookie-banner .cookie-message {
+  font-weight: 500;
+  color: #F0F0F0;
+  text-align: left;
+  width: 80%;
+  position: relative;
+  display: block;
+  float: left;
+}
+
 @media only screen and (max-width: 1176px) {
   button, .button {
     font-size: 1em;

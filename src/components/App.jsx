@@ -16,6 +16,7 @@ import {CopyCSSContainer} from './CopyCSS';
 import Loader from 'react-loader';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
+import CookieBanner from 'react-cookie-banner';
 
 export const App = React.createClass({
   getInitialState: function () {
@@ -87,6 +88,14 @@ export const App = React.createClass({
           <CssDisplayContainer />
         </div>
         </Loader>
+        <CookieBanner
+          disableStyle={true}
+          message="
+            This website uses cookies (Twitter sharing and analytics). By
+            continuing to use this website you are giving consent to cookies
+            being used. Thank you."
+          onAccept={() => {}}
+          cookie="user-has-accepted-cookies"/>
       </div>;
   }
 });

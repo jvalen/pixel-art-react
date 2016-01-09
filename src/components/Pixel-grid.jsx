@@ -6,7 +6,6 @@ export const Grid = React.createClass({
   getCells: function() {
     const { gridData, cellSize, columns, padding, currentColor } = this.props;
     const width = 100 / columns;
-
     return gridData.toJS().map((currentCell, i) =>
       <PixelCellContainer key={i} id={i} width={width} padding={padding} color={currentCell.color} currentColor={currentColor}/>
     );
