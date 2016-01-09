@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {generatePixelDrawCss} from '../utils/helpers';
-import AlertContainer from 'react-alert';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+// import AlertContainer from 'react-alert';
+//import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export const SaveDrawing = React.createClass({
   save: function() {
@@ -36,15 +36,14 @@ export const SaveDrawing = React.createClass({
 
     localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
     //Show message
-    msg.show('Drawing saved', {
-      time: 2000,
-      type: 'success'
-    });
+    // msg.show('Drawing saved', {
+    //   time: 2000,
+    //   type: 'success'
+    // });
   },
   render: function() {
     return(
       <div>
-        <AlertContainer ref={(a) => global.msg = a} {...this.alertOptions} />
         <button className="save-drawing red" onClick={this.save}>SAVE</button>
       </div>
       );
