@@ -31,7 +31,7 @@ export const SimpleNotification = React.createClass({
         );
       });
 
-    if(notifications.size > 0){
+    if(notifications.size > 0) {
       this.removeNotifications();
     }
 

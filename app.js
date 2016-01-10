@@ -162,8 +162,10 @@ function handleRender(req, res) {
     </Provider>
   );
 
+  const initialState = store.getState();
+
   // Send the rendered page back to the client
-  res.render('index.jade', {reactOutput: html});
+  res.render('index.jade', {reactOutput: html, initialState: JSON.stringify(initialState)});
 }
 
 /**

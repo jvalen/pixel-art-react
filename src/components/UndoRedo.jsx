@@ -4,7 +4,7 @@ import * as actionCreators from '../action_creators';
 
 export const UndoRedo = React.createClass({
   undo: function() {
-    if (this.props.pastStatesCount > 1) {
+    if (this.props.pastStatesCount > 3) {
       this.props.undo();
     }
   },

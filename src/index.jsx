@@ -17,7 +17,6 @@ store.dispatch({
   state: {}
 });
 
-
 ReactDOM.render(
   <Provider store={store}>
     <AppContainer />
