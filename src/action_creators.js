@@ -89,6 +89,12 @@ export function showSpinner() {
   };
 }
 
+export function hideSpinner() {
+  return {
+    type: 'HIDE_SPINNER'
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

@@ -13,15 +13,12 @@ import {EyedropperContainer} from './Eyedropper';
 import {ColorPickerContainer} from './ColorPicker';
 import {TwitterButtonContainer} from './TwitterButton';
 import {CopyCSSContainer} from './CopyCSS';
-import Loader from 'react-loader';
 import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
+import {SimpleSpinner} from './SimpleSpinner';
 
 export const App = React.createClass({
-  getInitialState: function () {
-    return { loaded: false };
-  },
   componentDidMount: function () {
     let dataStored = localStorage.getItem('pixel-art-react');
     if (dataStored) {
@@ -45,13 +42,12 @@ export const App = React.createClass({
       };
       localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
     }
-  },
-  onSuccess: function (profile) {
-    this.setState({ profile: profile, loaded: true });
+
+    this.props.hideSpinner();
   },
   render: function() {
     return <div id="pixel-art-app">
-      <Loader loaded={!this.props.loading}>
+        <SimpleSpinner spin={this.props.loading} />
         <div className="grid grid-pad main-block">
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
@@ -87,7 +83,6 @@ export const App = React.createClass({
         <div className="css-container">
           <CssDisplayContainer />
         </div>
-        </Loader>
         <CookieBanner
           disableStyle={true}
           message="
