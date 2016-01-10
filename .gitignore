@@ -7,6 +7,5 @@ Procfile
 config.json
 public
 routes
-views
 npm-debug.log
 .directory
