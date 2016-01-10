@@ -43,7 +43,8 @@ function setInitialState(state, newState) {
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false,
-    loading: true
+    loading: true,
+    notifications: []
   };
 
   return state.merge(initialState);
@@ -169,6 +170,14 @@ function hideSpinner(state, columns, rows) {
   return state.merge(newState);
 }
 
+function sendNotification(state, message) {
+  let newState = {
+    notifications: message === '' ? [] : [message]
+  };
+
+  return state.merge(newState);
+}
+
 export default function(state = Map(), action) {
   switch (action.type) {
   case 'SET_INITIAL_STATE':
@@ -197,6 +206,8 @@ export default function(state = Map(), action) {
     return showSpinner(state);
   case 'HIDE_SPINNER':
     return hideSpinner(state);
+  case 'SEND_NOTIFICATION':
+    return sendNotification(state, action.message);
   }
   return state;
 }

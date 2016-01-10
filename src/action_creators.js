@@ -95,6 +95,13 @@ export function hideSpinner() {
   };
 }
 
+export function sendNotification(message) {
+  return {
+    type: 'SEND_NOTIFICATION',
+    message
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

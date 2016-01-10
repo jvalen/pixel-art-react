@@ -17,6 +17,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
 import {SimpleSpinner} from './SimpleSpinner';
+import {SimpleNotificationContainer} from './SimpleNotification';
 
 export const App = React.createClass({
   componentDidMount: function () {
@@ -48,6 +49,12 @@ export const App = React.createClass({
   render: function() {
     return <div id="pixel-art-app">
         <SimpleSpinner spin={this.props.loading} />
+        <SimpleNotificationContainer
+          notification={this.props.notifications}
+          fadeInTime={1500}
+          fadeOutTime={1500}
+          duration={1500}
+        />
         <div className="grid grid-pad main-block">
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
@@ -97,7 +104,8 @@ export const App = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    loading: state.present.get('loading')
+    loading: state.present.get('loading'),
+    notifications: state.present.get('notifications')
   };
 }
 export const AppContainer = connect(
