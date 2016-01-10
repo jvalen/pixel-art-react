@@ -4,7 +4,7 @@ var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 var config = {
   entry: [
-    './src/index.jsx'
+    './client.js'
   ],
   plugins: [
     new CopyWebpackPlugin([

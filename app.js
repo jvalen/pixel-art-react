@@ -18,6 +18,8 @@ import {OAuth} from 'oauth'
 import session from 'express-session'
 import React from 'react'
 import { createStore } from 'redux'
+import Jade from 'jade'
+import {Map, fromJS} from 'immutable';
 
 let app = module.exports = express(),
     configData,
@@ -43,6 +45,8 @@ var oa = new OAuth(
       "HMAC-SHA1"
     );
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/deploy'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -158,39 +162,8 @@ function handleRender(req, res) {
     </Provider>
   );
 
-  // Grab the initial state from our Redux store
-    const initialState = store.getState();
-
   // Send the rendered page back to the client
-  res.send(renderFullPage(html, initialState));
-}
-
-function renderFullPage(html, initialState) {
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Pixel Art to CSS</title>
-        <link rel="stylesheet" type="text/css" href="main.css">
-      </head>
-      <body>
-        <header class="grid">
-          <div class="col-2-3">
-            <h1>Pixel Art to CSS</h1>
-          </div>
-          <div class="credits-wrapper col-1-3">
-            <div>
-              <h2>by <a target="_blank" href="http://www.jvrpath.com/">jvalen</a></h2>
-              <iframe src="https://ghbtns.com/github-btn.html?user=jvalen&repo=pixel-art-react&type=star&count=true&size=large" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
-            </div>
-          </div>
-        </header>
-        <div id="app">${html}</div>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="bundle.js"></script>
-      </body>
-    </html>
-    `
+  res.render('index.jade', {reactOutput: html});
 }
 
 /**
