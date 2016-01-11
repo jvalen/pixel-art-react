@@ -14,7 +14,9 @@ export const Preview = React.createClass({
           boxShadow: cssString,
           height: cellSize,
           width: cellSize,
-          marginTop: '1em'
+          marginTop: '1em',
+          MozBoxShadow: cssString,
+          WebkitBoxShadow: cssString
         };
 
     return <div style={style}></div>;

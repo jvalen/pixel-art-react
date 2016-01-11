@@ -15,7 +15,7 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize) {
       return accumulator;
     }
   }, '');
-  return cssString;
+  return cssString.slice(0, -1);
 }
 
 export function shareDrawing(cssImageData, columns, rows, cellSize, text) {
