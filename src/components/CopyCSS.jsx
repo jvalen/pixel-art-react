@@ -48,7 +48,11 @@ export const CopyCSS = React.createClass({
       },
       cssBlock: {
         overflowY: 'scroll',
-        height: '20em'
+        height: '20em',
+        backgroundColor: '#313131',
+        color: '#ccc',
+        padding: '0.5em',
+        textAlign: 'left'
       }
     };
     return (
