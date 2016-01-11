@@ -7,6 +7,7 @@ export const Preview = React.createClass({
     let dataFromParent = !!this.props.loadData;
     const { grid, columns, rows, cellSize } =
       dataFromParent ? this.props.loadData : this.props;
+
     let cssString = generatePixelDrawCss(
       dataFromParent ? grid : grid.toJS(),
       columns, rows, cellSize),
@@ -30,11 +31,13 @@ export const Preview = React.createClass({
       width: columns * cellSize,
       height: rows * cellSize,
       margin: '1em 1em',
-      display: 'table'
+      display: 'inline-block'
     };
 
     if (dataFromParent) {
-      wrapperStyle.float = 'left';
+      wrapperStyle.width = '200px';
+      wrapperStyle.height = '200px';
+      wrapperStyle.border = '1px solid black';
     }
 
     return <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>

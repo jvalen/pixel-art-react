@@ -31,8 +31,10 @@ export const LoadDrawing = React.createClass({
         dataStored = JSON.parse(dataStored);
 
         if (dataStored.stored.length > 0) {
-          return dataStored.stored.map((data, i) =>
-            <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
+          return dataStored.stored.map((data, i) => {
+              data.cellSize = 5; //Unify cellsize for load preview
+              return <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
+            }
           );
         }
       } else {
@@ -50,12 +52,17 @@ export const LoadDrawing = React.createClass({
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         textAlign: 'center',
-        border: '4px solid #C5C5C5'
+        border: '4px solid #C5C5C5',
+        width: '80%'
       },
       h2 : {
         padding: '2em 0',
         fontSize: '1em',
         display: 'block'
+      },
+      drawingsWrapper: {
+        height: '20em',
+        overflowY: 'scroll'
       }
     };
     return (
@@ -68,7 +75,7 @@ export const LoadDrawing = React.createClass({
 
             <button onClick={this.closeModal}>CLOSE</button>
             <h2 style={customStyles.h2}>Select one of your awesome drawings</h2>
-            <div>
+            <div style={customStyles.drawingsWrapper}>
               {this.giveMeDrawings()}
             </div>
           </Modal>
