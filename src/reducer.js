@@ -2,6 +2,9 @@ import {Map, toJS} from 'immutable';
 
 const GRID_INITIAL_COLOR = '313131';
 
+/*
+ * Helpers
+ */
 export function createGrid(cellsCount, initialColor, createGamma) {
   let newGrid = [];
 
@@ -20,6 +23,26 @@ export function createGrid(cellsCount, initialColor, createGamma) {
 
   return newGrid;
 }
+
+function checkColorInPalette(palette, color) {
+  let sameColors = palette.filter(function(currentColor) {
+    return (currentColor.color === color);
+  });
+  return (sameColors.length > 0);
+}
+
+function addColorToLastCellInPalette(palette, newColor) {
+  return palette.map(function(currentColor, i, collection) {
+    if (i === collection.length - 1) {
+      //Last cell
+      return ({color: newColor});
+    } else {
+      return ({color: currentColor.color});
+    }
+  });
+}
+
+/* Action methods */
 
 function setInitialState(state, newState) {
   //Create initial grid
@@ -67,24 +90,40 @@ function setColorSelected(state, newColorSelected) {
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false
+    },
+    paletteGridData = state.get('paletteGridData').toJS();
+
+  if (!checkColorInPalette(paletteGridData, newColorSelected)) {
+    //If there is no newColorSelected in the palette it will create one
+    newState.paletteGridData =
+      addColorToLastCellInPalette(paletteGridData, newColorSelected);
   }
+
   return state.merge(newState);
 }
 
 function setCustomColor(state, customColor) {
   let currentColor = state.get('currentColor'),
-      paletteGrid = state.get('paletteGridData');
+      paletteGridData = state.get('paletteGridData').toJS();
 
   let newState = {
-    currentColor: customColor,
-    paletteGridData: paletteGrid.map((paletteColor) => {
-      if(paletteColor.toJS().color === currentColor) {
+    currentColor: customColor
+  };
+
+  if (!checkColorInPalette(paletteGridData, currentColor)) {
+    //If there is no colorSelected in the palette it will create one
+    newState.paletteGridData =
+      addColorToLastCellInPalette(paletteGridData, customColor);
+  } else {
+    newState.paletteGridData = paletteGridData.map((paletteColor) => {
+      if(paletteColor.color === currentColor) {
         return Map({color: customColor});
       } else {
         return paletteColor;
       }
-    })
-  };
+    });
+  }
+
 
   return state.merge(newState);
 }
