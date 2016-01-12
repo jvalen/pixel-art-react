@@ -10,7 +10,8 @@ var config = {
   plugins: [
     new CopyWebpackPlugin([
         { from: 'dist/main.css', to: 'main.css' },
-        { from: 'dist/fonts', to: 'fonts' }
+        { from: 'dist/fonts', to: 'fonts' },
+        { from: 'dist/favicon.ico', to: 'favicon.ico' }
     ]),
     new webpack.ProvidePlugin({
         $: "jquery",
