@@ -63,7 +63,7 @@ export const Preview = React.createClass({
         </div>
       );
     } else {
-      return <div style={style.previewWrapper}></div>;
+      return <div style={styles.previewWrapper}></div>;
     }
 
   },
