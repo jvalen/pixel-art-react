@@ -75,7 +75,7 @@ export const App = React.createClass({
                   <EyedropperContainer />
               </div>
             </div>
-            <TwitterButtonContainer maxChars="140" />
+            <TwitterButtonContainer maxChars="113" />
           </div>
           <div className="col-1-2">
             <GridContainer />

@@ -6,7 +6,12 @@ import * as actionCreators from '../action_creators';
 
 export const TwitterButton = React.createClass({
   getInitialState: function() {
-    return { modalIsOpen: false, charsLeft: this.props.maxChars };
+    let initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
+    return {
+      modalIsOpen: false,
+      charsLeft: this.props.maxChars - initialText.length,
+      initialText: initialText
+    };
   },
   handleTextChange(event) {
     let input = event.target.value;
@@ -114,12 +119,7 @@ export const TwitterButton = React.createClass({
             ref="tweetText"
             style={customStyles.textarea}
             onChange={this.handleTextChange}
-            defaultValue="
-            made with
-            http://goo.gl/73F1JR
-            by @sprawlWalker
-            #pixelart
-            ">
+            defaultValue={this.state.initialText}>
           </textarea>
           <div style={customStyles.charCount} className="char-count">
             {this.state.charsLeft}
