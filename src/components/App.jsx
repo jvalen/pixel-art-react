@@ -51,7 +51,7 @@ export const App = React.createClass({
         <SimpleSpinner spin={this.props.loading} />
         <SimpleNotificationContainer
           notification={this.props.notifications}
-          fadeInTime={1500}
+          fadeInTime={1000}
           fadeOutTime={1500}
           duration={1500}
         />

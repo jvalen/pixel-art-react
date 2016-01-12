@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {generatePixelDrawCss} from '../utils/helpers';
-// import AlertContainer from 'react-alert';
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as actionCreators from '../action_creators';
 
 export const SaveDrawing = React.createClass({

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {generatePixelDrawCss} from '../utils/helpers';
+import * as actionCreators from '../action_creators';
 
 /*
   Avoid error when server-side render doesn't recognize
@@ -16,6 +17,7 @@ export const Preview = React.createClass({
         dataStored = JSON.parse(dataStored);
         dataStored.stored.splice(event.target.getAttribute('data-key'), 1);
         browserStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+        this.props.sendNotification('Drawing deleted');
       }
     }
   },
@@ -99,5 +101,6 @@ function mapStateToProps(state) {
   };
 }
 export const PreviewContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  actionCreators
 )(Preview);
