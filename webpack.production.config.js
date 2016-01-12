@@ -1,6 +1,7 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
+var webpack = require('webpack');
 
 var config = {
   entry: [
@@ -10,7 +11,12 @@ var config = {
     new CopyWebpackPlugin([
         { from: 'dist/main.css', to: 'main.css' },
         { from: 'dist/fonts', to: 'fonts' }
-    ])
+    ]),
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
+    })
   ],
   module: {
     loaders: [{

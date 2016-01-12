@@ -45,7 +45,6 @@ export function shareDrawing(cssImageData, columns, rows, cellSize, text) {
 
   $.ajax({
     method: "POST",
-    // url: "http://127.0.0.1:3000/auth/twitter",
     url: "/auth/twitter",
     data: css
   }).done(function(data) {
