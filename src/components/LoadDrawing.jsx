@@ -33,12 +33,12 @@ export const LoadDrawing = React.createClass({
         if (dataStored.stored.length > 0) {
           return dataStored.stored.map((data, i) => {
               data.cellSize = 5; //Unify cellsize for load preview
-              return <PreviewContainer key={i + 1} loadData={data} onClick={this.drawingClick.bind(this, data)} />
+              return <PreviewContainer key={i + 1} id={i} loadData={data} onClick={this.drawingClick.bind(this, data)} />
             }
           );
+        } else {
+          return ['Nothing awesome yet...'];
         }
-      } else {
-        return ['Nothing awesome yet...'];
       }
     }
   },

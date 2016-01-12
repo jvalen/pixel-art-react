@@ -2,7 +2,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {generatePixelDrawCss} from '../utils/helpers';
 
+/*
+  Avoid error when server-side render doesn't recognize
+  localstorage (browser feature)
+*/
+let browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
+
 export const Preview = React.createClass({
+  removeFromStorage: function(event) {
+    if (!!browserStorage) {
+      let dataStored = browserStorage.getItem('pixel-art-react');
+      if (dataStored) {
+        dataStored = JSON.parse(dataStored);
+        dataStored.stored.splice(event.target.getAttribute('data-key'), 1);
+        browserStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+      }
+    }
+  },
   generatePreview: function() {
     let dataFromParent = !!this.props.loadData;
     const { grid, columns, rows, cellSize } =
@@ -11,16 +27,43 @@ export const Preview = React.createClass({
     let cssString = generatePixelDrawCss(
       dataFromParent ? grid : grid.toJS(),
       columns, rows, cellSize),
-        style =  {
-          boxShadow: cssString,
-          height: cellSize,
-          width: cellSize,
-          marginTop: '1em',
-          MozBoxShadow: cssString,
-          WebkitBoxShadow: cssString
+        styles = {
+          previewWrapper: {
+            boxShadow: cssString,
+            height: cellSize,
+            width: cellSize,
+            marginTop: '1em',
+            MozBoxShadow: cssString,
+            WebkitBoxShadow: cssString
+          },
+          trashIcon: {
+            position: 'relative',
+            fontSize: '1.7em',
+            color: 'red',
+            top: '-1em',
+            right: '-6.5em',
+            cursor: 'no-drop',
+            padding: '0.1em',
+            backgroundColor: 'white',
+            border: '1px solid black'
+          }
         };
 
-    return <div style={style}></div>;
+    if (dataFromParent) {
+      return (
+        <div style={styles.previewWrapper}>
+          <div
+            data-key={this.props.id}
+            style={styles.trashIcon}
+            className="fa fa-trash-o"
+            onClick={this.removeFromStorage}>
+          </div>
+        </div>
+      );
+    } else {
+      return <div style={style.previewWrapper}></div>;
+    }
+
   },
   render: function() {
     let dataFromParent = !!this.props.loadData;
@@ -37,7 +80,8 @@ export const Preview = React.createClass({
     if (dataFromParent) {
       wrapperStyle.width = '200px';
       wrapperStyle.height = '200px';
-      wrapperStyle.border = '1px solid black';
+      wrapperStyle.border = '3px solid black';
+      wrapperStyle.cursor = 'pointer';
     }
 
     return <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>

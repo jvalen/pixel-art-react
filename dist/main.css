@@ -57,6 +57,10 @@
   content: "\f12d";
 }
 
+.fa-trash-o:before {
+  content: "\f014";
+}
+
 .fa-twitter:before {
   content: "\f099";
   padding-right: 1em;
