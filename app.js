@@ -48,8 +48,8 @@ var oa = new OAuth(
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/deploy'));
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({ secret: configData.EXPRESS_SESSION_SECRET, resave: true, saveUninitialized: true }));
 
@@ -69,6 +69,8 @@ app.post('/auth/twitter', function(req, res) {
       // console.log(oauth_token_secret);
       req.session.oauthRequestToken = oauth_token;
       req.session.oauthRequestTokenSecret = oauth_token_secret;
+
+      req.body.boxShadow = JSON.parse(req.body.boxShadow);
       req.session.cssData = req.body;
 
       res.contentType('application/json');

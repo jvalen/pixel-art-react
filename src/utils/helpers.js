@@ -39,7 +39,7 @@ export function shareDrawing(cssImageData, columns, rows, cellSize, text) {
       'cols': columns,
       'rows': rows,
       'pixelSize': cellSize,
-      'boxShadow': cssParsedData,
+      'boxShadow': JSON.stringify(cssParsedData),
       'text': text
     };
 
