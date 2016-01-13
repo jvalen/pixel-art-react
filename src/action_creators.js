@@ -50,6 +50,18 @@ export function setDrawing(grid, paletteGridData, cellSize, columns, rows) {
   };
 }
 
+export function startDrag() {
+  return {
+    type: 'START_DRAG'
+  };
+}
+
+export function endDrag() {
+  return {
+    type: 'END_DRAG'
+  };
+}
+
 export function setEraser() {
   return {
     type: 'SET_ERASER'

@@ -52,7 +52,8 @@ function setInitialState(state, newState) {
       padding = 0.1,
       currentColor = '000',
       pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR),
-      paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true);
+      paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true),
+      dragging = false;
 
   let initialState = {
     grid: pixelGrid,
@@ -83,7 +84,12 @@ function setGridDimension(state, columns, rows, cellSize) {
 
   return state.merge(newState);
 }
-
+function startDrag(state) {
+  return state.merge({dragging: true})
+}
+function endDrag(state){
+  return state.merge({dragging: false})
+}
 function setColorSelected(state, newColorSelected) {
   let newState = {
     currentColor: newColorSelected,
@@ -231,6 +237,10 @@ export default function(state = Map(), action) {
     return setGridCellValue(state, action.color, action.used, action.id);
   case 'SET_DRAWING':
     return setDrawing(state, action.grid, action.paletteGridData, action.cellSize, action.columns, action.rows);
+  case 'START_DRAG':
+    return startDrag(state);
+  case 'END_DRAG':
+    return endDrag(state);
   case 'SET_ERASER':
     return setEraser(state);
   case 'SET_EYEDROPPER':

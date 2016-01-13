@@ -3,7 +3,16 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 
 export const PixelCell = React.createClass({
+  handleDrag: function(event) {
+    // If currently dragging
+    if(this.props.dragging) {
+      this.drawCell(event)
+    }
+  },
   handleClick: function(event) {
+    this.drawCell(event)
+  },
+  drawCell: function(event) {
     if (!this.props.eraserOn && !this.props.eyedropperOn) {
       //Apply the new color
       this.props.setGridCellValue(
@@ -50,7 +59,7 @@ export const PixelCell = React.createClass({
     };
 
     return <div className="cellWrapper" style={styles.cellWrapper}>
-        <div className="cell" onClick={this.handleClick} style={styles.cell}></div>
+        <div className="cell" onMouseDown={this.props.startDrag} onMouseUp={this.props.endDrag} onMouseOver={this.handleDrag} onClick={this.handleClick} style={styles.cell}></div>
       </div>;
   }
 });
@@ -59,7 +68,8 @@ function mapStateToProps(state) {
   return {
     initialColor: state.present.get('initialColor'),
     eyedropperOn: state.present.get('eyedropperOn'),
-    eraserOn: state.present.get('eraserOn')
+    eraserOn: state.present.get('eraserOn'),
+    dragging: state.present.get('dragging')
   };
 }
 export const PixelCellContainer = connect(
