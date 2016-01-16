@@ -7,7 +7,7 @@ export const DownloadDrawing = React.createClass({
   handleClick: function(event) {
     const { grid, columns, rows, cellSize } = this.props;
 
-    let cssString = generatePixelDrawCss(grid, columns, rows, cellSize);
+    let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
     shareDrawing(
       {
         css: cssString,
