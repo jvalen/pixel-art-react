@@ -18,6 +18,7 @@ import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
 import {SimpleSpinner} from './SimpleSpinner';
 import {SimpleNotificationContainer} from './SimpleNotification';
+import {DownloadDrawingContainer} from './DownloadDrawing';
 
 export const App = React.createClass({
   componentDidMount: function () {
@@ -68,6 +69,14 @@ export const App = React.createClass({
             <div className="grid">
               <div className="col-3-4">
                 <PaletteContainer />
+                <div className="grid grid-pad">
+                  <div className="col-1-2">
+                    <TwitterButtonContainer maxChars="113" />
+                  </div>
+                  <div className="col-1-2">
+                    <DownloadDrawingContainer />
+                  </div>
+                </div>
               </div>
               <div className="col-1-4 tools-wrapper">
                   <EraserContainer />
@@ -75,7 +84,6 @@ export const App = React.createClass({
                   <EyedropperContainer />
               </div>
             </div>
-            <TwitterButtonContainer maxChars="113" />
           </div>
           <div className="col-1-2">
             <GridContainer />

@@ -18,8 +18,8 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize) {
   return cssString.slice(0, -1);
 }
 
-export function shareDrawing(cssImageData, columns, rows, cellSize, text) {
-  let cssParsedData = cssImageData.split(',').filter(
+export function shareDrawing(imageData, text, type) {
+  let cssParsedData = imageData.css.split(',').filter(
       function(elem){
         return elem !== ''
       }).map(
@@ -36,18 +36,32 @@ export function shareDrawing(cssImageData, columns, rows, cellSize, text) {
       );
 
   var css =  {
-      'cols': columns,
-      'rows': rows,
-      'pixelSize': cellSize,
+      'cols': imageData.columns,
+      'rows': imageData.rows,
+      'pixelSize': imageData.cellSize,
       'boxShadow': JSON.stringify(cssParsedData),
       'text': text
     };
 
-  $.ajax({
-    method: "POST",
-    url: "/auth/twitter",
-    data: css
-  }).done(function(data) {
-    window.location = data;
-  });
+  switch (type) {
+    case 'download':
+      $.ajax({
+        method: "POST",
+        url: "/auth/download",
+        data: css
+      }).done(function(data) {
+        window.open(data);
+      });
+      console.log("download");
+      break;
+    case 'twitter':
+      $.ajax({
+        method: "POST",
+        url: "/auth/twitter",
+        data: css
+      }).done(function(data) {
+        window.location = data;
+      });
+      break;
+  }
 }

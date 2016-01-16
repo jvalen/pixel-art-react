@@ -40,7 +40,16 @@ export const TwitterButton = React.createClass({
       //Generate CSS and send to the server
       let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
       this.props.showSpinner();
-      shareDrawing(cssString, columns, rows, cellSize, this.refs.tweetText.value);
+      shareDrawing(
+        {
+          css: cssString,
+          columns: columns,
+          rows: rows,
+          cellSize: cellSize,
+        },
+        this.refs.tweetText.value,
+        'twitter'
+      );
     }
   },
   openModal: function() {
@@ -92,9 +101,6 @@ export const TwitterButton = React.createClass({
       },
       button: {
         margin: '1em auto'
-      },
-      hyperlink: {
-        marginTop: '1em'
       }
     };
     return (
@@ -102,10 +108,8 @@ export const TwitterButton = React.createClass({
         <a
           className="twitter-button button"
           href="javascript:void(0);"
-          style={customStyles.hyperlink}
           onClick={this.openModal}>
           <span className="fa fa-twitter"></span>
-          SHARE
         </a>
         <Modal
           isOpen={this.state.modalIsOpen}

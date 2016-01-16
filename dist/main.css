@@ -61,10 +61,17 @@
   content: "\f014";
 }
 
+.fa-download:before {
+  content: "\f019";
+}
+
 .fa-twitter:before {
   content: "\f099";
-  padding-right: 1em;
   color: "#BBBBBB";
+}
+
+button .fa-twitter:before {
+  padding-right: 1em;
 }
 
 .fa-undo:before {
@@ -188,15 +195,15 @@ button, .button, input[type=submit] {
   text-decoration: none;
   display: inline-block;
   position: relative;
-  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae, 3px 2px #3a587f, 2px 3px #4171ae, 4px 3px #3a587f, 3px 4px #4171ae, 5px 4px #3a587f, 4px 5px #4171ae, 6px 5px #3a587f, 5px 6px #4171ae;
+  box-shadow: 1px 0px #4171ae, 0px 1px #3a587f, 2px 1px #4171ae, 1px 2px #3a587f, 3px 2px #4171ae, 2px 3px #3a587f, 4px 3px #4171ae, 3px 4px #3a587f, 5px 4px #4171ae, 4px 5px #3a587f, 6px 5px #4171ae, 5px 6px #3a587f;
 }
 button:hover, button:focus, button.hover, button.focus, .button:hover, .button:focus, .button.hover, .button.focus, input[type=submit]:hover, input[type=submit]:focus, input[type=submit].hover, input[type=submit].focus {
   transform: translate(2px, 2px);
-  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae, 3px 2px #3a587f, 2px 3px #4171ae, 4px 3px #3a587f, 3px 4px #4171ae;
+  box-shadow: 1px 0px #4171ae, 0px 1px #3a587f, 2px 1px #4171ae, 1px 2px #3a587f, 3px 2px #4171ae, 2px 3px #3a587f, 4px 3px #4171ae, 3px 4px #3a587f;
 }
 button:active, button.active, .button:active, .button.active, input[type=submit]:active, input[type=submit].active {
   transform: translate(4px, 4px);
-  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae, 2px 1px #3a587f, 1px 2px #4171ae;
+  box-shadow: 1px 0px #4171ae, 0px 1px #3a587f, 2px 1px #4171ae, 1px 2px #3a587f;
 }
 
 /* Red button */
@@ -227,6 +234,21 @@ button.gray:hover, button.gray:focus, button.gray.hover, button.gray.focus, .but
 button.gray:active, button.gray.active, .button.gray:active, .button.gray.active {
   transform: translate(4px, 4px);
   box-shadow: 1px 0px #676767, 0px 1px #515151, 2px 1px #676767, 1px 2px #515151;
+}
+
+/* Brown button */
+button.brown {
+  background: #803C3C;
+  box-shadow: 1px 0px #733939, 0px 1px #552A2A, 2px 1px #733939, 1px 2px #552A2A, 3px 2px #733939, 2px 3px #552A2A, 4px 3px #733939, 3px 4px #552A2A, 5px 4px #733939, 4px 5px #552A2A, 6px 5px #733939, 5px 6px #552A2A;
+  margin-top: 0;
+}
+button.brown:hover, button.brown:focus, button.brown.hover, button.brown.focus, .button.brown:hover, .button.brown:focus, .button.brown.hover, .button.brown.focus {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 0px #733939, 0px 1px #552A2A, 2px 1px #733939, 1px 2px #552A2A, 3px 2px #733939, 2px 3px #552A2A, 4px 3px #733939, 3px 4px #552A2A;
+}
+button.brown:active, button.brown.active, .button.brown:active, .button.brown.active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 0px #733939, 0px 1px #552A2A, 2px 1px #733939, 1px 2px #552A2A;
 }
 
 .load-button-wrapper {
@@ -388,7 +410,7 @@ body {
 /* Media queries */
 
 @media only screen and (min-width: 1177px) {
-  button, .button {
+  button, .button, button:before {
     font-size: 2em;
   }
 
@@ -412,7 +434,7 @@ body {
 
 
 @media only screen and (max-width: 1176px) {
-  button, .button {
+  button, .button, button:before {
     font-size: 1em;
   }
 

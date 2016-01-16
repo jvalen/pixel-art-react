@@ -65,8 +65,6 @@ app.post('/auth/twitter', function(req, res) {
       res.send("auth twitter: error")
     }
     else {
-      // console.log(oauth_token);
-      // console.log(oauth_token_secret);
       req.session.oauthRequestToken = oauth_token;
       req.session.oauthRequestTokenSecret = oauth_token_secret;
 
@@ -82,10 +80,6 @@ app.post('/auth/twitter', function(req, res) {
 });
 
 app.get('/auth/twitter/callback', function(req, res, next){
-  // console.log(">>" + req.session.oauthRequestToken);
-  // console.log(">>" + req.session.oauthRequestTokenSecret);
-  // console.log(">>" + req.query.oauth_verifier);
-
   if (req.query) {
     oa.getOAuthAccessToken(req.session.oauthRequestToken, req.session.oauthRequestTokenSecret, req.query.oauth_verifier,
     function(error, oauthAccessToken, oauthAccessTokenSecret, results){
@@ -135,6 +129,34 @@ app.get('/auth/twitter/callback', function(req, res, next){
     );
   } else
     next(new Error("auth twitter callback: error"))
+});
+
+app.post('/auth/download', function(req, res) {
+  let randomName = temp.path({suffix: '.png'}),
+      imgPath = 'images' + randomName;
+
+  req.body.boxShadow = JSON.parse(req.body.boxShadow);
+
+  drawFromCss(req.body, imgPath, function() {
+    res.send('/download' + randomName);
+  });
+});
+
+app.get('/download/tmp/:filename', function(req, res) {
+  console.log('downloaded file: ' + req.params.filename);
+  let filePath = __dirname + '/images/tmp/' + req.params.filename;
+
+  //Stream and delete the file
+  let stream = fs.createReadStream(filePath, {bufferSize: 64 * 1024});
+  stream.pipe(res);
+
+  let had_error = false;
+  stream.on('error', function(err){
+    had_error = true;
+  });
+  stream.on('close', function(){
+   if (!had_error) fs.unlink(filePath);
+  });
 });
 
 app.listen(process.env.PORT || portServer, function(){
