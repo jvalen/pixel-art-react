@@ -21,8 +21,12 @@ export const DownloadDrawing = React.createClass({
     this.props.sendNotification('Downloading...');
   },
   render: function() {
+    let style = {
+      margin: '0 auto',
+      display: 'table'
+    };
     return(
-      <div>
+      <div style={style}>
         <button className="fa fa-download brown" onClick={this.handleClick}></button>
       </div>
       );

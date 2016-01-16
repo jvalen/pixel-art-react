@@ -101,10 +101,14 @@ export const TwitterButton = React.createClass({
       },
       button: {
         margin: '1em auto'
+      },
+      buttonWrapper: {
+        margin: '0 auto',
+        display: 'table'
       }
     };
     return (
-      <div>
+      <div style={customStyles.buttonWrapper}>
         <a
           className="twitter-button button"
           href="javascript:void(0);"
