@@ -31,7 +31,7 @@ export const PixelCell = React.createClass({
     }
   },
   render: function() {
-    const { padding, color, width, id } = this.props;
+    const { color, width, id } = this.props;
     let selectedColor = color,
         customCursor = 'cell';
 
@@ -45,8 +45,7 @@ export const PixelCell = React.createClass({
       cellWrapper: {
         display: "inline-block",
         width: `${width}%`,
-        boxSizing: "border-box",
-        padding: padding + 'em'
+        boxSizing: "border-box"
       },
       cell: {
         backgroundColor: '#' + selectedColor,
@@ -54,7 +53,8 @@ export const PixelCell = React.createClass({
         position: "relative",
         width: "100%",
         paddingBottom: "100%",
-        cursor: customCursor
+        cursor: customCursor,
+        border: '1px solid #585858'
       }
     };
 

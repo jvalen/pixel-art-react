@@ -49,7 +49,6 @@ function setInitialState(state, newState) {
   let cellSize = 10,
       columns = 20,
       rows = 20,
-      padding = 0.1,
       currentColor = '000',
       pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR),
       paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true),
@@ -61,14 +60,14 @@ function setInitialState(state, newState) {
     cellSize: cellSize,
     columns: columns,
     rows: rows,
-    padding: padding,
     currentColor: currentColor,
     initialColor: GRID_INITIAL_COLOR,
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false,
     loading: true,
-    notifications: []
+    notifications: [],
+    dragging: dragging
   };
 
   return state.merge(initialState);
