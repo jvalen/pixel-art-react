@@ -6,7 +6,9 @@ export const PixelCell = React.createClass({
   handleDrag: function(event) {
     // If currently dragging
     if(this.props.dragging) {
-      this.drawCell(event)
+      this.props.endDrag();
+      this.drawCell(event);
+      this.props.startDrag();
     }
   },
   handleClick: function(event) {
@@ -58,9 +60,17 @@ export const PixelCell = React.createClass({
       }
     };
 
-    return <div className="cellWrapper" style={styles.cellWrapper}>
-        <div className="cell" onMouseDown={this.props.startDrag} onMouseUp={this.props.endDrag} onMouseOver={this.handleDrag} onClick={this.handleClick} style={styles.cell}></div>
-      </div>;
+    return(
+      <div className="cellWrapper" style={styles.cellWrapper}>
+          <div className="cell"
+            onMouseDown={this.props.startDrag}
+            onMouseUp={this.props.endDrag}
+            onMouseOver={this.handleDrag}
+            onClick={this.handleClick}
+            style={styles.cell}>
+        </div>
+      </div>
+    );
   }
 });
 
