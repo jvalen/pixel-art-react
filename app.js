@@ -169,7 +169,6 @@ app.listen(process.env.PORT || portServer, function(){
 function handleRender(req, res) {
   // Create a new Redux store instance
   const store = createStore(undoable(reducer, {
-    initTypes: ['@@redux/SET_INITIAL_STATE', '@@SET_INITIAL_STATE'], // history will be (re)set upon init action type
     debug: false
   }));
 

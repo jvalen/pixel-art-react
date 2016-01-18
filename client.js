@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import reducer from './src/reducer';
 import {AppContainer} from './src/components/App';
 import {Map, fromJS} from 'immutable';
-import undoable from 'redux-undo';
+import undoable, {includeAction} from 'redux-undo';
 
 let initialState = window.__INITIAL_STATE__;
 
@@ -16,7 +16,14 @@ initialState.past = initialState.past.map(function(item){
 });
 
 const store = createStore(undoable(reducer, {
-  initTypes: ['@@redux/SET_INITIAL_STATE', '@@SET_INITIAL_STATE'], // history will be (re)set upon init action type
+  filter: includeAction([
+    'SET_STATE',
+    'SET_GRID_DIMENSION',
+    'SET_GRID_CELL_VALUE',
+    'SET_DRAWING',
+    'SET_CELL_SIZE',
+    'SET_RESET_GRID'
+  ]),
   debug: false
 }), initialState);
 

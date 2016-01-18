@@ -16,7 +16,7 @@ const store = createStore(undoable(reducer, {
     'SET_CELL_SIZE',
     'SET_RESET_GRID'
   ]),
-  debug: false,
+  debug: true
 }));
 
 store.dispatch({
