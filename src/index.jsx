@@ -8,7 +8,6 @@ import {Map, fromJS} from 'immutable';
 import undoable, {includeAction} from 'redux-undo';
 
 const store = createStore(undoable(reducer, {
-  initialState: undefined,
   filter: includeAction([
     'SET_STATE',
     'SET_GRID_DIMENSION',
