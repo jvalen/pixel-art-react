@@ -14,6 +14,10 @@ export const PixelCell = React.createClass({
   handleClick: function(event) {
     this.drawCell(event)
   },
+  handleMouseDown: function(event) {
+    this.drawCell(event)
+    this.props.startDrag();
+  },
   drawCell: function(event) {
     if (!this.props.eraserOn && !this.props.eyedropperOn) {
       //Apply the new color
@@ -63,7 +67,7 @@ export const PixelCell = React.createClass({
     return(
       <div className="cellWrapper" style={styles.cellWrapper}>
           <div className="cell"
-            onMouseDown={this.props.startDrag}
+            onMouseDown={this.handleMouseDown}
             onMouseUp={this.props.endDrag}
             onMouseOver={this.handleDrag}
             onClick={this.handleClick}
