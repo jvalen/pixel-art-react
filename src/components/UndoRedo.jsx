@@ -4,9 +4,7 @@ import * as actionCreators from '../action_creators';
 
 export const UndoRedo = React.createClass({
   undo: function() {
-    if (this.props.pastStatesCount > 1) {
       this.props.undo();
-    }
   },
   redo: function() {
     this.props.redo();
@@ -30,12 +28,7 @@ export const UndoRedo = React.createClass({
   }
 });
 
-function mapStateToProps(state) {
-  return {
-    pastStatesCount: state.past ? state.past.length : 0
-  };
-}
 export const UndoRedoContainer = connect(
-  mapStateToProps,
+  null,
   actionCreators
 )(UndoRedo);
