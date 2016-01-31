@@ -22,6 +22,7 @@ import {DownloadDrawingContainer} from './DownloadDrawing';
 
 export const App = React.createClass({
   componentDidMount: function () {
+    this.props.hideSpinner();
     let dataStored = localStorage.getItem('pixel-art-react');
     if (dataStored) {
       dataStored = JSON.parse(dataStored);
@@ -44,8 +45,6 @@ export const App = React.createClass({
       };
       localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
     }
-
-    this.props.hideSpinner();
   },
   render: function() {
     return <div id="pixel-art-app">
