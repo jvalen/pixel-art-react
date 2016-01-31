@@ -70,7 +70,6 @@ export const PixelCell = React.createClass({
             onMouseDown={this.handleMouseDown}
             onMouseUp={this.props.endDrag}
             onMouseOver={this.handleDrag}
-            onClick={this.handleClick}
             style={styles.cell}>
         </div>
       </div>
