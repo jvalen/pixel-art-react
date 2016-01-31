@@ -177,6 +177,9 @@ function handleRender(req, res) {
     type: 'SET_INITIAL_STATE',
     state: {}
   });
+  store.dispatch({
+    type: 'SHOW_SPINNER'
+  });
 
   // Render the component to a string
   const html = renderToString(

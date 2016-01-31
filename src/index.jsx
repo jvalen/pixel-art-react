@@ -23,6 +23,9 @@ store.dispatch({
   type: 'SET_INITIAL_STATE',
   state: {}
 });
+store.dispatch({
+  type: 'SHOW_SPINNER'
+});
 
 ReactDOM.render(
   <Provider store={store}>

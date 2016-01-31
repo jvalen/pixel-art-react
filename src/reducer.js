@@ -65,7 +65,7 @@ function setInitialState(state, newState) {
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false,
-    loading: true,
+    loading: false,
     notifications: [],
     dragging: dragging
   };
