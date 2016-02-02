@@ -1,10 +1,16 @@
-#Pixel-art to CSS with react
+# Pixel-art to CSS with react
 
 <a target='_blank' href='http://www.recurse.com' title='Made at the Recurse Center'><img src='https://cloud.githubusercontent.com/assets/2883345/11325206/336ea5f4-9150-11e5-9e90-d86ad31993d8.png' height='20px'/></a>
 
-![pixel-art-react](screenshots/screenshot1.png)
+### Did you know that you can create pixel art using a single CSS property?
 
-Handy and fun pixel art tool, where your drawing will be transformed to CSS.
+**pixel-art-react** is a handy and intuitive tool, that can help you to design your awesome drawings!
+
+Try to draw some pixels on the screen, **pixel-art-react** will generate the CSS code using **box-shadow** property, ready to use in your HTML blocks.
+
+Check the following **_mini-pixel-spiderman_** example:
+
+![pixel-art-react](screenshots/screenshot1.png)
 
 The project is built with **React**, **Redux** and **ImmutableJS**. Trying to avoid side-effects in a functional way of programming.
 
