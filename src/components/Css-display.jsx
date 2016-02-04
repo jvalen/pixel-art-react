@@ -8,7 +8,6 @@ export const CssDisplay = React.createClass({
     let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
 
     if (!!cssString) {
-      cssString = cssString.slice(0, -1);
       cssString = 'box-shadow:' + cssString + '; '
       cssString +=  'height: ' + cellSize + 'px; width: ' + cellSize + 'px;';
     }
