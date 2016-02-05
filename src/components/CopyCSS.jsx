@@ -11,7 +11,6 @@ export const CopyCSS = React.createClass({
     const { grid, columns, rows, cellSize } = this.props;
     let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
     if (!!cssString) {
-      cssString = cssString.slice(0, -1);
       cssString = 'box-shadow:' + cssString + '; '
       cssString +=  'height: ' + cellSize + 'px; width: ' + cellSize + 'px;';
     }
