@@ -18,7 +18,7 @@ export const CssDisplay = React.createClass({
     let styleContainer = {
       position: 'absolute',
       top: '-1.6em',
-      left: '0',
+      left: 0,
       opacity: '0.1',
       zIndex: '-1',
       padding: '1em',

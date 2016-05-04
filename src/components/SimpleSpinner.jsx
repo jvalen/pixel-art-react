@@ -12,8 +12,8 @@ export const SimpleSpinner = React.createClass({
       wrapper: {
         position: 'absolute',
         zIndex: '1',
-        left: '0',
-        right: '0',
+        left: 0,
+        right: 0,
         marginLeft: 'auto',
         marginRight: 'auto',
         display: this.props.spin ? 'block' : 'none',
@@ -21,7 +21,7 @@ export const SimpleSpinner = React.createClass({
         height: '100%',
         backgroundColor: 'black',
         opacity: '0.4',
-        top: '0'
+        top: 0
       },
       spin: {
         height: '60px',

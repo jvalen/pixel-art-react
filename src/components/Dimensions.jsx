@@ -69,20 +69,20 @@ export const Dimensions = React.createClass({
         color: '#BBBBBB',
         margin: '1em auto',
         textAlign: 'center',
-        padding: '0',
+        padding: 0,
         width: '80%',
         display: 'table',
         marginBottom: '2em'
       },
       colWrapper: {
         margin: '1em auto',
-        padding: '0',
+        padding: 0,
         width: '80%',
         display: 'table'
       },
       rowWrapper: {
         margin: '1em auto',
-        padding: '0',
+        padding: 0,
         width: '80%',
         display: 'table'
       },
@@ -92,7 +92,7 @@ export const Dimensions = React.createClass({
         textAlign: 'center',
         marginBottom: '0.3em',
         color: '#BBBBBB',
-        top: '0',
+        top: 0,
         position: 'relative'
       },
       modal : {
