@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import reducer from './reducer';
-import {AppContainer} from './components/App';
-import {Map, fromJS} from 'immutable';
-import undoable, {includeAction} from 'redux-undo';
+import { AppContainer } from './components/App';
+import undoable, { includeAction } from 'redux-undo';
 
 const store = createStore(undoable(reducer, {
   filter: includeAction([
