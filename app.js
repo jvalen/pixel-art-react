@@ -44,7 +44,7 @@ const oa = new OAuth(
 );
 
 app.set('views', `${__dirname}/views`);
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(express.static(`${__dirname}/deploy`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -85,7 +85,7 @@ function handleRender(req, res) {
   const initialState = store.getState();
 
   // Send the rendered page back to the client
-  res.render('index.jade', {
+  res.render('index.pug', {
     reactOutput: html,
     initialState: JSON.stringify(initialState)
   });
