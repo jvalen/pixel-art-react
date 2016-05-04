@@ -1,4 +1,4 @@
-import {Map, toJS} from 'immutable';
+import { Map } from 'immutable';
 
 const GRID_INITIAL_COLOR = '313131';
 
@@ -6,18 +6,18 @@ const GRID_INITIAL_COLOR = '313131';
  * Helpers
  */
 export function createGrid(cellsCount, initialColor, createGamma) {
-  let newGrid = [];
+  const newGrid = [];
 
   if (createGamma) {
     // Create colors gamma
-    for(var i = 0; i <= cellsCount ; i += 42) {
-      let hex = ((0xe000|i).toString(16)).slice(1);
-      newGrid.push({color: hex});
+    for (let i = 0; i <= cellsCount; i += 42) {
+      const hex = ((0xe000 | i).toString(16)).slice(1);
+      newGrid.push({ color: hex });
     }
   } else {
-    //Set every cell with the initial color
-    for (var i = 0; i < cellsCount; i++) {
-      newGrid.push({color: initialColor, used: false});
+    // Set every cell with the initial color
+    for (let i = 0; i < cellsCount; i++) {
+      newGrid.push({ color: initialColor, used: false });
     }
   }
 
@@ -25,81 +25,80 @@ export function createGrid(cellsCount, initialColor, createGamma) {
 }
 
 function checkColorInPalette(palette, color) {
-  let sameColors = palette.filter(function(currentColor) {
+  const sameColors = palette.filter((currentColor) => {
     return (currentColor.color === color);
   });
   return (sameColors.length > 0);
 }
 
 function addColorToLastCellInPalette(palette, newColor) {
-  return palette.map(function(currentColor, i, collection) {
+  return palette.map((currentColor, i, collection) => {
     if (i === collection.length - 1) {
-      //Last cell
-      return ({color: newColor});
-    } else {
-      return ({color: currentColor.color});
+      // Last cell
+      return ({ color: newColor });
     }
+    return ({ color: currentColor.color });
   });
 }
 
 /* Action methods */
 
-function setInitialState(state, newState) {
-  //Create initial grid
-  let cellSize = 10,
-      columns = 20,
-      rows = 20,
-      currentColor = '000',
-      pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR),
-      paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true),
-      dragging = false;
+function setInitialState(state) {
+  // Create initial grid
+  const cellSize = 10;
+  const columns = 20;
+  const rows = 20;
+  const currentColor = '000';
+  const pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR);
+  const paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true);
+  const dragging = false;
 
-  let initialState = {
+  const initialState = {
     grid: pixelGrid,
     paletteGridData: paletteGrid,
-    cellSize: cellSize,
-    columns: columns,
-    rows: rows,
-    currentColor: currentColor,
+    cellSize,
+    columns,
+    rows,
+    currentColor,
     initialColor: GRID_INITIAL_COLOR,
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false,
     loading: false,
     notifications: [],
-    dragging: dragging
+    dragging
   };
 
   return state.merge(initialState);
 }
 
 function setGridDimension(state, columns, rows, cellSize) {
-  let newState = {
+  const newState = {
     grid: createGrid(columns * rows, GRID_INITIAL_COLOR),
     rows: parseInt(rows, 10),
     columns: parseInt(columns, 10),
     cellSize: parseInt(cellSize, 10)
-  }
+  };
 
   return state.merge(newState);
 }
 function startDrag(state) {
-  return state.merge({dragging: true})
+  return state.merge({ dragging: true });
 }
-function endDrag(state){
-  return state.merge({dragging: false})
+function endDrag(state) {
+  return state.merge({ dragging: false });
 }
 function setColorSelected(state, newColorSelected) {
-  let newState = {
+  const newState = {
     currentColor: newColorSelected,
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false
-    },
-    paletteGridData = state.get('paletteGridData').toJS();
+  };
+  const paletteGridData = state.get('paletteGridData').toJS();
 
   if (!checkColorInPalette(paletteGridData, newColorSelected)) {
-    //If there is no newColorSelected in the palette it will create one
+    // If there is no newColorSelected in the palette it will create one
     newState.paletteGridData =
       addColorToLastCellInPalette(paletteGridData, newColorSelected);
   }
@@ -108,24 +107,22 @@ function setColorSelected(state, newColorSelected) {
 }
 
 function setCustomColor(state, customColor) {
-  let currentColor = state.get('currentColor'),
-      paletteGridData = state.get('paletteGridData').toJS();
-
-  let newState = {
+  const currentColor = state.get('currentColor');
+  const paletteGridData = state.get('paletteGridData').toJS();
+  const newState = {
     currentColor: customColor
   };
 
   if (!checkColorInPalette(paletteGridData, currentColor)) {
-    //If there is no colorSelected in the palette it will create one
+    // If there is no colorSelected in the palette it will create one
     newState.paletteGridData =
       addColorToLastCellInPalette(paletteGridData, customColor);
   } else {
     newState.paletteGridData = paletteGridData.map((paletteColor) => {
-      if(paletteColor.color === currentColor) {
-        return Map({color: customColor});
-      } else {
-        return paletteColor;
+      if (paletteColor.color === currentColor) {
+        return Map({ color: customColor });
       }
+      return paletteColor;
     });
   }
 
@@ -134,26 +131,23 @@ function setCustomColor(state, customColor) {
 }
 
 function setGridCellValue(state, color, used, id) {
-  return state.setIn(['grid', parseInt(id, 10)], {
-    color: color,
-    used: used
-  });
+  return state.setIn(['grid', parseInt(id, 10)], { color, used });
 }
 
 function setDrawing(state, grid, paletteGridData, cellSize, columns, rows) {
-  let newState = {
-    grid: grid,
-    paletteGridData: paletteGridData,
-    cellSize: cellSize,
-    columns: columns,
-    rows: rows,
+  const newState = {
+    grid,
+    paletteGridData,
+    cellSize,
+    columns,
+    rows,
   };
 
   return state.merge(newState);
 }
 
 function setEraser(state) {
-  let newState = {
+  const newState = {
     currentColor: null,
     eraserOn: true,
     eyedropperOn: false,
@@ -164,7 +158,7 @@ function setEraser(state) {
 }
 
 function setEyedropper(state) {
-  let newState = {
+  const newState = {
     eraserOn: false,
     eyedropperOn: true,
     colorPickerOn: false
@@ -174,7 +168,7 @@ function setEyedropper(state) {
 }
 
 function setColorPicker(state) {
-  let newState = {
+  const newState = {
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: true
@@ -184,15 +178,15 @@ function setColorPicker(state) {
 }
 
 function setCellSize(state, cellSize) {
-  let newState = {
-    cellSize: cellSize
+  const newState = {
+    cellSize
   };
 
   return state.merge(newState);
 }
 
 function resetGrid(state, columns, rows) {
-  let newState = {
+  const newState = {
     grid: createGrid(
       parseInt(columns, 10) * parseInt(rows, 10),
       GRID_INITIAL_COLOR
@@ -202,60 +196,64 @@ function resetGrid(state, columns, rows) {
   return state.merge(newState);
 }
 
-function showSpinner(state, columns, rows) {
-  let newState = {loading: true};
+function showSpinner(state) {
+  const newState = { loading: true };
 
   return state.merge(newState);
 }
 
-function hideSpinner(state, columns, rows) {
-  let newState = {loading: false};
+function hideSpinner(state) {
+  const newState = { loading: false };
 
   return state.merge(newState);
 }
 
 function sendNotification(state, message) {
-  let newState = {
+  const newState = {
     notifications: message === '' ? [] : [message]
   };
 
   return state.merge(newState);
 }
 
-export default function(state = Map(), action) {
+export default function (state = Map(), action) {
   switch (action.type) {
-  case 'SET_INITIAL_STATE':
-    return setInitialState(state, action.state);
-  case 'SET_GRID_DIMENSION':
-    return setGridDimension(state, action.columns, action.rows, action.cellSize);
-  case 'SET_COLOR_SELECTED':
-    return setColorSelected(state, action.newColorSelected);
-  case 'SET_CUSTOM_COLOR':
-    return setCustomColor(state, action.customColor);
-  case 'SET_GRID_CELL_VALUE':
-    return setGridCellValue(state, action.color, action.used, action.id);
-  case 'SET_DRAWING':
-    return setDrawing(state, action.grid, action.paletteGridData, action.cellSize, action.columns, action.rows);
-  case 'START_DRAG':
-    return startDrag(state);
-  case 'END_DRAG':
-    return endDrag(state);
-  case 'SET_ERASER':
-    return setEraser(state);
-  case 'SET_EYEDROPPER':
-    return setEyedropper(state);
-  case 'SET_COLOR_PICKER':
-    return setColorPicker(state);
-  case 'SET_CELL_SIZE':
-    return setCellSize(state, action.cellSize);
-  case 'SET_RESET_GRID':
-    return resetGrid(state, action.columns, action.rows);
-  case 'SHOW_SPINNER':
-    return showSpinner(state);
-  case 'HIDE_SPINNER':
-    return hideSpinner(state);
-  case 'SEND_NOTIFICATION':
-    return sendNotification(state, action.message);
+    case 'SET_INITIAL_STATE':
+      return setInitialState(state);
+    case 'SET_GRID_DIMENSION':
+      return setGridDimension(state, action.columns, action.rows, action.cellSize);
+    case 'SET_COLOR_SELECTED':
+      return setColorSelected(state, action.newColorSelected);
+    case 'SET_CUSTOM_COLOR':
+      return setCustomColor(state, action.customColor);
+    case 'SET_GRID_CELL_VALUE':
+      return setGridCellValue(state, action.color, action.used, action.id);
+    case 'SET_DRAWING':
+      return setDrawing(
+        state, action.grid, action.paletteGridData,
+        action.cellSize, action.columns, action.rows)
+      ;
+    case 'START_DRAG':
+      return startDrag(state);
+    case 'END_DRAG':
+      return endDrag(state);
+    case 'SET_ERASER':
+      return setEraser(state);
+    case 'SET_EYEDROPPER':
+      return setEyedropper(state);
+    case 'SET_COLOR_PICKER':
+      return setColorPicker(state);
+    case 'SET_CELL_SIZE':
+      return setCellSize(state, action.cellSize);
+    case 'SET_RESET_GRID':
+      return resetGrid(state, action.columns, action.rows);
+    case 'SHOW_SPINNER':
+      return showSpinner(state);
+    case 'HIDE_SPINNER':
+      return hideSpinner(state);
+    case 'SEND_NOTIFICATION':
+      return sendNotification(state, action.message);
+    default:
   }
   return state;
 }

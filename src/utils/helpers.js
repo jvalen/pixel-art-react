@@ -1,67 +1,62 @@
 export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize) {
-  let cssString = pixelGrid.reduce((accumulator, currentValue, i) => {
+  const cssString = pixelGrid.reduce((accumulator, currentValue, i) => {
     if (currentValue.used) {
-      let xCoord = ((i % columns) * cellSize) + cellSize;
-      let yCoord = (parseInt(i / columns, 10) * cellSize) + cellSize;
+      const xCoord = ((i % columns) * cellSize) + cellSize;
+      const yCoord = (parseInt(i / columns, 10) * cellSize) + cellSize;
 
-      return accumulator +
-        ' ' +
-        (xCoord + 'px ') +
-        (yCoord + 'px')
-        + ' 0 '
-        + '#' + currentValue.color
-        + ',';
-    } else {
-      return accumulator;
+      return `${accumulator} ${xCoord}px ${yCoord}px 0 #${currentValue.color},`;
     }
+
+    return accumulator;
   }, '');
   return cssString.slice(0, -1);
 }
 
 export function shareDrawing(imageData, text, type) {
-  let cssParsedData = imageData.css.split(',').filter(
-      function(elem){
-        return elem !== ''
+  const cssParsedData = imageData.css.split(',').filter(
+      (elem) => {
+        return elem !== '';
       }).map(
-        function(elem){
+        (elem) => {
           if (elem !== '') {
             return elem.trim().split(' ').reduce(
-              function(acum, elem){
-                acum.push(elem.split('px').shift());
+              (acum, item) => {
+                acum.push(item.split('px').shift());
                 return acum;
               },
-              [])
+            []);
           }
+          throw new Error('Error parsing CSS data');
         }
       );
 
-  var css =  {
-      'cols': imageData.columns,
-      'rows': imageData.rows,
-      'pixelSize': imageData.cellSize,
-      'boxShadow': JSON.stringify(cssParsedData),
-      'text': text
-    };
+  const css = {
+    cols: imageData.columns,
+    rows: imageData.rows,
+    pixelSize: imageData.cellSize,
+    boxShadow: JSON.stringify(cssParsedData),
+    text
+  };
 
   switch (type) {
     case 'download':
       $.ajax({
-        method: "POST",
-        url: "/auth/download",
+        method: 'POST',
+        url: '/auth/download',
         data: css
-      }).done(function(data) {
+      }).done((data) => {
         window.open(data);
       });
-      console.log("download");
       break;
     case 'twitter':
       $.ajax({
-        method: "POST",
-        url: "/auth/twitter",
+        method: 'POST',
+        url: '/auth/twitter',
         data: css
-      }).done(function(data) {
+      }).done((data) => {
         window.location = data;
       });
       break;
+    default:
   }
 }
