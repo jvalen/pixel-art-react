@@ -4,6 +4,7 @@
   "description": "Pixel art drawing web app powered by ReactJS",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch",
     "development": "webpack-dev-server",
@@ -69,5 +70,12 @@
   },
   "engines": {
     "node": "5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^8.0.0",
+    "eslint-plugin-import": "^1.6.1",
+    "eslint-plugin-jsx-a11y": "^1.0.4",
+    "eslint-plugin-react": "^5.0.1"
   }
 }
