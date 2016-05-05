@@ -35,14 +35,16 @@ export const ColorPicker = React.createClass({
       },
       popover: {
         position: 'absolute',
-        zIndex: '2'
+        zIndex: '2',
+        right: -250,
+        top: 155
       },
       cover: {
         position: 'fixed',
-        top: '0',
-        right: '0',
-        bottom: '0',
-        left: '0'
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
       }
     };
 
