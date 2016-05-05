@@ -32,6 +32,17 @@ export const ColorPicker = React.createClass({
       picker: {
         position: 'relative',
         bottom: '18.4em'
+      },
+      popover: {
+        position: 'absolute',
+        zIndex: '2'
+      },
+      cover: {
+        position: 'fixed',
+        top: '0',
+        right: '0',
+        bottom: '0',
+        left: '0'
       }
     };
 
@@ -47,11 +58,18 @@ export const ColorPicker = React.createClass({
           style={styles.button}>
         </div>
         <div style={styles.picker}>
-          <Picker color={this.state.background}
-            onChange={this.handleChange}
-            onClose={this.handleClose}
-            display={this.state.displayColorPicker}
-            type="sketch" />
+            {this.state.displayColorPicker ?
+              <div style={styles.popover} is="popover">
+                <div style={styles.cover} is="cover" onClick={this.handleClose} />
+                <Picker
+                  color={this.state.background}
+                  onChange={this.handleChange}
+                  onClose={this.handleClose}
+                  type="sketch"
+                />
+              </div>
+              : null
+             }
         </div>
       </div>
     );
