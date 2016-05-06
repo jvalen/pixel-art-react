@@ -55,10 +55,9 @@ export class LoadDrawing extends React.Component {
             );
           });
         }
-        return ['Nothing awesome yet...'];
       }
     }
-    throw new Error('Error getting stored drawings');
+    return ['Nothing awesome yet...'];
   }
 
   render() {
