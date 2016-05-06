@@ -10,7 +10,7 @@ export class TwitterButton extends React.Component {
     const initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
     this.state = {
       modalIsOpen: false,
-      charsLeft: this.props.maxChars - initialText.length,
+      charsLeft: props.maxChars - initialText.length,
       initialText
     };
   }
@@ -115,13 +115,12 @@ export class TwitterButton extends React.Component {
     };
     return (
       <div style={customStyles.buttonWrapper}>
-        <a
+        <button
           className="twitter-button button"
-          href={() => { void(0); }}
           onClick={() => { this.openModal(); }}
         >
           <span className="fa fa-twitter"></span>
-        </a>
+        </button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={() => { this.closeModal(); }}
@@ -133,7 +132,7 @@ export class TwitterButton extends React.Component {
           <textarea
             ref="tweetText"
             style={customStyles.textarea}
-            onChange={() => { this.handleTextChange(); }}
+            onChange={(event) => { this.handleTextChange(event); }}
             defaultValue={this.state.initialText}
           >
           </textarea>

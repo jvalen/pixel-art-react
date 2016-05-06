@@ -70,10 +70,6 @@
   color: "#BBBBBB";
 }
 
-button .fa-twitter:before {
-  padding-right: 1em;
-}
-
 .fa-undo:before {
   content: "\f0e2";
 }
