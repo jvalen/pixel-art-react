@@ -17,8 +17,10 @@ import { OAuth } from 'oauth';
 import session from 'express-session';
 import React from 'react';
 import { createStore } from 'redux';
+import pkgjson from './package.json';
 
 const app = module.exports = express();
+console.log(`Version deployed: ${pkgjson.version}`);
 
 /**
  * Configuration
