@@ -79,7 +79,7 @@
     "webpack-hot-middleware": "^2.2.0"
   },
   "engines": {
-    "node": "5.2.0"
+    "node": "5.11.0"
   },
   "devDependencies": {
     "eslint": "^2.9.0",
