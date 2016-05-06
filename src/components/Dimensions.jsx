@@ -1,29 +1,41 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import Modal from 'react-modal';
-import {PreviewContainer} from './Preview';
+import { PreviewContainer } from './Preview';
 
-export const Dimensions = React.createClass({
-  getInitialState: function() {
-    return {columnsValue: 20, rowsValue: 20, cellSizeValue: 10, modalIsOpen: false};
-  },
-  showPreview: function() {
-    this.setState({modalIsOpen: true});
-  },
-  hidePreview: function() {
-    this.setState({modalIsOpen: false});
-  },
-  handleCellSizeChange: function(event) {
-    let newLocalState = {
+export class Dimensions extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      columnsValue: 20,
+      rowsValue: 20,
+      cellSizeValue: 10,
+      modalIsOpen: false
+    };
+  }
+
+  showPreview() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  hidePreview() {
+    this.setState({ modalIsOpen: false });
+  }
+
+  handleCellSizeChange(event) {
+    const newLocalState = {
       cellSizeValue: event.target.value | 0
     };
-    this.setState(newLocalState, function() {
+    this.setState(newLocalState, function () {
       this.props.setCellSize(this.state.cellSizeValue);
     });
-  },
-  handleChange: function(event) {
-    let propertyName, newLocalState = {};
+  }
+
+  handleChange(event) {
+    let propertyName;
+    const newLocalState = {};
+
     switch (event.target.className) {
       case 'columns':
         propertyName = 'columnsValue';
@@ -31,16 +43,18 @@ export const Dimensions = React.createClass({
       case 'rows':
         propertyName = 'rowsValue';
         break;
+      default:
     }
 
     newLocalState[propertyName] = event.target.value | 0;
-    this.setState(newLocalState, function() {
+    this.setState(newLocalState, function () {
       this.props.setGridDimension(
         this.state.columnsValue, this.state.rowsValue, this.state.cellSizeValue
       );
     });
-  },
-  render: function() {
+  }
+
+  render() {
     const { columns, rows, cellSize } = this.props;
     let columnsValue = columns;
     let rowsValue = rows;
@@ -95,7 +109,7 @@ export const Dimensions = React.createClass({
         top: 0,
         position: 'relative'
       },
-      modal : {
+      modal: {
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -118,35 +132,58 @@ export const Dimensions = React.createClass({
       }
     };
 
-    return <div className="dimensions self_clear" style={styles.dimensions}>
+    return (
+      <div className="dimensions self_clear" style={styles.dimensions}>
         <div className="column-wrapper self_clear" style={styles.colWrapper}>
           <label style={styles.columnsLabel}>Col</label>
-          <input type="text" className="columns" value={columnsValue} onChange={this.handleChange} />
+          <input
+            type="text"
+            className="columns"
+            value={columnsValue}
+            onChange={(ev) => { this.handleChange(ev); }}
+          />
         </div>
         <div className="row-wrapper self_clear" style={styles.rowWrapper}>
           <label style={styles.rowsLabel}>Row</label>
-          <input type="text" className="rows" value={rowsValue} onChange={this.handleChange}/>
+          <input
+            type="text"
+            className="rows"
+            value={rowsValue}
+            onChange={(ev) => { this.handleChange(ev); }}
+          />
         </div>
         <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
           <label className="tile-size-label" style={styles.cellSizeLabel}>Tile Size</label>
-          <input type="text" className="cell-size" value={cellSizeValue} onChange={this.handleCellSizeChange}/>
+          <input
+            type="text"
+            className="cell-size"
+            value={cellSizeValue}
+            onChange={(ev) => { this.handleCellSizeChange(ev); }}
+          />
         </div>
         <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
-          <button className="gray" style={styles.showPreviewButton} onClick={this.showPreview}>Preview</button>
+          <button
+            className="gray"
+            style={styles.showPreviewButton}
+            onClick={() => { this.showPreview(); }}
+          >
+            Preview
+          </button>
           <Modal
             isOpen={this.state.modalIsOpen}
-            onRequestClose={this.hidePreview}
-            style={styles.modal} >
-
-            <button onClick={this.hidePreview}>CLOSE</button>
+            onRequestClose={() => { this.hidePreview(); }}
+            style={styles.modal}
+          >
+            <button onClick={() => { this.hidePreview(); }}>CLOSE</button>
             <div>
               <PreviewContainer key="0" />
             </div>
           </Modal>
         </div>
-      </div>;
+      </div>
+    );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

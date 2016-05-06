@@ -1,27 +1,27 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export const PaletteColor = React.createClass({
-  handleClick: function(event) {
+export class PaletteColor extends React.Component {
+  handleClick() {
     this.props.setColorSelected(this.props.color);
-  },
-  render: function() {
+  }
+
+  render() {
     const { width, color } = this.props;
-    let cellColor = color;
+    const cellColor = color;
 
     const styles = {
       cellWrapper: {
-        display: "inline-block",
+        display: 'inline-block',
         width: `${width}%`
-        //padding: "0.1em"
       },
       cell: {
-        backgroundColor: '#' + cellColor,
+        backgroundColor: `#${cellColor}`,
         color: 'white',
-        position: "relative",
-        width: "100%",
-        paddingBottom: "100%"
+        position: 'relative',
+        width: '100%',
+        paddingBottom: '100%'
       }
     };
 
@@ -31,11 +31,17 @@ export const PaletteColor = React.createClass({
       styles.cellWrapper.border = 'none';
     }
 
-    return <div className="cellWrapper" style={styles.cellWrapper}>
-        <div className="cell" onClick={this.handleClick} style={styles.cell}></div>
-      </div>;
+    return (
+      <div className="cellWrapper" style={styles.cellWrapper}>
+        <div
+          className="cell"
+          onClick={() => { this.handleClick(); }}
+          style={styles.cell}
+        />
+      </div>
+    );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

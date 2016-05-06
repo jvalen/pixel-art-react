@@ -1,49 +1,52 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {generatePixelDrawCss} from '../utils/helpers';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export const SaveDrawing = React.createClass({
-  save: function() {
+export class SaveDrawing extends React.Component {
+  save() {
+    let dataStored = localStorage.getItem('pixel-art-react');
     const { grid, columns, rows, cellSize, paletteGridData } = this.props;
-    let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize),
-        dataStored = localStorage.getItem('pixel-art-react'),
-        drawingToSave = {
-          id: 0,
-          grid: grid,
-          paletteGridData: paletteGridData,
-          cellSize: cellSize,
-          columns: columns,
-          rows: rows
-        };
+    const drawingToSave = {
+      id: 0,
+      grid,
+      paletteGridData,
+      cellSize,
+      columns,
+      rows
+    };
 
     if (dataStored) {
-      //Data exist in the web storage
+      // Data exist in the web storage
       dataStored = JSON.parse(dataStored);
 
-      let drawingsCount = dataStored.length;
+      const drawingsCount = dataStored.length;
       drawingToSave.id = drawingsCount;
       dataStored.stored.push(drawingToSave);
     } else {
-      //No data in the web storage
+      // No data in the web storage
       dataStored = {
-        'stored': [drawingToSave],
-        'current': null
+        stored: [drawingToSave],
+        current: null
       };
     }
 
     localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
 
     this.props.sendNotification('Drawing saved');
-  },
-  render: function() {
-    return(
-      <div>
-        <button className="save-drawing red" onClick={this.save}>SAVE</button>
-      </div>
-      );
   }
-});
+  render() {
+    return (
+      <div>
+        <button
+          className="save-drawing red"
+          onClick={() => { this.save(); }}
+        >
+          SAVE
+        </button>
+      </div>
+    );
+  }
+}
 
 function mapStateToProps(state) {
   return {

@@ -1,37 +1,41 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {generatePixelDrawCss, shareDrawing} from '../utils/helpers';
+import { connect } from 'react-redux';
+import { generatePixelDrawCss, shareDrawing } from '../utils/helpers';
 import * as actionCreators from '../action_creators';
 
-export const DownloadDrawing = React.createClass({
-  handleClick: function(event) {
+export class DownloadDrawing extends React.Component {
+  handleClick() {
     const { grid, columns, rows, cellSize } = this.props;
 
-    let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
+    const cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
     shareDrawing(
       {
         css: cssString,
-        columns: columns,
-        rows: rows,
-        cellSize: cellSize,
+        columns,
+        rows,
+        cellSize,
       },
       '',
       'download'
     );
     this.props.sendNotification('Downloading...');
-  },
-  render: function() {
+  }
+
+  render() {
     let style = {
       margin: '0 auto',
       display: 'table'
     };
-    return(
+    return (
       <div style={style}>
-        <button className="fa fa-download brown" onClick={this.handleClick}></button>
+        <button
+          className="fa fa-download brown"
+          onClick={() => { this.handleClick(); }}
+        />
       </div>
-      );
+    );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

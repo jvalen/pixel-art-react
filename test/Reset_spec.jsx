@@ -1,6 +1,6 @@
-import React from 'react/addons';
-import {Reset} from '../src/components/Reset';
-import {expect} from 'chai';
+import React from 'react';
+import { Reset } from '../src/components/Reset';
+import { expect } from 'chai';
 
 const {
   renderIntoDocument,
@@ -9,7 +9,6 @@ const {
 } = React.addons.TestUtils;
 
 describe('Reset', () => {
-
   it('Renders one button', () => {
     const component = renderIntoDocument(
       <Reset />
@@ -19,10 +18,10 @@ describe('Reset', () => {
   });
 
   it('Calls resetGrid callback when the button is clicked', () => {
-    let result,
-        resetGrid = function() {
-          result = 'test passed';
-        };
+    let result;
+    let resetGrid = function () {
+      result = 'test passed';
+    };
     const component = renderIntoDocument(
       <Reset resetGrid={resetGrid} />
     );
@@ -30,5 +29,4 @@ describe('Reset', () => {
     Simulate.click(buttons[0]);
     expect(result).to.equal('test passed');
   });
-
 });

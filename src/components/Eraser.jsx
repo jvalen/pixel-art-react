@@ -1,15 +1,18 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export const Eraser = React.createClass({
-  getInitialState: function() {
-    return {previousColor: null};
-  },
-  handleClick: function(event) {
+export class Eraser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { previousColor: null };
+  }
+
+  handleClick() {
     this.props.setEraser();
-  },
-  render: function() {
+  }
+
+  render() {
     let style = {
       border: '2px solid #313131',
       backgroundColor: '#585858'
@@ -21,10 +24,14 @@ export const Eraser = React.createClass({
     }
 
     return (
-      <div className="fa fa-eraser" onClick={this.handleClick} style={style}></div>
+      <div
+        className="fa fa-eraser"
+        onClick={() => { this.handleClick(); }}
+        style={style}
+      />
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

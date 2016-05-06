@@ -1,16 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {generatePixelDrawCss} from '../utils/helpers';
+import { connect } from 'react-redux';
+import { generatePixelDrawCss } from '../utils/helpers';
 import * as actionCreators from '../action_creators';
 
 /*
   Avoid error when server-side render doesn't recognize
   localstorage (browser feature)
 */
-let browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
+const browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
 
-export const Preview = React.createClass({
-  removeFromStorage: function(event) {
+export class Preview extends React.Component {
+  removeFromStorage(event) {
     if (!!browserStorage) {
       let dataStored = browserStorage.getItem('pixel-art-react');
       if (dataStored) {
@@ -20,36 +20,37 @@ export const Preview = React.createClass({
         this.props.sendNotification('Drawing deleted');
       }
     }
-  },
-  generatePreview: function() {
-    let dataFromParent = !!this.props.loadData;
+  }
+
+  generatePreview() {
+    const dataFromParent = !!this.props.loadData;
     const { grid, columns, rows, cellSize } =
       dataFromParent ? this.props.loadData : this.props;
 
-    let cssString = generatePixelDrawCss(
+    const cssString = generatePixelDrawCss(
       dataFromParent ? grid : grid.toJS(),
-      columns, rows, cellSize),
-        styles = {
-          previewWrapper: {
-            boxShadow: cssString,
-            height: cellSize,
-            width: cellSize,
-            marginTop: '1em',
-            MozBoxShadow: cssString,
-            WebkitBoxShadow: cssString
-          },
-          trashIcon: {
-            position: 'relative',
-            fontSize: '1.7em',
-            color: 'red',
-            top: '-1em',
-            right: '-6.5em',
-            cursor: 'no-drop',
-            padding: '0.1em',
-            backgroundColor: 'white',
-            border: '1px solid black'
-          }
-        };
+      columns, rows, cellSize);
+    const styles = {
+      previewWrapper: {
+        boxShadow: cssString,
+        height: cellSize,
+        width: cellSize,
+        marginTop: '1em',
+        MozBoxShadow: cssString,
+        WebkitBoxShadow: cssString
+      },
+      trashIcon: {
+        position: 'relative',
+        fontSize: '1.7em',
+        color: 'red',
+        top: '-1em',
+        right: '-6.5em',
+        cursor: 'no-drop',
+        padding: '0.1em',
+        backgroundColor: 'white',
+        border: '1px solid black'
+      }
+    };
 
     if (dataFromParent) {
       return (
@@ -58,18 +59,18 @@ export const Preview = React.createClass({
             data-key={this.props.id}
             style={styles.trashIcon}
             className="fa fa-trash-o"
-            onClick={this.removeFromStorage}>
+            onClick={this.removeFromStorage}
+          >
           </div>
         </div>
       );
-    } else {
-      return <div style={styles.previewWrapper}></div>;
     }
+    return <div style={styles.previewWrapper}></div>;
+  }
 
-  },
-  render: function() {
-    let dataFromParent = !!this.props.loadData;
-    const { grid, columns, rows, cellSize } =
+  render() {
+    const dataFromParent = !!this.props.loadData;
+    const { columns, rows, cellSize } =
       dataFromParent ? this.props.loadData : this.props;
 
     const wrapperStyle = {
@@ -86,11 +87,13 @@ export const Preview = React.createClass({
       wrapperStyle.cursor = 'pointer';
     }
 
-    return <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>
-      {this.generatePreview()}
-    </div>;
+    return (
+      <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>
+        {this.generatePreview()}
+      </div>
+    );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

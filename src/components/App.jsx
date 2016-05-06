@@ -1,53 +1,54 @@
 import React from 'react';
-import {GridContainer} from './Pixel-grid';
-import {DimensionsContainer} from './Dimensions';
-import {UndoRedoContainer} from './UndoRedo';
-import {PaletteContainer} from './Palette-grid';
-import {CssDisplayContainer} from './Css-display';
-import {PreviewContainer} from './Preview';
-import {LoadDrawingContainer} from './LoadDrawing';
-import {SaveDrawingContainer} from './SaveDrawing';
-import {EraserContainer} from './Eraser';
-import {ResetContainer} from './Reset';
-import {EyedropperContainer} from './Eyedropper';
-import {ColorPickerContainer} from './ColorPicker';
-import {TwitterButtonContainer} from './TwitterButton';
-import {CopyCSSContainer} from './CopyCSS';
-import {connect} from 'react-redux';
+import { GridContainer } from './Pixel-grid';
+import { DimensionsContainer } from './Dimensions';
+import { UndoRedoContainer } from './UndoRedo';
+import { PaletteContainer } from './Palette-grid';
+import { CssDisplayContainer } from './Css-display';
+import { LoadDrawingContainer } from './LoadDrawing';
+import { SaveDrawingContainer } from './SaveDrawing';
+import { EraserContainer } from './Eraser';
+import { ResetContainer } from './Reset';
+import { EyedropperContainer } from './Eyedropper';
+import { ColorPickerContainer } from './ColorPicker';
+import { TwitterButtonContainer } from './TwitterButton';
+import { CopyCSSContainer } from './CopyCSS';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
-import {SimpleSpinner} from './SimpleSpinner';
-import {SimpleNotificationContainer} from './SimpleNotification';
-import {DownloadDrawingContainer} from './DownloadDrawing';
+import { SimpleSpinner } from './SimpleSpinner';
+import { SimpleNotificationContainer } from './SimpleNotification';
+import { DownloadDrawingContainer } from './DownloadDrawing';
 
-export const App = React.createClass({
-  componentDidMount: function () {
+export class App extends React.Component {
+  componentDidMount() {
     this.props.hideSpinner();
     let dataStored = localStorage.getItem('pixel-art-react');
     if (dataStored) {
       dataStored = JSON.parse(dataStored);
       if (dataStored.current) {
-          //Load data from web storage
-          const { grid, paletteGridData, columns, rows, cellSize } = dataStored.current;
-          this.props.setDrawing(
-            grid,
-            paletteGridData,
-            cellSize,
-            columns,
-            rows
-          );
+        // Load data from web storage
+        const { grid, paletteGridData, columns, rows, cellSize } = dataStored.current;
+        this.props.setDrawing(
+          grid,
+          paletteGridData,
+          cellSize,
+          columns,
+          rows
+        );
       }
     } else {
-      //Initialize web storage
+      // Initialize web storage
       dataStored = {
-        'stored': [],
-        'current': null
+        stored: [],
+        current: null
       };
       localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
     }
-  },
-  render: function() {
-    return <div id="pixel-art-app">
+  }
+
+  render() {
+    return (
+      <div id="pixel-art-app">
         <SimpleSpinner spin={this.props.loading} />
         <SimpleNotificationContainer
           notification={this.props.notifications}
@@ -78,9 +79,9 @@ export const App = React.createClass({
                 </div>
               </div>
               <div className="col-1-4 tools-wrapper">
-                  <EraserContainer />
-                  <ColorPickerContainer />
-                  <EyedropperContainer />
+                <EraserContainer />
+                <ColorPickerContainer />
+                <EyedropperContainer />
               </div>
             </div>
           </div>
@@ -98,16 +99,18 @@ export const App = React.createClass({
           <CssDisplayContainer />
         </div>
         <CookieBanner
-          disableStyle={true}
+          disableStyle
           message="
             This website uses cookies (Twitter sharing and analytics). By
             continuing to use this website you are giving consent to cookies
             being used. Thank you."
           onAccept={() => {}}
-          cookie="user-has-accepted-cookies"/>
-      </div>;
+          cookie="user-has-accepted-cookies"
+        />
+      </div>
+    );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

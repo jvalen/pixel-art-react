@@ -1,5 +1,5 @@
 {
-    "extends": "airbnb",
+    "extends": ["airbnb"],
     "env": {
         "browser": true,
         "node": true,
@@ -17,7 +17,8 @@
         "func-names": 0,
         "arrow-body-style": [2, "always"],
         "no-underscore-dangle": ["error", { "allow": ["__INITIAL_STATE__"] }],
-        "new-cap": ["error", {"capIsNewExceptions": ["Map"]}]
+        "new-cap": ["error", {"capIsNewExceptions": ["Map"]}],
+        "react/prefer-es6-class": 1,
     },
     "globals": {
         "$": true

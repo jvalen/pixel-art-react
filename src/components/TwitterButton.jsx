@@ -1,35 +1,38 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {generatePixelDrawCss, shareDrawing} from '../utils/helpers';
+import { connect } from 'react-redux';
+import { generatePixelDrawCss, shareDrawing } from '../utils/helpers';
 import Modal from 'react-modal';
 import * as actionCreators from '../action_creators';
 
-export const TwitterButton = React.createClass({
-  getInitialState: function() {
-    let initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
-    return {
+export class TwitterButton extends React.Component {
+  constructor(props) {
+    super(props);
+    const initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
+    this.state = {
       modalIsOpen: false,
       charsLeft: this.props.maxChars - initialText.length,
-      initialText: initialText
+      initialText
     };
-  },
+  }
+
   handleTextChange(event) {
-    let input = event.target.value;
-    this.setState({charsLeft: this.props.maxChars - input.length});
-  },
-  tweetDrawing: function() {
+    const input = event.target.value;
+    this.setState({ charsLeft: this.props.maxChars - input.length });
+  }
+
+  tweetDrawing() {
     if (this.state.charsLeft >= 0) {
       const { grid, paletteGridData, columns, rows, cellSize } = this.props;
-      //Store current drawing in the web storage
-      let dataStored = localStorage.getItem('pixel-art-react'),
-          drawingToSave = {
-            id: 0,
-            grid: grid,
-            paletteGridData: paletteGridData,
-            cellSize: cellSize,
-            columns: columns,
-            rows: rows
-          };
+      // Store current drawing in the web storage
+      let dataStored = localStorage.getItem('pixel-art-react');
+      const drawingToSave = {
+        id: 0,
+        grid,
+        paletteGridData,
+        cellSize,
+        columns,
+        rows
+      };
 
       if (dataStored) {
         dataStored = JSON.parse(dataStored);
@@ -37,34 +40,37 @@ export const TwitterButton = React.createClass({
         localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
       }
 
-      //Generate CSS and send to the server
-      let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
+      // Generate CSS and send to the server
+      const cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
       this.props.showSpinner();
       shareDrawing(
         {
           css: cssString,
-          columns: columns,
-          rows: rows,
-          cellSize: cellSize,
+          columns,
+          rows,
+          cellSize,
         },
         this.refs.tweetText.value,
         'twitter'
       );
     }
-  },
-  openModal: function() {
-    this.setState({modalIsOpen: true});
-  },
-  closeModal: function() {
-    this.setState({modalIsOpen: false});
-  },
-  render: function() {
+  }
+
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+
+  render() {
     let countColor = '#000000';
     if (this.state.charsLeft < 0) {
       countColor = 'red';
     }
     const customStyles = {
-      content : {
+      content: {
         top: '50%',
         left: '50%',
         right: 'auto',
@@ -76,14 +82,14 @@ export const TwitterButton = React.createClass({
         width: '80%',
         padding: '1em'
       },
-      h2 : {
+      h2: {
         padding: '1em 0',
         fontSize: '1.5em',
         display: 'block',
         width: '80%',
         margin: '1em auto'
       },
-      h3 : {
+      h3: {
         padding: '1em 0',
         fontSize: '1em',
         display: 'block',
@@ -111,23 +117,25 @@ export const TwitterButton = React.createClass({
       <div style={customStyles.buttonWrapper}>
         <a
           className="twitter-button button"
-          href="javascript:void(0);"
-          onClick={this.openModal}>
+          href={() => { void(0); }}
+          onClick={() => { this.openModal(); }}
+        >
           <span className="fa fa-twitter"></span>
         </a>
         <Modal
           isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          style={customStyles} >
-
+          onRequestClose={() => { this.closeModal(); }}
+          style={customStyles}
+        >
           <h2 style={customStyles.h2}>
             You are about to share your awesome drawing on Twitter
           </h2>
           <textarea
             ref="tweetText"
             style={customStyles.textarea}
-            onChange={this.handleTextChange}
-            defaultValue={this.state.initialText}>
+            onChange={() => { this.handleTextChange(); }}
+            defaultValue={this.state.initialText}
+          >
           </textarea>
           <div style={customStyles.charCount} className="char-count">
             {this.state.charsLeft}
@@ -136,14 +144,17 @@ export const TwitterButton = React.createClass({
             Please customize your message above,
             the drawing will be automatically included
           </h3>
-          <button style={customStyles.button} onClick={this.tweetDrawing}>
+          <button
+            style={customStyles.button}
+            onClick={() => { this.tweetDrawing(); }}
+          >
             <span className="fa fa-twitter"></span>TWEET
           </button>
         </Modal>
       </div>
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

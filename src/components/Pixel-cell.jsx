@@ -1,81 +1,86 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export const PixelCell = React.createClass({
-  handleDrag: function(event) {
+export class PixelCell extends React.Component {
+  handleDrag(event) {
     // If currently dragging
-    if(this.props.dragging) {
+    if (this.props.dragging) {
       this.props.endDrag();
       this.drawCell(event);
       this.props.startDrag();
     }
-  },
-  handleClick: function(event) {
-    this.drawCell(event)
-  },
-  handleMouseDown: function(event) {
-    this.drawCell(event)
+  }
+
+  handleClick(event) {
+    this.drawCell(event);
+  }
+
+  handleMouseDown(event) {
+    this.drawCell(event);
     this.props.startDrag();
-  },
-  drawCell: function(event) {
+  }
+
+  drawCell() {
     if (!this.props.eraserOn && !this.props.eyedropperOn) {
-      //Apply the new color
+      // Apply the new color
       this.props.setGridCellValue(
         this.props.currentColor,
         true,
         this.props.id);
-    } else if(this.props.eraserOn) {
-      //Color removed
+    } else if (this.props.eraserOn) {
+      // Color removed
       this.props.setGridCellValue(
         this.props.initialColor,
         false,
         this.props.id);
-    } else if(this.props.eyedropperOn) {
-      //Eyedropper
+    } else if (this.props.eyedropperOn) {
+      // Eyedropper
       this.props.setColorSelected(this.props.color);
     }
-  },
-  render: function() {
-    const { color, width, id } = this.props;
-    let selectedColor = color,
-        customCursor = 'cell';
+  }
+
+  render() {
+    const { color, width } = this.props;
+    const selectedColor = color;
+    let customCursor = 'cell';
 
     if (this.props.eraserOn) {
       customCursor = 'context-menu';
-    } else if(this.props.eyedropperOn) {
+    } else if (this.props.eyedropperOn) {
       customCursor = 'copy';
     }
 
     const styles = {
       cellWrapper: {
-        display: "inline-block",
+        display: 'inline-block',
         width: `${width}%`,
-        boxSizing: "border-box"
+        boxSizing: 'border-box'
       },
       cell: {
-        backgroundColor: '#' + selectedColor,
+        backgroundColor: `#${selectedColor}`,
         color: 'white',
-        position: "relative",
-        width: "100%",
-        paddingBottom: "100%",
+        position: 'relative',
+        width: '100%',
+        paddingBottom: '100%',
         cursor: customCursor,
         border: '1px solid #585858'
       }
     };
 
-    return(
+    return (
       <div className="cellWrapper" style={styles.cellWrapper}>
-          <div className="cell"
-            onMouseDown={this.handleMouseDown}
-            onMouseUp={this.props.endDrag}
-            onMouseOver={this.handleDrag}
-            style={styles.cell}>
-        </div>
+        <div
+          className="cell"
+          onMouseDown={(event) => { this.handleMouseDown(event); }}
+          onMouseUp={this.props.endDrag}
+          onMouseOver={(event) => { this.handleDrag(event); }}
+          style={styles.cell}
+        />
       </div>
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

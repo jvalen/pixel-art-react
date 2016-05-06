@@ -1,12 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export const Eyedropper = React.createClass({
-  handleClick: function(event) {
+export class Eyedropper extends React.Component {
+  handleClick() {
     this.props.setEyedropper();
-  },
-  render: function() {
+  }
+
+  render() {
     let style = {
       border: '2px solid #313131',
       backgroundColor: '#585858'
@@ -18,10 +19,14 @@ export const Eyedropper = React.createClass({
     }
 
     return (
-      <div className="fa fa-eyedropper" onClick={this.handleClick} style={style}></div>
+      <div
+        className="fa fa-eyedropper"
+        onClick={() => { this.handleClick(); }}
+        style={style}
+      />
     );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

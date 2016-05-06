@@ -1,20 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {generatePixelDrawCss} from '../utils/helpers';
+import { connect } from 'react-redux';
+import { generatePixelDrawCss } from '../utils/helpers';
 
-export const CssDisplay = React.createClass({
-  generateCss: function() {
+export class CssDisplay extends React.Component {
+  generateCss() {
     const { grid, columns, rows, cellSize } = this.props;
     let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
 
     if (!!cssString) {
-      cssString = 'box-shadow:' + cssString + '; '
-      cssString +=  'height: ' + cellSize + 'px; width: ' + cellSize + 'px;';
+      cssString = `box-shadow: ${cssString}; `;
+      cssString += `height: ${cellSize}px; width: ${cellSize}px;`;
     }
 
     return <div>{cssString}</div>;
-  },
-  render: function() {
+  }
+
+  render() {
     let styleContainer = {
       position: 'absolute',
       top: '-1.6em',
@@ -25,11 +26,13 @@ export const CssDisplay = React.createClass({
       marginTop: '1em',
       color: '#000000'
     };
-    return <div className="css-display" style={styleContainer}>
+    return (
+      <div className="css-display" style={styleContainer}>
       {this.generateCss()}
-    </div>;
+      </div>
+    );
   }
-});
+}
 
 function mapStateToProps(state) {
   return {

@@ -1,41 +1,41 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 
-export const SimpleNotification = React.createClass({
-  removeNotifications: function() {
+export class SimpleNotification extends React.Component {
+  removeNotifications() {
     setTimeout(() => {
       this.props.sendNotification('');
     }, this.props.duration);
-  },
-  render: function() {
-    var style = {
-        backgroundColor: '#313131',
-        color: '#BBBBBB',
-        width: '25%',
-        textAlign: 'center',
-        padding: '1em',
-        position: 'absolute',
-        zIndex: '1',
-        left: '38%',
-        top: '1em',
-        border: '1px solid orange'
+  }
 
-      },
-      notifications = this.props.notification.map(function(item, i) {
-        return (
-          <div key={i} style={style} className="simple-notification">
-            {item}
-          </div>
-        );
-      });
+  render() {
+    let style = {
+      backgroundColor: '#313131',
+      color: '#BBBBBB',
+      width: '25%',
+      textAlign: 'center',
+      padding: '1em',
+      position: 'absolute',
+      zIndex: '1',
+      left: '38%',
+      top: '1em',
+      border: '1px solid orange'
+    };
+    let notifications = this.props.notification.map((item, i) => {
+      return (
+        <div key={i} style={style} className="simple-notification">
+          {item}
+        </div>
+      );
+    });
 
-    if(notifications.size > 0) {
+    if (notifications.size > 0) {
       this.removeNotifications();
     }
 
-    return(
+    return (
       <div>
         <ReactCSSTransitionGroup
           transitionName="simple-notification"
@@ -47,9 +47,9 @@ export const SimpleNotification = React.createClass({
       </div>
       );
   }
-});
+}
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 export const SimpleNotificationContainer = connect(
