@@ -31,7 +31,7 @@
     "babel-preset-react": "^6.1.18",
     "babel-register": "^6.3.13",
     "babel-runtime": "^5.8.20",
-    "body-parser": "^1.14.2",
+    "body-parser": "^1.15.1",
     "chai": "^3.4.1",
     "chai-immutable": "^1.5.3",
     "cookie-parser": "^1.4.0",
@@ -48,7 +48,6 @@
     "node-localstorage": "^0.6.0",
     "oauth": "^0.9.14",
     "pug": "^2.0.0-alpha6",
-    "qs": "^4.0.0",
     "react": "^15.0.2",
     "react-addons-css-transition-group": "^15.0.2",
     "react-addons-shallow-compare": "^15.0.2",
@@ -75,7 +74,7 @@
   "devDependencies": {
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^8.0.0",
-    "eslint-plugin-import": "^1.6.1",
+    "eslint-plugin-import": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^1.0.4",
     "eslint-plugin-react": "^5.0.1"
   }
