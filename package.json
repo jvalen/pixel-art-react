@@ -61,7 +61,7 @@
     "react-redux": "^4.0.0",
     "react-transform-hmr": "^1.0.0",
     "redux": "^3.0.4",
-    "redux-undo": "^0.5.0",
+    "redux-undo": "^0.6.1",
     "temp": "^0.8.3",
     "twitter": "^1.2.5",
     "webpack": "^1.12.9",
