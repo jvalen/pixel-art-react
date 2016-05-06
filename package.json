@@ -1,8 +1,8 @@
 {
   "name": "pixel-art-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pixel art drawing web app powered by ReactJS",
-  "main": "index.js",
+  "author": "Javier Valencia Romero",
   "scripts": {
     "lint": "eslint --ext .js --ext .jsx .",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
@@ -13,8 +13,19 @@
     "start": "npm run server",
     "postinstall": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
-  "keywords": [],
-  "author": "Javier Valencia Romero",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jvalen/pixel-art-react"
+  },
+  "keywords": [
+    "pixel",
+    "art",
+    "drawing",
+    "react",
+    "redux",
+    "express"
+  ],
   "license": "MIT",
   "babel": {
     "presets": [
