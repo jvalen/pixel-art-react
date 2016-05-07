@@ -5,6 +5,10 @@ import { Provider } from 'react-redux';
 import reducer from './reducer';
 import { AppContainer } from './components/App';
 import undoable, { includeAction } from 'redux-undo';
+import Perf from 'react-addons-perf';
+
+// Expose react-addons-perf for development purposes
+window.Perf = Perf;
 
 const store = createStore(undoable(reducer, {
   filter: includeAction([
