@@ -20,11 +20,19 @@ export class Grid extends React.Component {
   }
 
   render() {
+    let customCursor = 'cell';
+
+    if (this.props.eraserOn) {
+      customCursor = 'context-menu';
+    } else if (this.props.eyedropperOn) {
+      customCursor = 'copy';
+    }
     const style = {
       lineHeight: '0px',
       minHeight: '1px',
       margin: '0 auto',
-      width: '80%'
+      width: '80%',
+      cursor: customCursor
     };
 
     return (
@@ -40,7 +48,9 @@ function mapStateToProps(state) {
     gridData: state.present.get('grid'),
     cellSize: state.present.get('cellSize'),
     columns: state.present.get('columns'),
-    currentColor: state.present.get('currentColor')
+    currentColor: state.present.get('currentColor'),
+    eyedropperOn: state.present.get('eyedropperOn'),
+    eraserOn: state.present.get('eraserOn'),
   };
 }
 export const GridContainer = connect(mapStateToProps)(Grid);
