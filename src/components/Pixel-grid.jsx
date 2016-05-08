@@ -1,12 +1,11 @@
 import React from 'react';
 import { PixelCellContainer } from './Pixel-cell';
-import { connect } from 'react-redux';
 
 export class Grid extends React.Component {
   getCells() {
-    const { gridData, columns, currentColor } = this.props;
+    const { grid, columns, currentColor } = this.props;
     const width = 100 / columns;
-    return gridData.toJS().map((currentCell, i) => {
+    return grid.toJS().map((currentCell, i) => {
       return (
         <PixelCellContainer
           key={i}
@@ -42,15 +41,3 @@ export class Grid extends React.Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    gridData: state.present.get('grid'),
-    cellSize: state.present.get('cellSize'),
-    columns: state.present.get('columns'),
-    currentColor: state.present.get('currentColor'),
-    eyedropperOn: state.present.get('eyedropperOn'),
-    eraserOn: state.present.get('eraserOn'),
-  };
-}
-export const GridContainer = connect(mapStateToProps)(Grid);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GridContainer } from './Pixel-grid';
+import { Grid } from './Pixel-grid';
 import { DimensionsContainer } from './Dimensions';
 import { UndoRedoContainer } from './UndoRedo';
 import { PaletteContainer } from './Palette-grid';
@@ -86,7 +86,14 @@ export class App extends React.Component {
             </div>
           </div>
           <div className="col-1-2">
-            <GridContainer />
+            <Grid
+              grid={this.props.grid}
+              columns={this.props.columns}
+              cellSize={this.props.cellSize}
+              currentColor={this.props.currentColor}
+              eyedropperOn={this.props.eyedropperOn}
+              eraserOn={this.props.eraserOn}
+            />
           </div>
           <div className="col-1-4">
             <UndoRedoContainer />
@@ -129,7 +136,10 @@ function mapStateToProps(state) {
     grid: state.present.get('grid'),
     columns: state.present.get('columns'),
     rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
+    cellSize: state.present.get('cellSize'),
+    currentColor: state.present.get('currentColor'),
+    eyedropperOn: state.present.get('eyedropperOn'),
+    eraserOn: state.present.get('eraserOn')
   };
 }
 export const AppContainer = connect(
