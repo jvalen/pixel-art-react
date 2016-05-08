@@ -94,7 +94,7 @@ export class App extends React.Component {
             <ResetContainer />
             <CopyCSS
               grid={this.props.grid}
-              colums={this.props.colums}
+              columns={this.props.columns}
               rows={this.props.rows}
               cellSize={this.props.cellSize}
             />
@@ -103,7 +103,7 @@ export class App extends React.Component {
         <div className="css-container">
           <CssDisplay
             grid={this.props.grid}
-            colums={this.props.colums}
+            columns={this.props.columns}
             rows={this.props.rows}
             cellSize={this.props.cellSize}
           />
