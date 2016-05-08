@@ -3,7 +3,7 @@ import { GridContainer } from './Pixel-grid';
 import { DimensionsContainer } from './Dimensions';
 import { UndoRedoContainer } from './UndoRedo';
 import { PaletteContainer } from './Palette-grid';
-import { CssDisplayContainer } from './Css-display';
+import { CssDisplay } from './Css-display';
 import { LoadDrawingContainer } from './LoadDrawing';
 import { SaveDrawingContainer } from './SaveDrawing';
 import { EraserContainer } from './Eraser';
@@ -96,7 +96,12 @@ export class App extends React.Component {
           </div>
         </div>
         <div className="css-container">
-          <CssDisplayContainer />
+          <CssDisplay
+            grid={this.props.grid}
+            colums={this.props.colums}
+            rows={this.props.rows}
+            cellSize={this.props.cellSize}
+          />
         </div>
         <CookieBanner
           disableStyle
@@ -115,7 +120,11 @@ export class App extends React.Component {
 function mapStateToProps(state) {
   return {
     loading: state.present.get('loading'),
-    notifications: state.present.get('notifications')
+    notifications: state.present.get('notifications'),
+    grid: state.present.get('grid'),
+    columns: state.present.get('columns'),
+    rows: state.present.get('rows'),
+    cellSize: state.present.get('cellSize')
   };
 }
 export const AppContainer = connect(

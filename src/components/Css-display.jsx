@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { generatePixelDrawCss } from '../utils/helpers';
 
 export class CssDisplay extends React.Component {
@@ -33,15 +32,3 @@ export class CssDisplay extends React.Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    grid: state.present.get('grid'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
-  };
-}
-export const CssDisplayContainer = connect(
-  mapStateToProps
-)(CssDisplay);
