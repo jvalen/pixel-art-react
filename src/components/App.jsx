@@ -11,7 +11,7 @@ import { ResetContainer } from './Reset';
 import { EyedropperContainer } from './Eyedropper';
 import { ColorPickerContainer } from './ColorPicker';
 import { TwitterButtonContainer } from './TwitterButton';
-import { CopyCSSContainer } from './CopyCSS';
+import { CopyCSS } from './CopyCSS';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
@@ -92,7 +92,12 @@ export class App extends React.Component {
             <UndoRedoContainer />
             <DimensionsContainer />
             <ResetContainer />
-            <CopyCSSContainer />
+            <CopyCSS
+              grid={this.props.grid}
+              colums={this.props.colums}
+              rows={this.props.rows}
+              cellSize={this.props.cellSize}
+            />
           </div>
         </div>
         <div className="css-container">
