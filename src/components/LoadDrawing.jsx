@@ -26,7 +26,7 @@ export class LoadDrawing extends React.Component {
 
   drawingClick(data) {
     this.props.setDrawing(
-      data.grid,
+      data.frames,
       data.paletteGridData,
       data.cellSize,
       data.columns,
@@ -51,6 +51,8 @@ export class LoadDrawing extends React.Component {
                 id={i}
                 loadData={elem}
                 onClick={() => { this.drawingClick(elem); }}
+                activeFrameIndex={0}
+                animationMode={false}
               />
             );
           });

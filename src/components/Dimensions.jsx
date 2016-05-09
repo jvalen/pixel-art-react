@@ -176,7 +176,15 @@ export class Dimensions extends React.Component {
           >
             <button onClick={() => { this.hidePreview(); }}>CLOSE</button>
             <div>
-              <PreviewContainer key="0" />
+              <PreviewContainer
+                key="0"
+                frames={this.props.frames}
+                columns={this.props.columns}
+                rows={this.props.rows}
+                cellSize={this.props.cellSize}
+                animationMode={this.props.animationMode}
+                activeFrameIndex={this.props.activeFrameIndex}
+              />
             </div>
           </Modal>
         </div>

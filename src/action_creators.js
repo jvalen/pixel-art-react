@@ -39,10 +39,10 @@ export function setGridCellValue(color, used, id) {
   };
 }
 
-export function setDrawing(grid, paletteGridData, cellSize, columns, rows) {
+export function setDrawing(frames, paletteGridData, cellSize, columns, rows) {
   return {
     type: 'SET_DRAWING',
-    grid,
+    frames,
     paletteGridData,
     cellSize,
     columns,
@@ -87,11 +87,12 @@ export function setCellSize(cellSize) {
   };
 }
 
-export function resetGrid(columns, rows) {
+export function resetGrid(columns, rows, activeFrameIndex) {
   return {
     type: 'SET_RESET_GRID',
     columns,
-    rows
+    rows,
+    activeFrameIndex
   };
 }
 

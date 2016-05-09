@@ -3,8 +3,8 @@ import { generatePixelDrawCss } from '../utils/helpers';
 
 export class CssDisplay extends React.Component {
   generateCss() {
-    const { grid, columns, rows, cellSize } = this.props;
-    let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
+    const { activeFrame, columns, rows, cellSize } = this.props;
+    let cssString = generatePixelDrawCss(activeFrame, columns, rows, cellSize);
 
     if (!!cssString) {
       cssString = `box-shadow: ${cssString}; `;

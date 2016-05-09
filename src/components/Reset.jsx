@@ -4,7 +4,10 @@ import * as actionCreators from '../action_creators';
 
 export class Reset extends React.Component {
   handleClick() {
-    this.props.resetGrid(this.props.columns, this.props.rows);
+    this.props.resetGrid(
+      this.props.columns,
+      this.props.rows,
+      this.props.activeFrameIndex);
   }
 
   render() {
@@ -25,11 +28,8 @@ export class Reset extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows')
-  };
+function mapStateToProps() {
+  return {};
 }
 export const ResetContainer = connect(
   mapStateToProps,

@@ -24,12 +24,21 @@ export class Preview extends React.Component {
 
   generatePreview() {
     const dataFromParent = !!this.props.loadData;
-    const { grid, columns, rows, cellSize } =
+    const { frames, columns, rows, cellSize } =
       dataFromParent ? this.props.loadData : this.props;
+    const { activeFrameIndex, animationMode } = this.props;
 
+    if (animationMode) {
+      // TODO: Show animation
+      console.log('animation mode');
+      return null;
+    }
+
+    // Regular drawing mode
     const cssString = generatePixelDrawCss(
-      dataFromParent ? grid : grid.toJS(),
+      frames[activeFrameIndex],
       columns, rows, cellSize);
+
     const styles = {
       previewWrapper: {
         boxShadow: cssString,
@@ -95,13 +104,8 @@ export class Preview extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    grid: state.present.get('grid'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
-  };
+function mapStateToProps() {
+  return {};
 }
 export const PreviewContainer = connect(
   mapStateToProps,

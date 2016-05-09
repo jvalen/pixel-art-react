@@ -5,9 +5,9 @@ import * as actionCreators from '../action_creators';
 
 export class DownloadDrawing extends React.Component {
   handleClick() {
-    const { grid, columns, rows, cellSize } = this.props;
+    const { activeFrame, columns, rows, cellSize } = this.props;
 
-    const cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
+    const cssString = generatePixelDrawCss(activeFrame, columns, rows, cellSize);
     shareDrawing(
       {
         css: cssString,
@@ -37,13 +37,8 @@ export class DownloadDrawing extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    grid: state.present.get('grid'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
-  };
+function mapStateToProps() {
+  return {};
 }
 export const DownloadDrawingContainer = connect(
   mapStateToProps,

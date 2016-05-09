@@ -22,12 +22,15 @@ export class TwitterButton extends React.Component {
 
   tweetDrawing() {
     if (this.state.charsLeft >= 0) {
-      const { grid, paletteGridData, columns, rows, cellSize } = this.props;
+      const {
+        frames, activeFrameIndex, paletteGridData,
+        columns, rows, cellSize
+      } = this.props;
       // Store current drawing in the web storage
       let dataStored = localStorage.getItem('pixel-art-react');
       const drawingToSave = {
         id: 0,
-        grid,
+        frames,
         paletteGridData,
         cellSize,
         columns,
@@ -41,7 +44,9 @@ export class TwitterButton extends React.Component {
       }
 
       // Generate CSS and send to the server
-      const cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
+      const cssString = generatePixelDrawCss(
+        frames[activeFrameIndex], columns, rows, cellSize
+      );
       this.props.showSpinner();
       shareDrawing(
         {
@@ -155,14 +160,8 @@ export class TwitterButton extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    grid: state.present.get('grid'),
-    paletteGridData: state.present.get('paletteGridData'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
-  };
+function mapStateToProps() {
+  return {};
 }
 export const TwitterButtonContainer = connect(
   mapStateToProps,

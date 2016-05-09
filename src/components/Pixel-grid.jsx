@@ -3,9 +3,10 @@ import { PixelCellContainer } from './Pixel-cell';
 
 export class Grid extends React.Component {
   getCells() {
-    const { grid, columns, currentColor } = this.props;
+    const { activeFrame, columns, currentColor } = this.props;
     const width = 100 / columns;
-    return grid.toJS().map((currentCell, i) => {
+
+    return activeFrame.map((currentCell, i) => {
       return (
         <PixelCellContainer
           key={i}
