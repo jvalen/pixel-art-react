@@ -12,6 +12,21 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize) {
   return cssString.slice(0, -1);
 }
 
+export function generateAnimationCSSData(frames, intervalData, columns, rows, cellSize) {
+  const result = frames.reduce((acc, frame, index) => {
+    const intervalAcc = acc;
+    const currentBoxShadow = generatePixelDrawCss(frame, columns, rows, cellSize);
+    intervalAcc[`${intervalData[index]}%`] =
+    { boxShadow:
+        `${currentBoxShadow};height: ${cellSize}px; width: ${cellSize}px;`
+    };
+
+    return intervalAcc;
+  }, {});
+
+  return result;
+}
+
 export function shareDrawing(imageData, text, type) {
   const cssParsedData = imageData.css.split(',').filter(
       (elem) => {

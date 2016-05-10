@@ -11,7 +11,7 @@ export class CopyCSS extends React.Component {
   generateCSS() {
     const { frames, columns, rows, cellSize, activeFrameIndex } = this.props;
 
-    if (frames.length > 0) {
+    if (frames.length > 1) {
       // TODO: Show switch
       console.log('Show switch');
       return null;

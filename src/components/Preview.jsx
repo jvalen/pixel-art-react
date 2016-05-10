@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { generatePixelDrawCss } from '../utils/helpers';
+import { generatePixelDrawCss, generateAnimationCSSData } from '../utils/helpers';
 import * as actionCreators from '../action_creators';
+import { Animation } from './Animation';
+import { StyleRoot } from 'radium';
 
 /*
   Avoid error when server-side render doesn't recognize
@@ -27,12 +29,7 @@ export class Preview extends React.Component {
     const { frames, columns, rows, cellSize } =
       dataFromParent ? this.props.loadData : this.props;
     const { activeFrameIndex } = this.props;
-
-    if (frames.length > 0) {
-      // TODO: Show animation
-      console.log('Show switch');
-      return null;
-    }
+    const animation = frames.length > 1;
 
     // Regular drawing mode
     const cssString = generatePixelDrawCss(
@@ -61,20 +58,31 @@ export class Preview extends React.Component {
       }
     };
 
-    if (dataFromParent) {
-      return (
-        <div style={styles.previewWrapper}>
+    const animationData =
+      generateAnimationCSSData(
+        frames, [0, 25, 50, 100],
+        columns, rows, cellSize
+      );
+
+    return (
+      <div style={animation ? null : styles.previewWrapper}>
+        {animation ?
+          <StyleRoot>
+            <Animation duration={1} boxShadow={animationData} />
+          </StyleRoot>
+          : null
+        }
+        {dataFromParent ?
           <div
             data-key={this.props.id}
             style={styles.trashIcon}
             className="fa fa-trash-o"
             onClick={this.removeFromStorage}
-          >
-          </div>
-        </div>
-      );
-    }
-    return <div style={styles.previewWrapper}></div>;
+          />
+        : null
+        }
+      </div>
+    );
   }
 
   render() {
