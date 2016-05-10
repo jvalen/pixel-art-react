@@ -223,6 +223,24 @@ function sendNotification(state, message) {
   return state.merge(newState);
 }
 
+function changeActiveFrame(state, frameIndex) {
+  const newState = {
+    activeFrameIndex: frameIndex
+  };
+
+  return state.merge(newState);
+}
+
+function createNewFrame(state) {
+  const newState = state.toJS();
+  newState.frames.push(createGrid(
+    parseInt(newState.columns, 10) * parseInt(newState.rows, 10),
+    GRID_INITIAL_COLOR
+  ));
+  newState.activeFrameIndex = newState.frames.length - 1;
+  return fromJS(newState);
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -260,6 +278,10 @@ export default function (state = Map(), action) {
       return hideSpinner(state);
     case 'SEND_NOTIFICATION':
       return sendNotification(state, action.message);
+    case 'CHANGE_ACTIVE_FRAME':
+      return changeActiveFrame(state, action.frameIndex);
+    case 'CREATE_NEW_FRAME':
+      return createNewFrame(state);
     default:
   }
   return state;

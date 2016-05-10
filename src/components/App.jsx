@@ -18,6 +18,8 @@ import CookieBanner from 'react-cookie-banner';
 import { SimpleSpinner } from './SimpleSpinner';
 import { SimpleNotificationContainer } from './SimpleNotification';
 import { DownloadDrawingContainer } from './DownloadDrawing';
+import { FrameSelector } from './FrameSelector';
+import { AddFrameContainer } from './AddFrame';
 
 export class App extends React.Component {
   componentDidMount() {
@@ -56,11 +58,13 @@ export class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
+        <FrameSelector frames={this.props.frames} />
         <div className="grid grid-pad main-block">
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
               <div className="load-button-wrapper">
                 <LoadDrawingContainer />
+                <AddFrameContainer />
               </div>
               <div className="save-button-wrapper">
                 <SaveDrawingContainer

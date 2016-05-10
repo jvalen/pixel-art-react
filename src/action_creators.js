@@ -115,6 +115,19 @@ export function sendNotification(message) {
   };
 }
 
+export function changeActiveFrame(frameIndex) {
+  return {
+    type: 'CHANGE_ACTIVE_FRAME',
+    frameIndex
+  };
+}
+
+export function createNewFrame() {
+  return {
+    type: 'CREATE_NEW_FRAME'
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }
