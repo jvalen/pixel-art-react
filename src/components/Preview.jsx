@@ -26,11 +26,11 @@ export class Preview extends React.Component {
     const dataFromParent = !!this.props.loadData;
     const { frames, columns, rows, cellSize } =
       dataFromParent ? this.props.loadData : this.props;
-    const { activeFrameIndex, animationMode } = this.props;
+    const { activeFrameIndex } = this.props;
 
-    if (animationMode) {
+    if (frames.length > 0) {
       // TODO: Show animation
-      console.log('animation mode');
+      console.log('Show switch');
       return null;
     }
 

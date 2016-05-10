@@ -52,7 +52,6 @@ export class LoadDrawing extends React.Component {
                 loadData={elem}
                 onClick={() => { this.drawingClick(elem); }}
                 activeFrameIndex={0}
-                animationMode={false}
               />
             );
           });

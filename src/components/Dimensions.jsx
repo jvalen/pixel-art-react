@@ -182,7 +182,6 @@ export class Dimensions extends React.Component {
                 columns={this.props.columns}
                 rows={this.props.rows}
                 cellSize={this.props.cellSize}
-                animationMode={this.props.animationMode}
                 activeFrameIndex={this.props.activeFrameIndex}
               />
             </div>

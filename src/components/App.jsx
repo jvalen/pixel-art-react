@@ -58,13 +58,13 @@ export class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
+        <AddFrameContainer />
         <FrameSelector frames={this.props.frames} />
         <div className="grid grid-pad main-block">
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
               <div className="load-button-wrapper">
                 <LoadDrawingContainer />
-                <AddFrameContainer />
               </div>
               <div className="save-button-wrapper">
                 <SaveDrawingContainer
@@ -125,7 +125,6 @@ export class App extends React.Component {
               columns={this.props.columns}
               rows={this.props.rows}
               cellSize={this.props.cellSize}
-              animationMode={this.props.animationMode}
               activeFrameIndex={this.props.activeFrameIndex}
             />
             <ResetContainer
@@ -138,7 +137,6 @@ export class App extends React.Component {
               columns={this.props.columns}
               rows={this.props.rows}
               cellSize={this.props.cellSize}
-              animationMode={this.props.animationMode}
               activeFrameIndex={this.props.activeFrameIndex}
             />
           </div>
@@ -181,7 +179,6 @@ function mapStateToProps(state) {
     eraserOn: state.present.get('eraserOn'),
     frames: framesData,
     activeFrameIndex: state.present.get('activeFrameIndex'),
-    animationMode: state.present.get('animationMode'),
     paletteGridData: state.present.get('paletteGridData')
   };
 }

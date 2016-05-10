@@ -9,13 +9,11 @@ export class CopyCSS extends React.Component {
   }
 
   generateCSS() {
-    const {
-      frames, columns, rows, cellSize,
-      activeFrameIndex, animationMode
-    } = this.props;
+    const { frames, columns, rows, cellSize, activeFrameIndex } = this.props;
 
-    if (animationMode) {
-      console.log('animation mode');
+    if (frames.length > 0) {
+      // TODO: Show switch
+      console.log('Show switch');
       return null;
     }
     // Show info of only one frame

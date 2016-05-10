@@ -67,8 +67,7 @@ function setInitialState(state) {
     loading: false,
     notifications: [],
     dragging,
-    activeFrameIndex: 0,
-    animationMode: false
+    activeFrameIndex: 0
   };
 
   return state.merge(initialState);
