@@ -60,7 +60,7 @@ export class Preview extends React.Component {
 
     const animationData =
       generateAnimationCSSData(
-        frames, [0, 25, 50, 100],
+        frames, [0, 25, 50, 75, 100],
         columns, rows, cellSize
       );
 
@@ -68,7 +68,7 @@ export class Preview extends React.Component {
       <div style={animation ? null : styles.previewWrapper}>
         {animation ?
           <StyleRoot>
-            <Animation duration={1} boxShadow={animationData} />
+            <Animation duration={2} boxShadow={animationData} />
           </StyleRoot>
           : null
         }

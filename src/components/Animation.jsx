@@ -6,12 +6,7 @@ export const Animation = radium((props) => {
   const style = {
     position: 'absolute',
     animation: `x ${props.duration}s infinite`,
-    animationName: pulseKeyframes,
-    // -webkit-animation-timing-function: 'linear',
-    // animation-timing-function: 'linear'
-    background: 'blue',
-    height: '4px',
-    margin: '0 auto'
+    animationName: pulseKeyframes
   };
   return (
     <div className="animation-container" style={style} />

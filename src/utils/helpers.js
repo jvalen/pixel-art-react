@@ -12,11 +12,26 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize) {
   return cssString.slice(0, -1);
 }
 
+/*
+ * Return CSS keyframes data for animation of the frames passed
+ *
+ * The resultant data will look like:
+ * {
+ *   0%, 25%: { box-shadow: ...}
+ *   25.01%, 50%: { box-shadow: ...}
+ *   50.01%, 75%: { box-shadow: ...}
+ *   75.01%, 100%: { box-shadow: ...}
+ * }
+ *
+ * for intervalData like: [0, 25, 50, 75, 100]
+*/
 export function generateAnimationCSSData(frames, intervalData, columns, rows, cellSize) {
   const result = frames.reduce((acc, frame, index) => {
     const intervalAcc = acc;
     const currentBoxShadow = generatePixelDrawCss(frame, columns, rows, cellSize);
-    intervalAcc[`${intervalData[index]}%`] =
+    const minValue = index === 0 ? 0 : intervalData[index] + 0.01;
+    const maxValue = intervalData[index + 1];
+    intervalAcc[`${minValue}%, ${maxValue}%`] =
     { boxShadow:
         `${currentBoxShadow};height: ${cellSize}px; width: ${cellSize}px;`
     };
