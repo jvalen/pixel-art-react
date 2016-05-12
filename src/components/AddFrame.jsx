@@ -14,7 +14,7 @@ const AddFrame = (props) => {
       className="add-frame gray"
       onClick={() => { handleClick(); }}
     >
-      New Frame
+      +
     </button>
   );
 };

@@ -30,20 +30,14 @@ export class Preview extends React.Component {
       dataFromParent ? this.props.loadData : this.props;
     const { activeFrameIndex } = this.props;
     const animation = frames.length > 1;
-
-    // Regular drawing mode
-    const cssString = generatePixelDrawCss(
-      frames[activeFrameIndex],
-      columns, rows, cellSize);
+    let animationData;
+    let cssString;
 
     const styles = {
       previewWrapper: {
-        boxShadow: cssString,
         height: cellSize,
         width: cellSize,
-        marginTop: '1em',
-        MozBoxShadow: cssString,
-        WebkitBoxShadow: cssString
+        marginTop: '1em'
       },
       trashIcon: {
         position: 'relative',
@@ -58,11 +52,21 @@ export class Preview extends React.Component {
       }
     };
 
-    const animationData =
+    if (animation) {
+      animationData =
       generateAnimationCSSData(
         frames, [0, 25, 50, 75, 100],
         columns, rows, cellSize
       );
+    } else {
+      cssString = generatePixelDrawCss(
+        frames[activeFrameIndex],
+        columns, rows, cellSize);
+
+      styles.previewWrapper.boxShadow = cssString;
+      styles.previewWrapper.MozBoxShadow = cssString;
+      styles.previewWrapper.WebkitBoxShadow = cssString;
+    }
 
     return (
       <div style={animation ? null : styles.previewWrapper}>

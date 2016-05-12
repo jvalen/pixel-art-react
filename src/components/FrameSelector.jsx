@@ -5,14 +5,20 @@ export const FrameSelector = (props) => {
   const getFrames = () => {
     return props.frames.map((frameData, index) => {
       return (
-        <FrameContainer key={index} data-id={index} frame={frameData} />
+        <FrameContainer
+          key={index}
+          data-id={index}
+          frame={frameData}
+          columns={props.columns}
+          rows={props.rows}
+        />
       );
     });
   };
 
   let style = {
-    border: '2px solid #313131',
-    backgroundColor: '#585858'
+    width: '80%',
+    display: 'inline-block'
   };
 
   return (

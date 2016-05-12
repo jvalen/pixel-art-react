@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
+import { PreviewContainer } from './Preview';
 
 export const Frame = (props) => {
   const handleClick = () => {
@@ -10,7 +11,12 @@ export const Frame = (props) => {
   let style = {
     border: '1px solid #313131',
     backgroundColor: '#BBBBBB',
-    color: 'white'
+    color: 'white',
+    position: 'relative',
+    display: 'inline-block',
+    width: '10%',
+    height: '3em',
+    margin: '0 0.3em'
   };
 
   return (
@@ -19,7 +25,13 @@ export const Frame = (props) => {
       onClick={() => { handleClick(); }}
       style={style}
     >
-      Frame {props['data-id']}
+      <PreviewContainer
+        frames={[props.frame]}
+        columns={props.columns}
+        rows={props.rows}
+        cellSize={2}
+        activeFrameIndex={0}
+      />
     </div>
   );
 };
