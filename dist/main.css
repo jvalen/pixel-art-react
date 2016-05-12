@@ -456,3 +456,13 @@ body {
     padding-top: 1em !important;
   }
 }
+
+.grid-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.grid-container .grid-cell{
+  border: 1px solid #585858;
+  border-width: 0 1px 1px 0;
+  color: white;
+}
