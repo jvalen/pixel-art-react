@@ -94,7 +94,8 @@ export class Preview extends React.Component {
       width: columns * cellSize,
       height: rows * cellSize,
       margin: '1em 1em',
-      display: 'inline-block'
+      display: 'inline-block',
+      position: 'relative'
     };
 
     if (dataFromParent) {
