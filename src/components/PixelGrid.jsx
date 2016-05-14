@@ -8,10 +8,10 @@ import Cell from './PixelCell';
 class Grid extends React.Component {
   shouldComponentUpdate(nextProps) {
     const same = (key) => { return nextProps[key].equals(this.props[key]); };
-    if (same('grid') && this.props.dragging === nextProps.dragging) {
-      console.info('No need to render the grid!');
-      return false
-    };
+    if (same('grid')) {
+      // console.info('No need to render the grid!');
+      return false;
+    }
     return true;
   }
 
@@ -84,7 +84,7 @@ class Grid extends React.Component {
       width: '80%',
       cursor: customCursor
     };
-    console.info('Rendering the grid!');
+    // console.info('Rendering the grid!', this.props);
     return (
       <div className="grid-container" style={style}>
         {this.getCells(this.props)}
