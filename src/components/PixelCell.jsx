@@ -21,7 +21,6 @@ export default class PixelCell extends React.Component {
 
     return (
       <div
-        className="grid-cell"
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onMouseOver={onMouseOver}
