@@ -17,8 +17,10 @@ export const FrameSelector = (props) => {
   };
 
   let style = {
-    width: '80%',
-    display: 'inline-block'
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+    overflowY: 'hidden'
   };
 
   return (

@@ -240,6 +240,19 @@ function createNewFrame(state) {
   return fromJS(newState);
 }
 
+function deleteFrame(state, frameId) {
+  const newState = state.toJS();
+  const reduceFrameIndex =
+    (newState.activeFrameIndex >= frameId) && (newState.activeFrameIndex > 0);
+
+  newState.frames.splice(frameId, 1);
+
+  if (reduceFrameIndex) {
+    newState.activeFrameIndex = newState.frames.length - 1;
+  }
+  return fromJS(newState);
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -281,6 +294,8 @@ export default function (state = Map(), action) {
       return changeActiveFrame(state, action.frameIndex);
     case 'CREATE_NEW_FRAME':
       return createNewFrame(state);
+    case 'DELETE_FRAME':
+      return deleteFrame(state, action.frameId);
     default:
   }
   return state;

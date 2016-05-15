@@ -117,6 +117,9 @@
 .col-1-8 {
   width: 12.5%;
 }
+.col-7-8 {
+  width: 87.5%;
+}
 
 .grid:after {
   content: "";

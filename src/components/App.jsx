@@ -58,12 +58,18 @@ export class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
-        <AddFrameContainer />
-        <FrameSelector
-          frames={this.props.frames}
-          columns={this.props.columns}
-          rows={this.props.rows}
-        />
+        <div className="grid grid-pad">
+          <div className="col-1-8">
+            <AddFrameContainer />
+          </div>
+          <div className="col-7-8">
+            <FrameSelector
+              frames={this.props.frames}
+              columns={this.props.columns}
+              rows={this.props.rows}
+            />
+          </div>
+        </div>
         <div className="grid grid-pad main-block">
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">

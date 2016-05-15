@@ -128,6 +128,13 @@ export function createNewFrame() {
   };
 }
 
+export function deleteFrame(frameId) {
+  return {
+    type: 'DELETE_FRAME',
+    frameId
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }
