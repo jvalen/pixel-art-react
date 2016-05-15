@@ -26,30 +26,30 @@ class Grid extends React.Component {
           width={width}
           color={currentCell.color}
           currentColor={currentColor}
-          onMouseDown={() => { this.handleMouseDown(i); }}
+          onMouseDown={() => { this.handleMouseDown(i, currentCell.color); }}
           onMouseUp={() => { props.actions.endDrag(); }}
-          onMouseOver={() => { this.handleDrag(i); }}
+          onMouseOver={() => { this.handleDrag(i, currentCell.color); }}
         />
       );
     });
   }
-  handleDrag(id) {
+  handleDrag(id, color) {
     // If currently dragging
     if (this.props.dragging) {
       this.props.actions.endDrag();
-      this.drawCell(id);
+      this.drawCell(id, color);
       this.props.actions.startDrag();
     }
   }
   handleClick(id) {
     this.drawCell(id);
   }
-  handleMouseDown(id) {
-    this.drawCell(id);
+  handleMouseDown(id, color) {
+    this.drawCell(id, color);
     this.props.actions.startDrag();
   }
 
-  drawCell(id) {
+  drawCell(id, color) {
     if (!this.props.eraserOn && !this.props.eyedropperOn) {
       // Apply the new color
       this.props.actions.setGridCellValue(
@@ -65,7 +65,7 @@ class Grid extends React.Component {
       );
     } else if (this.props.eyedropperOn) {
       // Eyedropper
-      this.props.actions.setColorSelected(this.props.color);
+      this.props.actions.setColorSelected(color);
     }
   }
 
