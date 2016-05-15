@@ -41,9 +41,7 @@ class Grid extends React.Component {
       this.props.actions.startDrag();
     }
   }
-  handleClick(id) {
-    this.drawCell(id);
-  }
+
   handleMouseDown(id, color) {
     this.drawCell(id, color);
     this.props.actions.startDrag();
