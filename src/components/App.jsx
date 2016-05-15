@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from './Pixel-grid';
+import Grid from './Pixel-grid';
 import { DimensionsContainer } from './Dimensions';
 import { UndoRedoContainer } from './UndoRedo';
 import { PaletteContainer } from './Palette-grid';
