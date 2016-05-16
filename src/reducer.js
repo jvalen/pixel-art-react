@@ -241,16 +241,19 @@ function createNewFrame(state) {
 }
 
 function deleteFrame(state, frameId) {
-  const newState = state.toJS();
-  const reduceFrameIndex =
+  if (state.get('frames').size > 1) {
+    const newState = state.toJS();
+    const reduceFrameIndex =
     (newState.activeFrameIndex >= frameId) && (newState.activeFrameIndex > 0);
 
-  newState.frames.splice(frameId, 1);
+    newState.frames.splice(frameId, 1);
 
-  if (reduceFrameIndex) {
-    newState.activeFrameIndex = newState.frames.length - 1;
+    if (reduceFrameIndex) {
+      newState.activeFrameIndex = newState.frames.length - 1;
+    }
+    return fromJS(newState);
   }
-  return fromJS(newState);
+  return state;
 }
 
 function duplicateFrame(state, frameId) {

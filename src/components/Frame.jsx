@@ -9,7 +9,9 @@ export const Frame = (props) => {
   };
 
   const deleteFrame = () => {
-    props.deleteFrame(props['data-id']);
+    if (props['data-id'] > 0) {
+      props.deleteFrame(props['data-id']);
+    }
   };
 
   const duplicateFrame = () => {
