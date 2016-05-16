@@ -129,6 +129,9 @@ export class Dimensions extends React.Component {
       },
       dimensions: {
         marginTop: '1.5em'
+      },
+      previewWrapper: {
+        textAlign: 'center'
       }
     };
 
@@ -175,7 +178,7 @@ export class Dimensions extends React.Component {
             style={styles.modal}
           >
             <button onClick={() => { this.hidePreview(); }}>CLOSE</button>
-            <div>
+            <div style={styles.previewWrapper}>
               <PreviewContainer
                 key="0"
                 frames={this.props.frames}
