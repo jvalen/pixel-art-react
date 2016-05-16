@@ -5,25 +5,7 @@ import * as actionCreators from '../action_creators';
 import { Animation } from './Animation';
 import { StyleRoot } from 'radium';
 
-/*
-  Avoid error when server-side render doesn't recognize
-  localstorage (browser feature)
-*/
-const browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
-
 export class Preview extends React.Component {
-  removeFromStorage(event) {
-    if (!!browserStorage) {
-      let dataStored = browserStorage.getItem('pixel-art-react');
-      if (dataStored) {
-        dataStored = JSON.parse(dataStored);
-        dataStored.stored.splice(event.target.getAttribute('data-key'), 1);
-        browserStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
-        this.props.sendNotification('Drawing deleted');
-      }
-    }
-  }
-
   generatePreview() {
     const dataFromParent = !!this.props.loadData;
     const { frames, columns, rows, cellSize } =
@@ -37,17 +19,6 @@ export class Preview extends React.Component {
       previewWrapper: {
         height: cellSize,
         width: cellSize
-      },
-      trashIcon: {
-        position: 'relative',
-        fontSize: '1.7em',
-        color: 'red',
-        top: '-1em',
-        right: '-6.5em',
-        cursor: 'no-drop',
-        padding: '0.1em',
-        backgroundColor: 'white',
-        border: '1px solid black'
       }
     };
 
@@ -75,15 +46,6 @@ export class Preview extends React.Component {
           </StyleRoot>
           : null
         }
-        {dataFromParent ?
-          <div
-            data-key={this.props.id}
-            style={styles.trashIcon}
-            className="fa fa-trash-o"
-            onClick={this.removeFromStorage}
-          />
-        : null
-        }
       </div>
     );
   }
@@ -99,13 +61,6 @@ export class Preview extends React.Component {
       display: 'inline-block',
       position: 'relative'
     };
-
-    if (dataFromParent) {
-      wrapperStyle.width = '200px';
-      wrapperStyle.height = '200px';
-      wrapperStyle.border = '3px solid black';
-      wrapperStyle.cursor = 'pointer';
-    }
 
     return (
       <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>
