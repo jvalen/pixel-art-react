@@ -12,6 +12,10 @@ export const Frame = (props) => {
     props.deleteFrame(props['data-id']);
   };
 
+  const duplicateFrame = () => {
+    props.duplicateFrame(props['data-id']);
+  };
+
   const styles = {
     frame: {
       border: '1px solid #313131',
@@ -29,6 +33,13 @@ export const Frame = (props) => {
       top: '0.3em',
       right: '0.3em',
       cursor: 'no-drop'
+    },
+    duplicate: {
+      position: 'absolute',
+      color: 'red',
+      bottom: '0.3em',
+      right: '0.3em',
+      cursor: 'no-drop'
     }
   };
 
@@ -41,6 +52,11 @@ export const Frame = (props) => {
         style={styles.delete}
         className="fa fa-trash-o"
         onClick={deleteFrame}
+      />
+      <div
+        style={styles.duplicate}
+        className="fa fa-files-o"
+        onClick={duplicateFrame}
       />
       <PreviewContainer
         frames={[props.frame]}

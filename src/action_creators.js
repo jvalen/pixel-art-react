@@ -135,6 +135,13 @@ export function deleteFrame(frameId) {
   };
 }
 
+export function duplicateFrame(frameId) {
+  return {
+    type: 'DUPLICATE_FRAME',
+    frameId
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

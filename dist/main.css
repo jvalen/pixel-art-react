@@ -61,6 +61,10 @@
   content: "\f014";
 }
 
+.fa-files-o:before {
+  content: "\f0c5";
+}
+
 .fa-download:before {
   content: "\f019";
 }

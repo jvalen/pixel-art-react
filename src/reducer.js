@@ -253,6 +253,15 @@ function deleteFrame(state, frameId) {
   return fromJS(newState);
 }
 
+function duplicateFrame(state, frameId) {
+  const newState = state.toJS();
+
+  newState.frames.splice(frameId, 0, newState.frames[frameId]);
+  newState.activeFrameIndex = frameId + 1;
+
+  return fromJS(newState);
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -296,6 +305,8 @@ export default function (state = Map(), action) {
       return createNewFrame(state);
     case 'DELETE_FRAME':
       return deleteFrame(state, action.frameId);
+    case 'DUPLICATE_FRAME':
+      return duplicateFrame(state, action.frameId);
     default:
   }
   return state;
