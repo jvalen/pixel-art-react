@@ -11,6 +11,7 @@ export const FrameSelector = (props) => {
           frame={frameData}
           columns={props.columns}
           rows={props.rows}
+          active={props.activeFrameIndex === index}
         />
       );
     });

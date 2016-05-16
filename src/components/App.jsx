@@ -67,6 +67,7 @@ export class App extends React.Component {
               frames={this.props.frames}
               columns={this.props.columns}
               rows={this.props.rows}
+              activeFrameIndex={this.props.activeFrameIndex}
             />
           </div>
         </div>
