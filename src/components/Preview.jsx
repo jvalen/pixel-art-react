@@ -36,8 +36,7 @@ export class Preview extends React.Component {
     const styles = {
       previewWrapper: {
         height: cellSize,
-        width: cellSize,
-        marginTop: '1em'
+        width: cellSize
       },
       trashIcon: {
         position: 'relative',
@@ -97,7 +96,6 @@ export class Preview extends React.Component {
     const wrapperStyle = {
       width: columns * cellSize,
       height: rows * cellSize,
-      margin: '1em 1em',
       display: 'inline-block',
       position: 'relative'
     };
