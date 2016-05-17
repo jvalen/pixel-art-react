@@ -46,7 +46,10 @@ export class Preview extends React.Component {
       <div style={animation ? null : styles.previewWrapper}>
         {animation ?
           <StyleRoot>
-            <Animation duration={2} boxShadow={animationData} />
+            <Animation
+              duration={this.props.duration}
+              boxShadow={animationData}
+            />
           </StyleRoot>
           : null
         }
@@ -74,8 +77,10 @@ export class Preview extends React.Component {
   }
 }
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    duration: state.present.get('duration')
+  };
 }
 export const PreviewContainer = connect(
   mapStateToProps,

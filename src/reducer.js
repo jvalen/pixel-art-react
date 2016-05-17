@@ -67,7 +67,8 @@ function setInitialState(state) {
     loading: false,
     notifications: [],
     dragging,
-    activeFrameIndex: 0
+    activeFrameIndex: 0,
+    duration: 1
   };
 
   return state.merge(initialState);
@@ -265,6 +266,11 @@ function duplicateFrame(state, frameId) {
   return fromJS(newState);
 }
 
+function setDuration(state, duration) {
+  const newState = { duration };
+  return state.merge(newState);
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -310,6 +316,8 @@ export default function (state = Map(), action) {
       return deleteFrame(state, action.frameId);
     case 'DUPLICATE_FRAME':
       return duplicateFrame(state, action.frameId);
+    case 'SET_DURATION':
+      return setDuration(state, action.duration);
     default:
   }
   return state;

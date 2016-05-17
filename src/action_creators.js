@@ -142,6 +142,13 @@ export function duplicateFrame(frameId) {
   };
 }
 
+export function setDuration(duration) {
+  return {
+    type: 'SET_DURATION',
+    duration
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

@@ -20,6 +20,7 @@ import { SimpleNotificationContainer } from './SimpleNotification';
 import { DownloadDrawingContainer } from './DownloadDrawing';
 import { FrameSelector } from './FrameSelector';
 import { AddFrameContainer } from './AddFrame';
+import Duration from './Duration';
 
 export class App extends React.Component {
   componentDidMount() {
@@ -58,16 +59,22 @@ export class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
-        <div className="grid grid-pad">
+        <div className="grid">
           <div className="col-1-8">
             <AddFrameContainer />
           </div>
-          <div className="col-7-8">
+          <div className="col-6-8">
             <FrameSelector
               frames={this.props.frames}
               columns={this.props.columns}
               rows={this.props.rows}
               activeFrameIndex={this.props.activeFrameIndex}
+            />
+          </div>
+          <div className="col-1-8">
+            <Duration
+              duration={this.props.duration}
+              setDuration={this.props.setDuration}
             />
           </div>
         </div>
@@ -190,7 +197,8 @@ function mapStateToProps(state) {
     eraserOn: state.present.get('eraserOn'),
     frames: framesData,
     activeFrameIndex: state.present.get('activeFrameIndex'),
-    paletteGridData: state.present.get('paletteGridData')
+    paletteGridData: state.present.get('paletteGridData'),
+    duration: state.present.get('duration')
   };
 }
 export const AppContainer = connect(

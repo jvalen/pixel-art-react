@@ -115,7 +115,7 @@
   width: 25%;
 }
 
-.col-3-4 {
+.col-3-4, .col-6-8 {
   width: 75%;
 }
 .col-1-8 {
@@ -444,6 +444,11 @@ body {
   label {
     font-size: 0.8em;
     top: 1.4em !important;
+  }
+
+  label.duration-label {
+    font-size: 0.8em;
+    top: 0 !important;
   }
 
   h1 {
