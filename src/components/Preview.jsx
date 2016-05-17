@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { generatePixelDrawCss, generateAnimationCSSData } from '../utils/helpers';
+import {
+  generatePixelDrawCss,
+  generateAnimationCSSData,
+  generateAnimationIntervals
+} from '../utils/helpers';
 import * as actionCreators from '../action_creators';
 import { Animation } from './Animation';
 import { StyleRoot } from 'radium';
@@ -25,7 +29,7 @@ export class Preview extends React.Component {
     if (animation) {
       animationData =
       generateAnimationCSSData(
-        frames, [0, 25, 50, 75, 100],
+        frames, generateAnimationIntervals(frames),
         columns, rows, cellSize
       );
     } else {
