@@ -12,7 +12,8 @@ export class SaveDrawing extends React.Component {
       paletteGridData,
       cellSize,
       columns,
-      rows
+      rows,
+      animate: frames.length > 1
     };
 
     if (dataStored) {

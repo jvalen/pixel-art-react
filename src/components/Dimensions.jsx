@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import Modal from 'react-modal';
 import { PreviewContainer } from './Preview';
+import RadioSelector from './RadioSelector';
 
 export class Dimensions extends React.Component {
   constructor(props) {
@@ -11,8 +12,10 @@ export class Dimensions extends React.Component {
       columnsValue: 20,
       rowsValue: 20,
       cellSizeValue: 10,
-      modalIsOpen: false
+      modalIsOpen: false,
+      previewType: 'single'
     };
+    this.changePreviewType = this.changePreviewType.bind(this);
   }
 
   showPreview() {
@@ -54,11 +57,25 @@ export class Dimensions extends React.Component {
     });
   }
 
+  changePreviewType(value) {
+    this.setState({ previewType: value });
+  }
+
   render() {
     const { columns, rows, cellSize } = this.props;
     let columnsValue = columns;
     let rowsValue = rows;
     let cellSizeValue = cellSize;
+    const options = [
+      {
+        value: 'single',
+        label: 'single'
+      },
+      {
+        value: 'animation',
+        label: 'animation'
+      }
+    ];
 
     const styles = {
       columnsLabel: {
@@ -178,6 +195,12 @@ export class Dimensions extends React.Component {
             style={styles.modal}
           >
             <button onClick={() => { this.hidePreview(); }}>CLOSE</button>
+            <RadioSelector
+              name="preview-type"
+              selected={this.state.previewType}
+              change={this.changePreviewType}
+              options={options}
+            />
             <div style={styles.previewWrapper}>
               <PreviewContainer
                 key="0"
@@ -186,6 +209,7 @@ export class Dimensions extends React.Component {
                 rows={this.props.rows}
                 cellSize={this.props.cellSize}
                 activeFrameIndex={this.props.activeFrameIndex}
+                animate={this.state.previewType !== 'single'}
               />
             </div>
           </Modal>

@@ -12,10 +12,10 @@ import { StyleRoot } from 'radium';
 export class Preview extends React.Component {
   generatePreview() {
     const dataFromParent = !!this.props.loadData;
-    const { frames, columns, rows, cellSize } =
+    const { frames, columns, rows, cellSize, animate } =
       dataFromParent ? this.props.loadData : this.props;
     const { activeFrameIndex } = this.props;
-    const animation = frames.length > 1;
+    const animation = frames.length > 1 && animate;
     let animationData;
     let cssString;
 
