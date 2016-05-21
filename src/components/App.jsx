@@ -111,10 +111,12 @@ export class App extends React.Component {
                   </div>
                   <div className="col-1-2">
                     <DownloadDrawingContainer
+                      frames={this.props.frames}
                       activeFrame={this.props.activeFrame}
                       columns={this.props.columns}
                       rows={this.props.rows}
                       cellSize={this.props.cellSize}
+                      duration={this.props.duration}
                     />
                   </div>
                 </div>

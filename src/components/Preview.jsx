@@ -35,7 +35,8 @@ export class Preview extends React.Component {
     } else {
       cssString = generatePixelDrawCss(
         frames[activeFrameIndex],
-        columns, rows, cellSize);
+        columns, rows, cellSize, 'string'
+      );
 
       styles.previewWrapper.boxShadow = cssString;
       styles.previewWrapper.MozBoxShadow = cssString;

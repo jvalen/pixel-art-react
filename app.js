@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import undoable from 'redux-undo';
 import reducer from './src/reducer';
 import { AppContainer } from './src/components/App';
-import gm from 'gm';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -18,6 +17,11 @@ import session from 'express-session';
 import React from 'react';
 import { createStore } from 'redux';
 import pkgjson from './package.json';
+import {
+  drawFrame,
+  drawGif,
+  drawSpritesheet
+} from './src/utils/imageGeneration';
 
 const app = module.exports = express();
 console.log(`Version deployed: ${pkgjson.version}`);
@@ -94,55 +98,6 @@ function handleRender(req, res) {
 }
 
 /**
- * Draw image with CSS data
- */
-function drawFromCss(data, path, callback) {
-  const cssData = data;
-  const width = cssData.cols * cssData.pixelSize;
-  const height = cssData.rows * cssData.pixelSize;
-  const opacity = 0;
-
-  cssData.boxShadow = cssData.boxShadow.map(
-    (elem) => {
-      return (
-        {
-          x: elem[0],
-          y: elem[1],
-          color: elem[3]
-        }
-      );
-    }
-  );
-
-  const BGCOLOR = '#000000';
-  const FILLCOLOR = (
-    `0${Math.round((1 - opacity) * 255).toString(16)}`
-  ).slice(-2);
-
-  const gmImg = gm(
-    width, height,
-    `${BGCOLOR}${FILLCOLOR}`
-  );
-
-  for (let i = 0; i < cssData.boxShadow.length; i++) {
-    const aux = cssData.boxShadow[i];
-    gmImg.fill(aux.color).drawRectangle(
-      aux.x - cssData.pixelSize, aux.y - cssData.pixelSize, aux.x, aux.y
-    );
-  }
-
-  gmImg.write(
-    path,
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
-      callback();
-    }
-  );
-}
-
-/**
  * Routes
  */
 app.get('/', handleRender);
@@ -157,7 +112,7 @@ app.post('/auth/twitter', (req, res) => {
       request.session.oauthRequestToken = oauthToken;
       request.session.oauthRequestTokenSecret = oauthTokenSecret;
 
-      request.body.boxShadow = JSON.parse(request.body.boxShadow);
+      request.body.drawingData = JSON.parse(request.body.drawingData);
       request.session.cssData = request.body;
 
       res.contentType('application/json');
@@ -193,7 +148,7 @@ app.get('/auth/twitter/callback', (req, res, next) => {
           request.session.oauthAccessToken = oauthAccessToken;
           request.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
 
-          drawFromCss(request.session.cssData, imgPath, () => {
+          drawFrame(request.session.cssData, imgPath, () => {
             // Tweet message and drawing
             const data = fs.readFileSync(imgPath);
             client.post('media/upload', { media: data }, (err, media) => {
@@ -224,19 +179,38 @@ app.get('/auth/twitter/callback', (req, res, next) => {
 });
 
 app.post('/auth/download', (req, res) => {
-  const randomName = temp.path({ suffix: '.png' });
+  const request = req;
+
+  let suffix = '.png';
+  if (request.body.type === 'gif') {
+    suffix = '.gif';
+  }
+
+  const randomName = temp.path({ suffix });
   const imgPath = `images${randomName}`;
 
-  const request = req;
-  request.body.boxShadow = JSON.parse(request.body.boxShadow);
+  request.body.drawingData = JSON.parse(request.body.drawingData);
 
-  drawFromCss(request.body, imgPath, () => {
-    res.send(`/download${randomName}`);
-  });
+  switch (request.body.type) {
+    case 'gif':
+      drawGif(request.body, imgPath, (gifPath) => {
+        res.send(`/download/tmp/${gifPath}`);
+      });
+      break;
+    case 'spritesheet':
+      drawSpritesheet(request.body, imgPath, (spritesheetPath) => {
+        res.send(`/download/tmp/${spritesheetPath}`);
+      });
+      break;
+    default:
+      drawFrame(request.body, imgPath, () => {
+        res.send(`/download${randomName}`);
+      });
+  }
 });
 
 app.get('/download/tmp/:filename', (req, res) => {
-  console.log(`downloaded file: ${req.params.filename}`);
+  // console.log(`downloaded file: ${req.params.filename}`);
   const filePath = `${__dirname}/images/tmp/${req.params.filename}`;
 
   // Stream and delete the file

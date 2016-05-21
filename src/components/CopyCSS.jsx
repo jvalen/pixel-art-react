@@ -21,7 +21,8 @@ export class CopyCSS extends React.Component {
       frames[activeFrameIndex],
       columns,
       rows,
-      cellSize
+      cellSize,
+      'string'
     );
     if (!!cssString) {
       cssString = `box-shadow: ${cssString}; `;
