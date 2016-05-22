@@ -100,7 +100,7 @@ export function drawFrame(data, path, callback) {
 /**
  * Creates a GIF from CSS exported data
  */
-export function drawGif(data, path, callback) {
+export function drawGif(data, path, transparent, callback) {
   const cssData = data;
   const width = cssData.cols * cssData.pixelSize;
   const height = cssData.rows * cssData.pixelSize;
@@ -119,12 +119,13 @@ export function drawGif(data, path, callback) {
     const duration = cssData.animationInfo.duration;
     const equalDelay = cssData.animationInfo.equalIntervalDelay;
     const delayPerFrame = (equalDelay * 100) / duration;
+    const opacityOptions = transparent ? ' ' : ' -background white -alpha remove';
 
     let creatingGifCommand = 'convert -dispose previous -loop 0';
     for (let i = 0; i < paths.length; i++) {
       creatingGifCommand += ` -delay ${delayPerFrame} ${paths[i]}`;
     }
-    creatingGifCommand += gifAnimatedPath;
+    creatingGifCommand += `${opacityOptions}${gifAnimatedPath}`;
 
     exec(creatingGifCommand, (err) => {
       removeFiles(paths);

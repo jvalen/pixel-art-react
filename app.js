@@ -186,7 +186,7 @@ app.get('/auth/twitter/callback', (req, res, next) => {
 
           switch (request.session.cssData.type) {
             case 'gif':
-              drawGif(request.session.cssData, imgPath, (gifPath) => {
+              drawGif(request.session.cssData, imgPath, false, (gifPath) => {
                 tweetWithMedia(client, request, res, gifPath);
               });
               break;
@@ -223,7 +223,7 @@ app.post('/auth/download', (req, res) => {
 
   switch (request.body.type) {
     case 'gif':
-      drawGif(request.body, imgPath, (gifPath) => {
+      drawGif(request.body, imgPath, true, (gifPath) => {
         res.send(`/download/tmp/${gifPath}`);
       });
       break;
