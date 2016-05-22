@@ -38,6 +38,12 @@ export function setGridCellValue(color, used, id) {
     id
   };
 }
+export function drawCell(id) {
+  return {
+    type: 'DRAW_CELL',
+    id
+  };
+}
 
 export function setDrawing(grid, paletteGridData, cellSize, columns, rows) {
   return {

@@ -51,7 +51,6 @@ function setInitialState(state) {
   const currentColor = '000';
   const pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR);
   const paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true);
-  const dragging = false;
 
   const initialState = {
     grid: pixelGrid,
@@ -65,8 +64,7 @@ function setInitialState(state) {
     eyedropperOn: false,
     colorPickerOn: false,
     loading: false,
-    notifications: [],
-    dragging
+    notifications: []
   };
 
   return state.merge(initialState);
@@ -82,12 +80,7 @@ function setGridDimension(state, columns, rows, cellSize) {
 
   return state.merge(newState);
 }
-function startDrag(state) {
-  return state.merge({ dragging: true });
-}
-function endDrag(state) {
-  return state.merge({ dragging: false });
-}
+
 function setColorSelected(state, newColorSelected) {
   const newState = {
     currentColor: newColorSelected,
@@ -216,6 +209,14 @@ function sendNotification(state, message) {
   return state.merge(newState);
 }
 
+// called when a pixel cell is clicked or dragged-and-droppped
+function drawCell(state, id) {
+  const prop = state.get('eraserOn') ? 'initialColor' : 'currentColor';
+  const used = !state.get('eraserOn');
+  const color = state.get(prop);
+  return setGridCellValue(state, color, used, id);
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -226,6 +227,8 @@ export default function (state = Map(), action) {
       return setColorSelected(state, action.newColorSelected);
     case 'SET_CUSTOM_COLOR':
       return setCustomColor(state, action.customColor);
+    case 'DRAW_CELL':
+      return drawCell(state, action.id); // used to set & erase cells, depending on the context
     case 'SET_GRID_CELL_VALUE':
       return setGridCellValue(state, action.color, action.used, action.id);
     case 'SET_DRAWING':
@@ -233,10 +236,6 @@ export default function (state = Map(), action) {
         state, action.grid, action.paletteGridData,
         action.cellSize, action.columns, action.rows)
       ;
-    case 'START_DRAG':
-      return startDrag(state);
-    case 'END_DRAG':
-      return endDrag(state);
     case 'SET_ERASER':
       return setEraser(state);
     case 'SET_EYEDROPPER':

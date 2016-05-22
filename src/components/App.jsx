@@ -1,5 +1,8 @@
 import React from 'react';
-import Grid from './Pixel-grid';
+import { bindActionCreators } from 'redux';
+
+import Grid from './PixelGridWrapper';
+
 import { DimensionsContainer } from './Dimensions';
 import { UndoRedoContainer } from './UndoRedo';
 import { PaletteContainer } from './Palette-grid';
@@ -21,7 +24,7 @@ import { DownloadDrawingContainer } from './DownloadDrawing';
 
 export class App extends React.Component {
   componentDidMount() {
-    this.props.hideSpinner();
+    this.props.actions.hideSpinner();
     let dataStored = localStorage.getItem('pixel-art-react');
     if (dataStored) {
       dataStored = JSON.parse(dataStored);
@@ -45,8 +48,9 @@ export class App extends React.Component {
       localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
     }
   }
-
   render() {
+    const { grid, actions, currentColor } = this.props;
+    // console.log('Render the app', currentColor, actions);
     return (
       <div id="pixel-art-app">
         <SimpleSpinner spin={this.props.loading} />
@@ -87,13 +91,17 @@ export class App extends React.Component {
           </div>
           <div className="col-1-2">
             <Grid
+              grid={grid}
+              actions={actions}
+            />
+            {false && <Grid
               grid={this.props.grid}
               columns={this.props.columns}
               cellSize={this.props.cellSize}
               currentColor={this.props.currentColor}
               eyedropperOn={this.props.eyedropperOn}
               eraserOn={this.props.eraserOn}
-            />
+            />}
           </div>
           <div className="col-1-4">
             <UndoRedoContainer />
@@ -142,7 +150,14 @@ function mapStateToProps(state) {
     eraserOn: state.present.get('eraserOn')
   };
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actionCreators, dispatch),
+  };
+}
+
 export const AppContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(App);
