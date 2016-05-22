@@ -5,14 +5,15 @@ import * as actionCreators from '../action_creators';
 export class SaveDrawing extends React.Component {
   save() {
     let dataStored = localStorage.getItem('pixel-art-react');
-    const { grid, columns, rows, cellSize, paletteGridData } = this.props;
+    const { frames, columns, rows, cellSize, paletteGridData } = this.props;
     const drawingToSave = {
       id: 0,
-      grid,
+      frames,
       paletteGridData,
       cellSize,
       columns,
-      rows
+      rows,
+      animate: frames.length > 1
     };
 
     if (dataStored) {
@@ -48,14 +49,8 @@ export class SaveDrawing extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    grid: state.present.get('grid'),
-    paletteGridData: state.present.get('paletteGridData'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize'),
-  };
+function mapStateToProps() {
+  return {};
 }
 export const SaveDrawingContainer = connect(
   mapStateToProps,

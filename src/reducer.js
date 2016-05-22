@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Map, fromJS } from 'immutable';
 
 const GRID_INITIAL_COLOR = '313131';
 
@@ -44,7 +44,7 @@ function addColorToLastCellInPalette(palette, newColor) {
 /* Action methods */
 
 function setInitialState(state) {
-  // Create initial grid
+  // Create initial frame
   const cellSize = 10;
   const columns = 20;
   const rows = 20;
@@ -54,7 +54,7 @@ function setInitialState(state) {
   const dragging = false;
 
   const initialState = {
-    grid: pixelGrid,
+    frames: [pixelGrid],
     paletteGridData: paletteGrid,
     cellSize,
     columns,
@@ -66,22 +66,27 @@ function setInitialState(state) {
     colorPickerOn: false,
     loading: false,
     notifications: [],
-    dragging
+    dragging,
+    activeFrameIndex: 0,
+    duration: 1
   };
 
   return state.merge(initialState);
 }
 
 function setGridDimension(state, columns, rows, cellSize) {
-  const newState = {
-    grid: createGrid(columns * rows, GRID_INITIAL_COLOR),
-    rows: parseInt(rows, 10),
-    columns: parseInt(columns, 10),
-    cellSize: parseInt(cellSize, 10)
-  };
+  const newState = state.toJS();
+  newState.frames[newState.activeFrameIndex] = createGrid(
+    parseInt(columns, 10) * parseInt(rows, 10),
+    GRID_INITIAL_COLOR
+  );
+  newState.rows = parseInt(rows, 10);
+  newState.columns = parseInt(columns, 10);
+  newState.cellSize = parseInt(cellSize, 10);
 
-  return state.merge(newState);
+  return fromJS(newState);
 }
+
 function startDrag(state) {
   return state.merge({ dragging: true });
 }
@@ -131,19 +136,22 @@ function setCustomColor(state, customColor) {
 }
 
 function setGridCellValue(state, color, used, id) {
-  return state.setIn(['grid', parseInt(id, 10)], { color, used });
+  return state.setIn(
+    ['frames', state.get('activeFrameIndex'), parseInt(id, 10)],
+    { color, used }
+  );
 }
 
-function setDrawing(state, grid, paletteGridData, cellSize, columns, rows) {
-  const newState = {
-    grid,
-    paletteGridData,
-    cellSize,
-    columns,
-    rows,
-  };
+function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
+  const newState = state.toJS();
+  newState.frames = frames;
+  newState.paletteGridData = paletteGridData;
+  newState.cellSize = cellSize;
+  newState.columns = columns;
+  newState.rows = rows;
+  newState.activeFrameIndex = 0;
 
-  return state.merge(newState);
+  return fromJS(newState);
 }
 
 function setEraser(state) {
@@ -185,15 +193,14 @@ function setCellSize(state, cellSize) {
   return state.merge(newState);
 }
 
-function resetGrid(state, columns, rows) {
-  const newState = {
-    grid: createGrid(
-      parseInt(columns, 10) * parseInt(rows, 10),
-      GRID_INITIAL_COLOR
-    )
-  };
+function resetGrid(state, columns, rows, activeFrameIndex) {
+  const newState = state.toJS();
+  newState.frames[activeFrameIndex] = createGrid(
+    parseInt(columns, 10) * parseInt(rows, 10),
+    GRID_INITIAL_COLOR
+  );
 
-  return state.merge(newState);
+  return fromJS(newState);
 }
 
 function showSpinner(state) {
@@ -216,6 +223,54 @@ function sendNotification(state, message) {
   return state.merge(newState);
 }
 
+function changeActiveFrame(state, frameIndex) {
+  const newState = {
+    activeFrameIndex: frameIndex
+  };
+
+  return state.merge(newState);
+}
+
+function createNewFrame(state) {
+  const newState = state.toJS();
+  newState.frames.push(createGrid(
+    parseInt(newState.columns, 10) * parseInt(newState.rows, 10),
+    GRID_INITIAL_COLOR
+  ));
+  newState.activeFrameIndex = newState.frames.length - 1;
+  return fromJS(newState);
+}
+
+function deleteFrame(state, frameId) {
+  if (state.get('frames').size > 1) {
+    const newState = state.toJS();
+    const reduceFrameIndex =
+    (newState.activeFrameIndex >= frameId) && (newState.activeFrameIndex > 0);
+
+    newState.frames.splice(frameId, 1);
+
+    if (reduceFrameIndex) {
+      newState.activeFrameIndex = newState.frames.length - 1;
+    }
+    return fromJS(newState);
+  }
+  return state;
+}
+
+function duplicateFrame(state, frameId) {
+  const newState = state.toJS();
+
+  newState.frames.splice(frameId, 0, newState.frames[frameId]);
+  newState.activeFrameIndex = frameId + 1;
+
+  return fromJS(newState);
+}
+
+function setDuration(state, duration) {
+  const newState = { duration };
+  return state.merge(newState);
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -230,7 +285,7 @@ export default function (state = Map(), action) {
       return setGridCellValue(state, action.color, action.used, action.id);
     case 'SET_DRAWING':
       return setDrawing(
-        state, action.grid, action.paletteGridData,
+        state, action.frames, action.paletteGridData,
         action.cellSize, action.columns, action.rows)
       ;
     case 'START_DRAG':
@@ -246,13 +301,23 @@ export default function (state = Map(), action) {
     case 'SET_CELL_SIZE':
       return setCellSize(state, action.cellSize);
     case 'SET_RESET_GRID':
-      return resetGrid(state, action.columns, action.rows);
+      return resetGrid(state, action.columns, action.rows, action.activeFrameIndex);
     case 'SHOW_SPINNER':
       return showSpinner(state);
     case 'HIDE_SPINNER':
       return hideSpinner(state);
     case 'SEND_NOTIFICATION':
       return sendNotification(state, action.message);
+    case 'CHANGE_ACTIVE_FRAME':
+      return changeActiveFrame(state, action.frameIndex);
+    case 'CREATE_NEW_FRAME':
+      return createNewFrame(state);
+    case 'DELETE_FRAME':
+      return deleteFrame(state, action.frameId);
+    case 'DUPLICATE_FRAME':
+      return duplicateFrame(state, action.frameId);
+    case 'SET_DURATION':
+      return setDuration(state, action.duration);
     default:
   }
   return state;

@@ -16,9 +16,10 @@ class Grid extends React.Component {
   }
 
   getCells(props) {
-    const { grid, columns, currentColor } = this.props;
+    const { activeFrame, columns, currentColor } = this.props;
     const width = 100 / columns;
-    return grid.toJS().map((currentCell, i) => {
+
+    return activeFrame.map((currentCell, i) => {
       return (
         <Cell
           key={i}

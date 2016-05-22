@@ -1,71 +1,61 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { generatePixelDrawCss } from '../utils/helpers';
+import {
+  generatePixelDrawCss,
+  generateAnimationCSSData,
+  generateAnimationIntervals
+} from '../utils/helpers';
 import * as actionCreators from '../action_creators';
-
-/*
-  Avoid error when server-side render doesn't recognize
-  localstorage (browser feature)
-*/
-const browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
+import { Animation } from './Animation';
+import { StyleRoot } from 'radium';
 
 export class Preview extends React.Component {
-  removeFromStorage(event) {
-    if (!!browserStorage) {
-      let dataStored = browserStorage.getItem('pixel-art-react');
-      if (dataStored) {
-        dataStored = JSON.parse(dataStored);
-        dataStored.stored.splice(event.target.getAttribute('data-key'), 1);
-        browserStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
-        this.props.sendNotification('Drawing deleted');
-      }
-    }
-  }
-
   generatePreview() {
     const dataFromParent = !!this.props.loadData;
-    const { grid, columns, rows, cellSize } =
+    const { frames, columns, rows, cellSize, animate } =
       dataFromParent ? this.props.loadData : this.props;
+    const { activeFrameIndex } = this.props;
+    const animation = frames.length > 1 && animate;
+    let animationData;
+    let cssString;
 
-    const cssString = generatePixelDrawCss(
-      dataFromParent ? grid : grid.toJS(),
-      columns, rows, cellSize);
     const styles = {
       previewWrapper: {
-        boxShadow: cssString,
         height: cellSize,
-        width: cellSize,
-        marginTop: '1em',
-        MozBoxShadow: cssString,
-        WebkitBoxShadow: cssString
-      },
-      trashIcon: {
-        position: 'relative',
-        fontSize: '1.7em',
-        color: 'red',
-        top: '-1em',
-        right: '-6.5em',
-        cursor: 'no-drop',
-        padding: '0.1em',
-        backgroundColor: 'white',
-        border: '1px solid black'
+        width: cellSize
       }
     };
 
-    if (dataFromParent) {
-      return (
-        <div style={styles.previewWrapper}>
-          <div
-            data-key={this.props.id}
-            style={styles.trashIcon}
-            className="fa fa-trash-o"
-            onClick={this.removeFromStorage}
-          >
-          </div>
-        </div>
+    if (animation) {
+      animationData =
+      generateAnimationCSSData(
+        frames, generateAnimationIntervals(frames),
+        columns, rows, cellSize
       );
+    } else {
+      cssString = generatePixelDrawCss(
+        frames[activeFrameIndex],
+        columns, rows, cellSize, 'string'
+      );
+
+      styles.previewWrapper.boxShadow = cssString;
+      styles.previewWrapper.MozBoxShadow = cssString;
+      styles.previewWrapper.WebkitBoxShadow = cssString;
     }
-    return <div style={styles.previewWrapper}></div>;
+
+    return (
+      <div style={animation ? null : styles.previewWrapper}>
+        {animation ?
+          <StyleRoot>
+            <Animation
+              duration={this.props.duration}
+              boxShadow={animationData}
+            />
+          </StyleRoot>
+          : null
+        }
+      </div>
+    );
   }
 
   render() {
@@ -76,16 +66,9 @@ export class Preview extends React.Component {
     const wrapperStyle = {
       width: columns * cellSize,
       height: rows * cellSize,
-      margin: '1em 1em',
-      display: 'inline-block'
+      display: 'inline-block',
+      position: 'relative'
     };
-
-    if (dataFromParent) {
-      wrapperStyle.width = '200px';
-      wrapperStyle.height = '200px';
-      wrapperStyle.border = '3px solid black';
-      wrapperStyle.cursor = 'pointer';
-    }
 
     return (
       <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>
@@ -97,10 +80,7 @@ export class Preview extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    grid: state.present.get('grid'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize')
+    duration: state.present.get('duration')
   };
 }
 export const PreviewContainer = connect(

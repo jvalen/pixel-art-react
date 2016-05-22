@@ -39,10 +39,10 @@ export function setGridCellValue(color, used, id) {
   };
 }
 
-export function setDrawing(grid, paletteGridData, cellSize, columns, rows) {
+export function setDrawing(frames, paletteGridData, cellSize, columns, rows) {
   return {
     type: 'SET_DRAWING',
-    grid,
+    frames,
     paletteGridData,
     cellSize,
     columns,
@@ -87,11 +87,12 @@ export function setCellSize(cellSize) {
   };
 }
 
-export function resetGrid(columns, rows) {
+export function resetGrid(columns, rows, activeFrameIndex) {
   return {
     type: 'SET_RESET_GRID',
     columns,
-    rows
+    rows,
+    activeFrameIndex
   };
 }
 
@@ -111,6 +112,40 @@ export function sendNotification(message) {
   return {
     type: 'SEND_NOTIFICATION',
     message
+  };
+}
+
+export function changeActiveFrame(frameIndex) {
+  return {
+    type: 'CHANGE_ACTIVE_FRAME',
+    frameIndex
+  };
+}
+
+export function createNewFrame() {
+  return {
+    type: 'CREATE_NEW_FRAME'
+  };
+}
+
+export function deleteFrame(frameId) {
+  return {
+    type: 'DELETE_FRAME',
+    frameId
+  };
+}
+
+export function duplicateFrame(frameId) {
+  return {
+    type: 'DUPLICATE_FRAME',
+    frameId
+  };
+}
+
+export function setDuration(duration) {
+  return {
+    type: 'SET_DURATION',
+    duration
   };
 }
 

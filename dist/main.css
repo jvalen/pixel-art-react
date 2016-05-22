@@ -61,6 +61,10 @@
   content: "\f014";
 }
 
+.fa-files-o:before {
+  content: "\f0c5";
+}
+
 .fa-download:before {
   content: "\f019";
 }
@@ -111,11 +115,14 @@
   width: 25%;
 }
 
-.col-3-4 {
+.col-3-4, .col-6-8 {
   width: 75%;
 }
 .col-1-8 {
   width: 12.5%;
+}
+.col-7-8 {
+  width: 87.5%;
 }
 
 .grid:after {
@@ -437,6 +444,11 @@ body {
   label {
     font-size: 0.8em;
     top: 1.4em !important;
+  }
+
+  label.duration-label {
+    font-size: 0.8em;
+    top: 0 !important;
   }
 
   h1 {

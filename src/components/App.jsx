@@ -18,6 +18,9 @@ import CookieBanner from 'react-cookie-banner';
 import { SimpleSpinner } from './SimpleSpinner';
 import { SimpleNotificationContainer } from './SimpleNotification';
 import { DownloadDrawingContainer } from './DownloadDrawing';
+import { FrameSelector } from './FrameSelector';
+import { AddFrameContainer } from './AddFrame';
+import Duration from './Duration';
 
 export class App extends React.Component {
   componentDidMount() {
@@ -27,9 +30,9 @@ export class App extends React.Component {
       dataStored = JSON.parse(dataStored);
       if (dataStored.current) {
         // Load data from web storage
-        const { grid, paletteGridData, columns, rows, cellSize } = dataStored.current;
+        const { frames, paletteGridData, columns, rows, cellSize } = dataStored.current;
         this.props.setDrawing(
-          grid,
+          frames,
           paletteGridData,
           cellSize,
           columns,
@@ -56,6 +59,25 @@ export class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
+        <div className="grid">
+          <div className="col-1-8">
+            <AddFrameContainer />
+          </div>
+          <div className="col-6-8">
+            <FrameSelector
+              frames={this.props.frames}
+              columns={this.props.columns}
+              rows={this.props.rows}
+              activeFrameIndex={this.props.activeFrameIndex}
+            />
+          </div>
+          <div className="col-1-8">
+            <Duration
+              duration={this.props.duration}
+              setDuration={this.props.setDuration}
+            />
+          </div>
+        </div>
         <div className="grid grid-pad main-block">
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
@@ -63,7 +85,13 @@ export class App extends React.Component {
                 <LoadDrawingContainer />
               </div>
               <div className="save-button-wrapper">
-                <SaveDrawingContainer />
+                <SaveDrawingContainer
+                  frames={this.props.frames}
+                  columns={this.props.columns}
+                  rows={this.props.rows}
+                  cellSize={this.props.cellSize}
+                  paletteGridData={this.props.paletteGridData}
+                />
               </div>
             </div>
             <div className="grid">
@@ -71,10 +99,26 @@ export class App extends React.Component {
                 <PaletteContainer />
                 <div className="grid grid-pad">
                   <div className="col-1-2">
-                    <TwitterButtonContainer maxChars="113" />
+                    <TwitterButtonContainer
+                      maxChars="113"
+                      frames={this.props.frames}
+                      activeFrame={this.props.activeFrame}
+                      columns={this.props.columns}
+                      rows={this.props.rows}
+                      cellSize={this.props.cellSize}
+                      duration={this.props.duration}
+                      paletteGridData={this.props.paletteGridData}
+                    />
                   </div>
                   <div className="col-1-2">
-                    <DownloadDrawingContainer />
+                    <DownloadDrawingContainer
+                      frames={this.props.frames}
+                      activeFrame={this.props.activeFrame}
+                      columns={this.props.columns}
+                      rows={this.props.rows}
+                      cellSize={this.props.cellSize}
+                      duration={this.props.duration}
+                    />
                   </div>
                 </div>
               </div>
@@ -87,7 +131,7 @@ export class App extends React.Component {
           </div>
           <div className="col-1-2">
             <Grid
-              grid={this.props.grid}
+              activeFrame={this.props.activeFrame}
               columns={this.props.columns}
               cellSize={this.props.cellSize}
               currentColor={this.props.currentColor}
@@ -97,19 +141,30 @@ export class App extends React.Component {
           </div>
           <div className="col-1-4">
             <UndoRedoContainer />
-            <DimensionsContainer />
-            <ResetContainer />
-            <CopyCSS
-              grid={this.props.grid}
+            <DimensionsContainer
+              frames={this.props.frames}
               columns={this.props.columns}
               rows={this.props.rows}
               cellSize={this.props.cellSize}
+              activeFrameIndex={this.props.activeFrameIndex}
+            />
+            <ResetContainer
+              columns={this.props.columns}
+              rows={this.props.rows}
+              activeFrameIndex={this.props.activeFrameIndex}
+            />
+            <CopyCSS
+              frames={this.props.frames}
+              columns={this.props.columns}
+              rows={this.props.rows}
+              cellSize={this.props.cellSize}
+              activeFrameIndex={this.props.activeFrameIndex}
             />
           </div>
         </div>
         <div className="css-container">
           <CssDisplay
-            grid={this.props.grid}
+            activeFrame={this.props.activeFrame}
             columns={this.props.columns}
             rows={this.props.rows}
             cellSize={this.props.cellSize}
@@ -130,16 +185,23 @@ export class App extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const framesData = state.present.get('frames').toJS();
+  const activeFrame = framesData[state.present.get('activeFrameIndex')];
+
   return {
     loading: state.present.get('loading'),
     notifications: state.present.get('notifications'),
-    grid: state.present.get('grid'),
+    activeFrame,
     columns: state.present.get('columns'),
     rows: state.present.get('rows'),
     cellSize: state.present.get('cellSize'),
     currentColor: state.present.get('currentColor'),
     eyedropperOn: state.present.get('eyedropperOn'),
-    eraserOn: state.present.get('eraserOn')
+    eraserOn: state.present.get('eraserOn'),
+    frames: framesData,
+    activeFrameIndex: state.present.get('activeFrameIndex'),
+    paletteGridData: state.present.get('paletteGridData'),
+    duration: state.present.get('duration')
   };
 }
 export const AppContainer = connect(

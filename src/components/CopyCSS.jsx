@@ -9,8 +9,21 @@ export class CopyCSS extends React.Component {
   }
 
   generateCSS() {
-    const { grid, columns, rows, cellSize } = this.props;
-    let cssString = generatePixelDrawCss(grid.toJS(), columns, rows, cellSize);
+    const { frames, columns, rows, cellSize, activeFrameIndex } = this.props;
+
+    if (frames.length > 1) {
+      // TODO: Show switch
+      console.log('Show switch');
+      return null;
+    }
+    // Show info of only one frame
+    let cssString = generatePixelDrawCss(
+      frames[activeFrameIndex],
+      columns,
+      rows,
+      cellSize,
+      'string'
+    );
     if (!!cssString) {
       cssString = `box-shadow: ${cssString}; `;
       cssString += `height: ${cellSize}px; width: ${cellSize}px;`;
