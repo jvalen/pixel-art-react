@@ -138,7 +138,7 @@ function setCustomColor(state, customColor) {
 function setGridCellValue(state, color, used, id) {
   return state.setIn(
     ['frames', state.get('activeFrameIndex'), parseInt(id, 10)],
-    { color, used }
+    Map({ color, used })
   );
 }
 

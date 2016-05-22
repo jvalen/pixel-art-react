@@ -8,7 +8,7 @@ import Cell from './Pixel-cell';
 class Grid extends React.Component {
   shouldComponentUpdate(nextProps) {
     const same = (key) => { return nextProps[key].equals(this.props[key]); };
-    if (same('grid')) {
+    if (same('activeFrame')) {
       // console.info('No need to render the grid!');
       return false;
     }
@@ -20,16 +20,17 @@ class Grid extends React.Component {
     const width = 100 / columns;
 
     return activeFrame.map((currentCell, i) => {
+      const color = currentCell.get('color');
       return (
         <Cell
           key={i}
           id={i}
           width={width}
-          color={currentCell.color}
+          color={color}
           currentColor={currentColor}
-          onMouseDown={() => { this.handleMouseDown(i, currentCell.color); }}
+          onMouseDown={() => { this.handleMouseDown(i, color); }}
           onMouseUp={() => { props.actions.endDrag(); }}
-          onMouseOver={() => { this.handleDrag(i, currentCell.color); }}
+          onMouseOver={() => { this.handleDrag(i, color); }}
         />
       );
     });
@@ -93,12 +94,11 @@ class Grid extends React.Component {
 }
 
 function mapStateToProps(state) {
-  // console.info('grid, mapStateToProps', state.present.toJS());
   return {
     initialColor: state.present.get('initialColor'),
-    eyedropperOn: state.present.get('eyedropperOn'),
-    eraserOn: state.present.get('eraserOn'),
-    dragging: state.present.get('dragging')
+    activeFrame: state.present.get('frames').get(
+      state.present.get('activeFrameIndex')
+    )
   };
 }
 

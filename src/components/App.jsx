@@ -131,12 +131,11 @@ export class App extends React.Component {
           </div>
           <div className="col-1-2">
             <Grid
-              activeFrame={this.props.activeFrame}
               columns={this.props.columns}
-              cellSize={this.props.cellSize}
               currentColor={this.props.currentColor}
               eyedropperOn={this.props.eyedropperOn}
               eraserOn={this.props.eraserOn}
+              dragging={this.props.dragging}
             />
           </div>
           <div className="col-1-4">
@@ -186,7 +185,8 @@ export class App extends React.Component {
 
 function mapStateToProps(state) {
   const framesData = state.present.get('frames').toJS();
-  const activeFrame = framesData[state.present.get('activeFrameIndex')];
+  const activeFrameIndex = state.present.get('activeFrameIndex');
+  const activeFrame = framesData[activeFrameIndex];
 
   return {
     loading: state.present.get('loading'),
@@ -199,9 +199,10 @@ function mapStateToProps(state) {
     eyedropperOn: state.present.get('eyedropperOn'),
     eraserOn: state.present.get('eraserOn'),
     frames: framesData,
-    activeFrameIndex: state.present.get('activeFrameIndex'),
+    activeFrameIndex,
     paletteGridData: state.present.get('paletteGridData'),
-    duration: state.present.get('duration')
+    duration: state.present.get('duration'),
+    dragging: state.present.get('dragging')
   };
 }
 export const AppContainer = connect(
