@@ -1,3 +1,7 @@
+>### A Big Update And Refactor Is Coming
+
+>Please be patient and do not send a PR these days...I promise it will not be long. New exciting features will be integrated soon.
+
 # Pixel-art to CSS with react
 
 <a target='_blank' href='http://www.recurse.com' title='Made at the Recurse Center'><img src='https://cloud.githubusercontent.com/assets/2883345/11325206/336ea5f4-9150-11e5-9e90-d86ad31993d8.png' height='20px'/></a>
