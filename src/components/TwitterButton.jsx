@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { generatePixelDrawCss, shareDrawing } from '../utils/helpers';
+import { shareDrawing } from '../utils/helpers';
 import Modal from 'react-modal';
 import * as actionCreators from '../action_creators';
+import RadioSelector from './RadioSelector';
 
 export class TwitterButton extends React.Component {
   constructor(props) {
@@ -11,8 +12,14 @@ export class TwitterButton extends React.Component {
     this.state = {
       modalIsOpen: false,
       charsLeft: props.maxChars - initialText.length,
-      initialText
+      initialText,
+      tweetType: 'frame'
     };
+    this.changeTweetType = this.changeTweetType.bind(this);
+  }
+
+  changeTweetType(value) {
+    this.setState({ tweetType: value });
   }
 
   handleTextChange(event) {
@@ -20,12 +27,13 @@ export class TwitterButton extends React.Component {
     this.setState({ charsLeft: this.props.maxChars - input.length });
   }
 
-  tweetDrawing() {
+  tweetDrawing(type) {
     if (this.state.charsLeft >= 0) {
       const {
-        frames, activeFrameIndex, paletteGridData,
-        columns, rows, cellSize
+        frames, activeFrame, paletteGridData,
+        columns, rows, cellSize, duration
       } = this.props;
+
       // Store current drawing in the web storage
       let dataStored = localStorage.getItem('pixel-art-react');
       const drawingToSave = {
@@ -43,17 +51,17 @@ export class TwitterButton extends React.Component {
         localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
       }
 
-      // Generate CSS and send to the server
-      const cssString = generatePixelDrawCss(
-        frames[activeFrameIndex], columns, rows, cellSize
-      );
       this.props.showSpinner();
+
       shareDrawing(
         {
-          css: cssString,
+          type,
+          frames,
+          activeFrame,
           columns,
           rows,
           cellSize,
+          duration
         },
         this.refs.tweetText.value,
         'twitter'
@@ -118,6 +126,22 @@ export class TwitterButton extends React.Component {
         display: 'table'
       }
     };
+
+    const options = [
+      {
+        value: 'frame',
+        label: 'selected frame'
+      },
+      {
+        value: 'gif',
+        label: 'gif'
+      },
+      {
+        value: 'spritesheet',
+        label: 'spritesheet'
+      }
+    ];
+
     return (
       <div style={customStyles.buttonWrapper}>
         <button
@@ -134,6 +158,12 @@ export class TwitterButton extends React.Component {
           <h2 style={customStyles.h2}>
             You are about to share your awesome drawing on Twitter
           </h2>
+          <RadioSelector
+            name="download-type"
+            selected={this.state.tweetType}
+            change={this.changeTweetType}
+            options={options}
+          />
           <textarea
             ref="tweetText"
             style={customStyles.textarea}
@@ -150,7 +180,7 @@ export class TwitterButton extends React.Component {
           </h3>
           <button
             style={customStyles.button}
-            onClick={() => { this.tweetDrawing(); }}
+            onClick={() => { this.tweetDrawing(this.state.tweetType); }}
           >
             <span className="fa fa-twitter"></span>TWEET
           </button>

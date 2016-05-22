@@ -98,6 +98,36 @@ function handleRender(req, res) {
 }
 
 /**
+ * Twitter upload helper
+ */
+function tweetWithMedia(client, request, response, path) {
+  // Tweet message and drawing
+  let filePath = path;
+  if (path.indexOf('images/tmp') === -1) {
+    filePath = `${__dirname}/images/tmp/${path}`;
+  }
+  const data = fs.readFileSync(filePath);
+  client.post('media/upload', { media: data }, (err, media) => {
+    if (!err) {
+      // If successful, a media object will be returned.
+      const status = {
+        status: request.session.cssData.text,
+        media_ids: media.media_id_string // Pass the media id string
+      };
+      client.post('statuses/update', status, (e) => {
+        if (!e) {
+          // Success
+          response.redirect('/');
+        }
+        fs.unlinkSync(filePath);
+      });
+    } else {
+      fs.unlinkSync(filePath);
+    }
+  });
+}
+
+/**
  * Routes
  */
 app.get('/', handleRender);
@@ -136,7 +166,13 @@ app.get('/auth/twitter/callback', (req, res, next) => {
           res.send('auth twitter callback: error');
         } else {
           const request = req;
-          const randomName = temp.path({ suffix: '.png' });
+
+          let suffix = '.png';
+          if (request.session.cssData.type === 'gif') {
+            suffix = '.gif';
+          }
+
+          const randomName = temp.path({ suffix });
           const imgPath = `images${randomName}`;
           const client = new Twitter({
             consumer_key: configData.TWITTER_CONSUMER_KEY,
@@ -148,28 +184,22 @@ app.get('/auth/twitter/callback', (req, res, next) => {
           request.session.oauthAccessToken = oauthAccessToken;
           request.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
 
-          drawFrame(request.session.cssData, imgPath, () => {
-            // Tweet message and drawing
-            const data = fs.readFileSync(imgPath);
-            client.post('media/upload', { media: data }, (err, media) => {
-              if (!err) {
-                // If successful, a media object will be returned.
-                const status = {
-                  status: request.session.cssData.text,
-                  media_ids: media.media_id_string // Pass the media id string
-                };
-                client.post('statuses/update', status, (e) => {
-                  if (!e) {
-                    // Success
-                    res.redirect('/');
-                  }
-                  fs.unlinkSync(imgPath);
-                });
-              } else {
-                fs.unlinkSync(imgPath);
-              }
-            });
-          });
+          switch (request.session.cssData.type) {
+            case 'gif':
+              drawGif(request.session.cssData, imgPath, (gifPath) => {
+                tweetWithMedia(client, request, res, gifPath);
+              });
+              break;
+            case 'spritesheet':
+              drawSpritesheet(request.session.cssData, imgPath, (spritesheetPath) => {
+                tweetWithMedia(client, request, res, spritesheetPath);
+              });
+              break;
+            default:
+              drawFrame(request.session.cssData, imgPath, () => {
+                tweetWithMedia(client, request, res, imgPath);
+              });
+          }
         }
       }
     );

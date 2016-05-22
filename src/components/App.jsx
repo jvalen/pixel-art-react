@@ -102,10 +102,11 @@ export class App extends React.Component {
                     <TwitterButtonContainer
                       maxChars="113"
                       frames={this.props.frames}
-                      activeFrameIndex={this.props.activeFrameIndex}
+                      activeFrame={this.props.activeFrame}
                       columns={this.props.columns}
                       rows={this.props.rows}
                       cellSize={this.props.cellSize}
+                      duration={this.props.duration}
                       paletteGridData={this.props.paletteGridData}
                     />
                   </div>
