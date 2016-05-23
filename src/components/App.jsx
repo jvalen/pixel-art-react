@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import CookieBanner from 'react-cookie-banner';
 
 import Grid from './PixelGridWrapper';
-
 import { DimensionsContainer } from './Dimensions';
 import { UndoRedoContainer } from './UndoRedo';
 import { PaletteContainer } from './Palette-grid';
@@ -15,9 +16,7 @@ import { EyedropperContainer } from './Eyedropper';
 import { ColorPickerContainer } from './ColorPicker';
 import { TwitterButtonContainer } from './TwitterButton';
 import { CopyCSS } from './CopyCSS';
-import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
-import CookieBanner from 'react-cookie-banner';
 import { SimpleSpinner } from './SimpleSpinner';
 import { SimpleNotificationContainer } from './SimpleNotification';
 import { DownloadDrawingContainer } from './DownloadDrawing';
@@ -49,8 +48,7 @@ export class App extends React.Component {
     }
   }
   render() {
-    const { grid, actions, currentColor } = this.props;
-    // console.log('Render the app', currentColor, actions);
+    const { grid, actions } = this.props;
     return (
       <div id="pixel-art-app">
         <SimpleSpinner spin={this.props.loading} />
@@ -94,14 +92,6 @@ export class App extends React.Component {
               grid={grid}
               actions={actions}
             />
-            {false && <Grid
-              grid={this.props.grid}
-              columns={this.props.columns}
-              cellSize={this.props.cellSize}
-              currentColor={this.props.currentColor}
-              eyedropperOn={this.props.eyedropperOn}
-              eraserOn={this.props.eraserOn}
-            />}
           </div>
           <div className="col-1-4">
             <UndoRedoContainer />
