@@ -30,14 +30,7 @@ export function setCustomColor(customColor) {
   };
 }
 
-export function setGridCellValue(color, used, id) {
-  return {
-    type: 'SET_GRID_CELL_VALUE',
-    color,
-    used,
-    id
-  };
-}
+
 export function drawCell(id) {
   return {
     type: 'DRAW_CELL',
@@ -53,18 +46,6 @@ export function setDrawing(grid, paletteGridData, cellSize, columns, rows) {
     cellSize,
     columns,
     rows
-  };
-}
-
-export function startDrag() {
-  return {
-    type: 'START_DRAG'
-  };
-}
-
-export function endDrag() {
-  return {
-    type: 'END_DRAG'
   };
 }
 

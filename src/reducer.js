@@ -211,6 +211,9 @@ function sendNotification(state, message) {
 
 // called when a pixel cell is clicked or dragged-and-droppped
 function drawCell(state, id) {
+  if (state.get('eyedropperOn')) {
+    return setColorSelected(state, state.get('grid').get(id).color);
+  }
   const prop = state.get('eraserOn') ? 'initialColor' : 'currentColor';
   const used = !state.get('eraserOn');
   const color = state.get(prop);
@@ -229,8 +232,6 @@ export default function (state = Map(), action) {
       return setCustomColor(state, action.customColor);
     case 'DRAW_CELL':
       return drawCell(state, action.id); // used to set & erase cells, depending on the context
-    case 'SET_GRID_CELL_VALUE':
-      return setGridCellValue(state, action.color, action.used, action.id);
     case 'SET_DRAWING':
       return setDrawing(
         state, action.grid, action.paletteGridData,

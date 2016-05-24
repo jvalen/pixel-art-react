@@ -48,7 +48,7 @@ export class App extends React.Component {
     }
   }
   render() {
-    const { grid, actions } = this.props;
+    const { grid, columns, actions } = this.props;
     return (
       <div id="pixel-art-app">
         <SimpleSpinner spin={this.props.loading} />
@@ -91,6 +91,7 @@ export class App extends React.Component {
             <Grid
               grid={grid}
               actions={actions}
+              columns={columns}
             />
           </div>
           <div className="col-1-4">
