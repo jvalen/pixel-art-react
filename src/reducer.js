@@ -143,15 +143,14 @@ function setGridCellValue(state, color, used, id) {
 }
 
 function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
-  const newState = state.toJS();
-  newState.frames = frames;
-  newState.paletteGridData = paletteGridData;
-  newState.cellSize = cellSize;
-  newState.columns = columns;
-  newState.rows = rows;
-  newState.activeFrameIndex = 0;
-
-  return fromJS(newState);
+  return state.merge({
+    frames,
+    paletteGridData,
+    cellSize,
+    columns,
+    rows,
+    activeFrameIndex: 0
+  });
 }
 
 function setEraser(state) {

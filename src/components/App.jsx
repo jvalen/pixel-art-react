@@ -184,25 +184,24 @@ export class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const framesData = state.present.get('frames').toJS();
+  const frames = state.present.get('frames');
   const activeFrameIndex = state.present.get('activeFrameIndex');
-  const activeFrame = framesData[activeFrameIndex];
 
   return {
-    loading: state.present.get('loading'),
+    frames,
+    activeFrame: frames.get(activeFrameIndex),
+    paletteGridData: state.present.get('paletteGridData'),
     notifications: state.present.get('notifications'),
-    activeFrame,
+    activeFrameIndex,
+    loading: state.present.get('loading'),
     columns: state.present.get('columns'),
     rows: state.present.get('rows'),
     cellSize: state.present.get('cellSize'),
     currentColor: state.present.get('currentColor'),
     eyedropperOn: state.present.get('eyedropperOn'),
     eraserOn: state.present.get('eraserOn'),
-    frames: framesData,
-    activeFrameIndex,
-    paletteGridData: state.present.get('paletteGridData'),
-    duration: state.present.get('duration'),
-    dragging: state.present.get('dragging')
+    dragging: state.present.get('dragging'),
+    duration: state.present.get('duration')
   };
 }
 export const AppContainer = connect(

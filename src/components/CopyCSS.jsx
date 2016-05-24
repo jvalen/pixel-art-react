@@ -11,14 +11,14 @@ export class CopyCSS extends React.Component {
   generateCSS() {
     const { frames, columns, rows, cellSize, activeFrameIndex } = this.props;
 
-    if (frames.length > 1) {
+    if (frames.size > 1) {
       // TODO: Show switch
       console.log('Show switch');
       return null;
     }
     // Show info of only one frame
     let cssString = generatePixelDrawCss(
-      frames[activeFrameIndex],
+      frames.get(activeFrameIndex),
       columns,
       rows,
       cellSize,

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import { PreviewContainer } from './Preview';
+import { List } from 'immutable';
 
 export const Frame = (props) => {
   const handleClick = () => {
@@ -70,7 +71,7 @@ export const Frame = (props) => {
       onClick={() => { handleClick(); }}
     >
       <PreviewContainer
-        frames={[props.frame]}
+        frames={List(props.frame)}
         columns={props.columns}
         rows={props.rows}
         cellSize={2}

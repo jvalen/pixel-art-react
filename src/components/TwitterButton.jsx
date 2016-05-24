@@ -38,7 +38,7 @@ export class TwitterButton extends React.Component {
       let dataStored = localStorage.getItem('pixel-art-react');
       const drawingToSave = {
         id: 0,
-        frames,
+        frames: frames.toJS(),
         paletteGridData,
         cellSize,
         columns,

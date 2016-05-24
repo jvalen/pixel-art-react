@@ -3,7 +3,7 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
     case 'array': {
       // Returns frame data as an array
       const frameData = pixelGrid.reduce((accumulator, currentValue, i) => {
-        if (currentValue.used) {
+        if (currentValue.get('used')) {
           const xCoord = ((i % columns) * cellSize) + cellSize;
           const yCoord = (parseInt(i / columns, 10) * cellSize) + cellSize;
           const pixelInfo = [];
@@ -11,7 +11,7 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
           pixelInfo.push(`${xCoord}`);
           pixelInfo.push(`${yCoord}`);
           pixelInfo.push('0');
-          pixelInfo.push(`#${currentValue.color}`);
+          pixelInfo.push(`#${currentValue.get('color')}`);
           accumulator.push(pixelInfo);
         }
 
@@ -22,11 +22,11 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
     default: {
       // Returns frame data as CSS string. Value: 'string'
       const cssString = pixelGrid.reduce((accumulator, currentValue, i) => {
-        if (currentValue.used) {
+        if (currentValue.get('used')) {
           const xCoord = ((i % columns) * cellSize) + cellSize;
           const yCoord = (parseInt(i / columns, 10) * cellSize) + cellSize;
 
-          return `${accumulator} ${xCoord}px ${yCoord}px 0 #${currentValue.color},`;
+          return `${accumulator} ${xCoord}px ${yCoord}px 0 #${currentValue.get('color')},`;
         }
 
         return accumulator;
@@ -74,7 +74,7 @@ export function generateAnimationCSSData(frames, intervalData, columns, rows, ce
  *  i.e. [0, 25, 50, 75, 100]
 */
 export function generateAnimationIntervals(frames) {
-  const intervalPercentage = 100 / frames.length;
+  const intervalPercentage = 100 / frames.size;
 
   const intervalsData = frames.reduce((acc, frame, index) => {
     acc.push(index * intervalPercentage);
@@ -87,7 +87,7 @@ export function generateAnimationIntervals(frames) {
 
 export function shareDrawing(imageData, text, action) {
   const duration = imageData.duration * 1000; // Milliseconds
-  const framesCount = imageData.frames.length;
+  const framesCount = imageData.frames.size;
   let drawingData;
 
   switch (imageData.type) {

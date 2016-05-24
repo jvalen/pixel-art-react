@@ -15,7 +15,7 @@ export class Preview extends React.Component {
     const { frames, columns, rows, cellSize, animate } =
       dataFromParent ? this.props.loadData : this.props;
     const { activeFrameIndex } = this.props;
-    const animation = frames.length > 1 && animate;
+    const animation = frames.size > 1 && animate;
     let animationData;
     let cssString;
 
@@ -34,7 +34,7 @@ export class Preview extends React.Component {
       );
     } else {
       cssString = generatePixelDrawCss(
-        frames[activeFrameIndex],
+        frames.get(activeFrameIndex),
         columns, rows, cellSize, 'string'
       );
 
