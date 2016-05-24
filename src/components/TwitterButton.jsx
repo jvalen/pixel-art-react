@@ -39,7 +39,7 @@ export class TwitterButton extends React.Component {
       const drawingToSave = {
         id: 0,
         frames: frames.toJS(),
-        paletteGridData,
+        paletteGridData: paletteGridData.toJS(),
         cellSize,
         columns,
         rows

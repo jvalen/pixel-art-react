@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 
 const GRID_INITIAL_COLOR = '313131';
 
@@ -6,7 +6,7 @@ const GRID_INITIAL_COLOR = '313131';
  * Helpers
  */
 export function createGrid(cellsCount, initialColor, createGamma) {
-  const newGrid = [];
+  const newGrid = List();
 
   if (createGamma) {
     // Create colors gamma
@@ -26,18 +26,18 @@ export function createGrid(cellsCount, initialColor, createGamma) {
 
 function checkColorInPalette(palette, color) {
   const sameColors = palette.filter((currentColor) => {
-    return (currentColor.color === color);
+    return (currentColor.get('color') === color);
   });
-  return (sameColors.length > 0);
+  return (sameColors.size > 0);
 }
 
 function addColorToLastCellInPalette(palette, newColor) {
   return palette.map((currentColor, i, collection) => {
-    if (i === collection.length - 1) {
+    if (i === collection.size - 1) {
       // Last cell
       return ({ color: newColor });
     }
-    return ({ color: currentColor.color });
+    return ({ color: currentColor.get('color') });
   });
 }
 
@@ -54,7 +54,7 @@ function setInitialState(state) {
   const dragging = false;
 
   const initialState = {
-    frames: [pixelGrid],
+    frames: List(pixelGrid),
     paletteGridData: paletteGrid,
     cellSize,
     columns,
@@ -65,7 +65,7 @@ function setInitialState(state) {
     eyedropperOn: false,
     colorPickerOn: false,
     loading: false,
-    notifications: [],
+    notifications: List(),
     dragging,
     activeFrameIndex: 0,
     duration: 1
@@ -216,7 +216,7 @@ function hideSpinner(state) {
 
 function sendNotification(state, message) {
   const newState = {
-    notifications: message === '' ? [] : [message]
+    notifications: message === '' ? List() : List(message)
   };
 
   return state.merge(newState);
