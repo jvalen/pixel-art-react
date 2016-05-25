@@ -111,22 +111,21 @@ class Modal extends React.Component {
     }];
 
     if (props.frames.size > 1) {
+      const spritesheetSupport =
+        props.type === 'download' ||
+        props.type === 'twitter';
+
       const animationOption = {
         value: 'animation',
-        label: 'animation'
+        label: spritesheetSupport ? 'GIF' : 'animation'
       };
+      options.push(animationOption);
 
-      switch (props.type) {
-        case 'download':
-        case 'twitter':
-          animationOption.label = 'GIF';
-          options.push(animationOption);
-          options.push({
-            value: 'spritesheet',
-            label: 'spritesheet'
-          });
-          break;
-        default: // copycss || preview
+      if (spritesheetSupport) {
+        options.push({
+          value: 'spritesheet',
+          label: 'spritesheet'
+        });
       }
     }
 
