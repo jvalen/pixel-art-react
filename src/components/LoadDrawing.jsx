@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import Modal from 'react-modal';
 import { PreviewContainer } from './Preview';
+import { fromJS } from 'immutable';
 
 /*
   Avoid error when server-side render doesn't recognize
@@ -79,8 +80,15 @@ export class LoadDrawing extends React.Component {
           };
 
           return dataStored.stored.map((data, i) => {
-            let elem = data;
-            elem.cellSize = 5; // Unify cellsize for load preview
+            const elem = {
+              animate: data.animate,
+              cellSize: 5, // Unify cellsize for load preview
+              columns: data.columns,
+              frames: fromJS(data.frames), // Parse to immutable
+              paletteGridData: fromJS(data.paletteGridData),
+              rows: data.rows
+            };
+
             return (
               <div
                 key={i}

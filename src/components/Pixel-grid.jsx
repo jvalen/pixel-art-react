@@ -16,7 +16,7 @@ class Grid extends React.Component {
   }
 
   getCells(props) {
-    const { activeFrame, columns, currentColor } = this.props;
+    const { activeFrame, columns, currentColor } = props;
     const width = 100 / columns;
 
     return activeFrame.map((currentCell, i) => {
@@ -95,10 +95,7 @@ class Grid extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    initialColor: state.present.get('initialColor'),
-    activeFrame: state.present.get('frames').get(
-      state.present.get('activeFrameIndex')
-    )
+    initialColor: state.present.get('initialColor')
   };
 }
 

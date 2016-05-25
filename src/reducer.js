@@ -1,4 +1,4 @@
-import { List, Map, fromJS } from 'immutable';
+import { List, Map } from 'immutable';
 
 const GRID_INITIAL_COLOR = '313131';
 
@@ -6,18 +6,18 @@ const GRID_INITIAL_COLOR = '313131';
  * Helpers
  */
 export function createGrid(cellsCount, initialColor, createGamma) {
-  const newGrid = List();
+  let newGrid = List();
 
   if (createGamma) {
     // Create colors gamma
     for (let i = 0; i <= cellsCount; i += 42) {
       const hex = ((0xe000 | i).toString(16)).slice(1);
-      newGrid.push({ color: hex });
+      newGrid = newGrid.push(Map({ color: hex }));
     }
   } else {
     // Set every cell with the initial color
     for (let i = 0; i < cellsCount; i++) {
-      newGrid.push({ color: initialColor, used: false });
+      newGrid = newGrid.push(Map({ color: initialColor, used: false }));
     }
   }
 
@@ -35,9 +35,9 @@ function addColorToLastCellInPalette(palette, newColor) {
   return palette.map((currentColor, i, collection) => {
     if (i === collection.size - 1) {
       // Last cell
-      return ({ color: newColor });
+      return (Map({ color: newColor }));
     }
-    return ({ color: currentColor.get('color') });
+    return (Map({ color: currentColor.get('color') }));
   });
 }
 
@@ -54,7 +54,7 @@ function setInitialState(state) {
   const dragging = false;
 
   const initialState = {
-    frames: List(pixelGrid),
+    frames: List([pixelGrid]),
     paletteGridData: paletteGrid,
     cellSize,
     columns,
@@ -75,24 +75,32 @@ function setInitialState(state) {
 }
 
 function setGridDimension(state, columns, rows, cellSize) {
-  const newState = state.toJS();
-  newState.frames[newState.activeFrameIndex] = createGrid(
-    parseInt(columns, 10) * parseInt(rows, 10),
-    GRID_INITIAL_COLOR
-  );
-  newState.rows = parseInt(rows, 10);
-  newState.columns = parseInt(columns, 10);
-  newState.cellSize = parseInt(cellSize, 10);
+  const framesCount = state.get('frames').size;
+  let newFrames = List();
 
-  return fromJS(newState);
+  for (let i = 0; i < framesCount; i++) {
+    newFrames = newFrames.push(List(createGrid(
+      parseInt(columns, 10) * parseInt(rows, 10),
+      GRID_INITIAL_COLOR
+    )));
+  }
+
+  return state.merge({
+    frames: newFrames,
+    rows: parseInt(rows, 10),
+    columns: parseInt(columns, 10),
+    cellSize: parseInt(cellSize, 10)
+  });
 }
 
 function startDrag(state) {
   return state.merge({ dragging: true });
 }
+
 function endDrag(state) {
   return state.merge({ dragging: false });
 }
+
 function setColorSelected(state, newColorSelected) {
   const newState = {
     currentColor: newColorSelected,
@@ -100,12 +108,13 @@ function setColorSelected(state, newColorSelected) {
     eyedropperOn: false,
     colorPickerOn: false
   };
-  const paletteGridData = state.get('paletteGridData').toJS();
+  const paletteGridData = state.get('paletteGridData');
 
   if (!checkColorInPalette(paletteGridData, newColorSelected)) {
     // If there is no newColorSelected in the palette it will create one
-    newState.paletteGridData =
-      addColorToLastCellInPalette(paletteGridData, newColorSelected);
+    newState.paletteGridData = addColorToLastCellInPalette(
+      paletteGridData, newColorSelected
+    );
   }
 
   return state.merge(newState);
@@ -113,31 +122,29 @@ function setColorSelected(state, newColorSelected) {
 
 function setCustomColor(state, customColor) {
   const currentColor = state.get('currentColor');
-  const paletteGridData = state.get('paletteGridData').toJS();
-  const newState = {
-    currentColor: customColor
-  };
+  const paletteGridData = state.get('paletteGridData');
+  const newState = { currentColor: customColor };
 
   if (!checkColorInPalette(paletteGridData, currentColor)) {
     // If there is no colorSelected in the palette it will create one
-    newState.paletteGridData =
-      addColorToLastCellInPalette(paletteGridData, customColor);
+    newState.paletteGridData = addColorToLastCellInPalette(
+      paletteGridData, customColor
+    );
   } else {
     newState.paletteGridData = paletteGridData.map((paletteColor) => {
-      if (paletteColor.color === currentColor) {
+      if (paletteColor.get('color') === currentColor) {
         return Map({ color: customColor });
       }
       return paletteColor;
     });
   }
 
-
   return state.merge(newState);
 }
 
 function setGridCellValue(state, color, used, id) {
   return state.setIn(
-    ['frames', state.get('activeFrameIndex'), parseInt(id, 10)],
+    ['frames', state.get('activeFrameIndex'), id],
     Map({ color, used })
   );
 }
@@ -154,120 +161,107 @@ function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
 }
 
 function setEraser(state) {
-  const newState = {
+  return state.merge({
     currentColor: null,
     eraserOn: true,
     eyedropperOn: false,
     colorPickerOn: false
-  };
-
-  return state.merge(newState);
+  });
 }
 
 function setEyedropper(state) {
-  const newState = {
+  return state.merge({
     eraserOn: false,
     eyedropperOn: true,
     colorPickerOn: false
-  };
-
-  return state.merge(newState);
+  });
 }
 
 function setColorPicker(state) {
-  const newState = {
+  return state.merge({
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: true
-  };
-
-  return state.merge(newState);
+  });
 }
 
 function setCellSize(state, cellSize) {
-  const newState = {
-    cellSize
-  };
-
-  return state.merge(newState);
+  return state.merge({ cellSize });
 }
 
 function resetGrid(state, columns, rows, activeFrameIndex) {
-  const newState = state.toJS();
-  newState.frames[activeFrameIndex] = createGrid(
+  const newGrid = createGrid(
     parseInt(columns, 10) * parseInt(rows, 10),
     GRID_INITIAL_COLOR
   );
 
-  return fromJS(newState);
+  return state.merge({
+    frames: state.get('frames').update(activeFrameIndex, () => {
+      return newGrid;
+    })
+  });
 }
 
 function showSpinner(state) {
-  const newState = { loading: true };
-
-  return state.merge(newState);
+  return state.merge({ loading: true });
 }
 
 function hideSpinner(state) {
-  const newState = { loading: false };
-
-  return state.merge(newState);
+  return state.merge({ loading: false });
 }
 
 function sendNotification(state, message) {
-  const newState = {
-    notifications: message === '' ? List() : List(message)
-  };
-
-  return state.merge(newState);
+  return state.merge({
+    notifications: message === '' ? List() : List([message])
+  });
 }
 
 function changeActiveFrame(state, frameIndex) {
-  const newState = {
-    activeFrameIndex: frameIndex
-  };
-
-  return state.merge(newState);
+  return state.merge({ activeFrameIndex: frameIndex });
 }
 
 function createNewFrame(state) {
-  const newState = state.toJS();
-  newState.frames.push(createGrid(
-    parseInt(newState.columns, 10) * parseInt(newState.rows, 10),
-    GRID_INITIAL_COLOR
-  ));
-  newState.activeFrameIndex = newState.frames.length - 1;
-  return fromJS(newState);
+  const frames = state.get('frames');
+
+  return state.merge({
+    frames: frames.push(createGrid(
+      parseInt(state.get('columns'), 10) * parseInt(state.get('rows'), 10),
+      GRID_INITIAL_COLOR
+    )),
+    activeFrameIndex: frames.size
+  });
 }
 
 function deleteFrame(state, frameId) {
-  if (state.get('frames').size > 1) {
-    const newState = state.toJS();
-    const reduceFrameIndex =
-    (newState.activeFrameIndex >= frameId) && (newState.activeFrameIndex > 0);
+  const activeFrameIndex = state.get('activeFrameIndex');
+  const newState = {};
+  let frames = state.get('frames');
 
-    newState.frames.splice(frameId, 1);
+  if (frames.size > 1) {
+    const reduceFrameIndex =
+      (activeFrameIndex >= frameId) &&
+      (activeFrameIndex > 0);
+
+    frames = frames.splice(frameId, 1);
+    newState.frames = frames;
 
     if (reduceFrameIndex) {
-      newState.activeFrameIndex = newState.frames.length - 1;
+      newState.activeFrameIndex = frames.size - 1;
     }
-    return fromJS(newState);
   }
-  return state;
+  return state.merge(newState);
 }
 
 function duplicateFrame(state, frameId) {
-  const newState = state.toJS();
-
-  newState.frames.splice(frameId, 0, newState.frames[frameId]);
-  newState.activeFrameIndex = frameId + 1;
-
-  return fromJS(newState);
+  const frames = state.get('frames');
+  return state.merge({
+    frames: frames.splice(frameId, 0, frames.get(frameId)),
+    activeFrameIndex: frameId + 1
+  });
 }
 
 function setDuration(state, duration) {
-  const newState = { duration };
-  return state.merge(newState);
+  return state.merge({ duration });
 }
 
 export default function (state = Map(), action) {
@@ -285,8 +279,7 @@ export default function (state = Map(), action) {
     case 'SET_DRAWING':
       return setDrawing(
         state, action.frames, action.paletteGridData,
-        action.cellSize, action.columns, action.rows)
-      ;
+        action.cellSize, action.columns, action.rows);
     case 'START_DRAG':
       return startDrag(state);
     case 'END_DRAG':
@@ -300,7 +293,9 @@ export default function (state = Map(), action) {
     case 'SET_CELL_SIZE':
       return setCellSize(state, action.cellSize);
     case 'SET_RESET_GRID':
-      return resetGrid(state, action.columns, action.rows, action.activeFrameIndex);
+      return resetGrid(
+        state, action.columns, action.rows,
+        action.activeFrameIndex);
     case 'SHOW_SPINNER':
       return showSpinner(state);
     case 'HIDE_SPINNER':

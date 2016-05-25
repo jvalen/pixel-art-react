@@ -11,7 +11,7 @@ export const Frame = (props) => {
 
   const deleteFrame = (e) => {
     e.stopPropagation();
-    if (props['data-id'] > 0 && props.active) {
+    if (props.active) {
       props.deleteFrame(props['data-id']);
     }
   };
@@ -71,7 +71,7 @@ export const Frame = (props) => {
       onClick={() => { handleClick(); }}
     >
       <PreviewContainer
-        frames={List(props.frame)}
+        frames={List([props.frame])}
         columns={props.columns}
         rows={props.rows}
         cellSize={2}

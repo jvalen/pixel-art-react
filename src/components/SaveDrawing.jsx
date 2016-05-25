@@ -8,8 +8,8 @@ export class SaveDrawing extends React.Component {
     const { frames, columns, rows, cellSize, paletteGridData } = this.props;
     const drawingToSave = {
       id: 0,
-      frames: frames.toJS(),
-      paletteGridData: paletteGridData.toJS(),
+      frames,
+      paletteGridData,
       cellSize,
       columns,
       rows,

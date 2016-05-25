@@ -96,7 +96,9 @@ export class App extends React.Component {
             </div>
             <div className="grid">
               <div className="col-3-4">
-                <PaletteContainer />
+                <PaletteContainer
+                  paletteGridData={this.props.paletteGridData}
+                />
                 <div className="grid grid-pad">
                   <div className="col-1-2">
                     <TwitterButtonContainer
@@ -136,6 +138,7 @@ export class App extends React.Component {
               eyedropperOn={this.props.eyedropperOn}
               eraserOn={this.props.eraserOn}
               dragging={this.props.dragging}
+              activeFrame={this.props.activeFrame}
             />
           </div>
           <div className="col-1-4">
