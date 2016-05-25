@@ -37,6 +37,42 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
 }
 
 /*
+ * Return Animation string to paste in CSS code
+ *
+   The resultant data will look like:
+    .pixel-animation {
+      position: absolute;
+      animation: x 1s infinite;
+      ...
+     }
+     @keyframes x {
+      0%, 25%: { box-shadow: ...}
+      25.01%, 50%: { box-shadow: ...}
+      50.01%, 75%: { box-shadow: ...}
+      75.01%, 100%: { box-shadow: ...}
+     }
+*/
+export function exportAnimationData(keyframes, duration) {
+  let result = '';
+  result += '.pixel-animation { position: absolute;';
+
+  result += `animation: x ${duration}s infinite;`;
+  result += `-webkit-animation: x ${duration}s infinite;`;
+  result += `-moz-animation: x ${duration}s infinite;`;
+  result += `-o-animation: x ${duration}s infinite; }`;
+
+  result += '@keyframes x {';
+
+  for(var key in keyframes) {
+    const boxShadow = keyframes[key].boxShadow;
+    result += `${key}{ box-shadow: ${boxShadow}}`;
+  }
+  result += '}';
+
+  return result;
+}
+
+/*
  * Return CSS keyframes data for animation of the frames passed
  *
  * The resultant data will look like:

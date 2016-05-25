@@ -11,7 +11,6 @@ import { ResetContainer } from './Reset';
 import { EyedropperContainer } from './Eyedropper';
 import { ColorPickerContainer } from './ColorPicker';
 import { TwitterButtonContainer } from './TwitterButton';
-import { CopyCSS } from './CopyCSS';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
@@ -73,11 +72,6 @@ export class App extends React.Component {
 
   render() {
     const styles = {
-      showPreviewWrapper: {
-        width: '80%',
-        margin: '1em auto',
-        display: 'table'
-      },
       showPreviewButton: {
         width: '100%'
       }
@@ -183,27 +177,30 @@ export class App extends React.Component {
               cellSize={this.props.cellSize}
               activeFrameIndex={this.props.activeFrameIndex}
             />
-            <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
-              <button
-                className="gray"
-                style={styles.showPreviewButton}
-                onClick={() => { this.changeModalType('preview'); }}
-              >
-                Preview
-              </button>
-            </div>
+            <button
+              className="gray"
+              style={styles.showPreviewButton}
+              onClick={() => { this.changeModalType('preview'); }}
+            >
+              Preview
+            </button>
             <ResetContainer
               columns={this.props.columns}
               rows={this.props.rows}
               activeFrameIndex={this.props.activeFrameIndex}
             />
-            <CopyCSS
+            <button
+              className="gray"
+              style={styles.showPreviewButton}
+              onClick={() => { this.changeModalType('copycss'); }}
               frames={this.props.frames}
               columns={this.props.columns}
               rows={this.props.rows}
               cellSize={this.props.cellSize}
               activeFrameIndex={this.props.activeFrameIndex}
-            />
+            >
+              CSS
+            </button>
           </div>
         </div>
         <div className="css-container">
@@ -232,6 +229,7 @@ export class App extends React.Component {
           rows={this.props.rows}
           cellSize={this.props.cellSize}
           activeFrameIndex={this.props.activeFrameIndex}
+          duration={this.props.duration}
         />
       </div>
     );

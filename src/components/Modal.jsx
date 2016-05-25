@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 
 import ModalReact from 'react-modal';
-import { PreviewContainer } from './Preview';
 import RadioSelector from './RadioSelector';
+import { PreviewContainer } from './Preview';
+import { CopyCSS } from './CopyCSS';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -53,31 +54,41 @@ class Modal extends React.Component {
     const options = this.generateRadioOptions(this.props);
     let content;
     let radioOptions = props.type !== 'load' ?
-      <RadioSelector
-        name="preview-type"
-        selected={this.state.previewType}
-        change={this.changePreviewType}
-        options={options}
-      /> :
+      <div className="modal-preview">
+        <RadioSelector
+          name="preview-type"
+          selected={this.state.previewType}
+          change={this.changePreviewType}
+          options={options}
+        />
+        <PreviewContainer
+          key="0"
+          frames={props.frames}
+          columns={props.columns}
+          rows={props.rows}
+          cellSize={props.type === 'preview' ? props.cellSize : 5}
+          activeFrameIndex={props.activeFrameIndex}
+          animate={this.state.previewType === 'animation'}
+        />
+      </div>
+      :
       null;
 
     switch (props.type) {
       case 'load':
         break;
-      case 'preview':
+      case 'copycss':
         content = (
-          <PreviewContainer
-            key="0"
+          <CopyCSS
             frames={props.frames}
             columns={props.columns}
             rows={props.rows}
             cellSize={props.cellSize}
             activeFrameIndex={props.activeFrameIndex}
-            animate={this.state.previewType === 'animation'}
+            animationCode={this.state.previewType !== 'single'}
+            duration={props.duration}
           />
         );
-        break;
-      case 'copycss':
         break;
       case 'download':
         break;
