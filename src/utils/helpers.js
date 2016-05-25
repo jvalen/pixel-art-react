@@ -63,9 +63,11 @@ export function exportAnimationData(keyframes, duration) {
 
   result += '@keyframes x {';
 
-  for(var key in keyframes) {
-    const boxShadow = keyframes[key].boxShadow;
-    result += `${key}{ box-shadow: ${boxShadow}}`;
+  for (const key in keyframes) {
+    if (keyframes.hasOwnProperty(key)) {
+      const boxShadow = keyframes[key].boxShadow;
+      result += `${key}{ box-shadow: ${boxShadow}}`;
+    }
   }
   result += '}';
 

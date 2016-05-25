@@ -1,25 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { shareDrawing } from '../utils/helpers';
-import Modal from 'react-modal';
 import * as actionCreators from '../action_creators';
-import RadioSelector from './RadioSelector';
 
 export class TwitterButton extends React.Component {
   constructor(props) {
     super(props);
     const initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
     this.state = {
-      modalIsOpen: false,
       charsLeft: props.maxChars - initialText.length,
-      initialText,
-      tweetType: 'frame'
+      initialText
     };
-    this.changeTweetType = this.changeTweetType.bind(this);
-  }
-
-  changeTweetType(value) {
-    this.setState({ tweetType: value });
   }
 
   handleTextChange(event) {
@@ -69,32 +60,12 @@ export class TwitterButton extends React.Component {
     }
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
   render() {
     let countColor = '#000000';
     if (this.state.charsLeft < 0) {
       countColor = 'red';
     }
     const customStyles = {
-      content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        textAlign: 'center',
-        border: '4px solid #C5C5C5',
-        width: '80%',
-        padding: '1em'
-      },
       h2: {
         padding: '1em 0',
         fontSize: '1.5em',
@@ -127,64 +98,31 @@ export class TwitterButton extends React.Component {
       }
     };
 
-    const options = [
-      {
-        value: 'frame',
-        label: 'selected frame'
-      },
-      {
-        value: 'gif',
-        label: 'gif'
-      },
-      {
-        value: 'spritesheet',
-        label: 'spritesheet'
-      }
-    ];
-
     return (
       <div style={customStyles.buttonWrapper}>
+        <h2 style={customStyles.h2}>
+          You are about to share your awesome drawing on Twitter
+        </h2>
+        <textarea
+          ref="tweetText"
+          style={customStyles.textarea}
+          onChange={(event) => { this.handleTextChange(event); }}
+          defaultValue={this.state.initialText}
+        >
+        </textarea>
+        <div style={customStyles.charCount} className="char-count">
+          {this.state.charsLeft}
+        </div>
+        <h3 style={customStyles.h3}>
+          Please customize your message above,
+          the drawing will be automatically included
+        </h3>
         <button
-          className="twitter-button button"
-          onClick={() => { this.openModal(); }}
+          style={customStyles.button}
+          onClick={() => { this.tweetDrawing(this.props.tweetType); }}
         >
-          <span className="fa fa-twitter"></span>
+          <span className="fa fa-twitter"></span>TWEET
         </button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={() => { this.closeModal(); }}
-          style={customStyles}
-        >
-          <h2 style={customStyles.h2}>
-            You are about to share your awesome drawing on Twitter
-          </h2>
-          <RadioSelector
-            name="download-type"
-            selected={this.state.tweetType}
-            change={this.changeTweetType}
-            options={options}
-          />
-          <textarea
-            ref="tweetText"
-            style={customStyles.textarea}
-            onChange={(event) => { this.handleTextChange(event); }}
-            defaultValue={this.state.initialText}
-          >
-          </textarea>
-          <div style={customStyles.charCount} className="char-count">
-            {this.state.charsLeft}
-          </div>
-          <h3 style={customStyles.h3}>
-            Please customize your message above,
-            the drawing will be automatically included
-          </h3>
-          <button
-            style={customStyles.button}
-            onClick={() => { this.tweetDrawing(this.state.tweetType); }}
-          >
-            <span className="fa fa-twitter"></span>TWEET
-          </button>
-        </Modal>
       </div>
     );
   }

@@ -9,6 +9,7 @@ import { PreviewContainer } from './Preview';
 import { CopyCSS } from './CopyCSS';
 import { LoadDrawingContainer } from './LoadDrawing';
 import { DownloadDrawingContainer } from './DownloadDrawing';
+import { TwitterButtonContainer } from './TwitterButton';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -75,6 +76,19 @@ class Modal extends React.Component {
         />);
         break;
       case 'twitter':
+        content = (
+          <TwitterButtonContainer
+            maxChars="113"
+            frames={props.frames}
+            activeFrame={props.activeFrame}
+            columns={props.columns}
+            rows={props.rows}
+            cellSize={props.cellSize}
+            duration={props.duration}
+            paletteGridData={props.paletteGridData}
+            tweetType={this.state.previewType}
+          />
+        );
         break;
       default:
     }

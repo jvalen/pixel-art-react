@@ -9,7 +9,6 @@ import { EraserContainer } from './Eraser';
 import { ResetContainer } from './Reset';
 import { EyedropperContainer } from './Eyedropper';
 import { ColorPickerContainer } from './ColorPicker';
-import { TwitterButtonContainer } from './TwitterButton';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
@@ -132,16 +131,12 @@ export class App extends React.Component {
                 />
                 <div className="grid grid-pad">
                   <div className="col-1-2">
-                    <TwitterButtonContainer
-                      maxChars="113"
-                      frames={this.props.frames}
-                      activeFrame={this.props.activeFrame}
-                      columns={this.props.columns}
-                      rows={this.props.rows}
-                      cellSize={this.props.cellSize}
-                      duration={this.props.duration}
-                      paletteGridData={this.props.paletteGridData}
-                    />
+                    <button
+                      className="twitter-button button"
+                      onClick={() => { this.changeModalType('twitter'); }}
+                    >
+                      <span className="fa fa-twitter"></span>
+                    </button>
                   </div>
                   <div className="col-1-2">
                     <button
@@ -231,6 +226,7 @@ export class App extends React.Component {
           activeFrameIndex={this.props.activeFrameIndex}
           duration={this.props.duration}
           activeFrame={this.props.activeFrame}
+          paletteGridData={this.props.paletteGridData}
         />
       </div>
     );
