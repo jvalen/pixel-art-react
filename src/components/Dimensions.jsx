@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
-import Modal from 'react-modal';
-import { PreviewContainer } from './Preview';
-import RadioSelector from './RadioSelector';
 
 export class Dimensions extends React.Component {
   constructor(props) {
@@ -11,19 +8,8 @@ export class Dimensions extends React.Component {
     this.state = {
       columnsValue: 20,
       rowsValue: 20,
-      cellSizeValue: 10,
-      modalIsOpen: false,
-      previewType: 'single'
+      cellSizeValue: 10
     };
-    this.changePreviewType = this.changePreviewType.bind(this);
-  }
-
-  showPreview() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  hidePreview() {
-    this.setState({ modalIsOpen: false });
   }
 
   handleCellSizeChange(event) {
@@ -57,25 +43,11 @@ export class Dimensions extends React.Component {
     });
   }
 
-  changePreviewType(value) {
-    this.setState({ previewType: value });
-  }
-
   render() {
     const { columns, rows, cellSize } = this.props;
     let columnsValue = columns;
     let rowsValue = rows;
     let cellSizeValue = cellSize;
-    const options = [
-      {
-        value: 'single',
-        label: 'single'
-      },
-      {
-        value: 'animation',
-        label: 'animation'
-      }
-    ];
 
     const styles = {
       columnsLabel: {
@@ -126,29 +98,8 @@ export class Dimensions extends React.Component {
         top: 0,
         position: 'relative'
       },
-      modal: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        textAlign: 'center',
-        border: '4px solid #C5C5C5'
-      },
-      showPreviewWrapper: {
-        width: '80%',
-        margin: '1em auto',
-        display: 'table'
-      },
-      showPreviewButton: {
-        width: '100%'
-      },
       dimensions: {
         marginTop: '1.5em'
-      },
-      previewWrapper: {
-        textAlign: 'center'
       }
     };
 
@@ -180,39 +131,6 @@ export class Dimensions extends React.Component {
             value={cellSizeValue}
             onChange={(ev) => { this.handleCellSizeChange(ev); }}
           />
-        </div>
-        <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
-          <button
-            className="gray"
-            style={styles.showPreviewButton}
-            onClick={() => { this.showPreview(); }}
-          >
-            Preview
-          </button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={() => { this.hidePreview(); }}
-            style={styles.modal}
-          >
-            <button onClick={() => { this.hidePreview(); }}>CLOSE</button>
-            <RadioSelector
-              name="preview-type"
-              selected={this.state.previewType}
-              change={this.changePreviewType}
-              options={options}
-            />
-            <div style={styles.previewWrapper}>
-              <PreviewContainer
-                key="0"
-                frames={this.props.frames}
-                columns={this.props.columns}
-                rows={this.props.rows}
-                cellSize={this.props.cellSize}
-                activeFrameIndex={this.props.activeFrameIndex}
-                animate={this.state.previewType !== 'single'}
-              />
-            </div>
-          </Modal>
         </div>
       </div>
     );

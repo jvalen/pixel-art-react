@@ -21,8 +21,17 @@ import { DownloadDrawingContainer } from './DownloadDrawing';
 import { FrameSelector } from './FrameSelector';
 import { AddFrameContainer } from './AddFrame';
 import Duration from './Duration';
+import Modal from './Modal';
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalType: null,
+      modalOpen: false
+    };
+  }
+
   componentDidMount() {
     this.props.hideSpinner();
     let dataStored = localStorage.getItem('pixel-art-react');
@@ -49,7 +58,31 @@ export class App extends React.Component {
     }
   }
 
+  changeModalType(type) {
+    this.setState({
+      modalType: type,
+      modalOpen: true
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modalOpen: false
+    });
+  }
+
   render() {
+    const styles = {
+      showPreviewWrapper: {
+        width: '80%',
+        margin: '1em auto',
+        display: 'table'
+      },
+      showPreviewButton: {
+        width: '100%'
+      }
+    };
+
     return (
       <div id="pixel-art-app">
         <SimpleSpinner spin={this.props.loading} />
@@ -150,6 +183,15 @@ export class App extends React.Component {
               cellSize={this.props.cellSize}
               activeFrameIndex={this.props.activeFrameIndex}
             />
+            <div className="show-preview-wrapper" style={styles.showPreviewWrapper}>
+              <button
+                className="gray"
+                style={styles.showPreviewButton}
+                onClick={() => { this.changeModalType('preview'); }}
+              >
+                Preview
+              </button>
+            </div>
             <ResetContainer
               columns={this.props.columns}
               rows={this.props.rows}
@@ -180,6 +222,16 @@ export class App extends React.Component {
             being used. Thank you."
           onAccept={() => {}}
           cookie="user-has-accepted-cookies"
+        />
+        <Modal
+          type={this.state.modalType}
+          isOpen={this.state.modalOpen}
+          close={() => { this.closeModal(); }}
+          frames={this.props.frames}
+          columns={this.props.columns}
+          rows={this.props.rows}
+          cellSize={this.props.cellSize}
+          activeFrameIndex={this.props.activeFrameIndex}
         />
       </div>
     );
