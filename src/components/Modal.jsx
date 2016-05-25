@@ -8,6 +8,7 @@ import RadioSelector from './RadioSelector';
 import { PreviewContainer } from './Preview';
 import { CopyCSS } from './CopyCSS';
 import { LoadDrawingContainer } from './LoadDrawing';
+import { DownloadDrawingContainer } from './DownloadDrawing';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Modal extends React.Component {
   }
 
   getModalContent(props) {
-    const options = this.generateRadioOptions(this.props);
+    const options = this.generateRadioOptions(props);
     let content;
     let radioOptions = props.type !== 'load' ?
       <div className="modal-preview">
@@ -29,22 +30,25 @@ class Modal extends React.Component {
           change={this.changePreviewType}
           options={options}
         />
-        <PreviewContainer
-          key="0"
-          frames={props.frames}
-          columns={props.columns}
-          rows={props.rows}
-          cellSize={props.type === 'preview' ? props.cellSize : 5}
-          activeFrameIndex={props.activeFrameIndex}
-          animate={this.state.previewType === 'animation'}
-        />
+        {this.state.previewType !== 'spritesheet' ?
+          <PreviewContainer
+            key="0"
+            frames={props.frames}
+            columns={props.columns}
+            rows={props.rows}
+            cellSize={props.type === 'preview' ? props.cellSize : 5}
+            activeFrameIndex={props.activeFrameIndex}
+            animate={this.state.previewType === 'animation'}
+          />
+        : null
+        }
       </div>
       :
       null;
 
     switch (props.type) {
       case 'load':
-        content = <LoadDrawingContainer close={this.props.close} />;
+        content = <LoadDrawingContainer close={props.close} />;
         break;
       case 'copycss':
         content = (
@@ -60,6 +64,15 @@ class Modal extends React.Component {
         );
         break;
       case 'download':
+        content = (<DownloadDrawingContainer
+          frames={props.frames}
+          activeFrame={props.activeFrame}
+          columns={props.columns}
+          rows={props.rows}
+          cellSize={props.cellSize}
+          duration={props.duration}
+          downloadType={this.state.previewType}
+        />);
         break;
       case 'twitter':
         break;
@@ -68,7 +81,7 @@ class Modal extends React.Component {
 
     return (
       <div className="modal-content">
-        <button onClick={() => { this.props.close(); }}>
+        <button onClick={() => { props.close(); }}>
           CLOSE
         </button>
         {radioOptions}
@@ -93,6 +106,7 @@ class Modal extends React.Component {
         case 'download':
         case 'twitter':
           animationOption.label = 'GIF';
+          options.push(animationOption);
           options.push({
             value: 'spritesheet',
             label: 'spritesheet'
@@ -100,7 +114,6 @@ class Modal extends React.Component {
           break;
         default: // copycss || preview
       }
-      options.push(animationOption);
     }
 
     return options;

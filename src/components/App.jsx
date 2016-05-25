@@ -15,7 +15,6 @@ import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
 import { SimpleSpinner } from './SimpleSpinner';
 import { SimpleNotificationContainer } from './SimpleNotification';
-import { DownloadDrawingContainer } from './DownloadDrawing';
 import { FrameSelector } from './FrameSelector';
 import { AddFrameContainer } from './AddFrame';
 import Duration from './Duration';
@@ -145,13 +144,9 @@ export class App extends React.Component {
                     />
                   </div>
                   <div className="col-1-2">
-                    <DownloadDrawingContainer
-                      frames={this.props.frames}
-                      activeFrame={this.props.activeFrame}
-                      columns={this.props.columns}
-                      rows={this.props.rows}
-                      cellSize={this.props.cellSize}
-                      duration={this.props.duration}
+                    <button
+                      className="fa fa-download brown"
+                      onClick={() => { this.changeModalType('download'); }}
                     />
                   </div>
                 </div>
@@ -235,6 +230,7 @@ export class App extends React.Component {
           cellSize={this.props.cellSize}
           activeFrameIndex={this.props.activeFrameIndex}
           duration={this.props.duration}
+          activeFrame={this.props.activeFrame}
         />
       </div>
     );

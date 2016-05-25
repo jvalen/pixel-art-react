@@ -127,7 +127,7 @@ export function shareDrawing(imageData, text, action) {
   let drawingData;
 
   switch (imageData.type) {
-    case 'frame': {
+    case 'single': {
       // Just need single frame data
       drawingData = generatePixelDrawCss(
         imageData.activeFrame,

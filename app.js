@@ -168,7 +168,7 @@ app.get('/auth/twitter/callback', (req, res, next) => {
           const request = req;
 
           let suffix = '.png';
-          if (request.session.cssData.type === 'gif') {
+          if (request.session.cssData.type === 'animation') {
             suffix = '.gif';
           }
 
@@ -185,7 +185,7 @@ app.get('/auth/twitter/callback', (req, res, next) => {
           request.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
 
           switch (request.session.cssData.type) {
-            case 'gif':
+            case 'animation':
               drawGif(request.session.cssData, imgPath, false, (gifPath) => {
                 tweetWithMedia(client, request, res, gifPath);
               });
@@ -212,7 +212,7 @@ app.post('/auth/download', (req, res) => {
   const request = req;
 
   let suffix = '.png';
-  if (request.body.type === 'gif') {
+  if (request.body.type === 'animation') {
     suffix = '.gif';
   }
 
@@ -222,7 +222,7 @@ app.post('/auth/download', (req, res) => {
   request.body.drawingData = JSON.parse(request.body.drawingData);
 
   switch (request.body.type) {
-    case 'gif':
+    case 'animation':
       drawGif(request.body, imgPath, true, (gifPath) => {
         res.send(`/download/tmp/${gifPath}`);
       });
