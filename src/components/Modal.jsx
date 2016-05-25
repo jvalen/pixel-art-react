@@ -7,6 +7,7 @@ import ModalReact from 'react-modal';
 import RadioSelector from './RadioSelector';
 import { PreviewContainer } from './Preview';
 import { CopyCSS } from './CopyCSS';
+import { LoadDrawingContainer } from './LoadDrawing';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -17,8 +18,63 @@ class Modal extends React.Component {
     this.changePreviewType = this.changePreviewType.bind(this);
   }
 
-  changePreviewType(value) {
-    this.setState({ previewType: value });
+  getModalContent(props) {
+    const options = this.generateRadioOptions(this.props);
+    let content;
+    let radioOptions = props.type !== 'load' ?
+      <div className="modal-preview">
+        <RadioSelector
+          name="preview-type"
+          selected={this.state.previewType}
+          change={this.changePreviewType}
+          options={options}
+        />
+        <PreviewContainer
+          key="0"
+          frames={props.frames}
+          columns={props.columns}
+          rows={props.rows}
+          cellSize={props.type === 'preview' ? props.cellSize : 5}
+          activeFrameIndex={props.activeFrameIndex}
+          animate={this.state.previewType === 'animation'}
+        />
+      </div>
+      :
+      null;
+
+    switch (props.type) {
+      case 'load':
+        content = <LoadDrawingContainer close={this.props.close} />;
+        break;
+      case 'copycss':
+        content = (
+          <CopyCSS
+            frames={props.frames}
+            columns={props.columns}
+            rows={props.rows}
+            cellSize={props.cellSize}
+            activeFrameIndex={props.activeFrameIndex}
+            animationCode={this.state.previewType !== 'single'}
+            duration={props.duration}
+          />
+        );
+        break;
+      case 'download':
+        break;
+      case 'twitter':
+        break;
+      default:
+    }
+
+    return (
+      <div className="modal-content">
+        <button onClick={() => { this.props.close(); }}>
+          CLOSE
+        </button>
+        {radioOptions}
+        {content}
+      </div>
+    );
   }
 
   generateRadioOptions(props) {
@@ -50,62 +106,8 @@ class Modal extends React.Component {
     return options;
   }
 
-  getModalContent(props) {
-    const options = this.generateRadioOptions(this.props);
-    let content;
-    let radioOptions = props.type !== 'load' ?
-      <div className="modal-preview">
-        <RadioSelector
-          name="preview-type"
-          selected={this.state.previewType}
-          change={this.changePreviewType}
-          options={options}
-        />
-        <PreviewContainer
-          key="0"
-          frames={props.frames}
-          columns={props.columns}
-          rows={props.rows}
-          cellSize={props.type === 'preview' ? props.cellSize : 5}
-          activeFrameIndex={props.activeFrameIndex}
-          animate={this.state.previewType === 'animation'}
-        />
-      </div>
-      :
-      null;
-
-    switch (props.type) {
-      case 'load':
-        break;
-      case 'copycss':
-        content = (
-          <CopyCSS
-            frames={props.frames}
-            columns={props.columns}
-            rows={props.rows}
-            cellSize={props.cellSize}
-            activeFrameIndex={props.activeFrameIndex}
-            animationCode={this.state.previewType !== 'single'}
-            duration={props.duration}
-          />
-        );
-        break;
-      case 'download':
-        break;
-      case 'twitter':
-        break;
-      default:
-    }
-
-    return (
-      <div className="modal-content">
-        <button onClick={() => { this.props.close(); }}>
-          CLOSE
-        </button>
-        {radioOptions}
-        {content}
-      </div>
-    );
+  changePreviewType(value) {
+    this.setState({ previewType: value });
   }
 
   render() {

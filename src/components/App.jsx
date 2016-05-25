@@ -4,7 +4,6 @@ import { DimensionsContainer } from './Dimensions';
 import { UndoRedoContainer } from './UndoRedo';
 import { PaletteContainer } from './Palette-grid';
 import { CssDisplay } from './Css-display';
-import { LoadDrawingContainer } from './LoadDrawing';
 import { SaveDrawingContainer } from './SaveDrawing';
 import { EraserContainer } from './Eraser';
 import { ResetContainer } from './Reset';
@@ -109,7 +108,13 @@ export class App extends React.Component {
           <div className="col-1-4 grid">
             <div className="load-save-container self_clear">
               <div className="load-button-wrapper">
-                <LoadDrawingContainer />
+                <button
+                  className="red"
+                  style={styles.showPreviewButton}
+                  onClick={() => { this.changeModalType('load'); }}
+                >
+                  LOAD
+                </button>
               </div>
               <div className="save-button-wrapper">
                 <SaveDrawingContainer

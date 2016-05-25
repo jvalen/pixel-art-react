@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
-import Modal from 'react-modal';
 import { PreviewContainer } from './Preview';
 import { fromJS } from 'immutable';
 
@@ -12,11 +11,6 @@ import { fromJS } from 'immutable';
 const browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
 
 export class LoadDrawing extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { modalIsOpen: false };
-  }
-
   removeFromStorage(key, e) {
     e.stopPropagation();
     if (!!browserStorage) {
@@ -26,17 +20,9 @@ export class LoadDrawing extends React.Component {
         dataStored.stored.splice(key, 1);
         browserStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
         this.props.sendNotification('Drawing deleted');
-        this.closeModal();
+        this.props.close();
       }
     }
-  }
-
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
   }
 
   drawingClick(data) {
@@ -47,7 +33,7 @@ export class LoadDrawing extends React.Component {
       data.columns,
       data.rows
     );
-    this.closeModal();
+    this.props.close();
   }
 
   giveMeDrawings() {
@@ -118,17 +104,6 @@ export class LoadDrawing extends React.Component {
 
   render() {
     const customStyles = {
-      content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        textAlign: 'center',
-        border: '4px solid #C5C5C5',
-        width: '80%'
-      },
       h2: {
         padding: '2em 0',
         fontSize: '1em',
@@ -153,23 +128,10 @@ export class LoadDrawing extends React.Component {
 
     return (
       <div>
-        <button
-          className="load-drawing red"
-          onClick={() => { this.openModal(); }}
-        >
-          LOAD
-        </button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={() => { this.closeModal(); }}
-          style={customStyles}
-        >
-          <button onClick={() => { this.closeModal(); }}>CLOSE</button>
-          <h2 style={customStyles.h2}>Select one of your awesome drawings</h2>
-          <div style={customStyles.drawingsWrapper}>
-            {drawingsStored ? this.giveMeDrawings() : 'Nothing awesome yet...'}
-          </div>
-        </Modal>
+        <h2 style={customStyles.h2}>Select one of your awesome drawings</h2>
+        <div style={customStyles.drawingsWrapper}>
+          {drawingsStored ? this.giveMeDrawings() : 'Nothing awesome yet...'}
+        </div>
       </div>
     );
   }
