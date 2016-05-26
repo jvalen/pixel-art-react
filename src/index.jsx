@@ -7,6 +7,9 @@ import { AppContainer } from './components/App';
 import undoable, { includeAction } from 'redux-undo';
 import Perf from 'react-addons-perf';
 
+// Import the CSS imports file
+import './css/imports.css';
+
 // Expose react-addons-perf for development purposes
 window.Perf = Perf;
 
