@@ -1,0 +1,30 @@
+.react-cookie-banner {
+  position: relative;
+  background-color: $color-mineShaft;
+  width: 100%;
+  z-index: 0;
+  clear: both;
+  display: table;
+  padding: 0.5em;
+  font-size: 0.9em;
+  .button-close {
+    position: relative;
+    line-height: 24px;
+    opacity: 0.5;
+    background-color: $color-white;
+    font-weight: 500;
+    color: $color-mineShaft;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.2em;
+    margin: 0.5em auto;
+    width: 11em;
+  }
+  .cookie-message {
+    font-weight: 500;
+    color: $color-silver;
+    text-align: left;
+    position: relative;
+    display: block;
+  }
+}

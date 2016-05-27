@@ -10,11 +10,34 @@ html {
 
 html,
 body {
-  margin: 0;
+  height: 100%;
+  width: 90%;
+  margin: 0 auto;
   padding: 0;
-  background-color: green;
+  background-color: $color-scorpion;
+  font-family: $font-pixel;
 }
 
 h1 {
-  margin: 0;
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 0.8em;
+  padding-right: 1em;
+  display: inline;
+  position: relative;
+  top: -0.9em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+.tools-wrapper {
+  text-align: center;
+}
+
+.load-save-container {
+  margin-bottom: 1.5em;
 }

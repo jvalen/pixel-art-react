@@ -1,0 +1,9 @@
+.load-button-wrapper {
+  width: 48%;
+  float: left;
+  button {
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+  }
+}

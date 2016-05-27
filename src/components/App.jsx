@@ -132,15 +132,13 @@ export class App extends React.Component {
                 <div className="grid grid-pad">
                   <div className="col-1-2">
                     <button
-                      className="twitter-button button"
+                      className="fa fa-twitter twitter"
                       onClick={() => { this.changeModalType('twitter'); }}
-                    >
-                      <span className="fa fa-twitter"></span>
-                    </button>
+                    />
                   </div>
                   <div className="col-1-2">
                     <button
-                      className="fa fa-download brown"
+                      className="fa fa-download download"
                       onClick={() => { this.changeModalType('download'); }}
                     />
                   </div>

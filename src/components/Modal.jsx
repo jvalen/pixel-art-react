@@ -95,7 +95,7 @@ class Modal extends React.Component {
 
     return (
       <div className="modal-content">
-        <button onClick={() => { props.close(); }}>
+        <button className="blue" onClick={() => { props.close(); }}>
           CLOSE
         </button>
         {radioOptions}

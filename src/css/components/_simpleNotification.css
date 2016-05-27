@@ -1,0 +1,17 @@
+.simple-notification-enter {
+  opacity: 0.01;
+}
+
+.simple-notification-enter.simple-notification-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
+}
+
+.simple-notification-leave {
+  opacity: 1;
+}
+
+.simple-notification-leave.simple-notification-leave-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-out;
+}

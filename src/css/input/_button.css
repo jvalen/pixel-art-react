@@ -1,0 +1,54 @@
+@define-mixin button $color-text $color-bg $color-boxshadow $color-bg-active {
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding: 10px;
+  font-size: 1em;
+  text-decoration: none;
+  transition-duration: 0.1s;
+  color: $color-text;
+  background-color: $color-bg;
+  box-shadow: 0 5px 0 0 $color-boxshadow;
+  &:hover {
+    transform: translate(0, 2px);
+    box-shadow: 0 0 0 $color-bg-active;
+    background-color: $color-bg-active;
+  }
+  &:active {
+    transform: translate(0, 5px);
+    box-shadow: 0 1px 0 $color-bg-active;
+    background-color: $color-bg-active;
+  }
+}
+
+button,
+.button,
+input[type=submit] {
+  &.red {
+    @mixin button $color-silver #961818 #6B1010 #741515 ;
+  }
+  &.gray {
+    @mixin button $color-silver #313131 #676767 #3E3C3C;
+  }
+  &.brown {
+    @mixin button $color-silver #803C3C #733939 #552A2A;
+  }
+  &.blue {
+    @mixin button $color-silver #5786c1 #4171ae #3a587f;
+  }
+  &.red,
+  &.gray,
+  &.brown,
+  &.blue {
+    font-family: $font-pixel;
+  }
+  &.download {
+    @mixin button $color-silver #803C3C #733939 #552A2A;
+    font-family: $font-icons;
+  }
+  &.twitter {
+    @mixin button $color-silver #5786c1 #4171ae #3a587f;
+    font-family: $font-icons;
+  }
+}
