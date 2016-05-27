@@ -19,15 +19,8 @@ export class Palette extends React.Component {
   }
 
   render() {
-    const style = {
-      lineHeight: 0,
-      backgroundColor: '#333333',
-      textAlign: 'center',
-      padding: '0.2em'
-    };
-
     return (
-      <div className="palette-container" style={style}>
+      <div className="palette-grid">
         {this.getColors()}
       </div>
     );
