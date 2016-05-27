@@ -1,4 +1,4 @@
-@define-mixin button $color-text $color-bg $color-boxshadow $color-bg-active {
+@define-mixin generate-button $color-text $color-bg $color-boxshadow $color-bg-active {
   background: none;
   border: none;
   outline: none;
@@ -22,33 +22,21 @@
   }
 }
 
-button,
-.button,
-input[type=submit] {
-  &.red {
-    @mixin button $color-silver $color-tamarillo $color-darkTan $color-moccaccino;
+@define-mixin button $color, $font: $font-pixel {
+  @if $color == red {
+    @mixin generate-button $color-silver $color-tamarillo $color-darkTan $color-moccaccino;
   }
-  &.gray {
-    @mixin button $color-silver $color-mineShaft $color-doveGray $color-tundora;
+
+  @if $color == gray {
+    @mixin generate-button $color-silver $color-mineShaft $color-doveGray $color-tundora;
   }
-  &.brown {
-    @mixin button $color-silver $color-lotus $color-buccaneer $color-cowboy;
+
+  @if $color == brown {
+    @mixin generate-button $color-silver $color-lotus $color-buccaneer $color-cowboy;
   }
-  &.blue {
-    @mixin button $color-silver $color-steelblue $color-sanMarino $color-eastBay;
+
+  @if $color == blue {
+    @mixin generate-button $color-silver $color-steelblue $color-sanMarino $color-eastBay;
   }
-  &.red,
-  &.gray,
-  &.brown,
-  &.blue {
-    font-family: $font-pixel;
-  }
-  &.download {
-    @mixin button $color-silver $color-lotus $color-buccaneer $color-cowboy;
-    font-family: $font-icons;
-  }
-  &.twitter {
-    @mixin button $color-silver $color-steelblue $color-sanMarino $color-eastBay;
-    font-family: $font-icons;
-  }
+  font-family: $font;
 }

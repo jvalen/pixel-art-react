@@ -25,7 +25,7 @@
     }
   }
   .twitter-form__tweet {
-    @mixin button $color-silver $color-steelblue $color-sanMarino $color-eastBay;
+    @mixin button blue;
     span {
       @mixin icon twitter;
     }

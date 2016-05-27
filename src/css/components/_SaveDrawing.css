@@ -1,9 +1,5 @@
-.save-button-wrapper {
-  width: 48%;
-  float: right;
+.save-drawing {
   button {
-    margin: 0 auto;
-    display: table;
-    width: 100%;
+    @mixin button red;
   }
 }

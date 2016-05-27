@@ -37,9 +37,8 @@ export class SaveDrawing extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="save-drawing">
         <button
-          className="save-drawing red"
           onClick={() => { this.save(); }}
         >
           SAVE

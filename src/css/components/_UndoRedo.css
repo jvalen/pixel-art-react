@@ -1,7 +1,7 @@
 .undo-redo {
   lost-utility: clearfix;
   button {
-    @mixin button $color-silver #313131 #676767 #3E3C3C;
+    @mixin button gray;
     lost-column: 1/2;
   }
   .undo-redo__icon--undo {
