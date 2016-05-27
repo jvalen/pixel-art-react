@@ -1,0 +1,12 @@
+.undo-redo {
+  button {
+    @mixin button $color-silver #313131 #676767 #3E3C3C;
+    lost-column: 1/2;
+  }
+  .undo-redo__icon--undo {
+    @mixin icon undo;
+  }
+  .undo-redo__icon--redo {
+    @mixin icon repeat;
+  }
+}

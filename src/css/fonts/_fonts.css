@@ -24,54 +24,57 @@
   font-style: normal;
 }
 
-.fa {
+@define-mixin icon $type {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  &::before {
+    @extend $type;
+  }
 }
 
-.fa-eyedropper::before {
+@define-extend eyedropper {
   content: "\f1fb";
 }
 
-.fa-paint-brush::before {
+@define-extend paint-brush {
   content: "\f1fc";
 }
 
-.fa-eraser::before {
+@define-extend eraser {
   content: "\f12d";
 }
 
-.fa-trash-o::before {
+@define-extend trash-o {
   content: "\f014";
 }
 
-.fa-files-o::before {
+@define-extend files-o {
   content: "\f0c5";
 }
 
-.fa-download::before {
+@define-extend download {
   content: "\f019";
 }
 
-.fa-twitter::before {
+@define-extend twitter {
   content: "\f099";
 }
 
-.fa-undo::before {
+@define-extend undo {
   content: "\f0e2";
 }
 
-.fa-repeat::before {
+@define-extend repeat {
   content: "\f01e";
 }
 
-.fa.fa-eyedropper,
-.fa.fa-paint-brush,
-.fa.fa-eraser {
+@define-extend eyedropper,
+  paint-brush,
+  eraser {
   text-align: center;
   font-size: 2em;
   color: #313131;

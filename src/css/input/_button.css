@@ -26,16 +26,16 @@ button,
 .button,
 input[type=submit] {
   &.red {
-    @mixin button $color-silver #961818 #6B1010 #741515 ;
+    @mixin button $color-silver $color-tamarillo $color-darkTan $color-moccaccino;
   }
   &.gray {
-    @mixin button $color-silver #313131 #676767 #3E3C3C;
+    @mixin button $color-silver $color-mineShaft $color-doveGray $color-tundora;
   }
   &.brown {
-    @mixin button $color-silver #803C3C #733939 #552A2A;
+    @mixin button $color-silver $color-lotus $color-buccaneer $color-cowboy;
   }
   &.blue {
-    @mixin button $color-silver #5786c1 #4171ae #3a587f;
+    @mixin button $color-silver $color-steelblue $color-sanMarino $color-eastBay;
   }
   &.red,
   &.gray,
@@ -44,11 +44,11 @@ input[type=submit] {
     font-family: $font-pixel;
   }
   &.download {
-    @mixin button $color-silver #803C3C #733939 #552A2A;
+    @mixin button $color-silver $color-lotus $color-buccaneer $color-cowboy;
     font-family: $font-icons;
   }
   &.twitter {
-    @mixin button $color-silver #5786c1 #4171ae #3a587f;
+    @mixin button $color-silver $color-steelblue $color-sanMarino $color-eastBay;
     font-family: $font-icons;
   }
 }

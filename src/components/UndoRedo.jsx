@@ -11,32 +11,17 @@ export class UndoRedo extends React.Component {
     this.props.redo();
   }
   render() {
-    const styles = {
-      undo: {
-        width: '48%',
-        float: 'left'
-      },
-      redo: {
-        width: '48%',
-        float: 'right'
-      }
-    };
-
     return (
-      <div className="self_clear">
+      <div className="undo-redo">
         <button
-          className="gray"
-          style={styles.undo}
           onClick={() => { this.undo(); }}
         >
-          <span className="fa fa-undo"></span>
+          <span className="undo-redo__icon--undo"></span>
         </button>
         <button
-          className="gray"
-          style={styles.redo}
           onClick={() => { this.redo(); }}
         >
-          <span className="fa fa-repeat"></span>
+          <span className="undo-redo__icon--redo"></span>
         </button>
       </div>
     );

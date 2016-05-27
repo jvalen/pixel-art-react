@@ -2,9 +2,24 @@ $font-pixel: 'silkscreen_expandednormal', 'Helvetica Neue Light', 'Helvetica Neu
 $font-icons: 'FontAwesome';
 
 $color-scorpion: #585858;
-$color-mineShaft: #313131;
-$color-doveGray: #707070;
 $color-boulder: #757575;
 $color-dustyGray: #969696;
 $color-silver: #bbb;
 $color-white: white;
+
+/* Button colors */
+$color-tamarillo: #961818;
+$color-darkTan: #6b1010;
+$color-moccaccino: #741515;
+
+$color-mineShaft: #313131;
+$color-doveGray: #707070;
+$color-tundora: #4b4949;
+
+$color-lotus: #803c3c;
+$color-buccaneer: #733939;
+$color-cowboy: #552a2a;
+
+$color-steelblue: #5786c1;
+$color-sanMarino: #4171ae;
+$color-eastBay: #3a587f;
