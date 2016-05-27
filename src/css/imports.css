@@ -9,9 +9,10 @@
 @import 'layout/_banner.css';
 @import 'input/_inputText.css';
 @import 'input/_button.css';
-@import 'components/_pixelGrid.css';
-@import 'components/_simpleNotification.css';
-@import 'components/_simpleSpinner.css';
-@import 'components/_loadDrawing.css';
-@import 'components/_saveDrawing.css';
-@import 'components/_twitterButton.css';
+@import 'components/_PixelGrid.css';
+@import 'components/_SimpleNotification.css';
+@import 'components/_SimpleSpinner.css';
+@import 'components/_LoadDrawing.css';
+@import 'components/_SaveDrawing.css';
+@import 'components/_TwitterButton.css';
+@import 'components/_UndoRedo.css';
