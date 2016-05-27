@@ -77,16 +77,9 @@ class Grid extends React.Component {
     } else if (this.props.eyedropperOn) {
       customCursor = 'copy';
     }
-    const style = {
-      lineHeight: '0px',
-      minHeight: '1px',
-      margin: '0 auto',
-      width: '80%',
-      cursor: customCursor
-    };
-    // console.info('Rendering the grid!', this.props);
+
     return (
-      <div className="grid-container" style={style}>
+      <div className={`pixel-grid ${customCursor}`}>
         {this.getCells(this.props)}
       </div>
     );
