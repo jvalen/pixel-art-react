@@ -11,15 +11,9 @@ export class Reset extends React.Component {
   }
 
   render() {
-    const style = {
-      width: '80%',
-      margin: '0.5em auto',
-      display: 'table'
-    };
     return (
       <button
-        className="gray"
-        style={style}
+        className="reset"
         onClick={() => { this.handleClick(); }}
       >
         RESET
