@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { shareDrawing } from '../utils/helpers';
 import * as actionCreators from '../action_creators';
 
-export class TwitterButton extends React.Component {
+export class TwitterForm extends React.Component {
   constructor(props) {
     super(props);
     const initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
@@ -61,67 +61,34 @@ export class TwitterButton extends React.Component {
   }
 
   render() {
-    let countColor = '#000000';
-    if (this.state.charsLeft < 0) {
-      countColor = 'red';
-    }
-    const customStyles = {
-      h2: {
-        padding: '1em 0',
-        fontSize: '1.5em',
-        display: 'block',
-        width: '80%',
-        margin: '1em auto'
-      },
-      h3: {
-        padding: '1em 0',
-        fontSize: '1em',
-        display: 'block',
-        width: '80%',
-        margin: '1em auto'
-      },
-      textarea: {
-        width: '80%',
-        resize: 'none',
-        height: '6em'
-      },
-      charCount: {
-        margin: '1em auto',
-        color: countColor
-      },
-      button: {
-        margin: '1em auto'
-      },
-      buttonWrapper: {
-        margin: '0 auto',
-        display: 'table'
-      }
-    };
-
     return (
-      <div style={customStyles.buttonWrapper}>
-        <h2 style={customStyles.h2}>
+      <div className="twitter-form">
+        <h2>
           You are about to share your awesome drawing on Twitter
         </h2>
         <textarea
           ref="tweetText"
-          style={customStyles.textarea}
           onChange={(event) => { this.handleTextChange(event); }}
           defaultValue={this.state.initialText}
         >
         </textarea>
-        <div style={customStyles.charCount} className="char-count">
+        <div
+          className={
+            `twitter-form__count
+            ${this.state.charsLeft < 0 ? ' max-reached' : ''}`
+          }
+        >
           {this.state.charsLeft}
         </div>
-        <h3 style={customStyles.h3}>
+        <h3>
           Please customize your message above,
           the drawing will be automatically included
         </h3>
         <button
-          style={customStyles.button}
+          className="twitter-form__tweet"
           onClick={() => { this.tweetDrawing(this.props.tweetType); }}
         >
-          <span className="fa fa-twitter"></span>TWEET
+          <span></span>TWEET
         </button>
       </div>
     );
@@ -131,7 +98,7 @@ export class TwitterButton extends React.Component {
 function mapStateToProps() {
   return {};
 }
-export const TwitterButtonContainer = connect(
+export const TwitterFormContainer = connect(
   mapStateToProps,
   actionCreators
-)(TwitterButton);
+)(TwitterForm);

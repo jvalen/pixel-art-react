@@ -9,7 +9,7 @@ import { PreviewContainer } from './Preview';
 import { CopyCSS } from './CopyCSS';
 import { LoadDrawingContainer } from './LoadDrawing';
 import { DownloadDrawingContainer } from './DownloadDrawing';
-import { TwitterButtonContainer } from './TwitterButton';
+import { TwitterFormContainer } from './TwitterForm';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -77,7 +77,7 @@ class Modal extends React.Component {
         break;
       case 'twitter':
         content = (
-          <TwitterButtonContainer
+          <TwitterFormContainer
             maxChars="113"
             frames={props.frames}
             activeFrame={props.activeFrame}
