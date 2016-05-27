@@ -1,4 +1,5 @@
 .undo-redo {
+  lost-utility: clearfix;
   button {
     @mixin button $color-silver #313131 #676767 #3E3C3C;
     lost-column: 1/2;
