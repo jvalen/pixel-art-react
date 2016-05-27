@@ -20,7 +20,7 @@ const RadioSelector = (props) => {
   };
 
   return (
-    <fieldset>
+    <fieldset className="radio-selector">
       {props.legend ? <legend>{props.legend}</legend> : null}
       {options(props.options)}
     </fieldset>
