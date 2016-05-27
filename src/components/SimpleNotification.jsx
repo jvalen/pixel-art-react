@@ -11,21 +11,9 @@ export class SimpleNotification extends React.Component {
   }
 
   render() {
-    let style = {
-      backgroundColor: '#313131',
-      color: '#BBBBBB',
-      width: '25%',
-      textAlign: 'center',
-      padding: '1em',
-      position: 'absolute',
-      zIndex: '1',
-      left: '38%',
-      top: '1em',
-      border: '1px solid orange'
-    };
     let notifications = this.props.notification.map((item, i) => {
       return (
-        <div key={i} style={style} className="simple-notification">
+        <div key={i} className="simple-notification">
           {item}
         </div>
       );

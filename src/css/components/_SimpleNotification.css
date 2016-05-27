@@ -1,3 +1,17 @@
+.simple-notification {
+  background-color: #313131;
+  color: $color-silver;
+  width: 25%;
+  text-align: center;
+  padding: 1em;
+  position: absolute;
+  z-index: 1;
+  left: 38%;
+  top: 1em;
+  border: 1px solid orange;
+}
+
+/* ReactCSSTransitionGroup related rules */
 .simple-notification-enter {
   opacity: 0.01;
 }
