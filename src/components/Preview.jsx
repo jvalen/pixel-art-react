@@ -63,15 +63,13 @@ export class Preview extends React.Component {
     const { columns, rows, cellSize } =
       dataFromParent ? this.props.loadData : this.props;
 
-    const wrapperStyle = {
+    const style = {
       width: columns * cellSize,
-      height: rows * cellSize,
-      display: 'inline-block',
-      position: 'relative'
+      height: rows * cellSize
     };
 
     return (
-      <div className="preview" style={wrapperStyle} onClick={this.props.onClick}>
+      <div className="preview" style={style} onClick={this.props.onClick}>
         {this.generatePreview()}
       </div>
     );

@@ -7,16 +7,18 @@
       display: none;
       &:checked + span {
         color: $color-white;
-        background-color: $color-tamarillo;
+        background-color: $color-black;
+      }
+      &:not(:checked) + span {
+        &:hover {
+          box-shadow: 0 0 0 2px $color-scorpion inset;
+        }
       }
     }
     span {
       padding: 0.6em 1em;
       border: 1px solid $color-scorpion;
       transition: all 0.3s;
-      &:hover {
-        box-shadow: 0 0 0 2px $color-scorpion inset;
-      }
     }
     margin: 0 0.5em;
   }
