@@ -1,0 +1,5 @@
+.modal {
+  button.close {
+    @mixin button blue;
+  }
+}
