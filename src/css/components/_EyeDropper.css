@@ -1,0 +1,10 @@
+.eyedropper {
+  border: 2px solid $color-mineShaft;
+  background-color: $color-scorpion;
+
+  @mixin icon eyedropper;
+  &.selected {
+    color: $color-silver;
+    border: 2px solid $color-silver;
+  }
+}

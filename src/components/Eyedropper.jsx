@@ -6,23 +6,11 @@ export class Eyedropper extends React.Component {
   handleClick() {
     this.props.setEyedropper();
   }
-
   render() {
-    let style = {
-      border: '2px solid #313131',
-      backgroundColor: '#585858'
-    };
-
-    if (this.props.eyedropperOn) {
-      style.color = '#BBBBBB';
-      style.border = '2px solid #BBBBBB';
-    }
-
     return (
       <div
-        className="fa fa-eyedropper"
+        className={`eyedropper${this.props.eyedropperOn ? ' selected' : ''}`}
         onClick={() => { this.handleClick(); }}
-        style={style}
       />
     );
   }
