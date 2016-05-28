@@ -1,3 +1,21 @@
+.tools-wrapper {
+  text-align: center;
+}
+
+.load-save-container {
+  margin-bottom: 1.5em;
+}
+
+.load-button-wrapper {
+  width: 48%;
+  float: left;
+  button {
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+  }
+}
+
 .save-button-wrapper {
   width: 48%;
   float: right;

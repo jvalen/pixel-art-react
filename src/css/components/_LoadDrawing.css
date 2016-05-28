@@ -1,9 +1,40 @@
-.load-button-wrapper {
-  width: 48%;
-  float: left;
-  button {
-    margin: 0 auto;
-    display: table;
-    width: 100%;
+.load-drawing {
+  h2 {
+    padding: 2em 0;
+    font-size: 1em;
+    display: block;
+  }
+  .load-drawing__container {
+    max-height: 400;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &.empty {
+      overflow-y: hidden;
+      display: block;
+    }
+    .load-drawing__drawing {
+      position: relative;
+      border: 3px solid black;
+      cursor: pointer;
+      flex: 1 1 25%;
+      min-height: 200;
+      margin: 1em;
+      .drawing__delete {
+        position: absolute;
+        font-size: 1.7em;
+        color: red;
+        top: 0;
+        right: 0;
+        cursor: no-drop;
+        padding: 0.1em;
+        background-color: white;
+        border: 1px solid black;
+
+        @mixin icon trash-o;
+      }
+    }
   }
 }

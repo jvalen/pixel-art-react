@@ -43,28 +43,6 @@ export class LoadDrawing extends React.Component {
         dataStored = JSON.parse(dataStored);
 
         if (dataStored.stored.length > 0) {
-          const styles = {
-            delete: {
-              position: 'absolute',
-              fontSize: '1.7em',
-              color: 'red',
-              top: 0,
-              right: 0,
-              cursor: 'no-drop',
-              padding: '0.1em',
-              backgroundColor: 'white',
-              border: '1px solid black'
-            },
-            wrapper: {
-              position: 'relative',
-              border: '3px solid black',
-              cursor: 'pointer',
-              flex: '1 1 25%',
-              minHeight: 200,
-              margin: '1em'
-            }
-          };
-
           return dataStored.stored.map((data, i) => {
             const elem = {
               animate: data.animate,
@@ -78,8 +56,8 @@ export class LoadDrawing extends React.Component {
             return (
               <div
                 key={i}
-                style={styles.wrapper}
                 onClick={() => { this.drawingClick(elem); }}
+                className="load-drawing__drawing"
               >
                 <PreviewContainer
                   key={i + 1}
@@ -89,8 +67,7 @@ export class LoadDrawing extends React.Component {
                 />
                 <div
                   data-key={i}
-                  style={styles.delete}
-                  className="fa fa-trash-o"
+                  className="drawing__delete"
                   onClick={(event) => { this.removeFromStorage(i, event); }}
                 />
               </div>
@@ -103,33 +80,17 @@ export class LoadDrawing extends React.Component {
   }
 
   render() {
-    const customStyles = {
-      h2: {
-        padding: '2em 0',
-        fontSize: '1em',
-        display: 'block'
-      },
-      drawingsWrapper: {
-        maxHeight: 400,
-        overflowY: 'scroll',
-        overflowX: 'hidden',
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap'
-      }
-    };
-
     const drawings = this.giveMeDrawings();
     const drawingsStored = drawings.length > 0;
-    if (!drawingsStored) {
-      customStyles.drawingsWrapper.overflowY = 'hidden';
-      customStyles.drawingsWrapper.display = 'block';
-    }
 
     return (
-      <div>
-        <h2 style={customStyles.h2}>Select one of your awesome drawings</h2>
-        <div style={customStyles.drawingsWrapper}>
+      <div className="load-drawing">
+        <h2>Select one of your awesome drawings</h2>
+        <div
+          className={
+            `load-drawing__container
+            ${!drawingsStored ? 'empty' : ''}`}
+        >
           {drawingsStored ? this.giveMeDrawings() : 'Nothing awesome yet...'}
         </div>
       </div>
