@@ -1,0 +1,18 @@
+.dimensions {
+  margin: 1.5em 0;
+  .dimensions__columns,
+  .dimensions__rows,
+  .dimensions__cell-size {
+    lost-utility: clearfix;
+    label,
+    input {
+      lost-column: 1/2;
+    }
+    label {
+      lost-align: center;
+      text-align: center;
+      color: $color-silver;
+    }
+    margin-bottom: 0.5em;
+  }
+}

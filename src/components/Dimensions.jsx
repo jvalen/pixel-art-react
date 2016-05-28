@@ -49,85 +49,28 @@ export class Dimensions extends React.Component {
     let rowsValue = rows;
     let cellSizeValue = cellSize;
 
-    const styles = {
-      columnsLabel: {
-        width: '48%',
-        float: 'left',
-        textAlign: 'center',
-        marginBottom: '0.3em',
-        color: '#BBBBBB',
-        top: '0.4em',
-        position: 'relative'
-      },
-      rowsLabel: {
-        width: '48%',
-        float: 'left',
-        textAlign: 'center',
-        marginBottom: '0.3em',
-        color: '#BBBBBB',
-        top: '0.4em',
-        position: 'relative'
-      },
-      cellSizeWrapper: {
-        color: '#BBBBBB',
-        margin: '1em auto',
-        textAlign: 'center',
-        padding: 0,
-        width: '80%',
-        display: 'table',
-        marginBottom: '2em'
-      },
-      colWrapper: {
-        margin: '1em auto',
-        padding: 0,
-        width: '80%',
-        display: 'table'
-      },
-      rowWrapper: {
-        margin: '1em auto',
-        padding: 0,
-        width: '80%',
-        display: 'table'
-      },
-      cellSizeLabel: {
-        width: '48%',
-        float: 'left',
-        textAlign: 'center',
-        marginBottom: '0.3em',
-        color: '#BBBBBB',
-        top: 0,
-        position: 'relative'
-      },
-      dimensions: {
-        marginTop: '1.5em'
-      }
-    };
-
     return (
-      <div className="dimensions self_clear" style={styles.dimensions}>
-        <div className="column-wrapper self_clear" style={styles.colWrapper}>
-          <label style={styles.columnsLabel}>Col</label>
+      <div className="dimensions">
+        <div className="dimensions__columns">
+          <label>Col</label>
           <input
             type="text"
-            className="columns"
             value={columnsValue}
             onChange={(ev) => { this.handleChange(ev); }}
           />
         </div>
-        <div className="row-wrapper self_clear" style={styles.rowWrapper}>
-          <label style={styles.rowsLabel}>Row</label>
+        <div className="dimensions__rows">
+          <label>Row</label>
           <input
             type="text"
-            className="rows"
             value={rowsValue}
             onChange={(ev) => { this.handleChange(ev); }}
           />
         </div>
-        <div className="cell-size-wrapper" style={styles.cellSizeWrapper}>
-          <label className="tile-size-label" style={styles.cellSizeLabel}>Tile Size</label>
+        <div className="dimensions__cell-size">
+          <label>Tile Size</label>
           <input
             type="text"
-            className="cell-size"
             value={cellSizeValue}
             onChange={(ev) => { this.handleCellSizeChange(ev); }}
           />
