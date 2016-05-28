@@ -1,0 +1,12 @@
+.color-picker {
+  .color-picker__button {
+    border: 2px solid $color-mineShaft;
+    background-color: $color-scorpion;
+
+    @mixin icon paint-brush;
+    &.selected {
+      color: $color-silver;
+      border: 2px solid $color-silver;
+    }
+  }
+}

@@ -29,11 +29,8 @@ export class ColorPicker extends React.Component {
   }
 
   render() {
+    /* Necessary inline styles for react-color component */
     const styles = {
-      button: {
-        border: '2px solid #313131',
-        backgroundColor: '#585858'
-      },
       picker: {
         position: 'relative',
         bottom: '18.4em'
@@ -53,17 +50,13 @@ export class ColorPicker extends React.Component {
       }
     };
 
-    if (this.props.colorPickerOn && this.state.displayColorPicker) {
-      styles.button.color = '#BBBBBB';
-      styles.button.border = '2px solid #BBBBBB';
-    }
+    const isSelected = this.props.colorPickerOn && this.state.displayColorPicker;
 
     return (
-      <div>
+      <div className="color-picker">
         <div
-          className="fa fa-paint-brush"
+          className={`color-picker__button${isSelected ? ' selected' : ''}`}
           onClick={() => { this.handleClick(); }}
-          style={styles.button}
         >
         </div>
         <div style={styles.picker}>
