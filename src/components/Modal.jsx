@@ -24,7 +24,7 @@ class Modal extends React.Component {
     const options = this.generateRadioOptions(props);
     let content;
     let radioOptions = props.type !== 'load' ?
-      <div className="modal-preview">
+      <div className="modal__preview">
         <RadioSelector
           name="preview-type"
           selected={this.state.previewType}
@@ -32,15 +32,17 @@ class Modal extends React.Component {
           options={options}
         />
         {this.state.previewType !== 'spritesheet' ?
-          <PreviewContainer
-            key="0"
-            frames={props.frames}
-            columns={props.columns}
-            rows={props.rows}
-            cellSize={props.type === 'preview' ? props.cellSize : 5}
-            activeFrameIndex={props.activeFrameIndex}
-            animate={this.state.previewType === 'animation'}
-          />
+          <div className="modal__preview--wrapper">
+            <PreviewContainer
+              key="0"
+              frames={props.frames}
+              columns={props.columns}
+              rows={props.rows}
+              cellSize={props.type === 'preview' ? props.cellSize : 5}
+              activeFrameIndex={props.activeFrameIndex}
+              animate={this.state.previewType === 'animation'}
+            />
+          </div>
         : null
         }
       </div>

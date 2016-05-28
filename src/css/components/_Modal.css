@@ -2,4 +2,8 @@
   button.close {
     @mixin button blue;
   }
+  .modal__preview--wrapper {
+    margin: 1em auto;
+    display: table;
+  }
 }

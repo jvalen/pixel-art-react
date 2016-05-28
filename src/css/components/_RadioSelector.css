@@ -6,8 +6,8 @@
     input {
       display: none;
       &:checked + span {
-        color: $color-white;
-        background-color: $color-black;
+        color: white;
+        background-color: black;
       }
       &:not(:checked) + span {
         &:hover {

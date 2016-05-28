@@ -23,51 +23,9 @@ export const Frame = (props) => {
     }
   };
 
-  const styles = {
-    frame: {
-      border: '1px solid #313131',
-      backgroundColor: '#BBBBBB',
-      color: 'white',
-      width: 70,
-      height: 70,
-      margin: '0 0.3em',
-      flex: '0 0 auto',
-      position: 'relative',
-      overflow: 'hidden',
-      opacity: 0.4
-    },
-    delete: {
-      position: 'absolute',
-      color: 'white',
-      top: '0.3em',
-      right: '0.3em',
-      backgroundColor: '#060606',
-      border: '1px solid white',
-      padding: '0.1em',
-      fontSize: '1.2em'
-    },
-    duplicate: {
-      position: 'absolute',
-      color: 'white',
-      bottom: '0.3em',
-      right: '0.3em',
-      backgroundColor: '#060606',
-      border: '1px solid white',
-      padding: '0.1em'
-    }
-  };
-
-  if (props.active) {
-    styles.frame.border = '2px solid #961818';
-    styles.frame.opacity = 1;
-    styles.delete.cursor = 'no-drop';
-    styles.duplicate.cursor = 'copy';
-  }
-
   return (
     <div
-      className="frame"
-      style={styles.frame}
+      className={`frame${props.active ? ' active' : ''}`}
       onClick={() => { handleClick(); }}
     >
       <PreviewContainer
@@ -78,13 +36,11 @@ export const Frame = (props) => {
         activeFrameIndex={0}
       />
       <div
-        style={styles.delete}
-        className="fa fa-trash-o"
+        className="delete"
         onClick={deleteFrame}
       />
       <div
-        style={styles.duplicate}
-        className="fa fa-files-o"
+        className="duplicate"
         onClick={duplicateFrame}
       />
     </div>
