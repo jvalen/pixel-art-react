@@ -17,15 +17,8 @@ export const FrameSelector = (props) => {
     });
   };
 
-  let style = {
-    display: 'flex',
-    flexWrap: 'nowrap',
-    overflowX: 'auto',
-    overflowY: 'hidden'
-  };
-
   return (
-    <div className="frame-selector" style={style}>
+    <div className="frame-selector">
       {getFrames()}
     </div>
   );
