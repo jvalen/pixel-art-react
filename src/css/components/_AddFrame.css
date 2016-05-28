@@ -1,4 +1,5 @@
 .add-frame {
   @mixin button gray;
-  height: 70px;
+  height: 65px;
+  float: left;
 }

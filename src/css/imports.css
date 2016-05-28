@@ -23,7 +23,8 @@
 @import 'components/_PaletteGrid.css';
 @import 'components/_PaletteColor.css';
 @import 'components/_Modal.css';
-@import 'components/_FrameSelector.css';
+@import 'components/_FramesHandler.css';
+@import 'components/_FrameList.css';
 @import 'components/_Frame.css';
 @import 'components/_EyeDropper.css';
 @import 'components/_Eraser.css';

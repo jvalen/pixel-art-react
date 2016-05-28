@@ -14,8 +14,7 @@ import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
 import { SimpleSpinner } from './SimpleSpinner';
 import { SimpleNotificationContainer } from './SimpleNotification';
-import { FrameSelector } from './FrameSelector';
-import { AddFrameContainer } from './AddFrame';
+import FramesHandler from './FramesHandler';
 import Duration from './Duration';
 import Modal from './Modal';
 
@@ -68,14 +67,8 @@ export class App extends React.Component {
   }
 
   render() {
-    const styles = {
-      showPreviewButton: {
-        width: '100%'
-      }
-    };
-
     return (
-      <div id="pixel-art-app">
+      <div id="app">
         <SimpleSpinner spin={this.props.loading} />
         <SimpleNotificationContainer
           notification={this.props.notifications}
@@ -83,12 +76,9 @@ export class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
-        <div className="grid">
-          <div className="col-1-8">
-            <AddFrameContainer />
-          </div>
-          <div className="col-6-8">
-            <FrameSelector
+        <div className="app__frames-container">
+          <div className="col-7-8">
+            <FramesHandler
               frames={this.props.frames}
               columns={this.props.columns}
               rows={this.props.rows}
@@ -108,7 +98,6 @@ export class App extends React.Component {
               <div className="load-button-wrapper">
                 <button
                   className="red"
-                  style={styles.showPreviewButton}
                   onClick={() => { this.changeModalType('load'); }}
                 >
                   LOAD
@@ -172,7 +161,6 @@ export class App extends React.Component {
             />
             <button
               className="gray"
-              style={styles.showPreviewButton}
               onClick={() => { this.changeModalType('preview'); }}
             >
               Preview
@@ -184,7 +172,6 @@ export class App extends React.Component {
             />
             <button
               className="gray"
-              style={styles.showPreviewButton}
               onClick={() => { this.changeModalType('copycss'); }}
               frames={this.props.frames}
               columns={this.props.columns}

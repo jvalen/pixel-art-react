@@ -1,7 +1,7 @@
 import React from 'react';
 import { FrameContainer } from './Frame';
 
-export const FrameSelector = (props) => {
+export const FrameList = (props) => {
   const getFrames = () => {
     return props.frames.map((frameData, index) => {
       return (
@@ -18,7 +18,7 @@ export const FrameSelector = (props) => {
   };
 
   return (
-    <div className="frame-selector">
+    <div className="frame-list">
       {getFrames()}
     </div>
   );
