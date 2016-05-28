@@ -1,0 +1,15 @@
+.copy-css {
+  h2 {
+    padding: 2em 0;
+    font-size: 1em;
+    display: block;
+  }
+  .copy-css__string {
+    overflow-y: scroll;
+    height: 20em;
+    background-color: $color-mineShaft;
+    color: $color-silver;
+    padding: 0.5em;
+    text-align: left;
+  }
+}

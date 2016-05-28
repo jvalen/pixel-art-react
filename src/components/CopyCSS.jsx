@@ -38,25 +38,10 @@ export class CopyCSS extends React.Component {
   }
 
   render() {
-    const customStyles = {
-      h2: {
-        padding: '2em 0',
-        fontSize: '1em',
-        display: 'block'
-      },
-      cssBlock: {
-        overflowY: 'scroll',
-        height: '20em',
-        backgroundColor: '#313131',
-        color: '#ccc',
-        padding: '0.5em',
-        textAlign: 'left'
-      }
-    };
     return (
-      <div className="copycss-wrapper">
-        <h2 style={customStyles.h2}>Copy the CSS generated</h2>
-        <div style={customStyles.cssBlock}>
+      <div className="copy-css">
+        <h2>Copy the CSS generated</h2>
+        <div className="copy-css__string">
           {this.generateCSS()}
         </div>
       </div>
