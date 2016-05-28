@@ -1,0 +1,12 @@
+.palette-color {
+  display: inline-block;
+  .palette-color__color {
+    color: white;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+  }
+  &.selected {
+    border: 4px solid white;
+  }
+}

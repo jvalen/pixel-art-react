@@ -12,31 +12,26 @@ export class PaletteColor extends React.Component {
     const cellColor = color;
 
     const styles = {
-      cellWrapper: {
-        display: 'inline-block',
+      paletteColor: {
         width: `${width}%`
       },
-      cell: {
-        backgroundColor: `#${cellColor}`,
-        color: 'white',
-        position: 'relative',
-        width: '100%',
-        paddingBottom: '100%'
+      color: {
+        backgroundColor: `#${cellColor}`
       }
     };
 
-    if (this.props.currentColor === cellColor) {
-      styles.cellWrapper.border = '4px solid white';
-    } else {
-      styles.cellWrapper.border = 'none';
-    }
-
     return (
-      <div className="cellWrapper" style={styles.cellWrapper}>
+      <div
+        className={
+          `palette-color
+          ${this.props.currentColor === cellColor ? 'selected' : ''}`
+        }
+        style={styles.paletteColor}
+      >
         <div
-          className="cell"
+          className="palette-color__color"
           onClick={() => { this.handleClick(); }}
-          style={styles.cell}
+          style={styles.color}
         />
       </div>
     );
