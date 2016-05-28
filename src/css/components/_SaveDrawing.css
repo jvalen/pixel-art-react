@@ -1,5 +1,6 @@
 .save-drawing {
   button {
     @mixin button red;
+    width: 100%;
   }
 }

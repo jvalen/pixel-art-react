@@ -92,55 +92,45 @@ export class App extends React.Component {
             />
           </div>
         </div>
-        <div className="grid grid-pad main-block">
-          <div className="col-1-4 grid">
-            <div className="load-save-container self_clear">
-              <div className="load-button-wrapper">
+        <div className="app__central-container">
+          <div className="col-1-4">
+            <div className="app__load-save-container">
+              <button
+                className="app__load-button"
+                onClick={() => { this.changeModalType('load'); }}
+              >
+                LOAD
+              </button>
+              <SaveDrawingContainer
+                frames={this.props.frames}
+                columns={this.props.columns}
+                rows={this.props.rows}
+                cellSize={this.props.cellSize}
+                paletteGridData={this.props.paletteGridData}
+              />
+            </div>
+            <div className="col-3-4">
+              <PaletteContainer
+                paletteGridData={this.props.paletteGridData}
+              />
+              <div className="app__social-container">
                 <button
-                  className="red"
-                  onClick={() => { this.changeModalType('load'); }}
-                >
-                  LOAD
-                </button>
-              </div>
-              <div className="save-button-wrapper">
-                <SaveDrawingContainer
-                  frames={this.props.frames}
-                  columns={this.props.columns}
-                  rows={this.props.rows}
-                  cellSize={this.props.cellSize}
-                  paletteGridData={this.props.paletteGridData}
+                  className="app__twitter-button"
+                  onClick={() => { this.changeModalType('twitter'); }}
+                />
+                <button
+                  className="app__download-button"
+                  onClick={() => { this.changeModalType('download'); }}
                 />
               </div>
             </div>
-            <div className="grid">
-              <div className="col-3-4">
-                <PaletteContainer
-                  paletteGridData={this.props.paletteGridData}
-                />
-                <div className="grid grid-pad">
-                  <div className="col-1-2">
-                    <button
-                      className="fa fa-twitter twitter"
-                      onClick={() => { this.changeModalType('twitter'); }}
-                    />
-                  </div>
-                  <div className="col-1-2">
-                    <button
-                      className="fa fa-download download"
-                      onClick={() => { this.changeModalType('download'); }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-1-4 tools-wrapper">
-                <EraserContainer />
-                <ColorPickerContainer />
-                <EyedropperContainer />
-              </div>
+            <div className="col-1-4 tools-wrapper">
+              <EraserContainer />
+              <ColorPickerContainer />
+              <EyedropperContainer />
             </div>
           </div>
-          <div className="col-1-2">
+          <div className="col-2-4">
             <Grid
               columns={this.props.columns}
               currentColor={this.props.currentColor}
@@ -160,7 +150,7 @@ export class App extends React.Component {
               activeFrameIndex={this.props.activeFrameIndex}
             />
             <button
-              className="gray"
+              className="app__preview-button"
               onClick={() => { this.changeModalType('preview'); }}
             >
               Preview
@@ -171,7 +161,7 @@ export class App extends React.Component {
               activeFrameIndex={this.props.activeFrameIndex}
             />
             <button
-              className="gray"
+              className="app__copycss-button"
               onClick={() => { this.changeModalType('copycss'); }}
               frames={this.props.frames}
               columns={this.props.columns}

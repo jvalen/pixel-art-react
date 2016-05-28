@@ -1,8 +1,45 @@
-.app {
+#app {
 
-  .app__frames-container {
+  .app__frames-container,
+  .app__main-container {
     lost-utility: clearfix;
   }
+
+  .app__load-save-container {
+    .app__load-button {
+      @mixin button red;
+    }
+    lost-utility: clearfix;
+    > div,
+    > button {
+      lost-column: 1/2 0 0.5em;
+    }
+  }
+
+  .app__social-container {
+    lost-utility: clearfix;
+    > div,
+    > button {
+      lost-column: 1/2 0 0.5em;
+    }
+    .app__twitter-button {
+      @mixin button blue;
+      @mixin icon twitter;
+    }
+    .app__download-button {
+      @mixin button brown;
+      @mixin icon download;
+    }
+  }
+
+  .app__preview-button,
+  .app__copycss-button {
+    @mixin button gray;
+    width: 100%;
+  }
+
+
+
 
 /*
   .tools-wrapper {
