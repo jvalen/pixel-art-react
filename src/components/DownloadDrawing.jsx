@@ -21,6 +21,7 @@ export class DownloadDrawing extends React.Component {
   render() {
     return (
       <button
+        className="download-drawing"
         onClick={() => { this.download(this.props.downloadType); }}
       >
         DOWNLOAD

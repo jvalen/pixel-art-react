@@ -1,0 +1,3 @@
+.download-drawing {
+  @mixin button brown;
+}
