@@ -13,21 +13,10 @@ export class Eraser extends React.Component {
   }
 
   render() {
-    let style = {
-      border: '2px solid #313131',
-      backgroundColor: '#585858'
-    };
-
-    if (this.props.eraserOn) {
-      style.color = '#BBBBBB';
-      style.border = '2px solid #BBBBBB';
-    }
-
     return (
       <div
-        className="fa fa-eraser"
+        className={`eraser${this.props.eraserOn ? ' selected' : ''}`}
         onClick={() => { this.handleClick(); }}
-        style={style}
       />
     );
   }
