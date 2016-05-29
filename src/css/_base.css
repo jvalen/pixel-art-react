@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  background-color: $color-scorpion;
 }
 
 *,
@@ -14,7 +15,6 @@ body {
   width: 90%;
   margin: 0 auto;
   padding: 0;
-  background-color: $color-scorpion;
   font-family: $font-pixel;
 }
 

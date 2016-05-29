@@ -1,8 +1,11 @@
 #app {
-
   .app__frames-container,
   .app__main-container {
     lost-utility: clearfix;
+  }
+
+  .app__frames-container {
+    margin-bottom: 1em;
   }
 
   .app__load-save-container {

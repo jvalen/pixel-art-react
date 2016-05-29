@@ -50,9 +50,9 @@ export class FramesHandler extends React.Component {
         </button>
         <div className="frame-handler__list">
           <Scrollbars
+            autoHeight
             ref="scrollbars"
             universal
-            autoHeight
             onUpdate={() => { this.onScrollbarUpdate(); }}
           >
             <div className="list__container">

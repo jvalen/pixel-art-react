@@ -94,25 +94,26 @@ export class App extends React.Component {
         </div>
         <div className="app__central-container">
           <div className="col-1-4">
-            <div className="app__load-save-container">
-              <button
-                className="app__load-button"
-                onClick={() => { this.changeModalType('load'); }}
-              >
-                LOAD
-              </button>
-              <SaveDrawingContainer
-                frames={this.props.frames}
-                columns={this.props.columns}
-                rows={this.props.rows}
-                cellSize={this.props.cellSize}
-                paletteGridData={this.props.paletteGridData}
-              />
-            </div>
             <div className="col-3-4">
+              <UndoRedoContainer />
               <PaletteContainer
                 paletteGridData={this.props.paletteGridData}
               />
+              <div className="app__load-save-container">
+                <button
+                  className="app__load-button"
+                  onClick={() => { this.changeModalType('load'); }}
+                >
+                  LOAD
+                </button>
+                <SaveDrawingContainer
+                  frames={this.props.frames}
+                  columns={this.props.columns}
+                  rows={this.props.rows}
+                  cellSize={this.props.cellSize}
+                  paletteGridData={this.props.paletteGridData}
+                />
+              </div>
               <div className="app__social-container">
                 <button
                   className="app__twitter-button"
@@ -141,7 +142,6 @@ export class App extends React.Component {
             />
           </div>
           <div className="col-1-4">
-            <UndoRedoContainer />
             <DimensionsContainer
               frames={this.props.frames}
               columns={this.props.columns}
