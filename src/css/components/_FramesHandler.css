@@ -1,3 +1,17 @@
 .frames-handler {
   lost-utility: clearfix;
+  .frames-handler__add {
+    @mixin button gray;
+    height: 65px;
+    float: left;
+  }
+  .frame-handler__list {
+    display: flex;
+    padding-left: 0.5em;
+    .list__container {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 0.5em;
+    }
+  }
 }

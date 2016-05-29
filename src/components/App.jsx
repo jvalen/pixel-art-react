@@ -14,7 +14,7 @@ import * as actionCreators from '../action_creators';
 import CookieBanner from 'react-cookie-banner';
 import { SimpleSpinner } from './SimpleSpinner';
 import { SimpleNotificationContainer } from './SimpleNotification';
-import FramesHandler from './FramesHandler';
+import { FramesHandlerContainer } from './FramesHandler';
 import Duration from './Duration';
 import Modal from './Modal';
 
@@ -78,7 +78,7 @@ export class App extends React.Component {
         />
         <div className="app__frames-container">
           <div className="col-7-8">
-            <FramesHandler
+            <FramesHandlerContainer
               frames={this.props.frames}
               columns={this.props.columns}
               rows={this.props.rows}
