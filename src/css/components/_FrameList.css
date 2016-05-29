@@ -1,6 +1,8 @@
 .frame-list {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+  padding-left: 0.5em;
+  .frame-list__container {
+    display: flex;
+    flex-wrap: nowrap;
+  }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FrameContainer } from './Frame';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 export const FrameList = (props) => {
   const getFrames = () => {
@@ -17,9 +18,20 @@ export const FrameList = (props) => {
     });
   };
 
+  const style = {
+    height: 80
+  };
+
   return (
     <div className="frame-list">
-      {getFrames()}
+      <Scrollbars
+        universal
+        style={style}
+      >
+        <div className="frame-list__container">
+          {getFrames()}
+        </div>
+      </Scrollbars>
     </div>
   );
 };
