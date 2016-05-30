@@ -84,7 +84,7 @@ class Grid extends React.Component {
     };
     // console.info('Rendering the grid!', this.props);
     return (
-      <div className="grid-container" style={style}>
+      <div className="grid-container self_clear" style={style}>
         {this.getCells(this.props)}
       </div>
     );

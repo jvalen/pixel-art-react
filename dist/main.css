@@ -457,16 +457,8 @@ body {
   }
 }
 
-.grid-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-}
 .grid-container > div {
+  float: left;
   border: 1px solid #585858;
   border-width: 0 1px 1px 0;
   color: white;
