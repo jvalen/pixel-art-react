@@ -1,7 +1,7 @@
 .pixel-grid {
-  display: flex;
-  flex-wrap: wrap;
+  lost-utility: clearfix;
   div {
+    float: left;
     border: 1px solid $color-scorpion;
     border-width: 0 1px 1px 0;
   }
