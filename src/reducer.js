@@ -1,26 +1,50 @@
 import { List, Map } from 'immutable';
 
-const GRID_INITIAL_COLOR = '313131';
+const GRID_INITIAL_COLOR = '#313131';
 
 /*
  * Helpers
  */
-export function createGrid(cellsCount, initialColor, createGamma) {
+export function createGrid(cellsCount, initialColor) {
   let newGrid = List();
-
-  if (createGamma) {
-    // Create colors gamma
-    for (let i = 0; i <= cellsCount; i += 42) {
-      const hex = ((0xe000 | i).toString(16)).slice(1);
-      newGrid = newGrid.push(Map({ color: hex }));
-    }
-  } else {
-    // Set every cell with the initial color
-    for (let i = 0; i < cellsCount; i++) {
-      newGrid = newGrid.push(Map({ color: initialColor, used: false }));
-    }
+  // Set every cell with the initial color
+  for (let i = 0; i < cellsCount; i++) {
+    newGrid = newGrid.push(Map({ color: initialColor, used: false }));
   }
+  return newGrid;
+}
 
+function createPalette() {
+  // TODO!!!
+  // 1- Fix color picker
+  // 2- Custom color (extra arrow same colors)
+  const paletteColors = [
+    { color: '#000000' },
+    { color: '#f44336' },
+    { color: '#e91e63' },
+    { color: '#9c27b0' },
+    { color: '#673ab7' },
+    { color: '#3f51b5' },
+    { color: '#2196f3' },
+    { color: '#03a9f4' },
+    { color: '#00bcd4' },
+    { color: '#009688' },
+    { color: '#4caf50' },
+    { color: '#8bc34a' },
+    { color: '#cddc39' },
+    { color: '#ffeb3b' },
+    { color: '#ffc107' },
+    { color: '#ff9800' },
+    { color: '#ff5722' },
+    { color: '#795548' },
+    { color: '#9e9e9e' },
+    { color: '#607d8b' },
+    { color: '#ffffff' }
+  ];
+  let newGrid = List();
+  for (let i = 0; i < paletteColors.length; i++) {
+    newGrid = newGrid.push(Map(paletteColors[i]));
+  }
   return newGrid;
 }
 
@@ -48,9 +72,9 @@ function setInitialState(state) {
   const cellSize = 10;
   const columns = 20;
   const rows = 20;
-  const currentColor = '000';
+  const currentColor = '#000000';
   const pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR);
-  const paletteGrid = createGrid(4095, GRID_INITIAL_COLOR, true);
+  const paletteGrid = createPalette();
   const dragging = false;
 
   const initialState = {

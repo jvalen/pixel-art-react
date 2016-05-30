@@ -7,4 +7,5 @@
   padding: 1em;
   margin-top: 1em;
   color: black;
+  user-select: none;
 }

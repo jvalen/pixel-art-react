@@ -13,10 +13,10 @@ export class PaletteColor extends React.Component {
 
     const styles = {
       paletteColor: {
-        width: `${width}%`
+        flex: `0 0 ${width}%`
       },
       color: {
-        backgroundColor: `#${cellColor}`
+        backgroundColor: cellColor
       }
     };
 

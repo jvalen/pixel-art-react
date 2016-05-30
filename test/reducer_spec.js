@@ -15,7 +15,7 @@ describe('reducer', () => {
     expect(nextState).to.deep.equal(fromJS({
       cellSize: 10,
       columns: 10,
-      currentColor: '000',
+      currentColor: '#000000',
       initialColor: '313131',
       padding: 0.1,
       rows: 10,
@@ -42,7 +42,7 @@ describe('reducer', () => {
     expect(nextState).to.deep.equal(fromJS({
       cellSize: 10,
       columns: 5,
-      currentColor: '000',
+      currentColor: '#000000',
       initialColor: '313131',
       padding: 0.1,
       rows: 5,

@@ -16,7 +16,7 @@ export default class PixelCell extends React.Component {
     const styles = {
       flex: `0 0 ${width}%`,
       paddingBottom: `${width}%`,
-      backgroundColor: `#${selectedColor}`
+      backgroundColor: selectedColor
     };
 
     return (

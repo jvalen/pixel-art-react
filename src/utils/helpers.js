@@ -11,7 +11,7 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
           pixelInfo.push(`${xCoord}`);
           pixelInfo.push(`${yCoord}`);
           pixelInfo.push('0');
-          pixelInfo.push(`#${currentValue.get('color')}`);
+          pixelInfo.push(currentValue.get('color'));
           accumulator.push(pixelInfo);
         }
 
@@ -26,7 +26,7 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
           const xCoord = ((i % columns) * cellSize) + cellSize;
           const yCoord = (parseInt(i / columns, 10) * cellSize) + cellSize;
 
-          return `${accumulator} ${xCoord}px ${yCoord}px 0 #${currentValue.get('color')},`;
+          return `${accumulator} ${xCoord}px ${yCoord}px 0 ${currentValue.get('color')},`;
         }
 
         return accumulator;

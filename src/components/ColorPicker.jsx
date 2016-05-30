@@ -8,7 +8,7 @@ export class ColorPicker extends React.Component {
     super(props);
     this.state = {
       displayColorPicker: false,
-      background: '#fff'
+      background: '#ffffff'
     };
   }
 
