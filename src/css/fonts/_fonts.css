@@ -71,13 +71,3 @@
 @define-extend repeat {
   content: "\f01e";
 }
-
-@define-extend eyedropper,
-  paint-brush,
-  eraser {
-  text-align: center;
-  font-size: 2em;
-  color: #313131;
-  padding: 16%;
-  margin: 0.5em 0;
-}

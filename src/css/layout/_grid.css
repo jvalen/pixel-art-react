@@ -34,3 +34,10 @@
 .col-7-8 {
   lost-column: 7/8;
 }
+
+.grid-3 {
+  lost-utility: clearfix;
+  & > div {
+    lost-column: 1/3 3 0;
+  }
+}

@@ -8,6 +8,7 @@
   }
 
   .app__load-save-container {
+    margin-bottom: 2em;
     .app__load-button {
       @mixin button gray;
     }
@@ -49,12 +50,23 @@
   }
 
   .app__tools-wrapper {
-    display: flex;
-    flex-wrap: wrap;
     text-align: center;
-    margin: 1em 0;
+    border-left: 2px solid $color-mineShaft;
+    margin: 1em 0 0.5em;
     & > div {
-      flex: 0 0 33%;
+      font-size: 1.8em;
+      text-align: center;
+      color: $color-mineShaft;
+      border: 1px solid $color-mineShaft;
+      border-width: 2px 2px 2px 0;
+      padding: 0.2em 0;
+      &.selected {
+        color: $color-silver;
+        background-color: $color-mineShaft;
+        & > div {
+          background-color: $color-mineShaft;
+        }
+      }
     }
   }
 

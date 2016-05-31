@@ -33,7 +33,7 @@ export class ColorPicker extends React.Component {
     const styles = {
       picker: {
         position: 'relative',
-        bottom: '18.4em'
+        bottom: '9em'
       },
       popover: {
         position: 'absolute',

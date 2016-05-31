@@ -87,15 +87,6 @@ export class App extends React.Component {
         <div className="app__central-container">
           <div className="col-1-4">
             <div className="app__left-side">
-              <UndoRedoContainer />
-              <div className="app__tools-wrapper">
-                <EraserContainer />
-                <ColorPickerContainer />
-                <EyedropperContainer />
-              </div>
-              <PaletteContainer
-                paletteGridData={this.props.paletteGridData}
-              />
               <div className="app__load-save-container">
                 <button
                   className="app__load-button"
@@ -111,6 +102,15 @@ export class App extends React.Component {
                   paletteGridData={this.props.paletteGridData}
                 />
               </div>
+              <UndoRedoContainer />
+              <div className="app__tools-wrapper grid-3">
+                <EraserContainer />
+                <ColorPickerContainer />
+                <EyedropperContainer />
+              </div>
+              <PaletteContainer
+                paletteGridData={this.props.paletteGridData}
+              />
               <button
                 className="app__copycss-button"
                 onClick={() => { this.changeModalType('copycss'); }}

@@ -2,7 +2,7 @@
   lost-utility: clearfix;
   button {
     @mixin button gray;
-    lost-column: 1/2;
+    lost-column: 1/2 0 0.5em;
   }
   .undo-redo__icon--undo {
     @mixin icon undo;
