@@ -77,25 +77,22 @@ export class App extends React.Component {
           duration={1500}
         />
         <div className="app__frames-container">
-          <div className="col-7-8">
-            <FramesHandlerContainer
-              frames={this.props.frames}
-              columns={this.props.columns}
-              rows={this.props.rows}
-              activeFrameIndex={this.props.activeFrameIndex}
-            />
-          </div>
-          <div className="col-1-8">
-            <Duration
-              duration={this.props.duration}
-              setDuration={this.props.setDuration}
-            />
-          </div>
+          <FramesHandlerContainer
+            frames={this.props.frames}
+            columns={this.props.columns}
+            rows={this.props.rows}
+            activeFrameIndex={this.props.activeFrameIndex}
+          />
         </div>
         <div className="app__central-container">
           <div className="col-1-4">
-            <div className="col-3-4">
+            <div className="app__left-side">
               <UndoRedoContainer />
+              <div className="app__tools-wrapper">
+                <EraserContainer />
+                <ColorPickerContainer />
+                <EyedropperContainer />
+              </div>
               <PaletteContainer
                 paletteGridData={this.props.paletteGridData}
               />
@@ -114,6 +111,17 @@ export class App extends React.Component {
                   paletteGridData={this.props.paletteGridData}
                 />
               </div>
+              <button
+                className="app__copycss-button"
+                onClick={() => { this.changeModalType('copycss'); }}
+                frames={this.props.frames}
+                columns={this.props.columns}
+                rows={this.props.rows}
+                cellSize={this.props.cellSize}
+                activeFrameIndex={this.props.activeFrameIndex}
+              >
+                CSS
+              </button>
               <div className="app__social-container">
                 <button
                   className="app__twitter-button"
@@ -124,11 +132,6 @@ export class App extends React.Component {
                   onClick={() => { this.changeModalType('download'); }}
                 />
               </div>
-            </div>
-            <div className="col-1-4 tools-wrapper">
-              <EraserContainer />
-              <ColorPickerContainer />
-              <EyedropperContainer />
             </div>
           </div>
           <div className="col-2-4">
@@ -142,35 +145,30 @@ export class App extends React.Component {
             />
           </div>
           <div className="col-1-4">
-            <DimensionsContainer
-              frames={this.props.frames}
-              columns={this.props.columns}
-              rows={this.props.rows}
-              cellSize={this.props.cellSize}
-              activeFrameIndex={this.props.activeFrameIndex}
-            />
-            <button
-              className="app__preview-button"
-              onClick={() => { this.changeModalType('preview'); }}
-            >
-              Preview
-            </button>
-            <ResetContainer
-              columns={this.props.columns}
-              rows={this.props.rows}
-              activeFrameIndex={this.props.activeFrameIndex}
-            />
-            <button
-              className="app__copycss-button"
-              onClick={() => { this.changeModalType('copycss'); }}
-              frames={this.props.frames}
-              columns={this.props.columns}
-              rows={this.props.rows}
-              cellSize={this.props.cellSize}
-              activeFrameIndex={this.props.activeFrameIndex}
-            >
-              CSS
-            </button>
+            <div className="app__right-side">
+              <Duration
+                duration={this.props.duration}
+                setDuration={this.props.setDuration}
+              />
+              <button
+                className="app__preview-button"
+                onClick={() => { this.changeModalType('preview'); }}
+              >
+                Preview
+              </button>
+              <ResetContainer
+                columns={this.props.columns}
+                rows={this.props.rows}
+                activeFrameIndex={this.props.activeFrameIndex}
+              />
+              <DimensionsContainer
+                frames={this.props.frames}
+                columns={this.props.columns}
+                rows={this.props.rows}
+                cellSize={this.props.cellSize}
+                activeFrameIndex={this.props.activeFrameIndex}
+              />
+            </div>
           </div>
         </div>
         <div className="css-container">

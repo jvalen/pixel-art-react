@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 export class Palette extends React.Component {
   getColors() {
     const { paletteGridData } = this.props;
-    const width = 100 / 4;
+    const width = 100 / 6;
 
     return paletteGridData.map((currentColor, i) => {
       return (

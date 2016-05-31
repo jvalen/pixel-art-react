@@ -1,5 +1,4 @@
 #app {
-  .app__frames-container,
   .app__main-container {
     lost-utility: clearfix;
   }
@@ -10,7 +9,7 @@
 
   .app__load-save-container {
     .app__load-button {
-      @mixin button red;
+      @mixin button gray;
     }
     lost-utility: clearfix;
     > div,
@@ -21,6 +20,7 @@
 
   .app__social-container {
     lost-utility: clearfix;
+    margin: 1em 0;
     > div,
     > button {
       lost-column: 1/2 0 0.5em;
@@ -35,39 +35,31 @@
     }
   }
 
-  .app__preview-button,
   .app__copycss-button {
-    @mixin button gray;
+    @mixin button white;
     width: 100%;
+    margin-top: 1em;
   }
 
+  .app__preview-button {
+    @mixin button gray;
+    width: 80%;
+    margin: 1em auto;
+    display: table;
+  }
 
-
-
-/*
-  .tools-wrapper {
+  .app__tools-wrapper {
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
-  }
-  .load-save-container {
-    margin-bottom: 1.5em;
-  }
-  .load-button-wrapper {
-    width: 48%;
-    float: left;
-    button {
-      margin: 0 auto;
-      display: table;
-      width: 100%;
+    margin: 1em 0;
+    & > div {
+      flex: 0 0 33%;
     }
   }
-  .save-button-wrapper {
-    width: 48%;
-    float: right;
-    button {
-      margin: 0 auto;
-      display: table;
-      width: 100%;
-    }
+
+  .app__left-side,
+  .app__right-side {
+    width: 80%;
   }
-*/
 }

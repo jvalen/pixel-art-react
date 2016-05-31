@@ -1,10 +1,8 @@
 .palette-color {
-  display: inline-block;
-  .palette-color__color {
-    color: white;
-    position: relative;
-  }
+  float: left;
+  border: 2px solid $color-scorpion;
+  border-width: 2px;
   &.selected {
-    border: 4px solid white;
+    border-color: white;
   }
 }

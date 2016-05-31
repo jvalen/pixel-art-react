@@ -12,12 +12,9 @@ export class PaletteColor extends React.Component {
     const cellColor = color;
 
     const styles = {
-      paletteColor: {
-        flex: `0 0 ${width}%`
-      },
-      color: {
-        backgroundColor: cellColor
-      }
+      width: `${width}%`,
+      paddingBottom: `${width}%`,
+      backgroundColor: cellColor
     };
 
     return (
@@ -26,14 +23,9 @@ export class PaletteColor extends React.Component {
           `palette-color
           ${this.props.currentColor === cellColor ? 'selected' : ''}`
         }
-        style={styles.paletteColor}
-      >
-        <div
-          className="palette-color__color"
-          onClick={() => { this.handleClick(); }}
-          style={styles.color}
-        />
-      </div>
+        style={styles}
+        onClick={() => { this.handleClick(); }}
+      />
     );
   }
 }

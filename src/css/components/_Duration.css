@@ -1,6 +1,7 @@
 .duration {
   text-align: center;
-  label: {
+  label {
+    display: block;
     text-align: center;
     margin-bottom: 0.3em;
     color: $color-silver;

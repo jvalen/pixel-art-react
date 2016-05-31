@@ -38,5 +38,9 @@
   @if $color == blue {
     @mixin generate-button $color-silver, $color-steelblue, $color-sanMarino, $color-eastBay;
   }
+
+  @if $color == white {
+    @mixin generate-button black, $color-alto, $color-silveChalice, $color-tundora;
+  }
   font-family: $font;
 }

@@ -21,7 +21,7 @@ export class ColorPicker extends React.Component {
 
   handleChange(color) {
     this.setState({ background: color.hex });
-    this.props.setCustomColor(color.hex);
+    this.props.setCustomColor(`#${color.hex}`);
   }
 
   handleClose() {
@@ -53,9 +53,9 @@ export class ColorPicker extends React.Component {
     const isSelected = this.props.colorPickerOn && this.state.displayColorPicker;
 
     return (
-      <div className="color-picker">
+      <div className={`color-picker${isSelected ? ' selected' : ''}`}>
         <div
-          className={`color-picker__button${isSelected ? ' selected' : ''}`}
+          className="color-picker__button"
           onClick={() => { this.handleClick(); }}
         >
         </div>

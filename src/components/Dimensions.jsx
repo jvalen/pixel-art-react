@@ -24,7 +24,6 @@ export class Dimensions extends React.Component {
   handleChange(event) {
     let propertyName;
     const newLocalState = {};
-
     switch (event.target.className) {
       case 'columns':
         propertyName = 'columnsValue';
@@ -57,6 +56,7 @@ export class Dimensions extends React.Component {
             type="text"
             value={columnsValue}
             onChange={(ev) => { this.handleChange(ev); }}
+            className="columns"
           />
         </div>
         <div className="dimensions__rows">
@@ -65,6 +65,7 @@ export class Dimensions extends React.Component {
             type="text"
             value={rowsValue}
             onChange={(ev) => { this.handleChange(ev); }}
+            className="rows"
           />
         </div>
         <div className="dimensions__cell-size">
