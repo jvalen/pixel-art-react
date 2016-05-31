@@ -17,6 +17,7 @@
     input {
       width: 50%;
       border: 1px solid $color-boulder;
+      background-color: $color-scorpion;
       padding: 0.2em 0;
       &:focus {
         border: solid 1px $color-dustyGray;

@@ -1,8 +1,71 @@
 /**
- * Clear inner floats
+ * Tooltip
  */
-.clearfix::after {
-  clear: both;
-  content: '';
-  display: table;
+
+[data-tooltip] {
+  position: relative;
+  cursor: pointer;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out,
+    transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::before,
+[data-tooltip]:focus::after {
+  visibility: visible;
+  opacity: 1;
+}
+
+[data-tooltip]::before {
+  z-index: 1001;
+  border: 6px solid transparent;
+  background: transparent;
+  content: "";
+}
+
+[data-tooltip]::after {
+  z-index: 1000;
+  padding: 8px;
+  width: 160px;
+  background-color: black;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: white;
+  content: attr(data-tooltip);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  bottom: 100%;
+  left: 50%;
+}
+
+[data-tooltip]::before {
+  margin-left: -6px;
+  margin-bottom: -12px;
+  border-top-color: #000;
+  border-top-color: hsla(0, 0%, 20%, 0.9);
+}
+
+[data-tooltip]::after {
+  margin-left: -80px;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::before,
+[data-tooltip]:focus::after {
+  transform: translateY(-12px);
 }
