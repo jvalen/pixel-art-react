@@ -1,5 +1,5 @@
 @media only screen and (min-width: 1177px) {
-  button,
+  /*button,
   .button {
     &::before {
       font-size: 2em;
@@ -16,11 +16,11 @@
 
   input[type="text"] {
     font-size: 2em;
-  }
+  }*/
 }
 
 @media only screen and (max-width: 1176px) {
-  button,
+  /*button,
   .button {
     &::before {
       font-size: 1em;
@@ -52,5 +52,5 @@
   figure.figure.front {
     font-size: 1em !important;
     padding-top: 1em !important;
-  }
+  }*/
 }

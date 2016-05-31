@@ -44,7 +44,7 @@
 
   .app__preview-button {
     @mixin button gray;
-    width: 80%;
+    width: 100%;
     margin: 1em auto;
     display: table;
   }
@@ -73,5 +73,10 @@
   .app__left-side,
   .app__right-side {
     width: 80%;
+  }
+
+  .app__right-side {
+    margin: 0 auto;
+    width: 100%;
   }
 }

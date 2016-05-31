@@ -7,4 +7,7 @@
     color: $color-silver;
     position: relative;
   }
+  input {
+    width: 50%;
+  }
 }

@@ -6,11 +6,12 @@ export const Duration = (props) => {
   };
   return (
     <div className="duration">
-      <label>Duration</label>
+      <label htmlFor="duration__input">Animation Duration</label>
       <input
         type="text"
         value={props.duration}
         onChange={(event) => { handleChange(event); }}
+        id="duration__input"
       />
     </div>
   );

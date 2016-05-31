@@ -71,3 +71,11 @@
 @define-extend repeat {
   content: "\f01e";
 }
+
+@define-extend columns {
+  content: "\f07e";
+}
+
+@define-extend rows {
+  content: "\f07d";
+}

@@ -51,29 +51,29 @@ export class Dimensions extends React.Component {
     return (
       <div className="dimensions">
         <div className="dimensions__columns">
-          <label>Col</label>
           <input
             type="text"
             value={columnsValue}
             onChange={(ev) => { this.handleChange(ev); }}
             className="columns"
+            id="dimensions__columns"
           />
         </div>
         <div className="dimensions__rows">
-          <label>Row</label>
           <input
             type="text"
             value={rowsValue}
             onChange={(ev) => { this.handleChange(ev); }}
-            className="rows"
+            id="dimensions__rows"
           />
         </div>
         <div className="dimensions__cell-size">
-          <label>Tile Size</label>
+          <label htmlFor="dimensions__tile-size">Pixel Size</label>
           <input
             type="text"
             value={cellSizeValue}
             onChange={(ev) => { this.handleCellSizeChange(ev); }}
+            id="dimensions__tile-size"
           />
         </div>
       </div>

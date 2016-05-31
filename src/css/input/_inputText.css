@@ -1,26 +1,17 @@
-$color-inputText-bg: $color-mineShaft;
-$color-inputText-text: $color-silver;
-$color-inputText-border: $color-boulder;
-$color-inputText-boxshadow: $color-doveGray;
-$color-inputText-border-focus: $color-dustyGray;
-
 input[type="text"] {
-  margin: 0;
   font-family: sans-serif;
   appearance: none;
   box-shadow: none;
   border-radius: none;
   text-align: center;
-  font-size: 2em;
-  color: $color-inputText-text;
-  background-color: $color-inputText-bg;
-  width: 50%;
-  padding: 10px 0;
-  border: solid 5px $color-inputText-border;
-  box-shadow: inset 0 0 0 1px $color-inputText-boxshadow;
-  transition: box-shadow 0.3s, border 0.3s;
+  font-size: 1em;
+  color: $color-silver;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $color-boulder;
+  transition: border 0.3s;
   &:focus {
-    border: solid 5px $color-inputText-border-focus;
+    border-bottom: solid 1px $color-dustyGray;
     outline: none;
   }
 }

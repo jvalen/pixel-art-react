@@ -1,18 +1,66 @@
 .dimensions {
-  margin: 1.5em 0;
+  margin: 1em 0;
+  /*background-color: $color-mineShaft;*/
+  padding: 0.5em;
+  .dimensions__columns {
+    @mixin icon columns;
+  }
+  .dimensions__rows {
+    @mixin icon rows;
+  }
+
   .dimensions__columns,
-  .dimensions__rows,
+  .dimensions__rows {
+    text-align: center;
+    margin: 0.5em auto;
+    display: table;
+    input {
+      width: 50%;
+      border: 1px solid $color-boulder;
+      padding: 0.2em 0;
+      &:focus {
+        border: solid 1px $color-dustyGray;
+        outline: none;
+      }
+    }
+    &::before {
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      font-size: 1.5em;
+      color: $color-mineShaft;
+      position: relative;
+      top: 0.15em;
+      margin-right: 0.4em;
+    }
+  }
+
   .dimensions__cell-size {
-    lost-utility: clearfix;
+    position: relative;
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
     label,
     input {
-      lost-column: 1/2;
-    }
-    label {
-      lost-align: center;
-      text-align: center;
+      display: flex;
+      flex: 1;
+      /*text-align: center;
+      justify-content: center;*/
+      align-items: center;
       color: $color-silver;
+      border-bottom: 1px solid $color-boulder;
+      &:focus {
+        border-bottom: solid 1px $color-dustyGray;
+        outline: none;
+      }
     }
-    margin-bottom: 0.5em;
+
+    label {
+      border: none;
+    }
+
+    input {
+      width: 100%;
+    }
   }
 }
