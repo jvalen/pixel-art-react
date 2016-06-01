@@ -5,10 +5,13 @@ input[type="text"] {
   text-align: center;
   font-size: 1em;
   color: $color-silver;
-  background-color: transparent;
   border: none;
-  transition: border 0.3s;
+  width: 100%;
+  background-color: $color-tundora;
+  transition: background-color 0.3s;
   &:focus {
+    color: $color-mineShaft;
+    background-color: $color-dustyGray;
     outline: none;
   }
 }

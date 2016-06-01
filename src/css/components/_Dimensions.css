@@ -2,10 +2,14 @@
   margin: 1em 0 0;
   padding: 0.5em;
   .dimensions__columns {
-    @mixin icon columns;
+    label {
+      @mixin icon columns;
+    }
   }
   .dimensions__rows {
-    @mixin icon rows;
+    label {
+      @mixin icon rows;
+    }
   }
 
   .dimensions__columns,
@@ -17,14 +21,9 @@
       font-family: $font-pixel;
       width: 50%;
       border: 3px solid $color-boulder;
-      background-color: $color-mineShaft;
       padding: 0.3em 0;
-      &:focus {
-        border: solid 3px $color-dustyGray;
-        outline: none;
-      }
     }
-    &::before {
+    label {
       width: 50px;
       height: 50px;
       display: inline-block;

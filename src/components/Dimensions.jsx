@@ -39,6 +39,7 @@ export class Dimensions extends React.Component {
       <div className="dimensions">
         <div data-tooltip="Number of columns">
           <div className="dimensions__columns">
+            <label htmlFor="dimensions__columns"></label>
             <input
               type="text"
               value={columns}
@@ -50,6 +51,7 @@ export class Dimensions extends React.Component {
         </div>
         <div data-tooltip="Number of rows">
           <div className="dimensions__rows">
+            <label htmlFor="dimensions__rows"></label>
             <input
               type="text"
               value={rows}

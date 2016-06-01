@@ -10,7 +10,7 @@ export const Duration = (props) => {
         data-tooltip="Animation duration in seconds"
         htmlFor="duration__input"
       >
-        Duration:
+        Duration
       </label>
       <input
         type="text"

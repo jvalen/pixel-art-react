@@ -39,7 +39,7 @@
   padding: 8px;
   width: 160px;
   background-color: black;
-  background-color: hsla(0, 0%, 20%, 0.9);
+  background-color: #4caf50;
   color: white;
   content: attr(data-tooltip);
   font-size: 14px;
@@ -56,7 +56,7 @@
   margin-left: -6px;
   margin-bottom: -12px;
   border-top-color: black;
-  border-top-color: hsla(0, 0%, 20%, 0.9);
+  border-top-color: #4caf50;
 }
 
 [data-tooltip]::after {

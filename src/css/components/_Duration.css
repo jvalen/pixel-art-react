@@ -1,26 +1,16 @@
 .duration {
-  lost-utility: clearfix;
-  position: relative;
-  margin-top: 2em;
-  margin-bottom: 0.5em;
-  border-bottom: 1px solid $color-mineShaft;
-  padding-bottom: 0.5em;
+  margin-top: 1em;
+  border: 3px solid $color-boulder;
+  background-color: $color-mineShaft;
+  color: $color-silver;
   text-align: center;
+
   label,
   input {
-    color: $color-mineShaft;
+    padding: 0.2em 0;
   }
 
   label {
-    float: left;
-  }
-
-  input {
-    width: 3em;
-    text-align: center;
-    float: left;
-    &:focus {
-      color: $color-silver;
-    }
+    display: block;
   }
 }
