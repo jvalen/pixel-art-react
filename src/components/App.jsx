@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from './Pixel-grid';
 import { DimensionsContainer } from './Dimensions';
+import { CellSizeContainer } from './CellSize';
 import { UndoRedoContainer } from './UndoRedo';
 import { PaletteContainer } from './Palette-grid';
 import { CssDisplay } from './Css-display';
@@ -146,10 +147,6 @@ export class App extends React.Component {
           </div>
           <div className="col-1-4">
             <div className="app__right-side">
-              <Duration
-                duration={this.props.duration}
-                setDuration={this.props.setDuration}
-              />
               <button
                 className="app__preview-button"
                 onClick={() => { this.changeModalType('preview'); }}
@@ -167,6 +164,11 @@ export class App extends React.Component {
                 rows={this.props.rows}
                 cellSize={this.props.cellSize}
                 activeFrameIndex={this.props.activeFrameIndex}
+              />
+              <CellSizeContainer />
+              <Duration
+                duration={this.props.duration}
+                setDuration={this.props.setDuration}
               />
             </div>
           </div>

@@ -7,12 +7,11 @@ export function setState(state) {
   };
 }
 
-export function setGridDimension(columns, rows, cellSize) {
+export function setGridDimension(columns, rows) {
   return {
     type: 'SET_GRID_DIMENSION',
     columns,
-    rows,
-    cellSize
+    rows
   };
 }
 

@@ -29,6 +29,7 @@
 @import 'components/_Eraser.css';
 @import 'components/_DownloadDrawing.css';
 @import 'components/_Dimensions.css';
+@import 'components/_CellSize.css';
 @import 'components/_CssDisplay.css';
 @import 'components/_CopyCss.css';
 @import 'components/_ColorPicker.css';

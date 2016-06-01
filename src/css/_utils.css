@@ -55,7 +55,7 @@
 [data-tooltip]::before {
   margin-left: -6px;
   margin-bottom: -12px;
-  border-top-color: #000;
+  border-top-color: black;
   border-top-color: hsla(0, 0%, 20%, 0.9);
 }
 

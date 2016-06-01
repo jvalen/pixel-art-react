@@ -1,6 +1,5 @@
 .dimensions {
-  margin: 1em 0;
-  /*background-color: $color-mineShaft;*/
+  margin: 1em 0 0;
   padding: 0.5em;
   .dimensions__columns {
     @mixin icon columns;
@@ -16,52 +15,23 @@
     display: table;
     input {
       width: 50%;
-      border: 1px solid $color-boulder;
-      background-color: $color-scorpion;
-      padding: 0.2em 0;
+      border: 3px solid $color-boulder;
+      background-color: $color-mineShaft;
+      padding: 0.3em 0;
       &:focus {
-        border: solid 1px $color-dustyGray;
+        border: solid 3px $color-dustyGray;
         outline: none;
       }
     }
     &::before {
-      width: 30px;
-      height: 30px;
+      width: 50px;
+      height: 50px;
       display: inline-block;
-      font-size: 1.5em;
+      font-size: 2.5em;
       color: $color-mineShaft;
       position: relative;
-      top: 0.15em;
+      top: 0.25em;
       margin-right: 0.4em;
-    }
-  }
-
-  .dimensions__cell-size {
-    position: relative;
-    display: flex;
-    margin-top: 2em;
-    margin-bottom: 0.5em;
-    label,
-    input {
-      display: flex;
-      flex: 1;
-      /*text-align: center;
-      justify-content: center;*/
-      align-items: center;
-      color: $color-silver;
-      border-bottom: 1px solid $color-boulder;
-      &:focus {
-        border-bottom: solid 1px $color-dustyGray;
-        outline: none;
-      }
-    }
-
-    label {
-      border: none;
-    }
-
-    input {
-      width: 100%;
     }
   }
 }

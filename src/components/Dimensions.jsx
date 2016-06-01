@@ -7,18 +7,8 @@ export class Dimensions extends React.Component {
     super(props);
     this.state = {
       columnsValue: 20,
-      rowsValue: 20,
-      cellSizeValue: 10
+      rowsValue: 20
     };
-  }
-
-  handleCellSizeChange(event) {
-    const newLocalState = {
-      cellSizeValue: event.target.value | 0
-    };
-    this.setState(newLocalState, function () {
-      this.props.setCellSize(this.state.cellSizeValue);
-    });
   }
 
   handleChange(event) {
@@ -37,44 +27,37 @@ export class Dimensions extends React.Component {
     newLocalState[propertyName] = event.target.value | 0;
     this.setState(newLocalState, function () {
       this.props.setGridDimension(
-        this.state.columnsValue, this.state.rowsValue, this.state.cellSizeValue
+        this.state.columnsValue, this.state.rowsValue
       );
     });
   }
 
   render() {
-    const { columns, rows, cellSize } = this.props;
-    let columnsValue = columns;
-    let rowsValue = rows;
-    let cellSizeValue = cellSize;
+    const { columns, rows } = this.props;
 
     return (
       <div className="dimensions">
-        <div className="dimensions__columns">
-          <input
-            type="text"
-            value={columnsValue}
-            onChange={(ev) => { this.handleChange(ev); }}
-            className="columns"
-            id="dimensions__columns"
-          />
+        <div data-tooltip="Number of columns">
+          <div className="dimensions__columns">
+            <input
+              type="text"
+              value={columns}
+              onChange={(ev) => { this.handleChange(ev); }}
+              className="columns"
+              id="dimensions__columns"
+            />
+          </div>
         </div>
-        <div className="dimensions__rows">
-          <input
-            type="text"
-            value={rowsValue}
-            onChange={(ev) => { this.handleChange(ev); }}
-            id="dimensions__rows"
-          />
-        </div>
-        <div className="dimensions__cell-size">
-          <label htmlFor="dimensions__tile-size">Pixel Size</label>
-          <input
-            type="text"
-            value={cellSizeValue}
-            onChange={(ev) => { this.handleCellSizeChange(ev); }}
-            id="dimensions__tile-size"
-          />
+        <div data-tooltip="Number of rows">
+          <div className="dimensions__rows">
+            <input
+              type="text"
+              value={rows}
+              onChange={(ev) => { this.handleChange(ev); }}
+              className="rows"
+              id="dimensions__rows"
+            />
+          </div>
         </div>
       </div>
     );
@@ -84,8 +67,7 @@ export class Dimensions extends React.Component {
 function mapStateToProps(state) {
   return {
     columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize'),
+    rows: state.present.get('rows')
   };
 }
 export const DimensionsContainer = connect(

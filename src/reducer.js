@@ -104,7 +104,7 @@ function setInitialState(state) {
   return state.merge(initialState);
 }
 
-function setGridDimension(state, columns, rows, cellSize) {
+function setGridDimension(state, columns, rows) {
   const framesCount = state.get('frames').size;
   let newFrames = List();
 
@@ -118,8 +118,7 @@ function setGridDimension(state, columns, rows, cellSize) {
   return state.merge({
     frames: newFrames,
     rows: parseInt(rows, 10),
-    columns: parseInt(columns, 10),
-    cellSize: parseInt(cellSize, 10)
+    columns: parseInt(columns, 10)
   });
 }
 
@@ -299,7 +298,7 @@ export default function (state = Map(), action) {
     case 'SET_INITIAL_STATE':
       return setInitialState(state);
     case 'SET_GRID_DIMENSION':
-      return setGridDimension(state, action.columns, action.rows, action.cellSize);
+      return setGridDimension(state, action.columns, action.rows);
     case 'SET_COLOR_SELECTED':
       return setColorSelected(state, action.newColorSelected);
     case 'SET_CUSTOM_COLOR':

@@ -6,7 +6,12 @@ export const Duration = (props) => {
   };
   return (
     <div className="duration">
-      <label htmlFor="duration__input">Animation Duration</label>
+      <label
+        data-tooltip="Animation duration in seconds"
+        htmlFor="duration__input"
+      >
+        Duration:
+      </label>
       <input
         type="text"
         value={props.duration}

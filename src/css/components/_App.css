@@ -10,7 +10,7 @@
   .app__load-save-container {
     margin-bottom: 2em;
     .app__load-button {
-      @mixin button gray;
+      @mixin button red;
     }
     lost-utility: clearfix;
     > div,
@@ -51,14 +51,11 @@
 
   .app__tools-wrapper {
     text-align: center;
-    border-left: 2px solid $color-mineShaft;
     margin: 1em 0 0.5em;
     & > div {
       font-size: 1.8em;
       text-align: center;
       color: $color-mineShaft;
-      border: 1px solid $color-mineShaft;
-      border-width: 2px 2px 2px 0;
       padding: 0.2em 0;
       &.selected {
         color: $color-silver;

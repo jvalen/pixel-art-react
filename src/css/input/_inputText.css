@@ -8,10 +8,8 @@ input[type="text"] {
   color: $color-silver;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid $color-boulder;
   transition: border 0.3s;
   &:focus {
-    border-bottom: solid 1px $color-dustyGray;
     outline: none;
   }
 }
