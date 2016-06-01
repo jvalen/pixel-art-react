@@ -1,4 +1,6 @@
 .eyedropper {
   @mixin icon eyedropper;
-  background-color: $color-scorpion;
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -121,7 +121,7 @@ export class App extends React.Component {
                 cellSize={this.props.cellSize}
                 activeFrameIndex={this.props.activeFrameIndex}
               >
-                CSS
+                css
               </button>
               <div className="app__social-container">
                 <button
@@ -151,7 +151,7 @@ export class App extends React.Component {
                 className="app__preview-button"
                 onClick={() => { this.changeModalType('preview'); }}
               >
-                Preview
+                PREVIEW
               </button>
               <ResetContainer
                 columns={this.props.columns}

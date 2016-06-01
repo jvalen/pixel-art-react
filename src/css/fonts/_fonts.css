@@ -1,12 +1,12 @@
 @font-face {
-  font-family: 'silkscreen_expandednormal';
-  src: url('fonts/files/slkscre-webfont.eot');
+  font-family: 'minecraftiaregular';
+  src: url('fonts/files/minecraftia-regular-webfont.eot');
   src:
-    url('fonts/files/slkscre-webfont.eot?#iefix') format('embedded-opentype'),
-    url('fonts/files/slkscre-webfont.woff2') format('woff2'),
-    url('fonts/files/slkscre-webfont.woff') format('woff'),
-    url('fonts/files/slkscre-webfont.ttf') format('truetype'),
-    url('fonts/files/slkscre-webfont.svg#silkscreen_expandednormal') format('svg');
+    url('fonts/files/minecraftia-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/files/minecraftia-regular-webfont.woff2') format('woff2'),
+    url('fonts/files/minecraftia-regular-webfont.woff') format('woff'),
+    url('fonts/files/minecraftia-regular-webfont.ttf') format('truetype'),
+    url('fonts/files/minecraftia-regular-webfont.svg#minecraftiaregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }

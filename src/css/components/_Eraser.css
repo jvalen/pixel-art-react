@@ -1,4 +1,6 @@
 .eraser {
   @mixin icon eraser;
-  background-color: $color-scorpion;
+  &:hover {
+    cursor: pointer;
+  }
 }

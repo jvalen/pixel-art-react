@@ -17,7 +17,6 @@
 
   input {
     width: 3em;
-    height: 1em;
     text-align: center;
     float: left;
     &:focus {

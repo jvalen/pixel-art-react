@@ -1,7 +1,9 @@
 .color-picker {
   .color-picker__button {
     @mixin icon paint-brush;
-    background-color: $color-scorpion;
     display: block;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }

@@ -40,6 +40,8 @@
     @mixin button white;
     width: 100%;
     margin-top: 1em;
+    font-weight: bold !important;
+    color: $color-mineShaft;
   }
 
   .app__preview-button {

@@ -14,6 +14,7 @@
     margin: 0.5em auto;
     display: table;
     input {
+      font-family: $font-pixel;
       width: 50%;
       border: 3px solid $color-boulder;
       background-color: $color-mineShaft;
@@ -30,7 +31,6 @@
       font-size: 2.5em;
       color: $color-mineShaft;
       position: relative;
-      top: 0.25em;
       margin-right: 0.4em;
     }
   }
