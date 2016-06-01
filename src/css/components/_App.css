@@ -1,5 +1,6 @@
 #app {
-  .app__main-container {
+  .app__main-container,
+  .app__central-container {
     lost-utility: clearfix;
   }
 

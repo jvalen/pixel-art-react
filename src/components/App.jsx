@@ -69,7 +69,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div id="app">
+      <div className="app__main">
         <SimpleSpinner spin={this.props.loading} />
         <SimpleNotificationContainer
           notification={this.props.notifications}
