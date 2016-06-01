@@ -1,56 +1,15 @@
-@media only screen and (min-width: 1177px) {
-  /*button,
-  .button {
-    &::before {
-      font-size: 2em;
-    }
+@media only screen and (max-width: 935px) {
+  .app__left-side,
+  .app__right-side {
+    width: 100% !important;
   }
-
-  label {
-    font-size: 2em;
-  }
-
-  h1 {
-    font-size: 3em;
-  }
-
-  input[type="text"] {
-    font-size: 2em;
-  }*/
 }
 
-@media only screen and (max-width: 1176px) {
-  /*button,
-  .button {
-    &::before {
-      font-size: 1em;
+@media only screen and (max-width: 780px) {
+  .dimensions {
+    label {
+      font-size: 1.5em !important;
+      top: -0.2em;
     }
   }
-
-  label {
-    font-size: 0.8em;
-  }
-
-  label.duration-label {
-    font-size: 0.8em;
-  }
-
-  h1 {
-    font-size: 2em;
-  }
-
-  .fa.fa-eyedropper,
-  .fa.fa-paint-brush,
-  .fa.fa-eraser {
-    font-size: 1.2em;
-  }
-
-  input[type="text"] {
-    font-size: 1em;
-  }
-
-  figure.figure.front {
-    font-size: 1em !important;
-    padding-top: 1em !important;
-  }*/
 }
