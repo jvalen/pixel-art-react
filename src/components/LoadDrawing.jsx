@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import { PreviewContainer } from './Preview';
 import { fromJS } from 'immutable';
+import { getDataFromStorage, removeProjectFromStorage } from '../utils/storage';
 
 /*
   Avoid error when server-side render doesn't recognize
@@ -14,11 +15,8 @@ export class LoadDrawing extends React.Component {
   removeFromStorage(key, e) {
     e.stopPropagation();
     if (!!browserStorage) {
-      let dataStored = browserStorage.getItem('pixel-art-react');
-      if (dataStored) {
-        dataStored = JSON.parse(dataStored);
-        dataStored.stored.splice(key, 1);
-        browserStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+      const removed = removeProjectFromStorage(browserStorage, key);
+      if (removed) {
         this.props.sendNotification('Drawing deleted');
         this.props.close();
       }
@@ -38,10 +36,8 @@ export class LoadDrawing extends React.Component {
 
   giveMeDrawings() {
     if (!!browserStorage) {
-      let dataStored = browserStorage.getItem('pixel-art-react');
+      const dataStored = getDataFromStorage(browserStorage);
       if (dataStored) {
-        dataStored = JSON.parse(dataStored);
-
         if (dataStored.stored.length > 0) {
           return dataStored.stored.map((data, i) => {
             const elem = {

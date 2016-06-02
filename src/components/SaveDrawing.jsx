@@ -1,39 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
+import { saveProjectToStorage } from '../utils/storage';
 
 export class SaveDrawing extends React.Component {
   save() {
-    let dataStored = localStorage.getItem('pixel-art-react');
-    const { frames, columns, rows, cellSize, paletteGridData } = this.props;
     const drawingToSave = {
-      id: 0,
-      frames,
-      paletteGridData,
-      cellSize,
-      columns,
-      rows,
-      animate: frames.size > 1
+      frames: this.props.frames,
+      paletteGridData: this.props.paletteGridData,
+      cellSize: this.props.cellSize,
+      columns: this.props.columns,
+      rows: this.props.rows,
+      animate: this.props.frames.size > 1
     };
 
-    if (dataStored) {
-      // Data exist in the web storage
-      dataStored = JSON.parse(dataStored);
-
-      const drawingsCount = dataStored.length;
-      drawingToSave.id = drawingsCount;
-      dataStored.stored.push(drawingToSave);
-    } else {
-      // No data in the web storage
-      dataStored = {
-        stored: [drawingToSave],
-        current: null
-      };
+    if (saveProjectToStorage(localStorage, drawingToSave)) {
+      this.props.sendNotification('Drawing saved');
     }
-
-    localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
-
-    this.props.sendNotification('Drawing saved');
   }
   render() {
     return (

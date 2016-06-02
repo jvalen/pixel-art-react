@@ -18,6 +18,7 @@ import { SimpleNotificationContainer } from './SimpleNotification';
 import { FramesHandlerContainer } from './FramesHandler';
 import Duration from './Duration';
 import Modal from './Modal';
+import { initStorage, getDataFromStorage } from '../utils/storage';
 
 export class App extends React.Component {
   constructor(props) {
@@ -31,12 +32,16 @@ export class App extends React.Component {
 
   componentDidMount() {
     this.props.hideSpinner();
-    let dataStored = localStorage.getItem('pixel-art-react');
+
+    const dataStored = getDataFromStorage(localStorage);
     if (dataStored) {
-      dataStored = JSON.parse(dataStored);
-      if (dataStored.current) {
-        // Load data from web storage
-        const { frames, paletteGridData, columns, rows, cellSize } = dataStored.current;
+      // Load current project from the storage
+      const currentProjectIndex = dataStored.current;
+      if (currentProjectIndex >= 0) {
+        const {
+          frames, paletteGridData, columns, rows, cellSize
+        } = dataStored.stored[currentProjectIndex];
+
         this.props.setDrawing(
           frames,
           paletteGridData,
@@ -46,12 +51,8 @@ export class App extends React.Component {
         );
       }
     } else {
-      // Initialize web storage
-      dataStored = {
-        stored: [],
-        current: null
-      };
-      localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+      // If no data initialize storage
+      initStorage(localStorage);
     }
   }
 

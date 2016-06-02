@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shareDrawing } from '../utils/helpers';
 import * as actionCreators from '../action_creators';
+import { saveProjectToStorage, getDataFromStorage } from '../utils/storage';
 
 export class TwitterForm extends React.Component {
   constructor(props) {
@@ -25,38 +26,33 @@ export class TwitterForm extends React.Component {
         columns, rows, cellSize, duration
       } = this.props;
 
-      // Store current drawing in the web storage
-      let dataStored = localStorage.getItem('pixel-art-react');
+      // Store current drawing in the storage
       const drawingToSave = {
-        id: 0,
-        frames: frames.toJS(),
-        paletteGridData: paletteGridData.toJS(),
+        frames,
+        paletteGridData,
         cellSize,
         columns,
-        rows
+        rows,
+        animate: frames.size > 1
       };
-
-      if (dataStored) {
-        dataStored = JSON.parse(dataStored);
-        dataStored.current = drawingToSave;
-        localStorage.setItem('pixel-art-react', JSON.stringify(dataStored));
+      if (saveProjectToStorage(localStorage, drawingToSave)) {
+        this.props.showSpinner();
+        shareDrawing(
+          {
+            type,
+            frames,
+            activeFrame,
+            columns,
+            rows,
+            cellSize,
+            duration
+          },
+          this.refs.tweetText.value,
+          'twitter'
+        );
+      } else {
+        this.props.sendNotification('Sorry: There was an error :(');
       }
-
-      this.props.showSpinner();
-
-      shareDrawing(
-        {
-          type,
-          frames,
-          activeFrame,
-          columns,
-          rows,
-          cellSize,
-          duration
-        },
-        this.refs.tweetText.value,
-        'twitter'
-      );
     }
   }
 
