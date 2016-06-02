@@ -86,56 +86,68 @@ export class App extends React.Component {
           />
         </div>
         <div className="app__central-container">
-          <div className="col-1-4">
+          <div className="left col-1-4">
             <div className="app__left-side">
-              <div className="app__load-save-container">
-                <button
-                  className="app__load-button"
-                  onClick={() => { this.changeModalType('load'); }}
-                >
-                  LOAD
-                </button>
-                <SaveDrawingContainer
-                  frames={this.props.frames}
-                  columns={this.props.columns}
-                  rows={this.props.rows}
-                  cellSize={this.props.cellSize}
-                  paletteGridData={this.props.paletteGridData}
-                />
-              </div>
-              <UndoRedoContainer />
-              <div className="app__tools-wrapper grid-3">
-                <EraserContainer />
-                <ColorPickerContainer />
-                <EyedropperContainer />
-              </div>
-              <PaletteContainer
-                paletteGridData={this.props.paletteGridData}
-              />
-              <button
-                className="app__copycss-button"
-                onClick={() => { this.changeModalType('copycss'); }}
-                frames={this.props.frames}
-                columns={this.props.columns}
-                rows={this.props.rows}
-                cellSize={this.props.cellSize}
-                activeFrameIndex={this.props.activeFrameIndex}
-              >
-                css
-              </button>
-              <div className="app__social-container">
-                <button
-                  className="app__twitter-button"
-                  onClick={() => { this.changeModalType('twitter'); }}
-                />
-                <button
-                  className="app__download-button"
-                  onClick={() => { this.changeModalType('download'); }}
-                />
-              </div>
+              <span className="app__mobile--container">
+                <span className="app__mobile--group">
+                  <div className="app__load-save-container">
+                    <button
+                      className="app__load-button"
+                      onClick={() => { this.changeModalType('load'); }}
+                    >
+                      LOAD
+                    </button>
+                    <SaveDrawingContainer
+                      frames={this.props.frames}
+                      columns={this.props.columns}
+                      rows={this.props.rows}
+                      cellSize={this.props.cellSize}
+                      paletteGridData={this.props.paletteGridData}
+                    />
+                  </div>
+                  <UndoRedoContainer />
+                  <div className="app__tools-wrapper grid-3">
+                    <EraserContainer />
+                    <ColorPickerContainer />
+                    <EyedropperContainer />
+                  </div>
+                </span>
+                <span className="app__mobile--group">
+                  <PaletteContainer
+                    paletteGridData={this.props.paletteGridData}
+                  />
+                </span>
+              </span>
+              <span className="app__mobile--container">
+                <span className="app__mobile--group">
+                  <button
+                    className="app__copycss-button"
+                    onClick={() => { this.changeModalType('copycss'); }}
+                    frames={this.props.frames}
+                    columns={this.props.columns}
+                    rows={this.props.rows}
+                    cellSize={this.props.cellSize}
+                    activeFrameIndex={this.props.activeFrameIndex}
+                  >
+                    css
+                  </button>
+                </span>
+                <span className="app__mobile--group">
+                  <div className="app__social-container">
+                    <button
+                      className="app__twitter-button"
+                      onClick={() => { this.changeModalType('twitter'); }}
+                    />
+                    <button
+                      className="app__download-button"
+                      onClick={() => { this.changeModalType('download'); }}
+                    />
+                  </div>
+                </span>
+              </span>
             </div>
           </div>
-          <div className="col-2-4">
+          <div className="center col-2-4">
             <Grid
               columns={this.props.columns}
               currentColor={this.props.currentColor}
@@ -145,31 +157,37 @@ export class App extends React.Component {
               activeFrame={this.props.activeFrame}
             />
           </div>
-          <div className="col-1-4">
+          <div className="right col-1-4">
             <div className="app__right-side">
-              <button
-                className="app__preview-button"
-                onClick={() => { this.changeModalType('preview'); }}
-              >
-                PREVIEW
-              </button>
-              <ResetContainer
-                columns={this.props.columns}
-                rows={this.props.rows}
-                activeFrameIndex={this.props.activeFrameIndex}
-              />
-              <DimensionsContainer
-                frames={this.props.frames}
-                columns={this.props.columns}
-                rows={this.props.rows}
-                cellSize={this.props.cellSize}
-                activeFrameIndex={this.props.activeFrameIndex}
-              />
-              <CellSizeContainer />
-              <Duration
-                duration={this.props.duration}
-                setDuration={this.props.setDuration}
-              />
+              <span className="app__mobile--container">
+                <span className="app__mobile--group">
+                  <button
+                    className="app__preview-button"
+                    onClick={() => { this.changeModalType('preview'); }}
+                  >
+                    PREVIEW
+                  </button>
+                  <ResetContainer
+                    columns={this.props.columns}
+                    rows={this.props.rows}
+                    activeFrameIndex={this.props.activeFrameIndex}
+                  />
+                  <DimensionsContainer
+                    frames={this.props.frames}
+                    columns={this.props.columns}
+                    rows={this.props.rows}
+                    cellSize={this.props.cellSize}
+                    activeFrameIndex={this.props.activeFrameIndex}
+                  />
+                </span>
+                <span className="app__mobile--group">
+                  <CellSizeContainer />
+                  <Duration
+                    duration={this.props.duration}
+                    setDuration={this.props.setDuration}
+                  />
+                </span>
+              </span>
             </div>
           </div>
         </div>
