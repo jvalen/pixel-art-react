@@ -1,12 +1,13 @@
 .load-drawing {
   h2 {
-    padding: 2em 0;
+    padding: 2em 0 0;
+    margin-bottom: 0;
     font-size: 1em;
     display: block;
+    text-align: center;
   }
   .load-drawing__container {
     max-height: 400;
-    overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
     flex-direction: row;
@@ -22,18 +23,22 @@
       flex: 1 1 25%;
       min-height: 200;
       margin: 1em;
+      padding: 0.5em 0;
       .drawing__delete {
+        @mixin icon trash-o;
         position: absolute;
         font-size: 1.7em;
-        color: red;
+        color: white;
         top: 0;
         right: 0;
         cursor: no-drop;
         padding: 0.1em;
-        background-color: white;
-        border: 1px solid black;
-
-        @mixin icon trash-o;
+        background-color: $color-mineShaft;
+        border: 2px solid black;
+        border-width: 0 0 2px 2px;
+      }
+      .preview {
+        margin: 0 auto;
       }
     }
   }

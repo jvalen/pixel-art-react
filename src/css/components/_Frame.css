@@ -1,5 +1,5 @@
 .frame {
-  border: 1px solid #313131;
+  border: 1px solid $color-mineShaft;
   background-color: $color-silver;
   color: white;
   width: 70px;
@@ -9,23 +9,25 @@
   position: relative;
   overflow: hidden;
   opacity: 0.4;
-  .delete {
-    @mixin icon trash-o;
-    font-size: 1.2em;
-    top: 0.3em;
-  }
-  .duplicate {
-    @mixin icon files-o;
-    bottom: 0.3em;
-  }
   .delete,
   .duplicate {
     position: absolute;
     color: white;
-    right: 0.3em;
-    background-color: black;
-    border: 1px solid white;
+    right: 0;
+    background-color: $color-mineShaft;
+    border: 1px solid $color-silver;
     padding: 0.1em;
+  }
+  .delete {
+    @mixin icon trash-o;
+    font-size: 1.2em;
+    top: 0;
+    border-width: 0 0 2px 2px;
+  }
+  .duplicate {
+    @mixin icon files-o;
+    bottom: 0;
+    border-width: 2px 0 0 2px;
   }
   &.active {
     border: 2px solid $color-tamarillo;
@@ -35,6 +37,10 @@
     }
     .duplicate {
       cursor: copy;
+    }
+    .delete,
+    .duplicate {
+      border-color: $color-tamarillo;
     }
   }
 }

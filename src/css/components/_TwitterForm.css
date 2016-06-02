@@ -28,6 +28,8 @@
     @mixin button blue;
     span {
       @mixin icon twitter;
+      font-size: 2.3em;
+      padding: 0 0.2em;
     }
   }
 }

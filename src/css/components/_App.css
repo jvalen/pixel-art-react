@@ -4,6 +4,10 @@
     lost-utility: clearfix;
   }
 
+  .app__main {
+    margin-bottom: 2em;
+  }
+
   .app__frames-container {
     margin-bottom: 1em;
   }

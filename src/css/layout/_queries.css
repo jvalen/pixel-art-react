@@ -47,6 +47,10 @@
       lost-column: 1/2;
     }
   }
+
+  body {
+    width: 100% !important;
+  }
 }
 
 @media only screen and (max-width: 360px) {
