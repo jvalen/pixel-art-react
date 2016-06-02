@@ -44,7 +44,7 @@ export class LoadDrawing extends React.Component {
         rows
       );
       this.props.close();
-      this.props.sendNotification('Project imported successfully');
+      this.props.sendNotification('Project successfully imported');
     } else {
       this.props.sendNotification("Sorry, the project couldn't be imported");
     }
