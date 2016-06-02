@@ -24,7 +24,8 @@ export class App extends React.Component {
     super(props);
     this.state = {
       modalType: null,
-      modalOpen: false
+      modalOpen: false,
+      helpOn: false
     };
   }
 
@@ -67,6 +68,10 @@ export class App extends React.Component {
     });
   }
 
+  toggleHelp() {
+    this.setState({ helpOn: !this.state.helpOn });
+  }
+
   render() {
     return (
       <div className="app__main">
@@ -77,7 +82,13 @@ export class App extends React.Component {
           fadeOutTime={1500}
           duration={1500}
         />
-        <div className="app__frames-container">
+        <div
+          className="app__frames-container"
+          data-tooltip={
+            this.state.helpOn ?
+            'Add frames to create an awesome animation' : null
+          }
+        >
           <FramesHandlerContainer
             frames={this.props.frames}
             columns={this.props.columns}
@@ -94,22 +105,67 @@ export class App extends React.Component {
                     <button
                       className="app__load-button"
                       onClick={() => { this.changeModalType('load'); }}
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Load projects you stored before'
+                        : null
+                      }
                     >
                       LOAD
                     </button>
-                    <SaveDrawingContainer
-                      frames={this.props.frames}
-                      columns={this.props.columns}
-                      rows={this.props.rows}
-                      cellSize={this.props.cellSize}
-                      paletteGridData={this.props.paletteGridData}
-                    />
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Save your project'
+                        : null
+                      }
+                    >
+                      <SaveDrawingContainer
+                        frames={this.props.frames}
+                        columns={this.props.columns}
+                        rows={this.props.rows}
+                        cellSize={this.props.cellSize}
+                        paletteGridData={this.props.paletteGridData}
+                      />
+                    </div>
                   </div>
-                  <UndoRedoContainer />
+                  <div
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'Undo Redo actions'
+                      : null
+                    }
+                  >
+                    <UndoRedoContainer />
+                  </div>
                   <div className="app__tools-wrapper grid-3">
-                    <EraserContainer />
-                    <ColorPickerContainer />
-                    <EyedropperContainer />
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Remove colors'
+                        : null
+                      }
+                    >
+                      <EraserContainer />
+                    </div>
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Choose a new color that is not in your palette'
+                        : null
+                      }
+                    >
+                      <ColorPickerContainer />
+                    </div>
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Sample a color from your drawing'
+                        : null
+                      }
+                    >
+                      <EyedropperContainer />
+                    </div>
                   </div>
                 </span>
                 <span className="app__mobile--group">
@@ -128,20 +184,50 @@ export class App extends React.Component {
                     rows={this.props.rows}
                     cellSize={this.props.cellSize}
                     activeFrameIndex={this.props.activeFrameIndex}
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'Check your CSS generated code'
+                      : null
+                    }
                   >
                     css
                   </button>
                 </span>
                 <span className="app__mobile--group">
                   <div className="app__social-container">
-                    <button
-                      className="app__twitter-button"
-                      onClick={() => { this.changeModalType('twitter'); }}
-                    />
-                    <button
-                      className="app__download-button"
-                      onClick={() => { this.changeModalType('download'); }}
-                    />
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Tweet your creation in different formats'
+                        : null
+                      }
+                    >
+                      <button
+                        className="app__twitter-button"
+                        onClick={() => { this.changeModalType('twitter'); }}
+                      />
+                    </div>
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Download your creation in different formats'
+                        : null
+                      }
+                    >
+                      <button
+                        className="app__download-button"
+                        onClick={() => { this.changeModalType('download'); }}
+                      />
+                    </div>
+                    <div data-tooltip="Toggle help tooltips">
+                      <button
+                        className={
+                          `app__toggle-help-button
+                          ${this.state.helpOn ? ' selected' : ''}`
+                        }
+                        onClick={() => { this.toggleHelp(); }}
+                      />
+                    </div>
                   </div>
                 </span>
               </span>
@@ -164,28 +250,65 @@ export class App extends React.Component {
                   <button
                     className="app__preview-button"
                     onClick={() => { this.changeModalType('preview'); }}
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'Show a preview of your project'
+                      : null
+                    }
                   >
                     PREVIEW
                   </button>
-                  <ResetContainer
-                    columns={this.props.columns}
-                    rows={this.props.rows}
-                    activeFrameIndex={this.props.activeFrameIndex}
-                  />
-                  <DimensionsContainer
-                    frames={this.props.frames}
-                    columns={this.props.columns}
-                    rows={this.props.rows}
-                    cellSize={this.props.cellSize}
-                    activeFrameIndex={this.props.activeFrameIndex}
-                  />
+                  <div
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'Reset the selected frame'
+                      : null
+                    }
+                  >
+                    <ResetContainer
+                      columns={this.props.columns}
+                      rows={this.props.rows}
+                      activeFrameIndex={this.props.activeFrameIndex}
+                    />
+                  </div>
+                  <div
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'Number of columns and rows'
+                      : null
+                    }
+                  >
+                    <DimensionsContainer
+                      frames={this.props.frames}
+                      columns={this.props.columns}
+                      rows={this.props.rows}
+                      cellSize={this.props.cellSize}
+                      activeFrameIndex={this.props.activeFrameIndex}
+                    />
+                  </div>
                 </span>
                 <span className="app__mobile--group">
-                  <CellSizeContainer />
-                  <Duration
-                    duration={this.props.duration}
-                    setDuration={this.props.setDuration}
-                  />
+                  <div
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'Size of one tile in px'
+                      : null
+                    }
+                  >
+                    <CellSizeContainer />
+                  </div>
+                  <div
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'Animation duration in seconds'
+                      : null
+                    }
+                  >
+                    <Duration
+                      duration={this.props.duration}
+                      setDuration={this.props.setDuration}
+                    />
+                  </div>
                 </span>
               </span>
             </div>

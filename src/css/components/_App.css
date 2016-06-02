@@ -4,7 +4,8 @@
     lost-utility: clearfix;
   }
 
-  .app__main {
+  .app__main,
+  .app__central-container {
     margin-bottom: 2em;
   }
 
@@ -27,17 +28,26 @@
   .app__social-container {
     lost-utility: clearfix;
     margin: 1em 0;
-    > div,
-    > button {
-      lost-column: 1/2 0 0.5em;
+    > div {
+      lost-column: 1/3 0 0.5em;
     }
     .app__twitter-button {
       @mixin button blue;
       @mixin icon twitter;
+      width: 100%;
     }
     .app__download-button {
       @mixin button brown;
       @mixin icon download;
+      width: 100%;
+    }
+    .app__toggle-help-button {
+      @mixin button darkblue;
+      @mixin icon help;
+      &.selected {
+        box-shadow: 0 0 0 2px $color-silver;
+      }
+      width: 100%;
     }
   }
 
@@ -59,16 +69,19 @@
   .app__tools-wrapper {
     text-align: center;
     margin: 1em 0 0.5em;
-    & > div {
-      font-size: 1.8em;
-      text-align: center;
-      color: $color-mineShaft;
-      padding: 0.2em 0;
-      &.selected {
-        color: $color-silver;
-        background-color: $color-mineShaft;
-        & > div {
+    > div {
+      > div {
+        font-size: 1.8em;
+        text-align: center;
+        color: $color-mineShaft;
+        padding: 0.2em 0;
+        width: 100%;
+        &.selected {
+          color: $color-silver;
           background-color: $color-mineShaft;
+          & > div {
+            background-color: $color-mineShaft;
+          }
         }
       }
     }

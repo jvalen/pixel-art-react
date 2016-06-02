@@ -37,29 +37,25 @@ export class Dimensions extends React.Component {
 
     return (
       <div className="dimensions">
-        <div data-tooltip="Number of columns">
-          <div className="dimensions__columns">
-            <label htmlFor="dimensions__columns"></label>
-            <input
-              type="text"
-              value={columns}
-              onChange={(ev) => { this.handleChange(ev); }}
-              className="columns"
-              id="dimensions__columns"
-            />
-          </div>
+        <div className="dimensions__columns">
+          <label htmlFor="dimensions__columns"></label>
+          <input
+            type="text"
+            value={columns}
+            onChange={(ev) => { this.handleChange(ev); }}
+            className="columns"
+            id="dimensions__columns"
+          />
         </div>
-        <div data-tooltip="Number of rows">
-          <div className="dimensions__rows">
-            <label htmlFor="dimensions__rows"></label>
-            <input
-              type="text"
-              value={rows}
-              onChange={(ev) => { this.handleChange(ev); }}
-              className="rows"
-              id="dimensions__rows"
-            />
-          </div>
+        <div className="dimensions__rows">
+          <label htmlFor="dimensions__rows"></label>
+          <input
+            type="text"
+            value={rows}
+            onChange={(ev) => { this.handleChange(ev); }}
+            className="rows"
+            id="dimensions__rows"
+          />
         </div>
       </div>
     );

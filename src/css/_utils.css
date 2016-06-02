@@ -5,6 +5,7 @@
 [data-tooltip] {
   position: relative;
   cursor: pointer;
+  text-align: center;
 }
 
 [data-tooltip]::before,
@@ -44,6 +45,7 @@
   content: attr(data-tooltip);
   font-size: 14px;
   line-height: 1.2;
+  font-weight: normal;
 }
 
 [data-tooltip]::before,

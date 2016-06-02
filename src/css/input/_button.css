@@ -10,7 +10,8 @@
   color: $color-text;
   background-color: $color-bg;
   box-shadow: 0 5px 0 0 $color-boxshadow;
-  &:hover {
+  &:hover,
+  &.selected {
     transform: translate(0, 2px);
     box-shadow: 0 0 0 $color-bg-active;
     background-color: $color-bg-active;
@@ -37,6 +38,10 @@
 
   @if $color == blue {
     @mixin generate-button $color-silver, $color-steelblue, $color-sanMarino, $color-eastBay;
+  }
+
+  @if $color == darkblue {
+    @mixin generate-button $color-silver, $color-chathamsBlue, $color-chambray, $color-cloudBurst;
   }
 
   @if $color == white {

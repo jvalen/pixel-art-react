@@ -79,3 +79,7 @@
 @define-extend rows {
   content: "\f07d";
 }
+
+@define-extend help {
+  content: "\f128";
+}

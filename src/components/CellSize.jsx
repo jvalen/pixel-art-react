@@ -12,10 +12,7 @@ export class CellSize extends React.Component {
 
     return (
       <div className="cell-size">
-        <label
-          data-tooltip="Size of one tile in px"
-          htmlFor="cell-size__input"
-        >
+        <label htmlFor="cell-size__input">
           Pixel Size
         </label>
         <input
