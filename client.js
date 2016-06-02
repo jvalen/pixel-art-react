@@ -7,6 +7,9 @@ import { AppContainer } from './src/components/App';
 import { fromJS } from 'immutable';
 import undoable, { includeAction } from 'redux-undo';
 
+// Import the CSS imports file
+import './src/css/imports.css';
+
 const initialState = window.__INITIAL_STATE__;
 
 /* Make immutable initial state from server side */

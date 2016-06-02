@@ -2,6 +2,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   entry: [
@@ -9,10 +10,9 @@ var config = {
   ],
   plugins: [
     new CopyWebpackPlugin([
-        { from: 'dist/main.css', to: 'main.css' },
-        { from: 'dist/fonts', to: 'fonts' },
         { from: 'dist/favicon.ico', to: 'favicon.ico' }
     ]),
+    new ExtractTextPlugin("css/main.css"),
     new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery",
@@ -22,12 +22,38 @@ var config = {
         'process.env.NODE_ENV': '"production"'
     })
   ],
+  postcss: function(webpack) {
+    return [
+      require('postcss-import')({ addDependencyTo: webpack }),
+      require('precss')(),
+      require('autoprefixer')({
+        browsers: ['last 2 versions', 'IE > 8']
+      }),
+      require('lost'),
+      require('postcss-reporter')({
+        clearMessages: true
+      })
+    ];
+  },
+  target: "web",
+  stats: false,
+  progress: true,
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel'
-    }]
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      },
+      {
+        test:   /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?v=[\d.]+)?(\?[a-z0-9#-]+)?$/,
+        loader: 'url-loader?limit=100000&name=./css/[hash].[ext]'
+      }
+    ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
