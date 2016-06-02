@@ -99,8 +99,8 @@ export class App extends React.Component {
         <div className="app__central-container">
           <div className="left col-1-4">
             <div className="app__left-side">
-              <span className="app__mobile--container">
-                <span className="app__mobile--group">
+              <div className="app__mobile--container">
+                <div className="app__mobile--group">
                   <div className="app__load-save-container">
                     <button
                       className="app__load-button"
@@ -167,15 +167,15 @@ export class App extends React.Component {
                       <EyedropperContainer />
                     </div>
                   </div>
-                </span>
-                <span className="app__mobile--group">
+                </div>
+                <div className="app__mobile--group">
                   <PaletteContainer
                     paletteGridData={this.props.paletteGridData}
                   />
-                </span>
-              </span>
-              <span className="app__mobile--container">
-                <span className="app__mobile--group">
+                </div>
+              </div>
+              <div className="app__mobile--container">
+                <div className="app__mobile--group">
                   <button
                     className="app__copycss-button"
                     onClick={() => { this.changeModalType('copycss'); }}
@@ -192,8 +192,8 @@ export class App extends React.Component {
                   >
                     css
                   </button>
-                </span>
-                <span className="app__mobile--group">
+                </div>
+                <div className="app__mobile--group">
                   <div className="app__social-container">
                     <div
                       data-tooltip={
@@ -229,8 +229,8 @@ export class App extends React.Component {
                       />
                     </div>
                   </div>
-                </span>
-              </span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="center col-2-4">
@@ -245,8 +245,8 @@ export class App extends React.Component {
           </div>
           <div className="right col-1-4">
             <div className="app__right-side">
-              <span className="app__mobile--container">
-                <span className="app__mobile--group">
+              <div className="app__mobile--container">
+                <div className="app__mobile--group">
                   <button
                     className="app__preview-button"
                     onClick={() => { this.changeModalType('preview'); }}
@@ -286,8 +286,8 @@ export class App extends React.Component {
                       activeFrameIndex={this.props.activeFrameIndex}
                     />
                   </div>
-                </span>
-                <span className="app__mobile--group">
+                </div>
+                <div className="app__mobile--group">
                   <div
                     data-tooltip={
                       this.state.helpOn ?
@@ -309,8 +309,8 @@ export class App extends React.Component {
                       setDuration={this.props.setDuration}
                     />
                   </div>
-                </span>
-              </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
