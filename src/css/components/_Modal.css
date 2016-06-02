@@ -2,7 +2,8 @@
   button.close {
     @mixin button blue;
   }
-  .modal__preview {
+  .modal__preview,
+  .modal__load {
     margin: 2em 0 1em;
     .modal__preview--wrapper {
       margin: 1em auto;

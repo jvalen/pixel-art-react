@@ -15,9 +15,10 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      previewType: 'single'
+      previewType: 'single',
+      loadType: 'storage'
     };
-    this.changePreviewType = this.changePreviewType.bind(this);
+    this.changeRadioType = this.changeRadioType.bind(this);
   }
 
   getModalContent(props) {
@@ -28,7 +29,7 @@ class Modal extends React.Component {
         <RadioSelector
           name="preview-type"
           selected={this.state.previewType}
-          change={this.changePreviewType}
+          change={this.changeRadioType}
           options={options}
         />
         {this.state.previewType !== 'spritesheet' ?
@@ -47,11 +48,29 @@ class Modal extends React.Component {
         }
       </div>
       :
-      null;
+      <div className="modal__load">
+        <RadioSelector
+          name="load-type"
+          selected={this.state.loadType}
+          change={this.changeRadioType}
+          options={options}
+        />
+      </div>
+      ;
 
     switch (props.type) {
       case 'load':
-        content = <LoadDrawingContainer close={props.close} />;
+        content = (
+          <LoadDrawingContainer
+            loadType={this.state.loadType}
+            close={props.close}
+            frames={props.frames}
+            columns={props.columns}
+            rows={props.rows}
+            cellSize={props.cellSize}
+            paletteGridData={props.paletteGridData}
+          />
+        );
         break;
       case 'copycss':
         content = (
@@ -107,35 +126,53 @@ class Modal extends React.Component {
   }
 
   generateRadioOptions(props) {
-    const options = [{
-      value: 'single',
-      label: 'single'
-    }];
+    let options;
 
-    if (props.frames.size > 1) {
-      const spritesheetSupport =
+    if (props.type !== 'load') {
+      options = [{
+        value: 'single',
+        label: 'single'
+      }];
+
+      if (props.frames.size > 1) {
+        const spritesheetSupport =
         props.type === 'download' ||
         props.type === 'twitter';
 
-      const animationOption = {
-        value: 'animation',
-        label: spritesheetSupport ? 'GIF' : 'animation'
-      };
-      options.push(animationOption);
+        const animationOption = {
+          value: 'animation',
+          label: spritesheetSupport ? 'GIF' : 'animation'
+        };
+        options.push(animationOption);
 
-      if (spritesheetSupport) {
-        options.push({
-          value: 'spritesheet',
-          label: 'spritesheet'
-        });
+        if (spritesheetSupport) {
+          options.push({
+            value: 'spritesheet',
+            label: 'spritesheet'
+          });
+        }
       }
+    } else {
+      options = [
+        { value: 'storage', label: 'Stored' },
+        { value: 'import', label: 'Import' },
+        { value: 'export', label: 'Export' }
+      ];
     }
 
     return options;
   }
 
-  changePreviewType(value) {
-    this.setState({ previewType: value });
+  changeRadioType(value, type) {
+    const newState = {};
+    switch (type) {
+      case 'load-type':
+        newState.loadType = value;
+        break;
+      default:
+        newState.previewType = value;
+    }
+    this.setState(newState);
   }
 
   render() {

@@ -85,3 +85,28 @@ export function removeProjectFromStorage(storage, indexToRemove) {
   }
   return false; // There was an error if it reaches this code
 }
+
+/*
+  Returns the export code
+*/
+export function generateExportString(projectData) {
+  try {
+    return JSON.stringify(projectData);
+  } catch (e) {
+    return 'Sorry, there was an error';
+  }
+}
+
+/*
+  Returns project data ready from a exported data string
+*/
+export function exportedStringToProjectData(projectData) {
+  if (projectData === '') {
+    return false;
+  }
+  try {
+    return JSON.parse(projectData);
+  } catch (e) {
+    return false;
+  }
+}

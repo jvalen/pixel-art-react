@@ -43,4 +43,25 @@
       }
     }
   }
+  .load-drawing__export {
+    overflow-y: scroll;
+    height: 30em;
+    background-color: $color-mineShaft;
+    color: $color-silver;
+    padding: 0.5em;
+    text-align: left;
+  }
+  .load-drawing__import {
+    width: 100%;
+    resize: none;
+    height: 25em;
+    margin: 1em 0 0;
+    background-color: $color-mineShaft;
+    color: $color-silver;
+  }
+  .import__button {
+    @mixin button red;
+    margin: 1.5em auto;
+    display: table;
+  }
 }

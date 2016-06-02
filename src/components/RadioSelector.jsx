@@ -10,7 +10,7 @@ const RadioSelector = (props) => {
             value={item.value}
             name={item.label}
             id={`${props.name}-${item.label}`}
-            onChange={() => { props.change(item.value); }}
+            onChange={() => { props.change(item.value, props.name); }}
             checked={props.selected === item.value ? 'checked' : null}
           />
           <span>{item.label}</span>

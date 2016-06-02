@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../action_creators';
 import { PreviewContainer } from './Preview';
 import { fromJS } from 'immutable';
-import { getDataFromStorage, removeProjectFromStorage } from '../utils/storage';
+import {
+  getDataFromStorage, removeProjectFromStorage,
+  generateExportString, exportedStringToProjectData
+} from '../utils/storage';
 
 /*
   Avoid error when server-side render doesn't recognize
@@ -12,6 +15,41 @@ import { getDataFromStorage, removeProjectFromStorage } from '../utils/storage';
 const browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
 
 export class LoadDrawing extends React.Component {
+  getExportCode() {
+    const projectData = {
+      frames: this.props.frames,
+      paletteGridData: this.props.paletteGridData,
+      cellSize: this.props.cellSize,
+      columns: this.props.columns,
+      rows: this.props.rows,
+      animate: this.props.frames.size > 1
+    };
+    return generateExportString(projectData);
+  }
+
+  importProject() {
+    const importedProject =
+      exportedStringToProjectData(this.refs.importProject.value);
+
+    if (importedProject) {
+      const {
+        frames, paletteGridData, columns, rows, cellSize
+      } = importedProject;
+
+      this.props.setDrawing(
+        frames,
+        paletteGridData,
+        cellSize,
+        columns,
+        rows
+      );
+      this.props.close();
+      this.props.sendNotification('Project imported successfully');
+    } else {
+      this.props.sendNotification("Sorry, the project couldn't be imported");
+    }
+  }
+
   removeFromStorage(key, e) {
     e.stopPropagation();
     if (!!browserStorage) {
@@ -75,22 +113,57 @@ export class LoadDrawing extends React.Component {
     return [];
   }
 
-  render() {
-    const drawings = this.giveMeDrawings();
-    const drawingsStored = drawings.length > 0;
+  giveMeOptions(type) {
+    switch (type) {
+      case 'import': {
+        return (
+          <div className="load-drawing">
+            <h2>Paste the previously exported code</h2>
+            <textarea
+              className="load-drawing__import"
+              ref="importProject"
+              defaultValue={''}
+            />
+            <button
+              className="import__button"
+              onClick={() => { this.importProject(); }}
+            >
+              IMPORT
+            </button>
+          </div>
+        );
+      }
+      case 'export': {
+        return (
+          <div className="load-drawing">
+            <h2>Select and copy the following code. Keep it save in a text file</h2>
+            <div className="load-drawing__export">
+              {this.getExportCode()}
+            </div>
+          </div>
+        );
+      }
+      default: {
+        const drawings = this.giveMeDrawings();
+        const drawingsStored = drawings.length > 0;
+        return (
+          <div className="load-drawing">
+            <h2>Select one of your awesome drawings</h2>
+            <div
+              className={
+                `load-drawing__container
+                ${!drawingsStored ? 'empty' : ''}`}
+            >
+              {drawingsStored ? this.giveMeDrawings() : 'Nothing awesome yet...'}
+            </div>
+          </div>
+        );
+      }
+    }
+  }
 
-    return (
-      <div className="load-drawing">
-        <h2>Select one of your awesome drawings</h2>
-        <div
-          className={
-            `load-drawing__container
-            ${!drawingsStored ? 'empty' : ''}`}
-        >
-          {drawingsStored ? this.giveMeDrawings() : 'Nothing awesome yet...'}
-        </div>
-      </div>
-    );
+  render() {
+    return (this.giveMeOptions(this.props.loadType));
   }
 }
 
