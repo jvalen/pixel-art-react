@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { shareDrawing } from '../utils/helpers';
-import * as actionCreators from '../action_creators';
-import { saveProjectToStorage, getDataFromStorage } from '../utils/storage';
+import * as actionCreators from '../actions/actionCreators';
+import { saveProjectToStorage } from '../utils/storage';
 
 export class TwitterForm extends React.Component {
   constructor(props) {

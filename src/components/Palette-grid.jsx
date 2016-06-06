@@ -7,15 +7,13 @@ export class Palette extends React.Component {
     const { paletteGridData } = this.props;
     const width = 100 / 6;
 
-    return paletteGridData.map((currentColor, i) => {
-      return (
-        <PaletteColorContainer
-          key={i}
-          width={width}
-          color={currentColor.get('color')}
-        />
-      );
-    });
+    return paletteGridData.map((currentColor, i) =>
+      <PaletteColorContainer
+        key={i}
+        width={width}
+        color={currentColor.get('color')}
+      />
+    );
   }
 
   render() {

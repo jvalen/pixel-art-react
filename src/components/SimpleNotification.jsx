@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 
 export class SimpleNotification extends React.Component {
   removeNotifications() {
@@ -11,13 +11,11 @@ export class SimpleNotification extends React.Component {
   }
 
   render() {
-    let notifications = this.props.notification.map((item, i) => {
-      return (
-        <div key={i} className="simple-notification">
-          {item}
-        </div>
-      );
-    });
+    let notifications = this.props.notification.map((item, i) =>
+      <div key={i} className="simple-notification">
+        {item}
+      </div>
+    );
 
     if (notifications.size > 0) {
       this.removeNotifications();

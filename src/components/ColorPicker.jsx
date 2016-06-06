@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 import Picker from 'react-color';
 
 export class ColorPicker extends React.Component {

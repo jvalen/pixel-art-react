@@ -2,14 +2,13 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 import Cell from './Pixel-cell';
 
 class Grid extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const same = (key) => { return nextProps[key].equals(this.props[key]); };
+    const same = (key) => nextProps[key].equals(this.props[key]);
     if (same('activeFrame')) {
-      // console.info('No need to render the grid!');
       return false;
     }
     return true;

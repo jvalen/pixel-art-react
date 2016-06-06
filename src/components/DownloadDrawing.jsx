@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { shareDrawing } from '../utils/helpers';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 
 export class DownloadDrawing extends React.Component {
   download(type) {

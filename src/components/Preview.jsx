@@ -5,7 +5,7 @@ import {
   generateAnimationCSSData,
   generateAnimationIntervals
 } from '../utils/helpers';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 import { Animation } from './Animation';
 import { StyleRoot } from 'radium';
 

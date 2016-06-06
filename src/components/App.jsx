@@ -11,7 +11,7 @@ import { ResetContainer } from './Reset';
 import { EyedropperContainer } from './Eyedropper';
 import { ColorPickerContainer } from './ColorPicker';
 import { connect } from 'react-redux';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 import CookieBanner from 'react-cookie-banner';
 import { SimpleSpinner } from './SimpleSpinner';
 import { SimpleNotificationContainer } from './SimpleNotification';

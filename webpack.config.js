@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
     './src/index.jsx'
   ],
   output: {
-    path: __dirname + '/build',
+    path: __dirname + '/devBuild',
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -35,13 +36,13 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './devBuild',
     hot: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './dist/index.html',
+      template: './devBuild/index.html',
       inject: true
     }),
     new webpack.ProvidePlugin({

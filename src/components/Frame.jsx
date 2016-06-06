@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 import { PreviewContainer } from './Preview';
 import { List } from 'immutable';
 

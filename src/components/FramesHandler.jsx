@@ -2,7 +2,7 @@ import React from 'react';
 import { FrameContainer } from './Frame';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { connect } from 'react-redux';
-import * as actionCreators from '../action_creators';
+import * as actionCreators from '../actions/actionCreators';
 
 export class FramesHandler extends React.Component {
   constructor(props) {
@@ -19,18 +19,16 @@ export class FramesHandler extends React.Component {
   }
 
   getFrames() {
-    return this.props.frames.map((frameData, index) => {
-      return (
-        <FrameContainer
-          key={index}
-          data-id={index}
-          frame={frameData}
-          columns={this.props.columns}
-          rows={this.props.rows}
-          active={this.props.activeFrameIndex === index}
-        />
-      );
-    });
+    return this.props.frames.map((frameData, index) =>
+      <FrameContainer
+        key={index}
+        data-id={index}
+        frame={frameData}
+        columns={this.props.columns}
+        rows={this.props.rows}
+        active={this.props.activeFrameIndex === index}
+      />
+    );
   }
 
   handleClick() {

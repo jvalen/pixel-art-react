@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import reducer from '../reducer';
+import reducer from '../reducers/reducer';
 import undoable, { includeAction } from 'redux-undo';
 import { fromJS } from 'immutable';
 
@@ -35,9 +35,7 @@ const configureStore = (devMode) => {
 
     /* Make immutable the initial state */
     initialState.present = fromJS(initialState.present);
-    initialState.past = initialState.past.map((item) => {
-      return fromJS(item);
-    });
+    initialState.past = initialState.past.map((item) => fromJS(item));
 
     store = createStore(undoable(reducer, {
       filter: includeAction([

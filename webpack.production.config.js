@@ -10,7 +10,7 @@ var config = {
   ],
   plugins: [
     new CopyWebpackPlugin([
-        { from: 'dist/favicon.ico', to: 'favicon.ico' }
+        { from: 'src/assets/favicon.ico', to: 'favicon.ico' }
     ]),
     new ExtractTextPlugin("css/main.css"),
     new webpack.ProvidePlugin({

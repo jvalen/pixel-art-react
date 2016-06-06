@@ -3,7 +3,7 @@
  */
 import { renderToString } from 'react-dom/server';
 import undoable from 'redux-undo';
-import reducer from './src/reducer';
+import reducer from '../reducers/reducer';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -14,13 +14,13 @@ import { OAuth } from 'oauth';
 import session from 'express-session';
 import React from 'react';
 import { createStore } from 'redux';
-import pkgjson from './package.json';
+import pkgjson from '../../package.json';
 import {
   drawFrame,
   drawGif,
   drawSpritesheet
-} from './src/utils/imageGeneration';
-import Root from './src/components/Root';
+} from '../utils/imageGeneration';
+import Root from '../components/Root';
 
 const app = module.exports = express();
 console.log(`Version deployed: ${pkgjson.version}`);
@@ -48,9 +48,9 @@ const oa = new OAuth(
   'HMAC-SHA1'
 );
 
-app.set('views', `${__dirname}/views`);
+app.set('views', `${__dirname}/../views`);
 app.set('view engine', 'pug');
-app.use(express.static(`${__dirname}/deploy`));
+app.use(express.static(`${__dirname}/../../deploy`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -101,7 +101,7 @@ function tweetWithMedia(client, request, response, path) {
   // Tweet message and drawing
   let filePath = path;
   if (path.indexOf('images/tmp') === -1) {
-    filePath = `${__dirname}/images/tmp/${path}`;
+    filePath = `${__dirname}/../../images/tmp/${path}`;
   }
   const data = fs.readFileSync(filePath);
   client.post('media/upload', { media: data }, (err, media) => {
@@ -238,7 +238,7 @@ app.post('/auth/download', (req, res) => {
 
 app.get('/download/tmp/:filename', (req, res) => {
   // console.log(`downloaded file: ${req.params.filename}`);
-  const filePath = `${__dirname}/images/tmp/${req.params.filename}`;
+  const filePath = `${__dirname}/../../images/tmp/${req.params.filename}`;
 
   // Stream and delete the file
   const stream = fs.createReadStream(filePath, { bufferSize: 64 * 1024 });
