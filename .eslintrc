@@ -15,7 +15,7 @@
         "indent": [2, 2, {"SwitchCase": 1}],
         "react/prop-types": 0,
         "func-names": 0,
-        "arrow-body-style": [2, "always"],
+        "arrow-body-style": [2, "as-needed"],
         "no-underscore-dangle": ["error", { "allow": ["__INITIAL_STATE__"] }],
         "new-cap": ["error", {"capIsNewExceptions": ["Map", "List"]}],
         "react/prefer-es6-class": 1,

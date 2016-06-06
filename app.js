@@ -2,10 +2,8 @@
  * Module dependencies.
  */
 import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
 import undoable from 'redux-undo';
 import reducer from './src/reducer';
-import { AppContainer } from './src/components/App';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -22,6 +20,7 @@ import {
   drawGif,
   drawSpritesheet
 } from './src/utils/imageGeneration';
+import Root from './src/components/Root';
 
 const app = module.exports = express();
 console.log(`Version deployed: ${pkgjson.version}`);
@@ -83,9 +82,7 @@ function handleRender(req, res) {
 
   // Render the component to a string
   const html = renderToString(
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
+    <Root store={store} />
   );
 
   const initialState = store.getState();

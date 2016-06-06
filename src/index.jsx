@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { AppContainer } from './components/App';
 import './css/imports.css'; // Import PostCSS files
 import Perf from 'react-addons-perf';
 import configureStore from './store/configureStore';
+import Root from './components/Root';
 
 const devMode = process.env.NODE_ENV === 'development';
 if (devMode) {
@@ -14,8 +13,6 @@ if (devMode) {
 const store = configureStore(devMode);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('app')
 );
