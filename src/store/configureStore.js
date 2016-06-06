@@ -1,0 +1,58 @@
+import { createStore } from 'redux';
+import reducer from '../reducer';
+import undoable, { includeAction } from 'redux-undo';
+import { fromJS } from 'immutable';
+
+const configureStore = (devMode) => {
+  let store;
+  if (devMode) {
+    store = createStore(undoable(reducer, {
+      filter: includeAction([
+        'SET_STATE',
+        'SET_GRID_DIMENSION',
+        'SET_GRID_CELL_VALUE',
+        'SET_DRAWING',
+        'SET_CELL_SIZE',
+        'SET_RESET_GRID'
+      ]),
+      debug: true
+    }));
+
+    /*
+      In production mode, the following actions are already dispatched
+      (Isomorphic app)
+    */
+    store.dispatch({
+      type: 'SET_INITIAL_STATE',
+      state: {}
+    });
+    store.dispatch({
+      type: 'SHOW_SPINNER'
+    });
+  } else {
+    // Collects initial state created in the server side
+    const initialState = window.__INITIAL_STATE__;
+
+    /* Make immutable the initial state */
+    initialState.present = fromJS(initialState.present);
+    initialState.past = initialState.past.map((item) => {
+      return fromJS(item);
+    });
+
+    store = createStore(undoable(reducer, {
+      filter: includeAction([
+        'SET_STATE',
+        'SET_GRID_DIMENSION',
+        'SET_GRID_CELL_VALUE',
+        'SET_DRAWING',
+        'SET_CELL_SIZE',
+        'SET_RESET_GRID'
+      ]),
+      debug: false
+    }), initialState);
+  }
+
+  return store;
+};
+
+export default configureStore;

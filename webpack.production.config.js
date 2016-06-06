@@ -6,7 +6,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   entry: [
-    './client.js'
+    './src/index.jsx'
   ],
   plugins: [
     new CopyWebpackPlugin([

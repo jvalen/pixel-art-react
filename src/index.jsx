@@ -1,37 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducer';
 import { AppContainer } from './components/App';
-import undoable, { includeAction } from 'redux-undo';
+import './css/imports.css'; // Import PostCSS files
 import Perf from 'react-addons-perf';
+import configureStore from './store/configureStore';
 
-// Import the CSS imports file
-import './css/imports.css';
+const devMode = process.env.NODE_ENV === 'development';
+if (devMode) {
+  window.Perf = Perf; // Expose react-addons-perf for dev purposes
+}
 
-// Expose react-addons-perf for development purposes
-window.Perf = Perf;
-
-const store = createStore(undoable(reducer, {
-  filter: includeAction([
-    'SET_STATE',
-    'SET_GRID_DIMENSION',
-    'SET_GRID_CELL_VALUE',
-    'SET_DRAWING',
-    'SET_CELL_SIZE',
-    'SET_RESET_GRID'
-  ]),
-  debug: true
-}));
-
-store.dispatch({
-  type: 'SET_INITIAL_STATE',
-  state: {}
-});
-store.dispatch({
-  type: 'SHOW_SPINNER'
-});
+const store = configureStore(devMode);
 
 ReactDOM.render(
   <Provider store={store}>
