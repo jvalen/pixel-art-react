@@ -16,13 +16,12 @@ function removeFiles(paths) {
  */
 function generateFrame(frameData, width, height, opacity, pixelSize) {
   const frame = frameData.map(
-    (elem) => {
-      return ({
+    (elem) =>
+      ({
         x: elem[0],
         y: elem[1],
         color: elem[3]
-      });
-    }
+      })
   );
 
   const BGCOLOR = '#000000';

@@ -55,9 +55,9 @@ function createPalette() {
 }
 
 function checkColorInPalette(palette, color) {
-  const sameColors = palette.filter((currentColor) => {
-    return (currentColor.get('color') === color);
-  });
+  const sameColors = palette.filter((currentColor) =>
+    (currentColor.get('color') === color)
+  );
   return (sameColors.size > 0);
 }
 
@@ -225,9 +225,7 @@ function resetGrid(state, columns, rows, activeFrameIndex) {
   );
 
   return state.merge({
-    frames: state.get('frames').update(activeFrameIndex, () => {
-      return newGrid;
-    })
+    frames: state.get('frames').update(activeFrameIndex, () => newGrid)
   });
 }
 
