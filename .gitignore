@@ -1,7 +1,6 @@
 node_modules
 dist/bundle.js
 npm-debug.log
-build/*
 deploy/*
 Procfile
 config.json

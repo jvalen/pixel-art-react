@@ -11,7 +11,7 @@ module.exports = {
     './src/index.jsx'
   ],
   output: {
-    path: __dirname + '/devBuild',
+    path: __dirname + '/build',
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -36,13 +36,13 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   devServer: {
-    contentBase: './devBuild',
+    contentBase: './build',
     hot: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './devBuild/index.html',
+      template: './build/index.html',
       inject: true
     }),
     new webpack.ProvidePlugin({
