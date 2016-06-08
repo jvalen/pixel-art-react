@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actions/actionCreators';
+import * as actionCreators from '../store/actions/actionCreators';
 
 export class SimpleNotification extends React.Component {
   removeNotifications() {

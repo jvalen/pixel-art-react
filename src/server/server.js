@@ -3,7 +3,7 @@
  */
 import { renderToString } from 'react-dom/server';
 import undoable from 'redux-undo';
-import reducer from '../reducers/reducer';
+import reducer from '../store/reducers/reducer';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';

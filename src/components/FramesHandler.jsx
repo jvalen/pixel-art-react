@@ -2,7 +2,7 @@ import React from 'react';
 import { FrameContainer } from './Frame';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actions/actionCreators';
+import * as actionCreators from '../store/actions/actionCreators';
 
 export class FramesHandler extends React.Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as actionCreators from '../actions/actionCreators';
+import * as actionCreators from '../store/actions/actionCreators';
 import Cell from './Pixel-cell';
 
 class Grid extends React.Component {

@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import reducer from '../reducers/reducer';
+import reducer from '../store/reducers/reducer';
 import undoable, { includeAction } from 'redux-undo';
 import { fromJS } from 'immutable';
 
