@@ -1,5 +1,5 @@
 import React from 'react';
-import { generatePixelDrawCss } from '../utils/helpers';
+import { generatePixelDrawCss } from '../utils/cssParse';
 
 export class CssDisplay extends React.Component {
   generateCss() {

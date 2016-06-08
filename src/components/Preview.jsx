@@ -4,7 +4,7 @@ import {
   generatePixelDrawCss,
   generateAnimationCSSData,
   generateAnimationIntervals
-} from '../utils/helpers';
+} from '../utils/cssParse';
 import * as actionCreators from '../store/actions/actionCreators';
 import { Animation } from './Animation';
 import { StyleRoot } from 'radium';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { shareDrawing } from '../utils/helpers';
+import { shareDrawing } from '../utils/cssParse';
 import * as actionCreators from '../store/actions/actionCreators';
 import { saveProjectToStorage } from '../utils/storage';
 

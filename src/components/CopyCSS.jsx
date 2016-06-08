@@ -4,7 +4,7 @@ import {
   generateAnimationCSSData,
   generateAnimationIntervals,
   exportAnimationData
-} from '../utils/helpers';
+} from '../utils/cssParse';
 
 export class CopyCSS extends React.Component {
   generateCSS() {
