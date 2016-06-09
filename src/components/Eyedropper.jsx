@@ -3,19 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-class Eyedropper extends React.Component {
-  handleClick() {
-    this.props.actions.setEyedropper();
-  }
-  render() {
-    return (
-      <div
-        className={`eyedropper${this.props.eyedropperOn ? ' selected' : ''}`}
-        onClick={() => { this.handleClick(); }}
-      />
-    );
-  }
-}
+const Eyedropper = (props) => {
+  const handleClick = () => {
+    props.actions.setEyedropper();
+  };
+
+  return (
+    <div
+      className={`eyedropper${props.eyedropperOn ? ' selected' : ''}`}
+      onClick={() => { handleClick(); }}
+    />
+  );
+};
 
 const mapStateToProps = (state) => ({
   eyedropperOn: state.present.get('eyedropperOn'),
