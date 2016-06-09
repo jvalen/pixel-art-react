@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../store/actions/actionCreators';
 
 export const Duration = (props) => {
   const handleChange = (event) => {
-    props.setDuration(event.target.value);
+    props.actions.setDuration(event.target.value);
   };
   return (
     <div className="duration">
@@ -19,4 +22,16 @@ export const Duration = (props) => {
   );
 };
 
-export default Duration;
+const mapStateToProps = (state) => ({
+  duration: state.present.get('duration')
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+const DurationContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Duration);
+export default DurationContainer;
