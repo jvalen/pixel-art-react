@@ -1,28 +1,26 @@
 import React from 'react';
-import Grid from './Pixel-grid';
-import { DimensionsContainer } from './Dimensions';
-import { CellSizeContainer } from './CellSize';
-import { UndoRedoContainer } from './UndoRedo';
-import { PaletteContainer } from './Palette-grid';
-import { CssDisplay } from './Css-display';
-import { SaveDrawingContainer } from './SaveDrawing';
-import { EraserContainer } from './Eraser';
-import { ResetContainer } from './Reset';
-import { EyedropperContainer } from './Eyedropper';
-import { ColorPickerContainer } from './ColorPicker';
-import { connect } from 'react-redux';
-import * as actionCreators from '../store/actions/actionCreators';
+import PixelGridContainer from './PixelGrid';
+import CellSizeContainer from './CellSize';
+import ColorPickerContainer from './ColorPicker';
+import ModalContainer from './Modal';
+import DimensionsContainer from './Dimensions';
+import CssDisplayContainer from './CssDisplay';
+import DurationContainer from './Duration';
+import EraserContainer from './Eraser';
+import EyedropperContainer from './Eyedropper';
+import FramesHandlerContainer from './FramesHandler';
+import PaletteContainer from './PaletteGrid';
+import ResetContainer from './Reset';
+import SaveDrawingContainer from './SaveDrawing';
+import SimpleNotificationContainer from './SimpleNotification';
+import SimpleSpinnerContainer from './SimpleSpinner';
+import UndoRedoContainer from './UndoRedo';
 import CookieBanner from 'react-cookie-banner';
-import { SimpleSpinner } from './SimpleSpinner';
-import { SimpleNotificationContainer } from './SimpleNotification';
-import { FramesHandlerContainer } from './FramesHandler';
-import Duration from './Duration';
-import Modal from './Modal';
-import { initStorage, getDataFromStorage } from '../utils/storage';
+import { initialSetup } from '../utils/startup';
 
-export class App extends React.Component {
-  constructor(props) {
-    super(props);
+export default class App extends React.Component {
+  constructor() {
+    super();
     this.state = {
       modalType: null,
       modalOpen: false,
@@ -31,29 +29,7 @@ export class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.hideSpinner();
-
-    const dataStored = getDataFromStorage(localStorage);
-    if (dataStored) {
-      // Load current project from the storage
-      const currentProjectIndex = dataStored.current;
-      if (currentProjectIndex >= 0) {
-        const {
-          frames, paletteGridData, columns, rows, cellSize
-        } = dataStored.stored[currentProjectIndex];
-
-        this.props.setDrawing(
-          frames,
-          paletteGridData,
-          cellSize,
-          columns,
-          rows
-        );
-      }
-    } else {
-      // If no data initialize storage
-      initStorage(localStorage);
-    }
+    initialSetup(this.props.dispatch, localStorage);
   }
 
   changeModalType(type) {
@@ -76,9 +52,8 @@ export class App extends React.Component {
   render() {
     return (
       <div className="app__main">
-        <SimpleSpinner spin={this.props.loading} />
+        <SimpleSpinnerContainer />
         <SimpleNotificationContainer
-          notification={this.props.notifications}
           fadeInTime={1000}
           fadeOutTime={1500}
           duration={1500}
@@ -90,12 +65,7 @@ export class App extends React.Component {
             'Add frames to create an awesome animation' : null
           }
         >
-          <FramesHandlerContainer
-            frames={this.props.frames}
-            columns={this.props.columns}
-            rows={this.props.rows}
-            activeFrameIndex={this.props.activeFrameIndex}
-          />
+          <FramesHandlerContainer />
         </div>
         <div className="app__central-container">
           <div className="left col-1-4">
@@ -121,13 +91,7 @@ export class App extends React.Component {
                         : null
                       }
                     >
-                      <SaveDrawingContainer
-                        frames={this.props.frames}
-                        columns={this.props.columns}
-                        rows={this.props.rows}
-                        cellSize={this.props.cellSize}
-                        paletteGridData={this.props.paletteGridData}
-                      />
+                      <SaveDrawingContainer />
                     </div>
                   </div>
                   <div
@@ -170,9 +134,7 @@ export class App extends React.Component {
                   </div>
                 </div>
                 <div className="app__mobile--group">
-                  <PaletteContainer
-                    paletteGridData={this.props.paletteGridData}
-                  />
+                  <PaletteContainer />
                 </div>
               </div>
               <div className="app__mobile--container">
@@ -180,11 +142,6 @@ export class App extends React.Component {
                   <button
                     className="app__copycss-button"
                     onClick={() => { this.changeModalType('copycss'); }}
-                    frames={this.props.frames}
-                    columns={this.props.columns}
-                    rows={this.props.rows}
-                    cellSize={this.props.cellSize}
-                    activeFrameIndex={this.props.activeFrameIndex}
                     data-tooltip={
                       this.state.helpOn ?
                       'Check your CSS generated code'
@@ -235,14 +192,7 @@ export class App extends React.Component {
             </div>
           </div>
           <div className="center col-2-4">
-            <Grid
-              columns={this.props.columns}
-              currentColor={this.props.currentColor}
-              eyedropperOn={this.props.eyedropperOn}
-              eraserOn={this.props.eraserOn}
-              dragging={this.props.dragging}
-              activeFrame={this.props.activeFrame}
-            />
+            <PixelGridContainer />
           </div>
           <div className="right col-1-4">
             <div className="app__right-side">
@@ -266,11 +216,7 @@ export class App extends React.Component {
                       : null
                     }
                   >
-                    <ResetContainer
-                      columns={this.props.columns}
-                      rows={this.props.rows}
-                      activeFrameIndex={this.props.activeFrameIndex}
-                    />
+                    <ResetContainer />
                   </div>
                   <div
                     data-tooltip={
@@ -279,13 +225,7 @@ export class App extends React.Component {
                       : null
                     }
                   >
-                    <DimensionsContainer
-                      frames={this.props.frames}
-                      columns={this.props.columns}
-                      rows={this.props.rows}
-                      cellSize={this.props.cellSize}
-                      activeFrameIndex={this.props.activeFrameIndex}
-                    />
+                    <DimensionsContainer />
                   </div>
                 </div>
                 <div className="app__mobile--group">
@@ -305,10 +245,7 @@ export class App extends React.Component {
                       : null
                     }
                   >
-                    <Duration
-                      duration={this.props.duration}
-                      setDuration={this.props.setDuration}
-                    />
+                    <DurationContainer />
                   </div>
                 </div>
               </div>
@@ -316,12 +253,7 @@ export class App extends React.Component {
           </div>
         </div>
         <div className="css-container">
-          <CssDisplay
-            activeFrame={this.props.activeFrame}
-            columns={this.props.columns}
-            rows={this.props.rows}
-            cellSize={this.props.cellSize}
-          />
+          <CssDisplayContainer />
         </div>
         <CookieBanner
           disableStyle
@@ -332,46 +264,12 @@ export class App extends React.Component {
           onAccept={() => {}}
           cookie="user-has-accepted-cookies"
         />
-        <Modal
+        <ModalContainer
           type={this.state.modalType}
           isOpen={this.state.modalOpen}
           close={() => { this.closeModal(); }}
-          frames={this.props.frames}
-          columns={this.props.columns}
-          rows={this.props.rows}
-          cellSize={this.props.cellSize}
-          activeFrameIndex={this.props.activeFrameIndex}
-          duration={this.props.duration}
-          activeFrame={this.props.activeFrame}
-          paletteGridData={this.props.paletteGridData}
         />
       </div>
     );
   }
 }
-
-function mapStateToProps(state) {
-  const frames = state.present.get('frames');
-  const activeFrameIndex = state.present.get('activeFrameIndex');
-
-  return {
-    frames,
-    activeFrame: frames.get(activeFrameIndex),
-    paletteGridData: state.present.get('paletteGridData'),
-    notifications: state.present.get('notifications'),
-    activeFrameIndex,
-    loading: state.present.get('loading'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
-    cellSize: state.present.get('cellSize'),
-    currentColor: state.present.get('currentColor'),
-    eyedropperOn: state.present.get('eyedropperOn'),
-    eraserOn: state.present.get('eraserOn'),
-    dragging: state.present.get('dragging'),
-    duration: state.present.get('duration')
-  };
-}
-export const AppContainer = connect(
-  mapStateToProps,
-  actionCreators
-)(App);
