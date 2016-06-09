@@ -6,13 +6,13 @@ import {
   exportAnimationData
 } from '../utils/cssParse';
 
-export default class CopyCSS extends React.Component {
-  generateCSS() {
+const CopyCSS = (props) => {
+  const generateCSS = () => {
     const {
       frames, columns, rows,
       cellSize, activeFrameIndex,
       animationCode, duration
-    } = this.props;
+    } = props;
 
     if (animationCode) {
       const cssAnimationString = exportAnimationData(
@@ -35,16 +35,15 @@ export default class CopyCSS extends React.Component {
       cssString += `height: ${cellSize}px; width: ${cellSize}px;`;
     }
     return cssString;
-  }
+  };
 
-  render() {
-    return (
-      <div className="copy-css">
-        <h2>Copy the CSS generated</h2>
-        <div className="copy-css__string">
-          {this.generateCSS()}
-        </div>
+  return (
+    <div className="copy-css">
+      <h2>Copy the CSS generated</h2>
+      <div className="copy-css__string">
+        {generateCSS()}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+export default CopyCSS;
