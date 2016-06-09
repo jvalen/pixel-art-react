@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-export class Dimensions extends React.Component {
+class Dimensions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +27,7 @@ export class Dimensions extends React.Component {
 
     newLocalState[propertyName] = event.target.value | 0;
     this.setState(newLocalState, function () {
-      this.props.setGridDimension(
+      this.props.actions.setGridDimension(
         this.state.columnsValue, this.state.rowsValue
       );
     });
@@ -62,13 +63,17 @@ export class Dimensions extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows')
-  };
-}
-export const DimensionsContainer = connect(
+const mapStateToProps = (state) => ({
+  columns: state.present.get('columns'),
+  rows: state.present.get('rows')
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+const DimensionsContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(Dimensions);
+export default DimensionsContainer;
