@@ -1,31 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-export class Reset extends React.Component {
-  handleClick() {
-    this.props.resetGrid(
-      this.props.columns,
-      this.props.rows,
-      this.props.activeFrameIndex);
-  }
+const Reset = (props) => {
+  const handleClick = () => {
+    props.actions.resetGrid(
+      props.columns,
+      props.rows,
+      props.activeFrameIndex);
+  };
 
-  render() {
-    return (
-      <button
-        className="reset"
-        onClick={() => { this.handleClick(); }}
-      >
-        RESET
-      </button>
-    );
-  }
-}
+  return (
+    <button
+      className="reset"
+      onClick={() => { handleClick(); }}
+    >
+      RESET
+    </button>
+  );
+};
 
-function mapStateToProps() {
-  return {};
-}
-export const ResetContainer = connect(
+const mapStateToProps = (state) => ({
+  columns: state.present.get('columns'),
+  rows: state.present.get('rows'),
+  activeFrameIndex: state.present.get('activeFrameIndex')
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+const ResetContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(Reset);
+export default ResetContainer;
