@@ -3,6 +3,7 @@
     padding: 2em 0;
     font-size: 1em;
     display: block;
+    text-align: center;
   }
   .copy-css__string {
     overflow-y: scroll;
