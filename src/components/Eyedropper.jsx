@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-export class Eyedropper extends React.Component {
+class Eyedropper extends React.Component {
   handleClick() {
-    this.props.setEyedropper();
+    this.props.actions.setEyedropper();
   }
   render() {
     return (
@@ -16,13 +17,16 @@ export class Eyedropper extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentColor: state.present.get('currentColor'),
-    eyedropperOn: state.present.get('eyedropperOn'),
-  };
-}
+const mapStateToProps = (state) => ({
+  eyedropperOn: state.present.get('eyedropperOn'),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
 export const EyedropperContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(Eyedropper);
+export default EyedropperContainer;
