@@ -7,11 +7,11 @@ import {
 import { Animation } from './Animation';
 import { StyleRoot } from 'radium';
 
-export default class Preview extends React.Component {
-  generatePreview() {
-    const { activeFrameIndex, duration } = this.props;
+const Preview = (props) => {
+  const generatePreview = () => {
+    const { activeFrameIndex, duration } = props;
     const { frames, columns, rows, cellSize, animate } =
-      this.props.storedData || this.props;
+      props.storedData || props;
     const animation = frames.size > 1 && animate;
     let animationData;
     let cssString;
@@ -53,19 +53,18 @@ export default class Preview extends React.Component {
         }
       </div>
     );
-  }
+  };
 
-  render() {
-    const { columns, rows, cellSize } = this.props.storedData || this.props;
-    const style = {
-      width: columns * cellSize,
-      height: rows * cellSize
-    };
+  const { columns, rows, cellSize } = props.storedData || props;
+  const style = {
+    width: columns * cellSize,
+    height: rows * cellSize
+  };
 
-    return (
-      <div className="preview" style={style} onClick={this.props.onClick}>
-        {this.generatePreview()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="preview" style={style} onClick={props.onClick}>
+      {generatePreview()}
+    </div>
+  );
+};
+export default Preview;
