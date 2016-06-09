@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
 export class CellSize extends React.Component {
   handleCellSizeChange(event) {
-    this.props.setCellSize(event.target.value | 0);
+    this.props.actions.setCellSize(event.target.value | 0);
   }
 
   render() {
@@ -26,12 +27,16 @@ export class CellSize extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    cellSize: state.present.get('cellSize'),
-  };
-}
-export const CellSizeContainer = connect(
+const mapStateToProps = (state) => ({
+  cellSize: state.present.get('cellSize')
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+const CellSizeContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(CellSize);
+export default CellSizeContainer;
