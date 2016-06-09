@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { generatePixelDrawCss } from '../utils/cssParse';
 
-class CssDisplay extends React.Component {
-  generateCss() {
-    const { activeFrame, columns, rows, cellSize } = this.props;
+const CssDisplay = (props) => {
+  const generateCss = () => {
+    const { activeFrame, columns, rows, cellSize } = props;
     let cssString = generatePixelDrawCss(
       activeFrame, columns, rows, cellSize, 'string'
     );
@@ -15,16 +15,14 @@ class CssDisplay extends React.Component {
     }
 
     return <div>{cssString}</div>;
-  }
+  };
 
-  render() {
-    return (
-      <div className="css-display">
-      {this.generateCss()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="css-display">
+    {generateCss()}
+    </div>
+  );
+};
 
 function mapStateToProps(state) {
   const frames = state.present.get('frames');
