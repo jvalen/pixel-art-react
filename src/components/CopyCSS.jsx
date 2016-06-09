@@ -6,7 +6,7 @@ import {
   exportAnimationData
 } from '../utils/cssParse';
 
-export class CopyCSS extends React.Component {
+export default class CopyCSS extends React.Component {
   generateCSS() {
     const {
       frames, columns, rows,

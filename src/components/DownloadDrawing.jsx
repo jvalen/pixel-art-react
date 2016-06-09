@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { shareDrawing } from '../utils/cssParse';
-import * as actionCreators from '../store/actions/actionCreators';
 
-export class DownloadDrawing extends React.Component {
+export default class DownloadDrawing extends React.Component {
   download(type) {
     const {
       frames, activeFrame, columns,
@@ -15,7 +13,7 @@ export class DownloadDrawing extends React.Component {
       '',
       'download'
     );
-    this.props.sendNotification('Downloading...');
+    this.props.actions.sendNotification('Downloading...');
   }
 
   render() {
@@ -29,11 +27,3 @@ export class DownloadDrawing extends React.Component {
     );
   }
 }
-
-function mapStateToProps() {
-  return {};
-}
-export const DownloadDrawingContainer = connect(
-  mapStateToProps,
-  actionCreators
-)(DownloadDrawing);

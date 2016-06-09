@@ -1,15 +1,15 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
 import ModalReact from 'react-modal';
 import RadioSelector from './RadioSelector';
-import { PreviewContainer } from './Preview';
-import { CopyCSS } from './CopyCSS';
-import { LoadDrawingContainer } from './LoadDrawing';
-import { DownloadDrawingContainer } from './DownloadDrawing';
-import { TwitterFormContainer } from './TwitterForm';
+import LoadDrawing from './LoadDrawing';
+import Preview from './Preview';
+import CopyCSS from './CopyCSS';
+import DownloadDrawing from './DownloadDrawing';
+import TwitterForm from './TwitterForm';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -34,12 +34,13 @@ class Modal extends React.Component {
         />
         {this.state.previewType !== 'spritesheet' ?
           <div className="modal__preview--wrapper">
-            <PreviewContainer
+            <Preview
               key="0"
               frames={props.frames}
               columns={props.columns}
               rows={props.rows}
               cellSize={props.type === 'preview' ? props.cellSize : 5}
+              duration={props.duration}
               activeFrameIndex={props.activeFrameIndex}
               animate={this.state.previewType === 'animation'}
             />
@@ -61,7 +62,7 @@ class Modal extends React.Component {
     switch (props.type) {
       case 'load':
         content = (
-          <LoadDrawingContainer
+          <LoadDrawing
             loadType={this.state.loadType}
             close={props.close}
             frames={props.frames}
@@ -69,6 +70,12 @@ class Modal extends React.Component {
             rows={props.rows}
             cellSize={props.cellSize}
             paletteGridData={props.paletteGridData}
+            actions={
+              {
+                setDrawing: props.actions.setDrawing,
+                sendNotification: props.actions.sendNotification
+              }
+            }
           />
         );
         break;
@@ -86,19 +93,22 @@ class Modal extends React.Component {
         );
         break;
       case 'download':
-        content = (<DownloadDrawingContainer
-          frames={props.frames}
-          activeFrame={props.activeFrame}
-          columns={props.columns}
-          rows={props.rows}
-          cellSize={props.cellSize}
-          duration={props.duration}
-          downloadType={this.state.previewType}
-        />);
+        content = (
+          <DownloadDrawing
+            frames={props.frames}
+            activeFrame={props.activeFrame}
+            columns={props.columns}
+            rows={props.rows}
+            cellSize={props.cellSize}
+            duration={props.duration}
+            downloadType={this.state.previewType}
+            actions={{ sendNotification: props.actions.sendNotification }}
+          />
+        );
         break;
       case 'twitter':
         content = (
-          <TwitterFormContainer
+          <TwitterForm
             maxChars="113"
             frames={props.frames}
             activeFrame={props.activeFrame}
@@ -108,6 +118,12 @@ class Modal extends React.Component {
             duration={props.duration}
             paletteGridData={props.paletteGridData}
             tweetType={this.state.previewType}
+            actions={
+              {
+                showSpinner: props.actions.showSpinner,
+                sendNotification: props.actions.sendNotification
+              }
+            }
           />
         );
         break;
@@ -201,17 +217,27 @@ class Modal extends React.Component {
   }
 }
 
-function mapStateToProps() {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
+const mapStateToProps = (state) => {
+  const frames = state.present.get('frames');
+  const activeFrameIndex = state.present.get('activeFrameIndex');
   return {
-    actions: bindActionCreators(actionCreators, dispatch),
+    frames,
+    activeFrameIndex,
+    activeFrame: frames.get(activeFrameIndex),
+    paletteGridData: state.present.get('paletteGridData'),
+    columns: state.present.get('columns'),
+    rows: state.present.get('rows'),
+    cellSize: state.present.get('cellSize'),
+    duration: state.present.get('duration')
   };
-}
+};
 
-export default connect(
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+const ModalContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Modal);
+export default ModalContainer;

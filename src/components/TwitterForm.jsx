@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { shareDrawing } from '../utils/cssParse';
-import * as actionCreators from '../store/actions/actionCreators';
 import { saveProjectToStorage } from '../utils/storage';
 
-export class TwitterForm extends React.Component {
+export default class TwitterForm extends React.Component {
   constructor(props) {
     super(props);
     const initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
@@ -36,7 +34,7 @@ export class TwitterForm extends React.Component {
         animate: frames.size > 1
       };
       if (saveProjectToStorage(localStorage, drawingToSave)) {
-        this.props.showSpinner();
+        this.props.actions.showSpinner();
         shareDrawing(
           {
             type,
@@ -51,7 +49,7 @@ export class TwitterForm extends React.Component {
           'twitter'
         );
       } else {
-        this.props.sendNotification('Sorry: There was an error :(');
+        this.props.actions.sendNotification('Sorry: There was an error :(');
       }
     }
   }
@@ -90,11 +88,3 @@ export class TwitterForm extends React.Component {
     );
   }
 }
-
-function mapStateToProps() {
-  return {};
-}
-export const TwitterFormContainer = connect(
-  mapStateToProps,
-  actionCreators
-)(TwitterForm);

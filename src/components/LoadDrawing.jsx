@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actionCreators from '../store/actions/actionCreators';
-import { PreviewContainer } from './Preview';
+import Preview from './Preview';
 import { fromJS } from 'immutable';
 import {
   getDataFromStorage, removeProjectFromStorage,
@@ -14,7 +12,7 @@ import {
 */
 const browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
 
-export class LoadDrawing extends React.Component {
+export default class LoadDrawing extends React.Component {
   getExportCode() {
     const projectData = {
       frames: this.props.frames,
@@ -36,7 +34,7 @@ export class LoadDrawing extends React.Component {
         frames, paletteGridData, columns, rows, cellSize
       } = importedProject;
 
-      this.props.setDrawing(
+      this.props.actions.setDrawing(
         frames,
         paletteGridData,
         cellSize,
@@ -44,9 +42,9 @@ export class LoadDrawing extends React.Component {
         rows
       );
       this.props.close();
-      this.props.sendNotification('Project successfully imported');
+      this.props.actions.sendNotification('Project successfully imported');
     } else {
-      this.props.sendNotification("Sorry, the project couldn't be imported");
+      this.props.actions.sendNotification("Sorry, the project couldn't be imported");
     }
   }
 
@@ -55,14 +53,14 @@ export class LoadDrawing extends React.Component {
     if (!!browserStorage) {
       const removed = removeProjectFromStorage(browserStorage, key);
       if (removed) {
-        this.props.sendNotification('Drawing deleted');
+        this.props.actions.sendNotification('Drawing deleted');
         this.props.close();
       }
     }
   }
 
   drawingClick(data) {
-    this.props.setDrawing(
+    this.props.actions.setDrawing(
       data.frames,
       data.paletteGridData,
       data.cellSize,
@@ -93,11 +91,12 @@ export class LoadDrawing extends React.Component {
                 onClick={() => { this.drawingClick(elem); }}
                 className="load-drawing__drawing"
               >
-                <PreviewContainer
+                <Preview
                   key={i + 1}
                   id={i}
-                  loadData={elem}
+                  storedData={elem}
                   activeFrameIndex={0}
+                  duration={1}
                 />
                 <div
                   data-key={i}
@@ -166,11 +165,3 @@ export class LoadDrawing extends React.Component {
     return (this.giveMeOptions(this.props.loadType));
   }
 }
-
-function mapStateToProps() {
-  return {};
-}
-export const LoadDrawingContainer = connect(
-  mapStateToProps,
-  actionCreators
-)(LoadDrawing);

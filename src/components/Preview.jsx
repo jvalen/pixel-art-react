@@ -1,20 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import {
   generatePixelDrawCss,
   generateAnimationCSSData,
   generateAnimationIntervals
 } from '../utils/cssParse';
-import * as actionCreators from '../store/actions/actionCreators';
 import { Animation } from './Animation';
 import { StyleRoot } from 'radium';
 
-export class Preview extends React.Component {
+export default class Preview extends React.Component {
   generatePreview() {
-    const dataFromParent = !!this.props.loadData;
+    const { activeFrameIndex, duration } = this.props;
     const { frames, columns, rows, cellSize, animate } =
-      dataFromParent ? this.props.loadData : this.props;
-    const { activeFrameIndex } = this.props;
+      this.props.storedData || this.props;
     const animation = frames.size > 1 && animate;
     let animationData;
     let cssString;
@@ -48,7 +45,7 @@ export class Preview extends React.Component {
         {animation ?
           <StyleRoot>
             <Animation
-              duration={this.props.duration}
+              duration={duration}
               boxShadow={animationData}
             />
           </StyleRoot>
@@ -59,10 +56,7 @@ export class Preview extends React.Component {
   }
 
   render() {
-    const dataFromParent = !!this.props.loadData;
-    const { columns, rows, cellSize } =
-      dataFromParent ? this.props.loadData : this.props;
-
+    const { columns, rows, cellSize } = this.props.storedData || this.props;
     const style = {
       width: columns * cellSize,
       height: rows * cellSize
@@ -75,13 +69,3 @@ export class Preview extends React.Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    duration: state.present.get('duration')
-  };
-}
-export const PreviewContainer = connect(
-  mapStateToProps,
-  actionCreators
-)(Preview);
