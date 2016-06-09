@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 import Picker from 'react-color';
 
-export class ColorPicker extends React.Component {
+class ColorPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,7 +88,7 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 
-export const ColorPickerContainer = connect(
+const ColorPickerContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ColorPicker);
