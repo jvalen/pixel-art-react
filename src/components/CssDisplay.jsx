@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { generatePixelDrawCss } from '../utils/cssParse';
 
-export class CssDisplay extends React.Component {
+class CssDisplay extends React.Component {
   generateCss() {
     const { activeFrame, columns, rows, cellSize } = this.props;
     let cssString = generatePixelDrawCss(
@@ -24,3 +25,19 @@ export class CssDisplay extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const frames = state.present.get('frames');
+  const activeFrameIndex = state.present.get('activeFrameIndex');
+  return {
+    activeFrame: frames.get(activeFrameIndex),
+    columns: state.present.get('columns'),
+    rows: state.present.get('rows'),
+    cellSize: state.present.get('cellSize')
+  };
+}
+
+const CssDisplayContainer = connect(
+  mapStateToProps
+)(CssDisplay);
+export default CssDisplayContainer;
