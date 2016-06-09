@@ -3,25 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-class Eraser extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { previousColor: null };
-  }
+const Eraser = (props) => {
+  const handleClick = () => {
+    props.actions.setEraser();
+  };
 
-  handleClick() {
-    this.props.actions.setEraser();
-  }
-
-  render() {
-    return (
-      <div
-        className={`eraser${this.props.eraserOn ? ' selected' : ''}`}
-        onClick={() => { this.handleClick(); }}
-      />
-    );
-  }
-}
+  return (
+    <div
+      className={`eraser${props.eraserOn ? ' selected' : ''}`}
+      onClick={() => { handleClick(); }}
+    />
+  );
+};
 
 const mapStateToProps = (state) => ({
   eraserOn: state.present.get('eraserOn')
