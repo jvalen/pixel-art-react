@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-export class CellSize extends React.Component {
+class CellSize extends React.Component {
   handleCellSizeChange(event) {
     this.props.actions.setCellSize(event.target.value | 0);
   }
