@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 import Picker from 'react-color';
 
@@ -13,7 +14,7 @@ export class ColorPicker extends React.Component {
   }
 
   handleClick() {
-    this.props.setColorPicker();
+    this.props.actions.setColorPicker();
     if (!this.state.displayColorPicker) {
       this.setState({ displayColorPicker: !this.state.displayColorPicker });
     }
@@ -21,7 +22,7 @@ export class ColorPicker extends React.Component {
 
   handleChange(color) {
     this.setState({ background: color.hex });
-    this.props.setCustomColor(`#${color.hex}`);
+    this.props.actions.setCustomColor(`#${color.hex}`);
   }
 
   handleClose() {
@@ -78,13 +79,17 @@ export class ColorPicker extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentColor: state.present.get('currentColor'),
-    colorPickerOn: state.present.get('colorPickerOn')
-  };
-}
+const mapStateToProps = (state) => ({
+  currentColor: state.present.get('currentColor'),
+  colorPickerOn: state.present.get('colorPickerOn')
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
 export const ColorPickerContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(ColorPicker);
+export default ColorPickerContainer;
