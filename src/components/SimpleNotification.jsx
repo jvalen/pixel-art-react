@@ -1,44 +1,50 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-export class SimpleNotification extends React.Component {
-  removeNotifications() {
+const SimpleNotification = (props) => {
+  const removeNotifications = () => {
     setTimeout(() => {
-      this.props.sendNotification('');
-    }, this.props.duration);
+      props.actions.sendNotification('');
+    }, props.duration);
+  };
+
+
+  const notifications = props.notifications.map((item, i) =>
+    <div key={i} className="simple-notification">
+      {item}
+    </div>
+  );
+
+  if (notifications.size > 0) {
+    removeNotifications();
   }
 
-  render() {
-    let notifications = this.props.notification.map((item, i) =>
-      <div key={i} className="simple-notification">
-        {item}
-      </div>
+  return (
+    <div>
+      <ReactCSSTransitionGroup
+        transitionName="simple-notification"
+        transitionEnterTimeout={props.fadeInTime}
+        transitionLeaveTimeout={props.fadeOutTime}
+      >
+        {notifications}
+      </ReactCSSTransitionGroup>
+    </div>
     );
+};
 
-    if (notifications.size > 0) {
-      this.removeNotifications();
-    }
+const mapStateToProps = (state) => ({
+  notifications: state.present.get('notifications')
+});
 
-    return (
-      <div>
-        <ReactCSSTransitionGroup
-          transitionName="simple-notification"
-          transitionEnterTimeout={this.props.fadeInTime}
-          transitionLeaveTimeout={this.props.fadeOutTime}
-        >
-          {notifications}
-        </ReactCSSTransitionGroup>
-      </div>
-      );
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
 
-function mapStateToProps() {
-  return {};
-}
-export const SimpleNotificationContainer = connect(
+const SimpleNotificationContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(SimpleNotification);
+export default SimpleNotificationContainer;
