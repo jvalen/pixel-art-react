@@ -1,34 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-export class UndoRedo extends React.Component {
-  undo() {
-    this.props.undo();
-  }
+const UndoRedo = (props) => {
+  const undo = () => {
+    props.actions.undo();
+  };
 
-  redo() {
-    this.props.redo();
-  }
-  render() {
-    return (
-      <div className="undo-redo">
-        <button
-          onClick={() => { this.undo(); }}
-        >
-          <span className="undo-redo__icon--undo"></span>
-        </button>
-        <button
-          onClick={() => { this.redo(); }}
-        >
-          <span className="undo-redo__icon--redo"></span>
-        </button>
-      </div>
-    );
-  }
-}
+  const redo = () => {
+    props.actions.redo();
+  };
 
-export const UndoRedoContainer = connect(
+  return (
+    <div className="undo-redo">
+      <button
+        onClick={() => { undo(); }}
+      >
+        <span className="undo-redo__icon--undo"></span>
+      </button>
+      <button
+        onClick={() => { redo(); }}
+      >
+        <span className="undo-redo__icon--redo"></span>
+      </button>
+    </div>
+  );
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+const UndoRedoContainer = connect(
   null,
-  actionCreators
+  mapDispatchToProps
 )(UndoRedo);
+export default UndoRedoContainer;
