@@ -1,25 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actionCreators from '../store/actions/actionCreators';
-import { PreviewContainer } from './Preview';
+import Preview from './Preview';
 import { List } from 'immutable';
 
-export const Frame = (props) => {
+const Frame = (props) => {
   const handleClick = () => {
-    props.changeActiveFrame(props['data-id']);
+    props.actions.changeActiveFrame(props['data-id']);
   };
 
   const deleteFrame = (e) => {
     e.stopPropagation();
     if (props.active) {
-      props.deleteFrame(props['data-id']);
+      props.actions.deleteFrame(props['data-id']);
     }
   };
 
   const duplicateFrame = (e) => {
     e.stopPropagation();
     if (props.active) {
-      props.duplicateFrame(props['data-id']);
+      props.actions.duplicateFrame(props['data-id']);
     }
   };
 
@@ -28,7 +26,7 @@ export const Frame = (props) => {
       className={`frame${props.active ? ' active' : ''}`}
       onClick={() => { handleClick(); }}
     >
-      <PreviewContainer
+      <Preview
         frames={List([props.frame])}
         columns={props.columns}
         rows={props.rows}
@@ -47,10 +45,4 @@ export const Frame = (props) => {
   );
 };
 
-function mapStateToProps() {
-  return {};
-}
-export const FrameContainer = connect(
-  mapStateToProps,
-  actionCreators
-)(Frame);
+export default Frame;
