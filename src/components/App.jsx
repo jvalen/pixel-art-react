@@ -9,7 +9,7 @@ import DurationContainer from './Duration';
 import EraserContainer from './Eraser';
 import EyedropperContainer from './Eyedropper';
 import FramesHandlerContainer from './FramesHandler';
-import PaletteContainer from './PaletteGrid';
+import PaletteGridContainer from './PaletteGrid';
 import ResetContainer from './Reset';
 import SaveDrawingContainer from './SaveDrawing';
 import SimpleNotificationContainer from './SimpleNotification';
@@ -134,7 +134,7 @@ export default class App extends React.Component {
                   </div>
                 </div>
                 <div className="app__mobile--group">
-                  <PaletteContainer />
+                  <PaletteGridContainer />
                 </div>
               </div>
               <div className="app__mobile--container">
