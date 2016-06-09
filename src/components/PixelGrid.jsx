@@ -1,11 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 import * as actionCreators from '../store/actions/actionCreators';
-import Cell from './Pixel-cell';
+import PixelCell from './PixelCell';
 
-class Grid extends React.Component {
+class PixelGrid extends React.Component {
   shouldComponentUpdate(nextProps) {
     const same = (key) => nextProps[key].equals(this.props[key]);
     if (same('activeFrame')) {
@@ -21,7 +20,7 @@ class Grid extends React.Component {
     return activeFrame.map((currentCell, i) => {
       const color = currentCell.get('color');
       return (
-        <Cell
+        <PixelCell
           key={i}
           id={i}
           width={width}
@@ -85,19 +84,26 @@ class Grid extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
+  const frames = state.present.get('frames');
+  const activeFrameIndex = state.present.get('activeFrameIndex');
   return {
-    initialColor: state.present.get('initialColor')
+    activeFrame: frames.get(activeFrameIndex),
+    columns: state.present.get('columns'),
+    initialColor: state.present.get('initialColor'),
+    currentColor: state.present.get('currentColor'),
+    eyedropperOn: state.present.get('eyedropperOn'),
+    eraserOn: state.present.get('eraserOn'),
+    dragging: state.present.get('dragging')
   };
-}
+};
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actionCreators, dispatch),
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
 
-export default connect(
+const PixelGridContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Grid);
+)(PixelGrid);
+export default PixelGridContainer;
