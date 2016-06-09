@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-export const Duration = (props) => {
+const Duration = (props) => {
   const handleChange = (event) => {
     props.actions.setDuration(event.target.value);
   };

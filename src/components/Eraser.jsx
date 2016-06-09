@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-export class Eraser extends React.Component {
+class Eraser extends React.Component {
   constructor(props) {
     super(props);
     this.state = { previousColor: null };
   }
 
   handleClick() {
-    this.props.setEraser();
+    this.props.actions.setEraser();
   }
 
   render() {
@@ -22,13 +23,16 @@ export class Eraser extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentColor: state.present.get('currentColor'),
-    eraserOn: state.present.get('eraserOn')
-  };
-}
-export const EraserContainer = connect(
+const mapStateToProps = (state) => ({
+  eraserOn: state.present.get('eraserOn')
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(actionCreators, dispatch)
+});
+
+const EraserContainer = connect(
   mapStateToProps,
-  actionCreators
+  mapDispatchToProps
 )(Eraser);
+export default EraserContainer;
