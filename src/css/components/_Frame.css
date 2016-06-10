@@ -3,7 +3,7 @@
   background-color: $color-silver;
   color: white;
   width: 70px;
-  height: 70px;
+  height: 84px;
   margin: 0 0.3em;
   flex: 0 0 auto;
   position: relative;
@@ -15,7 +15,7 @@
     color: white;
     right: 0;
     background-color: $color-mineShaft;
-    border: 1px solid $color-silver;
+    border: 1px solid $color-tundora;
     padding: 0.1em;
   }
   .delete {
@@ -26,7 +26,7 @@
   }
   .duplicate {
     @mixin icon files-o;
-    bottom: 0;
+    bottom: 23px;
     border-width: 2px 0 0 2px;
   }
   &.active {
@@ -42,5 +42,15 @@
     .duplicate {
       border-color: $color-tamarillo;
     }
+    .frame__percentage {
+      bottom: -15px;
+      border-color: $color-tamarillo;
+    }
+  }
+  .frame__percentage {
+    position: relative;
+    bottom: -17px;
+    height: 23px;
+    border-top: 2px solid $color-tundora;
   }
 }

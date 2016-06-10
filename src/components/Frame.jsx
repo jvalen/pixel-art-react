@@ -41,6 +41,12 @@ const Frame = (props) => {
         className="duplicate"
         onClick={duplicateFrame}
       />
+      <input
+        type="text"
+        value={0}
+        onChange={() => { console.log("change"); }}
+        className="frame__percentage"
+      />
     </div>
   );
 };

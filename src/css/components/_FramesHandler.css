@@ -2,7 +2,7 @@
   lost-utility: clearfix;
   .frames-handler__add {
     @mixin button gray;
-    height: 72px;
+    height: 86px;
     float: left;
   }
   .frame-handler__list {
@@ -10,7 +10,7 @@
     background-color: rgba(51, 50, 50, 0.2);
     padding: 0.2em;
     .list__container {
-      height: 72px;
+      height: 85px;
       display: flex;
       flex-wrap: nowrap;
       padding-bottom: 0.5em;
