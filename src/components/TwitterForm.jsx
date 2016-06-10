@@ -1,5 +1,5 @@
 import React from 'react';
-import { shareDrawing } from '../utils/cssParse';
+import { shareDrawing } from '../utils/share';
 import { saveProjectToStorage } from '../utils/storage';
 
 export default class TwitterForm extends React.Component {
@@ -46,7 +46,8 @@ export default class TwitterForm extends React.Component {
             duration
           },
           this.refs.tweetText.value,
-          'twitter'
+          'twitter',
+          this.props.actions.sendNotification
         );
       } else {
         this.props.actions.sendNotification('Sorry: There was an error :(');

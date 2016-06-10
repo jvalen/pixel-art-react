@@ -8,7 +8,8 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './src/index.jsx'
+    './src/index.jsx',
+    'whatwg-fetch'
   ],
   output: {
     path: __dirname + '/build',
@@ -44,11 +45,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './build/index.html',
       inject: true
-    }),
-    new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery"
     }),
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"development"'

@@ -132,22 +132,26 @@ app.get('/', handleRender);
 app.post('/auth/twitter', (req, res) => {
   oa.getOAuthRequestToken((error, oauthToken, oauthTokenSecret) => {
     if (error) {
-      res.send('auth twitter: error');
+      res.status(500).send('auth twitter: error');
     } else {
-      const request = req;
+      try {
+        const request = req;
 
-      request.session.oauthRequestToken = oauthToken;
-      request.session.oauthRequestTokenSecret = oauthTokenSecret;
+        request.session.oauthRequestToken = oauthToken;
+        request.session.oauthRequestTokenSecret = oauthTokenSecret;
 
-      request.body.drawingData = JSON.parse(request.body.drawingData);
-      request.session.cssData = request.body;
+        request.body.drawingData = JSON.parse(request.body.drawingData);
+        request.session.cssData = request.body;
 
-      res.contentType('application/json');
-      const data = JSON.stringify(
-        `https://twitter.com/oauth/authenticate?oauth_token=${oauthToken}`
-      );
-      res.header('Content-Length', data.length);
-      res.end(data);
+        res.contentType('application/json');
+        const data = JSON.stringify(
+          `https://twitter.com/oauth/authenticate?oauth_token=${oauthToken}`
+        );
+        res.header('Content-Length', data.length);
+        res.end(data);
+      } catch (e) {
+        res.status(500).send('auth twitter: error');
+      }
     }
   });
 });
@@ -206,38 +210,40 @@ app.get('/auth/twitter/callback', (req, res, next) => {
 });
 
 app.post('/auth/download', (req, res) => {
-  const request = req;
+  try {
+    const requestBody = req.body;
+    requestBody.drawingData = JSON.parse(requestBody.drawingData);
 
-  let suffix = '.png';
-  if (request.body.type === 'animation') {
-    suffix = '.gif';
-  }
+    let suffix = '.png';
+    if (requestBody.type === 'animation') {
+      suffix = '.gif';
+    }
 
-  const randomName = temp.path({ suffix });
-  const imgPath = `images${randomName}`;
+    const randomName = temp.path({ suffix });
+    const imgPath = `images${randomName}`;
 
-  request.body.drawingData = JSON.parse(request.body.drawingData);
-
-  switch (request.body.type) {
-    case 'animation':
-      drawGif(request.body, imgPath, true, (gifPath) => {
-        res.send(`/download/tmp/${gifPath}`);
-      });
-      break;
-    case 'spritesheet':
-      drawSpritesheet(request.body, imgPath, (spritesheetPath) => {
-        res.send(`/download/tmp/${spritesheetPath}`);
-      });
-      break;
-    default:
-      drawFrame(request.body, imgPath, () => {
-        res.send(`/download${randomName}`);
-      });
+    switch (requestBody.type) {
+      case 'animation':
+        drawGif(requestBody, imgPath, true, (gifPath) => {
+          res.send({ fileUrl: `/download/tmp/${gifPath}` });
+        });
+        break;
+      case 'spritesheet':
+        drawSpritesheet(requestBody, imgPath, (spritesheetPath) => {
+          res.send({ fileUrl: `/download/tmp/${spritesheetPath}` });
+        });
+        break;
+      default:
+        drawFrame(requestBody, imgPath, () => {
+          res.send({ fileUrl: `/download${randomName}` });
+        });
+    }
+  } catch (e) {
+    res.status(500).send('Download error');
   }
 });
 
 app.get('/download/tmp/:filename', (req, res) => {
-  // console.log(`downloaded file: ${req.params.filename}`);
   const filePath = `${__dirname}/../../images/tmp/${req.params.filename}`;
 
   // Stream and delete the file

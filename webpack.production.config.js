@@ -6,18 +6,14 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   entry: [
-    './src/index.jsx'
+    './src/index.jsx',
+    'whatwg-fetch'
   ],
   plugins: [
     new CopyWebpackPlugin([
         { from: 'src/assets/favicon.ico', to: 'favicon.ico' }
     ]),
     new ExtractTextPlugin("css/main.css"),
-    new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery"
-    }),
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': '"production"'
     })

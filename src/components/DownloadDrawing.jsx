@@ -1,5 +1,5 @@
 import React from 'react';
-import { shareDrawing } from '../utils/cssParse';
+import { shareDrawing } from '../utils/share';
 
 const DownloadDrawing = (props) => {
   const download = (type) => {
@@ -11,9 +11,9 @@ const DownloadDrawing = (props) => {
     shareDrawing(
       { type, frames, activeFrame, columns, rows, cellSize, duration },
       '',
-      'download'
+      'download',
+      props.actions.sendNotification
     );
-    props.actions.sendNotification('Downloading...');
   };
 
   return (
