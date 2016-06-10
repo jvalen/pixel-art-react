@@ -43,13 +43,12 @@
       border-color: $color-tamarillo;
     }
     .frame__percentage {
-      bottom: -15px;
       border-color: $color-tamarillo;
     }
   }
   .frame__percentage {
-    position: relative;
-    bottom: -17px;
+    position: absolute;
+    bottom: 0;
     height: 23px;
     border-top: 2px solid $color-tundora;
   }
