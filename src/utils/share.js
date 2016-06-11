@@ -43,7 +43,6 @@ export function shareDrawing(imageData, text, action, sendNotification) {
     type: imageData.type,
     animationInfo: {
       duration,
-      equalIntervalDelay: duration / framesCount,
       framesCount,
       intervals: generateAnimationIntervals(imageData.frames)
     }

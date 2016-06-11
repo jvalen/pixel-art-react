@@ -114,15 +114,28 @@ export function drawGif(data, path, transparent, callback) {
     const paths = framesFilesData.framePaths;
     const gifAnimatedPath = ` ${splittedPath[0]}-final.${splittedPath[1]}`;
     const gifFileName = gifAnimatedPath.split('images/tmp/')[1];
-
     const duration = cssData.animationInfo.duration;
-    const equalDelay = cssData.animationInfo.equalIntervalDelay;
-    const delayPerFrame = (equalDelay * 100) / duration;
+    const intervals = cssData.animationInfo.intervals;
     const opacityOptions = transparent ? ' ' : ' -background white -alpha remove';
 
     let creatingGifCommand = 'convert -dispose previous -loop 0';
     for (let i = 0; i < paths.length; i++) {
-      creatingGifCommand += ` -delay ${delayPerFrame} ${paths[i]}`;
+      /*
+        Calculates the delay from the animation duration and
+        frames intervals passed.
+        i.e:
+          Duration: 2000 (ms)
+          Intervals: [ 0, 45, 90, 100 ]
+          3 frames
+
+          The delay for each frame will be: [90, 90, 20]
+          Total delay 200 (2 seconds)
+          NOTE: graphicsmagick delay option works in 1/100ths of a second
+      */
+      const difference = intervals[i + 1] - intervals[i];
+      const currentDelay = (duration * difference) / 1000;
+      // console.log(difference, currentDelay);
+      creatingGifCommand += ` -delay ${currentDelay} ${paths[i]}`;
     }
     creatingGifCommand += `${opacityOptions}${gifAnimatedPath}`;
 
