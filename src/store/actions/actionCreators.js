@@ -148,6 +148,14 @@ export function setDuration(duration) {
   };
 }
 
+export function changeFrameInterval(frameIndex, interval) {
+  return {
+    type: 'CHANGE_FRAME_INTERVAL',
+    frameIndex,
+    interval
+  };
+}
+
 export function undo() {
   return (ActionCreators.undo());
 }

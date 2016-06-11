@@ -24,15 +24,18 @@ class FramesHandler extends React.Component {
       <Frame
         key={index}
         data-id={index}
+        index={index}
         frame={frameData}
         columns={this.props.columns}
         rows={this.props.rows}
         active={this.props.activeFrameIndex === index}
+        lastFrame={this.props.frames.size - 1 === index}
         actions={
           {
             changeActiveFrame: this.props.actions.changeActiveFrame,
             deleteFrame: this.props.actions.deleteFrame,
-            duplicateFrame: this.props.actions.duplicateFrame
+            duplicateFrame: this.props.actions.duplicateFrame,
+            changeFrameInterval: this.props.actions.changeFrameInterval
           }
         }
       />

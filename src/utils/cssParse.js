@@ -107,18 +107,12 @@ export function generateAnimationCSSData(frames, intervalData, columns, rows, ce
 /*
  * Return the interval data array for animation base on the frames passed
  *
- *  All intervals are equivalent
- *
  *  i.e. [0, 25, 50, 75, 100]
+ *  i.e. [0, 2.5, 67, 90.3, 100]
 */
 export function generateAnimationIntervals(frames) {
-  const intervalPercentage = 100 / frames.size;
-
-  const intervalsData = frames.reduce((acc, frame, index) => {
-    acc.push(index * intervalPercentage);
+  return frames.reduce((acc, frame) => {
+    acc.push(parseFloat(frame.get('interval')));
     return acc;
-  }, []);
-  intervalsData.push(100);
-
-  return intervalsData;
+  }, [0]);
 }

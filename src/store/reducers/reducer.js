@@ -226,6 +226,15 @@ function setDuration(state, duration) {
   return state.merge({ duration });
 }
 
+function changeFrameInterval(state, frameIndex, interval) {
+  return state.merge({
+    frames: state.get('frames').updateIn(
+      [frameIndex, 'interval'],
+      () => interval
+     )
+  });
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
@@ -274,6 +283,8 @@ export default function (state = Map(), action) {
       return duplicateFrame(state, action.frameId);
     case 'SET_DURATION':
       return setDuration(state, action.duration);
+    case 'CHANGE_FRAME_INTERVAL':
+      return changeFrameInterval(state, action.frameIndex, action.interval);
     default:
   }
   return state;

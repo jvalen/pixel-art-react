@@ -71,7 +71,7 @@ export function resetIntervals(frames) {
 
   return frames.reduce((acc, frame, index) => {
     const percentage = index ===
-      frames.size - 1 ? 100 : Math.round((index * equalPercentage) * 10) / 10;
+      frames.size - 1 ? 100 : Math.round(((index + 1) * equalPercentage) * 10) / 10;
     return acc.push(Map({ grid: frame.get('grid'), interval: percentage }));
   }, List([]));
 }
