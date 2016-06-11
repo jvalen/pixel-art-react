@@ -1,12 +1,12 @@
 import { List, Map } from 'immutable';
 
-export function createGrid(cellsCount, initialColor) {
+export function createGrid(cellsCount, initialColor, intervalPercentage) {
   let newGrid = List();
   // Set every cell with the initial color
   for (let i = 0; i < cellsCount; i++) {
     newGrid = newGrid.push(Map({ color: initialColor, used: false }));
   }
-  return newGrid;
+  return Map({ grid: newGrid, interval: intervalPercentage });
 }
 
 export function createPalette() {
@@ -64,4 +64,14 @@ export function addColorToLastCellInPalette(palette, newColor) {
     }
     return (Map({ color: currentColor.get('color') }));
   });
+}
+
+export function resetIntervals(frames) {
+  const equalPercentage = 100 / frames.size;
+
+  return frames.reduce((acc, frame, index) => {
+    const percentage = index ===
+      frames.size - 1 ? 100 : Math.round((index * equalPercentage) * 10) / 10;
+    return acc.push(Map({ grid: frame.get('grid'), interval: percentage }));
+  }, List([]));
 }

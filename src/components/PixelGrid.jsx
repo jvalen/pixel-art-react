@@ -6,7 +6,7 @@ import PixelCell from './PixelCell';
 
 class PixelGrid extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const same = (key) => nextProps[key].equals(this.props[key]);
+    const same = (key) => nextProps[key].get('grid').equals(this.props[key].get('grid'));
     if (same('activeFrame')) {
       return false;
     }
@@ -17,7 +17,7 @@ class PixelGrid extends React.Component {
     const { activeFrame, columns, currentColor } = props;
     const width = 100 / columns;
 
-    return activeFrame.map((currentCell, i) => {
+    return activeFrame.get('grid').map((currentCell, i) => {
       const color = currentCell.get('color');
       return (
         <PixelCell

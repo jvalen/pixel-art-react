@@ -43,7 +43,7 @@ const Frame = (props) => {
       />
       <input
         type="text"
-        value={0}
+        value={props.frame.get('interval')}
         onChange={() => { console.log("change"); }}
         className="frame__percentage"
       />

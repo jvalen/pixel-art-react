@@ -1,6 +1,6 @@
 import { List, Map } from 'immutable';
 import {
-  createGrid, createPalette,
+  createGrid, createPalette, resetIntervals,
   checkColorInPalette, addColorToLastCellInPalette
 } from './reducerHelpers';
 
@@ -11,12 +11,12 @@ function setInitialState(state) {
   const columns = 20;
   const rows = 20;
   const currentColor = '#000000';
-  const pixelGrid = createGrid(columns * rows, GRID_INITIAL_COLOR);
+  const frame = createGrid(columns * rows, GRID_INITIAL_COLOR, 0);
   const paletteGrid = createPalette();
   const dragging = false;
 
   const initialState = {
-    frames: List([pixelGrid]),
+    frames: [frame],
     paletteGridData: paletteGrid,
     cellSize,
     columns,
@@ -41,14 +41,15 @@ function setGridDimension(state, columns, rows) {
   let newFrames = List();
 
   for (let i = 0; i < framesCount; i++) {
-    newFrames = newFrames.push(List(createGrid(
+    newFrames = newFrames.push(createGrid(
       parseInt(columns, 10) * parseInt(rows, 10),
-      GRID_INITIAL_COLOR
-    )));
+      GRID_INITIAL_COLOR,
+      0
+    ));
   }
 
   return state.merge({
-    frames: newFrames,
+    frames: resetIntervals(newFrames),
     rows: parseInt(rows, 10),
     columns: parseInt(columns, 10)
   });
@@ -105,7 +106,7 @@ function setCustomColor(state, customColor) {
 
 function setGridCellValue(state, color, used, id) {
   return state.setIn(
-    ['frames', state.get('activeFrameIndex'), id],
+    ['frames', state.get('activeFrameIndex'), 'grid', id],
     Map({ color, used })
   );
 }
@@ -151,9 +152,11 @@ function setCellSize(state, cellSize) {
 }
 
 function resetGrid(state, columns, rows, activeFrameIndex) {
+  const currentInterval = state.get('frames').get(activeFrameIndex).get('interval');
   const newGrid = createGrid(
     parseInt(columns, 10) * parseInt(rows, 10),
-    GRID_INITIAL_COLOR
+    GRID_INITIAL_COLOR,
+    currentInterval
   );
 
   return state.merge({
@@ -180,14 +183,14 @@ function changeActiveFrame(state, frameIndex) {
 }
 
 function createNewFrame(state) {
-  const frames = state.get('frames');
-
+  const newFrames = state.get('frames').push(createGrid(
+    parseInt(state.get('columns'), 10) * parseInt(state.get('rows'), 10),
+    GRID_INITIAL_COLOR,
+    100
+  ));
   return state.merge({
-    frames: frames.push(createGrid(
-      parseInt(state.get('columns'), 10) * parseInt(state.get('rows'), 10),
-      GRID_INITIAL_COLOR
-    )),
-    activeFrameIndex: frames.size
+    frames: resetIntervals(newFrames),
+    activeFrameIndex: newFrames.size - 1
   });
 }
 
@@ -202,7 +205,7 @@ function deleteFrame(state, frameId) {
       (activeFrameIndex > 0);
 
     frames = frames.splice(frameId, 1);
-    newState.frames = frames;
+    newState.frames = resetIntervals(frames);
 
     if (reduceFrameIndex) {
       newState.activeFrameIndex = frames.size - 1;
@@ -214,7 +217,7 @@ function deleteFrame(state, frameId) {
 function duplicateFrame(state, frameId) {
   const frames = state.get('frames');
   return state.merge({
-    frames: frames.splice(frameId, 0, frames.get(frameId)),
+    frames: resetIntervals(frames.splice(frameId, 0, frames.get(frameId))),
     activeFrameIndex: frameId + 1
   });
 }

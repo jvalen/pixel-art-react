@@ -1,8 +1,8 @@
-export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
+export function generatePixelDrawCss(frame, columns, rows, cellSize, type) {
   switch (type) {
     case 'array': {
       // Returns frame data as an array
-      const frameData = pixelGrid.reduce((accumulator, currentValue, i) => {
+      const frameData = frame.get('grid').reduce((accumulator, currentValue, i) => {
         if (currentValue.get('used')) {
           const xCoord = ((i % columns) * cellSize) + cellSize;
           const yCoord = (parseInt(i / columns, 10) * cellSize) + cellSize;
@@ -21,7 +21,7 @@ export function generatePixelDrawCss(pixelGrid, columns, rows, cellSize, type) {
     }
     default: {
       // Returns frame data as CSS string. Value: 'string'
-      const cssString = pixelGrid.reduce((accumulator, currentValue, i) => {
+      const cssString = frame.get('grid').reduce((accumulator, currentValue, i) => {
         if (currentValue.get('used')) {
           const xCoord = ((i % columns) * cellSize) + cellSize;
           const yCoord = (parseInt(i / columns, 10) * cellSize) + cellSize;
