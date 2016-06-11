@@ -49,6 +49,7 @@
   .frame__percentage {
     position: absolute;
     bottom: 0;
+    left: 0;
     height: 23px;
     border-top: 2px solid $color-tundora;
   }
