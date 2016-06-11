@@ -31,15 +31,25 @@ const CopyCSS = (props) => {
       'string'
     );
     if (!!cssString) {
-      cssString = `box-shadow: ${cssString}; `;
-      cssString += `height: ${cellSize}px; width: ${cellSize}px;`;
+      cssString = `.pixelart-to-css { box-shadow: ${cssString}; `;
+      cssString += `height: ${cellSize}px; width: ${cellSize}px; }`;
     }
     return cssString;
   };
 
   return (
     <div className="copy-css">
-      <h2>Copy the CSS generated</h2>
+      {props.animationCode ?
+        <h2>
+          Paste the following code anywhere in the CSS code and assign
+          <span> .pixel-animation</span> class to a HTML element
+        </h2>
+        :
+        <h2>
+          Paste the following code anywhere in the CSS code and assign
+          <span> .pixelart-to-css</span> class to a HTML element
+        </h2>
+      }
       <div className="copy-css__string">
         {generateCSS()}
       </div>
