@@ -11,7 +11,7 @@ function setInitialState(state) {
   const columns = 20;
   const rows = 20;
   const currentColor = '#000000';
-  const frame = createGrid(columns * rows, GRID_INITIAL_COLOR, 0);
+  const frame = createGrid(columns * rows, GRID_INITIAL_COLOR, 100);
   const paletteGrid = createPalette();
   const dragging = false;
 
@@ -44,7 +44,7 @@ function setGridDimension(state, columns, rows) {
     newFrames = newFrames.push(createGrid(
       parseInt(columns, 10) * parseInt(rows, 10),
       GRID_INITIAL_COLOR,
-      0
+      100
     ));
   }
 
