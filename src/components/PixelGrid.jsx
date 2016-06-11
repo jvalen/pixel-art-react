@@ -7,7 +7,11 @@ import PixelCell from './PixelCell';
 class PixelGrid extends React.Component {
   shouldComponentUpdate(nextProps) {
     const same = (key) => nextProps[key].get('grid').equals(this.props[key].get('grid'));
-    if (same('activeFrame')) {
+    if (
+      same('activeFrame') &&
+      nextProps.eraserOn === this.props.eraserOn &&
+      nextProps.eyedropperOn === this.props.eyedropperOn
+    ) {
       return false;
     }
     return true;
