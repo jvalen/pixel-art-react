@@ -13,6 +13,14 @@
     margin-bottom: 1em;
   }
 
+  .app__frames-container[data-tooltip]::after {
+    width: 80%;
+  }
+
+  .app__frames-container[data-tooltip]::after {
+    margin-left: -40%;
+  }
+
   .app__load-save-container {
     margin-bottom: 2em;
     .app__load-button {

@@ -62,7 +62,11 @@ export default class App extends React.Component {
           className="app__frames-container"
           data-tooltip={
             this.state.helpOn ?
-            'Add frames to create an awesome animation' : null
+            `Create an awesome animation secuence.
+            You can modify the duration of each frame, changing its own value.
+            The number indicates where the frame ends in a range from 0 to 100.
+            `
+            : null
           }
         >
           <FramesHandlerContainer />
