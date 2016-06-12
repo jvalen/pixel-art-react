@@ -12,6 +12,7 @@ import FramesHandlerContainer from './FramesHandler';
 import PaletteGridContainer from './PaletteGrid';
 import ResetContainer from './Reset';
 import SaveDrawingContainer from './SaveDrawing';
+import NewProjectContainer from './NewProject';
 import SimpleNotificationContainer from './SimpleNotification';
 import SimpleSpinnerContainer from './SimpleSpinner';
 import UndoRedoContainer from './UndoRedo';
@@ -76,6 +77,15 @@ export default class App extends React.Component {
             <div className="app__left-side">
               <div className="app__mobile--container">
                 <div className="app__mobile--group">
+                  <div
+                    data-tooltip={
+                      this.state.helpOn ?
+                      'New project'
+                      : null
+                    }
+                  >
+                    <NewProjectContainer />
+                  </div>
                   <div className="app__load-save-container">
                     <button
                       className="app__load-button"

@@ -1,9 +1,8 @@
 import { ActionCreators } from 'redux-undo';
 
-export function setState(state) {
+export function setInitialState() {
   return {
-    type: 'SET_STATE',
-    state
+    type: 'SET_INITIAL_STATE'
   };
 }
 
@@ -151,6 +150,12 @@ export function changeFrameInterval(frameIndex, interval) {
     type: 'CHANGE_FRAME_INTERVAL',
     frameIndex,
     interval
+  };
+}
+
+export function newProject() {
+  return {
+    type: 'NEW_PROJECT'
   };
 }
 

@@ -290,6 +290,8 @@ export default function (state = Map(), action) {
       return setDuration(state, action.duration);
     case 'CHANGE_FRAME_INTERVAL':
       return changeFrameInterval(state, action.frameIndex, action.interval);
+    case 'NEW_PROJECT':
+      return setInitialState(state);
     default:
   }
   return state;

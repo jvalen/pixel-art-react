@@ -8,12 +8,12 @@ const configureStore = (devMode) => {
   if (devMode) {
     store = createStore(undoable(reducer, {
       filter: includeAction([
-        'SET_STATE',
         'SET_GRID_DIMENSION',
         'DRAW_CELL',
         'SET_DRAWING',
         'SET_CELL_SIZE',
-        'SET_RESET_GRID'
+        'SET_RESET_GRID',
+        'NEW_PROJECT'
       ]),
       debug: true
     }));
@@ -39,12 +39,12 @@ const configureStore = (devMode) => {
 
     store = createStore(undoable(reducer, {
       filter: includeAction([
-        'SET_STATE',
         'SET_GRID_DIMENSION',
         'DRAW_CELL',
         'SET_DRAWING',
         'SET_CELL_SIZE',
-        'SET_RESET_GRID'
+        'SET_RESET_GRID',
+        'NEW_PROJECT'
       ]),
       debug: false
     }), initialState);

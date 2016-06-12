@@ -24,7 +24,7 @@
   .app__load-save-container {
     margin-bottom: 2em;
     .app__load-button {
-      @mixin button red;
+      @mixin button gray;
     }
     lost-utility: clearfix;
     > div,
@@ -76,7 +76,7 @@
 
   .app__tools-wrapper {
     text-align: center;
-    margin: 1em 0 0.5em;
+    margin: 1em 0 0.6em;
     > div {
       > div {
         font-size: 1.8em;
