@@ -15,14 +15,5 @@
       flex-wrap: nowrap;
       padding-bottom: 0.5em;
     }
-
-    /*
-      Fix small vertical scrollbar glitch for some resolutions
-      inside frames-handler
-      Detected in Chrome
-    */
-    div::-webkit-scrollbar {
-      width: 1em !important;
-    }
   }
 }
