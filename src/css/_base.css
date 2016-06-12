@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   background-color: $color-scorpion;
+  overflow-x: hidden;
 }
 
 *,
