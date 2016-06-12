@@ -2,28 +2,23 @@ import React from 'react';
 
 export default class PixelCell extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const needToUpdate = (
-      (nextProps.color !== this.props.color) ||
-      (nextProps.width !== this.props.width)
-    );
-    return needToUpdate;
+    const keys = ['color', 'width'];
+    const isSame = keys.every(key => this.props.cell[key] === nextProps.cell[key]);
+    return !isSame;
   }
-
   render() {
-    const { color, width, onMouseDown, onMouseUp, onMouseOver } = this.props;
-    const selectedColor = color;
-
+    const { id, cell: { color, width }, onMouseDown, onMouseUp, onMouseOver } = this.props;
     const styles = {
       width: `${width}%`,
       paddingBottom: `${width}%`,
-      backgroundColor: selectedColor
+      backgroundColor: color
     };
 
     return (
       <div
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-        onMouseOver={onMouseOver}
+        onMouseDown={() => onMouseDown(id)}
+        onMouseUp={() => onMouseUp(id)}
+        onMouseOver={() => onMouseOver(id)}
         style={styles}
       />
     );

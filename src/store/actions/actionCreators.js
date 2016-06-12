@@ -29,11 +29,9 @@ export function setCustomColor(customColor) {
   };
 }
 
-export function setGridCellValue(color, used, id) {
+export function drawCell(id) {
   return {
-    type: 'SET_GRID_CELL_VALUE',
-    color,
-    used,
+    type: 'DRAW_CELL',
     id
   };
 }

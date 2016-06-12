@@ -1,5 +1,5 @@
 import React from 'react';
-import PixelGridContainer from './PixelGrid';
+import PixelCanvasContainer from './PixelCanvas';
 import CellSizeContainer from './CellSize';
 import ColorPickerContainer from './ColorPicker';
 import ModalContainer from './Modal';
@@ -196,7 +196,7 @@ export default class App extends React.Component {
             </div>
           </div>
           <div className="center col-2-4">
-            <PixelGridContainer />
+            <PixelCanvasContainer />
           </div>
           <div className="right col-1-4">
             <div className="app__right-side">

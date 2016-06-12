@@ -75,3 +75,10 @@ export function resetIntervals(frames) {
     return acc.push(Map({ grid: frame.get('grid'), interval: percentage }));
   }, List([]));
 }
+
+export function setGridCellValue(state, color, used, id) {
+  return state.setIn(
+    ['frames', state.get('activeFrameIndex'), 'grid', id],
+    Map({ color, used })
+  );
+}

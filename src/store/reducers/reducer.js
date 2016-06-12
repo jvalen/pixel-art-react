@@ -1,6 +1,6 @@
 import { List, Map } from 'immutable';
 import {
-  createGrid, createPalette, resetIntervals,
+  createGrid, createPalette, resetIntervals, setGridCellValue,
   checkColorInPalette, addColorToLastCellInPalette
 } from './reducerHelpers';
 
@@ -13,7 +13,6 @@ function setInitialState(state) {
   const currentColor = '#000000';
   const frame = createGrid(columns * rows, GRID_INITIAL_COLOR, 100);
   const paletteGrid = createPalette();
-  const dragging = false;
 
   const initialState = {
     frames: [frame],
@@ -28,7 +27,6 @@ function setInitialState(state) {
     colorPickerOn: false,
     loading: false,
     notifications: List(),
-    dragging,
     activeFrameIndex: 0,
     duration: 1
   };
@@ -104,11 +102,18 @@ function setCustomColor(state, customColor) {
   return state.merge(newState);
 }
 
-function setGridCellValue(state, color, used, id) {
-  return state.setIn(
-    ['frames', state.get('activeFrameIndex'), 'grid', id],
-    Map({ color, used })
-  );
+function drawCell(state, id) {
+  if (state.get('eyedropperOn')) {
+    const activeFrameIndex = state.get('activeFrameIndex');
+    const cellColor = state.getIn(
+      ['frames', activeFrameIndex, 'grid', id, 'color']
+    );
+    return setColorSelected(state, cellColor);
+  }
+  const prop = state.get('eraserOn') ? 'initialColor' : 'currentColor';
+  const used = !state.get('eraserOn');
+  const color = state.get(prop);
+  return setGridCellValue(state, color, used, id);
 }
 
 function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
@@ -245,8 +250,8 @@ export default function (state = Map(), action) {
       return setColorSelected(state, action.newColorSelected);
     case 'SET_CUSTOM_COLOR':
       return setCustomColor(state, action.customColor);
-    case 'SET_GRID_CELL_VALUE':
-      return setGridCellValue(state, action.color, action.used, action.id);
+    case 'DRAW_CELL':
+      return drawCell(state, action.id);
     case 'SET_DRAWING':
       return setDrawing(
         state, action.frames, action.paletteGridData,

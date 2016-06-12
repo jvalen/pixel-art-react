@@ -10,7 +10,7 @@ const configureStore = (devMode) => {
       filter: includeAction([
         'SET_STATE',
         'SET_GRID_DIMENSION',
-        'SET_GRID_CELL_VALUE',
+        'DRAW_CELL',
         'SET_DRAWING',
         'SET_CELL_SIZE',
         'SET_RESET_GRID'
@@ -41,7 +41,7 @@ const configureStore = (devMode) => {
       filter: includeAction([
         'SET_STATE',
         'SET_GRID_DIMENSION',
-        'SET_GRID_CELL_VALUE',
+        'DRAW_CELL',
         'SET_DRAWING',
         'SET_CELL_SIZE',
         'SET_RESET_GRID'
