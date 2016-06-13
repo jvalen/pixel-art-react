@@ -1,4 +1,4 @@
-@media only screen and (max-width: 935px) {
+@media only screen and (max-width: 1250px) {
   .app__left-side,
   .app__right-side {
     width: 100% !important;
@@ -57,6 +57,19 @@
     .app__mobile--group {
       lost-column: 1/2;
     }
+  }
+
+  .app__preview-button {
+    margin-top: 1em !important;
+  }
+
+  .app__copycss-button {
+    margin-top: 1.4em !important;
+  }
+
+  .grid-container {
+    width: 100% !important;
+    margin: 1em 0 !important;
   }
 
   body {
