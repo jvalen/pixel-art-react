@@ -23,8 +23,12 @@
   .cookie-message {
     font-weight: 500;
     color: $color-silver;
-    text-align: left;
+    text-align: center;
     position: relative;
     display: block;
+    a {
+      text-decoration: none;
+      color: $color-steelblue;
+    }
   }
 }

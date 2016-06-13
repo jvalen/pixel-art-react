@@ -25,7 +25,8 @@ export default class App extends React.Component {
     this.state = {
       modalType: null,
       modalOpen: false,
-      helpOn: false
+      helpOn: false,
+      showCookiesBanner: true
     };
   }
 
@@ -43,6 +44,12 @@ export default class App extends React.Component {
   closeModal() {
     this.setState({
       modalOpen: false
+    });
+  }
+
+  hideCookiesBanner() {
+    this.setState({
+      showCookiesBanner: false
     });
   }
 
@@ -269,15 +276,27 @@ export default class App extends React.Component {
         <div className="css-container">
           <CssDisplayContainer />
         </div>
-        <CookieBanner
-          disableStyle
-          message="
-            This website uses cookies (Twitter sharing and analytics). By
-            continuing to use this website you are giving consent to cookies
-            being used. Thank you."
-          onAccept={() => {}}
-          cookie="user-has-accepted-cookies"
-        />
+        {this.state.showCookiesBanner ?
+          <CookieBanner
+            disableStyle
+            message="
+              This website uses cookies. By continuing to use
+              this website you are giving consent to cookies
+              being used. Thank you. "
+            link={
+              {
+                msg: '',
+                url: 'http://www.jvrpath.com/pixelarttocss/cookies.html',
+                target: '_blank'
+              }
+            }
+            onAccept={() => this.hideCookiesBanner()}
+            cookie="user-has-accepted-cookies"
+            dismissOnScroll={false}
+          />
+        :
+          null
+        }
         <ModalContainer
           type={this.state.modalType}
           isOpen={this.state.modalOpen}
