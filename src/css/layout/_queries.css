@@ -45,7 +45,6 @@
       &.center {
         lost-column: none;
         .grid-container {
-          width: 90% !important;
           margin: 1em auto !important;
         }
       }
@@ -69,6 +68,32 @@
 
   body {
     width: 100% !important;
+  }
+
+  /* Avoid button hover effect in mobile devices */
+  .undo-redo,
+  .app__load-save-container,
+  .new-project,
+  .frames-handler,
+  .app__right-side {
+    button:hover,
+    button.selected {
+      background-color: $color-mineShaft !important;
+    }
+  }
+
+  button.app__copycss-button {
+    &:hover,
+    &.selected {
+      background-color: $color-alto !important;
+    }
+  }
+
+  .app__toggle-help-button {
+    &:hover,
+    &.selected {
+      background-color: $color-chathamsBlue !important;
+    }
   }
 }
 

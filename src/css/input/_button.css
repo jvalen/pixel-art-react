@@ -12,8 +12,6 @@
   box-shadow: 0 5px 0 0 $color-boxshadow;
   &:hover,
   &.selected {
-    transform: translate(0, 2px);
-    box-shadow: 0 0 0 $color-bg-active;
     background-color: $color-bg-active;
   }
   &:active {
@@ -45,7 +43,7 @@
   }
 
   @if $color == white {
-    @mixin generate-button black, $color-alto, $color-silveChalice, $color-tundora;
+    @mixin generate-button black, $color-alto, $color-silveChalice, $color-nobel;
   }
   font-family: $font;
 }
