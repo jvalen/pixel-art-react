@@ -55,6 +55,7 @@ export default class LoadDrawing extends React.Component {
       if (removed) {
         this.props.actions.sendNotification('Drawing deleted');
         this.props.close();
+        this.props.open();
       }
     }
   }

@@ -301,6 +301,7 @@ export default class App extends React.Component {
           type={this.state.modalType}
           isOpen={this.state.modalOpen}
           close={() => { this.closeModal(); }}
+          open={() => { this.changeModalType(this.state.modalType); }}
         />
       </div>
     );

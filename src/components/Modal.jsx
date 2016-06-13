@@ -65,6 +65,7 @@ class Modal extends React.Component {
           <LoadDrawing
             loadType={this.state.loadType}
             close={props.close}
+            open={props.open}
             frames={props.frames}
             columns={props.columns}
             rows={props.rows}
