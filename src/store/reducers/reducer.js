@@ -1,7 +1,7 @@
 import { List, Map } from 'immutable';
 import {
   createGrid, createPalette, resetIntervals, setGridCellValue,
-  checkColorInPalette, addColorToLastCellInPalette
+  checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette
 } from './reducerHelpers';
 
 const GRID_INITIAL_COLOR = '#313131';
@@ -10,7 +10,7 @@ function setInitialState(state) {
   const cellSize = 10;
   const columns = 20;
   const rows = 20;
-  const currentColor = '#000000';
+  const currentColor = { color: '#000000', position: 0 };
   const frame = createGrid(columns * rows, GRID_INITIAL_COLOR, 100);
   const paletteGrid = createPalette();
 
@@ -61,21 +61,28 @@ function endDrag(state) {
   return state.merge({ dragging: false });
 }
 
-function setColorSelected(state, newColorSelected) {
+function setColorSelected(state, newColorSelected, positionInPalette) {
+  const newColor = { color: newColorSelected, position: positionInPalette };
   const newState = {
-    currentColor: newColorSelected,
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false
   };
-  const paletteGridData = state.get('paletteGridData');
+  let paletteGridData = state.get('paletteGridData');
 
   if (!checkColorInPalette(paletteGridData, newColorSelected)) {
     // If there is no newColorSelected in the palette it will create one
-    newState.paletteGridData = addColorToLastCellInPalette(
+    paletteGridData = addColorToLastCellInPalette(
       paletteGridData, newColorSelected
     );
+    newColor.position = paletteGridData.size - 1;
+  } else if (positionInPalette === null) {
+    // Eyedropper called this function, the color position is unknown
+    newColor.position =
+      getPositionFirstMatchInPalette(paletteGridData, newColorSelected);
   }
+  newState.currentColor = newColor;
+  newState.paletteGridData = paletteGridData;
 
   return state.merge(newState);
 }
@@ -83,20 +90,23 @@ function setColorSelected(state, newColorSelected) {
 function setCustomColor(state, customColor) {
   const currentColor = state.get('currentColor');
   const paletteGridData = state.get('paletteGridData');
-  const newState = { currentColor: customColor };
+  const newState = {
+    currentColor: {
+      color: customColor,
+      position: currentColor.get('position')
+    }
+  };
 
-  if (!checkColorInPalette(paletteGridData, currentColor)) {
+  if (!checkColorInPalette(paletteGridData, currentColor.get('color'))) {
     // If there is no colorSelected in the palette it will create one
     newState.paletteGridData = addColorToLastCellInPalette(
       paletteGridData, customColor
     );
   } else {
-    newState.paletteGridData = paletteGridData.map((paletteColor) => {
-      if (paletteColor.get('color') === currentColor) {
-        return Map({ color: customColor });
-      }
-      return paletteColor;
-    });
+    // There is a color selected in the palette
+    newState.paletteGridData = paletteGridData.set(
+      currentColor.get('position'), Map({ color: customColor })
+    );
   }
 
   return state.merge(newState);
@@ -108,11 +118,12 @@ function drawCell(state, id) {
     const cellColor = state.getIn(
       ['frames', activeFrameIndex, 'grid', id, 'color']
     );
-    return setColorSelected(state, cellColor);
+    return setColorSelected(state, cellColor, null);
   }
-  const prop = state.get('eraserOn') ? 'initialColor' : 'currentColor';
   const used = !state.get('eraserOn');
-  const color = state.get(prop);
+  const color = state.get('eraserOn') ?
+    state.get('initialColor') :
+    state.get('currentColor').get('color');
   return setGridCellValue(state, color, used, id);
 }
 
@@ -129,7 +140,7 @@ function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
 
 function setEraser(state) {
   return state.merge({
-    currentColor: null,
+    currentColor: { color: null, position: -1 },
     eraserOn: true,
     eyedropperOn: false,
     colorPickerOn: false
@@ -247,7 +258,9 @@ export default function (state = Map(), action) {
     case 'SET_GRID_DIMENSION':
       return setGridDimension(state, action.columns, action.rows);
     case 'SET_COLOR_SELECTED':
-      return setColorSelected(state, action.newColorSelected);
+      return setColorSelected(
+        state, action.newColorSelected, action.paletteColorPosition
+      );
     case 'SET_CUSTOM_COLOR':
       return setCustomColor(state, action.customColor);
     case 'DRAW_CELL':

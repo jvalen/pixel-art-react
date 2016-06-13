@@ -56,6 +56,16 @@ export function checkColorInPalette(palette, color) {
   return (sameColors.size > 0);
 }
 
+export function getPositionFirstMatchInPalette(palette, color) {
+  return palette.reduce((acc, currentColor, index) => {
+    let currentPosition = acc;
+    if (currentPosition === -1 && currentColor.get('color') === color) {
+      currentPosition = index;
+    }
+    return currentPosition;
+  }, -1);
+}
+
 export function addColorToLastCellInPalette(palette, newColor) {
   return palette.map((currentColor, i, collection) => {
     if (i === collection.size - 1) {

@@ -12,9 +12,10 @@ const PaletteGrid = (props) => {
     return paletteGridData.map((color, i) =>
       <PaletteColor
         key={i}
+        positionInPalette={i}
         width={width}
         color={color.get('color')}
-        currentColor={currentColor}
+        selected={currentColor.get('position') === i}
         actions={{ setColorSelected: props.actions.setColorSelected }}
       />
     );

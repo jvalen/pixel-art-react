@@ -14,10 +14,11 @@ export function setGridDimension(columns, rows) {
   };
 }
 
-export function setColorSelected(newColorSelected) {
+export function setColorSelected(newColorSelected, paletteColorPosition) {
   return {
     type: 'SET_COLOR_SELECTED',
-    newColorSelected
+    newColorSelected,
+    paletteColorPosition
   };
 }
 
