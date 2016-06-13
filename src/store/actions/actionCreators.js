@@ -47,12 +47,6 @@ export function setDrawing(frames, paletteGridData, cellSize, columns, rows) {
   };
 }
 
-export function startDrag() {
-  return {
-    type: 'START_DRAG'
-  };
-}
-
 export function endDrag() {
   return {
     type: 'END_DRAG'

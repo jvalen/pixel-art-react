@@ -53,14 +53,6 @@ function setGridDimension(state, columns, rows) {
   });
 }
 
-function startDrag(state) {
-  return state.merge({ dragging: true });
-}
-
-function endDrag(state) {
-  return state.merge({ dragging: false });
-}
-
 function setColorSelected(state, newColorSelected, positionInPalette) {
   const newColor = { color: newColorSelected, position: positionInPalette };
   const newState = {
@@ -270,10 +262,6 @@ export default function (state = Map(), action) {
       return setDrawing(
         state, action.frames, action.paletteGridData,
         action.cellSize, action.columns, action.rows);
-    case 'START_DRAG':
-      return startDrag(state);
-    case 'END_DRAG':
-      return endDrag(state);
     case 'SET_ERASER':
       return setEraser(state);
     case 'SET_EYEDROPPER':
