@@ -102,6 +102,7 @@ function setCustomColor(state, customColor) {
     newState.paletteGridData = addColorToLastCellInPalette(
       paletteGridData, customColor
     );
+    newState.currentColor.position = newState.paletteGridData.size - 1;
   } else {
     // There is a color selected in the palette
     newState.paletteGridData = paletteGridData.set(
