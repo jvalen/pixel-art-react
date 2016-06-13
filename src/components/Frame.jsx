@@ -53,7 +53,7 @@ export default class Frame extends React.Component {
           onClick={(event) => { this.duplicateFrame(event); }}
         />
         <input
-          type="text"
+          type="number"
           value={this.props.frame.get('interval')}
           onChange={(event) => { this.changeInterval(event); }}
           className="frame__percentage"

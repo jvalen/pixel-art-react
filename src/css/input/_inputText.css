@@ -1,4 +1,5 @@
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
   appearance: none;
   box-shadow: none;
   border-radius: none;

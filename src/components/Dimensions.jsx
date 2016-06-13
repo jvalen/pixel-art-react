@@ -41,7 +41,7 @@ class Dimensions extends React.Component {
         <div className="dimensions__columns">
           <label htmlFor="dimensions__columns"></label>
           <input
-            type="text"
+            type="number"
             value={columns}
             onChange={(ev) => { this.handleChange(ev); }}
             className="columns"
@@ -51,7 +51,7 @@ class Dimensions extends React.Component {
         <div className="dimensions__rows">
           <label htmlFor="dimensions__rows"></label>
           <input
-            type="text"
+            type="number"
             value={rows}
             onChange={(ev) => { this.handleChange(ev); }}
             className="rows"
