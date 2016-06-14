@@ -1,12 +1,13 @@
 .simple-notification {
   background-color: #313131;
   color: $color-silver;
-  width: 35%;
+  width: 250px;
   text-align: center;
   padding: 1em;
-  position: absolute;
+  position: fixed;
   z-index: 1;
-  left: 38%;
+  left: 50%;
+  margin-left: -125px;
   top: 1em;
   border: 1px solid orange;
 }
