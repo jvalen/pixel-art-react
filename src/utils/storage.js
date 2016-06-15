@@ -1,4 +1,5 @@
-const STORAGE_KEY = 'pixelart-react-v2';
+import { exampleEyes } from '../../examples/example-eyes/json-eyes';
+const STORAGE_KEY = 'pixelart-react-v2-0-1';
 
 /*
  *  Storage data structure
@@ -28,8 +29,8 @@ function saveDataToStorage(storage, data) {
 */
 export function initStorage(storage) {
   storage.setItem(STORAGE_KEY, JSON.stringify({
-    stored: [],
-    current: -1
+    stored: [exampleEyes], // Load an example project data by default
+    current: 0
   }));
 }
 

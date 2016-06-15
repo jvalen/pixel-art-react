@@ -45,17 +45,18 @@
   }
   .load-drawing__export {
     overflow-y: scroll;
-    height: 30em;
     background-color: $color-mineShaft;
     color: $color-silver;
     padding: 0.5em;
     text-align: left;
   }
   .load-drawing__import {
+    font-family: $font-monospace;
     width: 100%;
     resize: none;
     height: 25em;
     margin: 1em 0 0;
+    padding: 0.5em;
     background-color: $color-mineShaft;
     color: $color-silver;
   }

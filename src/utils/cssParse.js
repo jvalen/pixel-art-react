@@ -54,19 +54,19 @@ export function generatePixelDrawCss(frame, columns, rows, cellSize, type) {
 */
 export function exportAnimationData(keyframes, duration) {
   let result = '';
-  result += '.pixel-animation { position: absolute;';
+  result += '.pixel-animation {\n  position: absolute;\n  ';
 
-  result += `animation: x ${duration}s infinite;`;
-  result += `-webkit-animation: x ${duration}s infinite;`;
-  result += `-moz-animation: x ${duration}s infinite;`;
-  result += `-o-animation: x ${duration}s infinite; }`;
+  result += `animation: x ${duration}s infinite;\n  `;
+  result += `-webkit-animation: x ${duration}s infinite;\n  `;
+  result += `-moz-animation: x ${duration}s infinite;\n  `;
+  result += `-o-animation: x ${duration}s infinite;\n}\n\n`;
 
-  result += '@keyframes x {';
+  result += '@keyframes x {\n';
 
   for (const key in keyframes) {
     if (keyframes.hasOwnProperty(key)) {
       const boxShadow = keyframes[key].boxShadow;
-      result += `${key}{ box-shadow: ${boxShadow}}`;
+      result += `${key}{\n  box-shadow: ${boxShadow}\n  }\n`;
     }
   }
   result += '}';

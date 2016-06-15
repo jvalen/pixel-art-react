@@ -26,6 +26,12 @@ Check the results of this simple project:
 
 ##### See it live at [pixelart-to-css-react](http://pixelart.jvrpath.com/)
 
+## Example
+
+You can find an example project data ready to import [here](examples/example-eyes/exported-eyes.txt).
+
+In addition a project will be loaded by default, check this out clicking on the **LOAD** button. Of course you can delete this project anytime you want.
+
 ## Technical overview
 
 This application has been built with the following technologies:
