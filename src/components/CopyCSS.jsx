@@ -31,8 +31,8 @@ const CopyCSS = (props) => {
       'string'
     );
     if (!!cssString) {
-      cssString = `.pixelart-to-css { box-shadow: ${cssString}; `;
-      cssString += `height: ${cellSize}px; width: ${cellSize}px; }`;
+      cssString = `.pixelart-to-css {\n  box-shadow: ${cssString};\n  `;
+      cssString += `height: ${cellSize}px;\n  width: ${cellSize}px;\n}`;
     }
     return cssString;
   };
@@ -50,9 +50,9 @@ const CopyCSS = (props) => {
           <span> .pixelart-to-css</span> class to a HTML element
         </h2>
       }
-      <div className="copy-css__string">
+      <pre className="copy-css__string">
         {generateCSS()}
-      </div>
+      </pre>
     </div>
   );
 };

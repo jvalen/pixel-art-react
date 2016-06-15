@@ -20,7 +20,8 @@
     inside frames-handler
     Detected in Chrome
   */
-  div::-webkit-scrollbar {
+  .app__frames-container::-webkit-scrollbar,
+  .app__frames-container div::-webkit-scrollbar {
     width: 1em !important;
   }
 }
@@ -94,6 +95,10 @@
     &.selected {
       background-color: $color-chathamsBlue !important;
     }
+  }
+
+  .load-drawing__import {
+    height: 10em !important;
   }
 }
 

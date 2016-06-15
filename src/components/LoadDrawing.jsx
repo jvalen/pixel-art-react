@@ -118,7 +118,7 @@ export default class LoadDrawing extends React.Component {
       case 'import': {
         return (
           <div className="load-drawing">
-            <h2>Paste the previously exported code</h2>
+            <h2>Paste a previously exported code</h2>
             <textarea
               className="load-drawing__import"
               ref="importProject"
@@ -137,9 +137,9 @@ export default class LoadDrawing extends React.Component {
         return (
           <div className="load-drawing">
             <h2>Select and copy the following code. Keep it save in a text file</h2>
-            <div className="load-drawing__export">
-              {this.getExportCode()}
-            </div>
+            <pre className="load-drawing__export">
+              {`\n${this.getExportCode()}\n\n`}
+            </pre>
           </div>
         );
       }
