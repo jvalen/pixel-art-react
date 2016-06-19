@@ -5,7 +5,7 @@ import { saveProjectToStorage } from '../utils/storage';
 export default class TwitterForm extends React.Component {
   constructor(props) {
     super(props);
-    const initialText = 'made with http://goo.gl/73F1JR by @sprawlWalker #pixelart';
+    const initialText = 'made with http://pixelart.jvrpath.com/ by @sprawlWalker #pixelart';
     this.state = {
       charsLeft: props.maxChars - initialText.length,
       initialText
