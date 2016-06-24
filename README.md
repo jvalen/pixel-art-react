@@ -45,7 +45,7 @@ This application has been built with the following technologies:
 ## Installation
 
 ```bash
-npm run install
+npm install
 ```
 
 ## Development
