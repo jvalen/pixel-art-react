@@ -11,7 +11,9 @@ var config = {
   ],
   plugins: [
     new CopyWebpackPlugin([
-        { from: 'src/assets/favicon.ico', to: 'favicon.ico' }
+        { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
+        { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
+        { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' }
     ]),
     new ExtractTextPlugin("css/main.css"),
     new webpack.DefinePlugin({
