@@ -36,6 +36,41 @@ describe('reducer: SET_INITIAL_STATE', () => {
   });
 });
 
+describe('reducer: CHANGE_DIMENSIONS', () => {
+  it('add a column', () => {
+    const dummyAction = {
+      type: 'SET_INITIAL_STATE',
+      state: Map({})
+    };
+    const dummyState = reducer(Map(), dummyAction);
+
+    const action = {
+      type: 'CHANGE_DIMENSIONS',
+      gridProperty: 'columns',
+      behaviour: 'add',
+    };
+    const nextState = reducer(dummyState, action);
+
+    expect(nextState.get('columns')).to.equal(21);
+  });
+  it('remove a row', () => {
+    const dummyAction = {
+      type: 'SET_INITIAL_STATE',
+      state: Map({})
+    };
+    const dummyState = reducer(Map(), dummyAction);
+
+    const action = {
+      type: 'CHANGE_DIMENSIONS',
+      gridProperty: 'rows',
+      behaviour: 'remove',
+    };
+    const nextState = reducer(dummyState, action);
+
+    expect(nextState.get('rows')).to.equal(19);
+  });
+});
+
 describe('reducer: SET_COLOR_SELECTED', () => {
   it('color provided is already in palette', () => {
     const dummyAction = {
