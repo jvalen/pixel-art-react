@@ -1,36 +1,4 @@
 .dimensions {
   margin: 1em 0 0;
   padding: 0.5em 0;
-  .dimensions__columns {
-    label {
-      @mixin icon columns;
-    }
-  }
-  .dimensions__rows {
-    label {
-      @mixin icon rows;
-    }
-  }
-
-  .dimensions__columns,
-  .dimensions__rows {
-    text-align: center;
-    margin: 0.5em auto;
-    display: table;
-    input {
-      font-family: $font-pixel;
-      width: 50%;
-      border: 3px solid $color-boulder;
-      padding: 0.3em 0;
-    }
-    label {
-      width: 50px;
-      height: 50px;
-      display: inline-block;
-      font-size: 2.5em;
-      color: $color-mineShaft;
-      position: relative;
-      margin-right: 0.4em;
-    }
-  }
 }

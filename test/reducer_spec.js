@@ -36,26 +36,6 @@ describe('reducer: SET_INITIAL_STATE', () => {
   });
 });
 
-describe('reducer: SET_GRID_DIMENSION', () => {
-  it('handles a column and row change', () => {
-    const dummyAction = {
-      type: 'SET_INITIAL_STATE',
-      state: Map({})
-    };
-    const dummyState = reducer(Map(), dummyAction);
-
-    const action = {
-      type: 'SET_GRID_DIMENSION',
-      columns: 5,
-      rows: 20,
-    };
-    const nextState = reducer(dummyState, action);
-
-    expect(nextState.get('columns')).to.equal(5);
-    expect(nextState.get('rows')).to.equal(20);
-  });
-});
-
 describe('reducer: SET_COLOR_SELECTED', () => {
   it('color provided is already in palette', () => {
     const dummyAction = {

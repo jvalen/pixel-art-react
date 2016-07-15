@@ -1,67 +1,31 @@
 import React from 'react';
+import Picker from './Picker';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-class Dimensions extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      columnsValue: 20,
-      rowsValue: 20
-    };
-  }
+const Dimensions = (props) => {
+  const changeDimensions = (gridProperty, behaviour) => {
+    props.actions.changeDimensions(gridProperty, behaviour);
+  };
 
-  handleChange(event) {
-    let propertyName;
-    const newLocalState = {};
-    switch (event.target.className) {
-      case 'columns':
-        propertyName = 'columnsValue';
-        break;
-      case 'rows':
-        propertyName = 'rowsValue';
-        break;
-      default:
-    }
+  const { columns, rows } = props;
 
-    newLocalState[propertyName] = event.target.value | 0;
-    this.setState(newLocalState, function () {
-      this.props.actions.setGridDimension(
-        this.state.columnsValue, this.state.rowsValue
-      );
-    });
-  }
-
-  render() {
-    const { columns, rows } = this.props;
-
-    return (
-      <div className="dimensions">
-        <div className="dimensions__columns">
-          <label htmlFor="dimensions__columns"></label>
-          <input
-            type="number"
-            value={columns}
-            onChange={(ev) => { this.handleChange(ev); }}
-            className="columns"
-            id="dimensions__columns"
-          />
-        </div>
-        <div className="dimensions__rows">
-          <label htmlFor="dimensions__rows"></label>
-          <input
-            type="number"
-            value={rows}
-            onChange={(ev) => { this.handleChange(ev); }}
-            className="rows"
-            id="dimensions__rows"
-          />
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="dimensions">
+      <Picker
+        type="columns"
+        value={columns}
+        action={changeDimensions}
+      />
+      <Picker
+        type="rows"
+        value={rows}
+        action={changeDimensions}
+      />
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   columns: state.present.get('columns'),

@@ -8,7 +8,7 @@ const configureStore = (devMode) => {
   if (devMode) {
     store = createStore(undoable(reducer, {
       filter: includeAction([
-        'SET_GRID_DIMENSION',
+        'CHANGE_DIMENSIONS',
         'DRAW_CELL',
         'SET_DRAWING',
         'SET_CELL_SIZE',
@@ -39,7 +39,7 @@ const configureStore = (devMode) => {
 
     store = createStore(undoable(reducer, {
       filter: includeAction([
-        'SET_GRID_DIMENSION',
+        'CHANGE_DIMENSIONS',
         'DRAW_CELL',
         'SET_DRAWING',
         'SET_CELL_SIZE',

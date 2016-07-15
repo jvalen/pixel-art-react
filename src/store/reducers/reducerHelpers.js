@@ -9,6 +9,40 @@ export function createGrid(cellsCount, initialColor, intervalPercentage) {
   return Map({ grid: newGrid, interval: intervalPercentage });
 }
 
+export function resizeGrid(frame, gridProperty, behaviour, initialColor, dimensions) {
+  const totalCells = dimensions.rows * dimensions.columns;
+  let currentFrameGrid = frame;
+
+  if (gridProperty === 'columns') {
+    // Resize by columns
+    if (behaviour === 'add') {
+      // Add a row at the end
+      for (let i = totalCells; i > 0; i -= dimensions.columns) {
+        currentFrameGrid = currentFrameGrid.splice(i, 0, Map({ color: initialColor, used: false }));
+      }
+    } else {
+      for (let i = totalCells; i > 0; i -= dimensions.columns) {
+        currentFrameGrid = currentFrameGrid.splice(i - 1, 1);
+      }
+    }
+  } else {
+    // Resize by rows
+    if (behaviour === 'add') {
+      // Add a row at the end
+      for (let i = 0; i < dimensions.columns; i++) {
+        currentFrameGrid = currentFrameGrid.push(Map({ color: initialColor, used: false }));
+      }
+    } else {
+      // Remove the last row
+      for (let i = 0; i < dimensions.columns; i++) {
+        currentFrameGrid = currentFrameGrid.splice(-1, 1);
+      }
+    }
+  }
+
+  return currentFrameGrid;
+}
+
 export function createPalette() {
   const paletteColors = [
     { color: '#000000' },

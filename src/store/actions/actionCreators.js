@@ -6,6 +6,14 @@ export function setInitialState() {
   };
 }
 
+export function changeDimensions(gridProperty, behaviour) {
+  return {
+    type: 'CHANGE_DIMENSIONS',
+    gridProperty,
+    behaviour
+  };
+}
+
 export function setGridDimension(columns, rows) {
   return {
     type: 'SET_GRID_DIMENSION',

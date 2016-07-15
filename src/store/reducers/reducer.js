@@ -1,6 +1,6 @@
 import { List, Map } from 'immutable';
 import {
-  createGrid, createPalette, resetIntervals, setGridCellValue,
+  createGrid, resizeGrid, createPalette, resetIntervals, setGridCellValue,
   checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette
 } from './reducerHelpers';
 
@@ -34,23 +34,37 @@ function setInitialState(state) {
   return state.merge(initialState);
 }
 
-function setGridDimension(state, columns, rows) {
+function changeDimensions(state, gridProperty, behaviour) {
   const framesCount = state.get('frames').size;
+  const propertyValue = state.get(gridProperty);
   let newFrames = List();
 
   for (let i = 0; i < framesCount; i++) {
-    newFrames = newFrames.push(createGrid(
-      parseInt(columns, 10) * parseInt(rows, 10),
-      GRID_INITIAL_COLOR,
-      100
-    ));
+    newFrames = newFrames.push(
+      Map(
+        {
+          grid:
+            resizeGrid(
+              state.getIn(['frames', i, 'grid']),
+              gridProperty,
+              behaviour,
+              GRID_INITIAL_COLOR,
+              { columns: state.get('columns'), rows: state.get('rows') }
+            ),
+          interval: state.getIn(['frames', i, 'interval'])
+        }
+      )
+    );
   }
 
-  return state.merge({
-    frames: resetIntervals(newFrames),
-    rows: parseInt(rows, 10),
-    columns: parseInt(columns, 10)
-  });
+  const newValues = {
+    frames: newFrames
+  };
+  newValues[gridProperty] = parseInt(
+    behaviour === 'add' ? propertyValue + 1 : propertyValue - 1,
+    10
+  );
+  return state.merge(newValues);
 }
 
 function setColorSelected(state, newColorSelected, positionInPalette) {
@@ -248,8 +262,8 @@ export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_INITIAL_STATE':
       return setInitialState(state);
-    case 'SET_GRID_DIMENSION':
-      return setGridDimension(state, action.columns, action.rows);
+    case 'CHANGE_DIMENSIONS':
+      return changeDimensions(state, action.gridProperty, action.behaviour);
     case 'SET_COLOR_SELECTED':
       return setColorSelected(
         state, action.newColorSelected, action.paletteColorPosition
