@@ -7,6 +7,7 @@ import DimensionsContainer from './Dimensions';
 import CssDisplayContainer from './CssDisplay';
 import DurationContainer from './Duration';
 import EraserContainer from './Eraser';
+import BucketContainer from './Bucket';
 import EyedropperContainer from './Eyedropper';
 import FramesHandlerContainer from './FramesHandler';
 import PaletteGridContainer from './PaletteGrid';
@@ -151,6 +152,15 @@ export default class App extends React.Component {
                       }
                     >
                       <EyedropperContainer />
+                    </div>
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Paint bucket tool'
+                        : null
+                      }
+                    >
+                      <BucketContainer />
                     </div>
                   </div>
                 </div>

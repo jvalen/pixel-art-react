@@ -1,7 +1,8 @@
 import { List, Map } from 'immutable';
 import {
   createGrid, resizeGrid, createPalette, resetIntervals, setGridCellValue,
-  checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette
+  checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette,
+  applyBucket
 } from './reducerHelpers';
 
 const GRID_INITIAL_COLOR = '#313131';
@@ -25,6 +26,7 @@ function setInitialState(state) {
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false,
+    bucketOn: false,
     loading: false,
     notifications: List(),
     activeFrameIndex: 0,
@@ -120,17 +122,27 @@ function setCustomColor(state, customColor) {
 }
 
 function drawCell(state, id) {
-  if (state.get('eyedropperOn')) {
+  const bucketOn = state.get('bucketOn');
+  const eyedropperOn = state.get('eyedropperOn');
+  const eraserOn = state.get('eraserOn');
+
+  if (bucketOn || eyedropperOn) {
     const activeFrameIndex = state.get('activeFrameIndex');
     const cellColor = state.getIn(
       ['frames', activeFrameIndex, 'grid', id, 'color']
     );
-    return setColorSelected(state, cellColor, null);
+
+    if (eyedropperOn) {
+      return setColorSelected(state, cellColor, null);
+    }
+    // bucketOn
+    return applyBucket(state, activeFrameIndex, id, cellColor);
   }
-  const used = !state.get('eraserOn');
-  const color = state.get('eraserOn') ?
-    state.get('initialColor') :
-    state.get('currentColor').get('color');
+  // eraserOn or regular cell paint
+  const used = !eraserOn;
+  const color = eraserOn ?
+  state.get('initialColor') :
+  state.get('currentColor').get('color');
   return setGridCellValue(state, color, used, id);
 }
 
@@ -150,7 +162,17 @@ function setEraser(state) {
     currentColor: { color: null, position: -1 },
     eraserOn: true,
     eyedropperOn: false,
-    colorPickerOn: false
+    colorPickerOn: false,
+    bucketOn: false
+  });
+}
+
+function setBucket(state) {
+  return state.merge({
+    eraserOn: false,
+    eyedropperOn: false,
+    colorPickerOn: false,
+    bucketOn: !state.get('bucketOn')
   });
 }
 
@@ -158,7 +180,8 @@ function setEyedropper(state) {
   return state.merge({
     eraserOn: false,
     eyedropperOn: true,
-    colorPickerOn: false
+    colorPickerOn: false,
+    bucketOn: false
   });
 }
 
@@ -166,7 +189,8 @@ function setColorPicker(state) {
   return state.merge({
     eraserOn: false,
     eyedropperOn: false,
-    colorPickerOn: true
+    colorPickerOn: true,
+    bucketOn: false
   });
 }
 
@@ -278,6 +302,8 @@ export default function (state = Map(), action) {
         action.cellSize, action.columns, action.rows);
     case 'SET_ERASER':
       return setEraser(state);
+    case 'SET_BUCKET':
+      return setBucket(state);
     case 'SET_EYEDROPPER':
       return setEyedropper(state);
     case 'SET_COLOR_PICKER':

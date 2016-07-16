@@ -126,3 +126,84 @@ export function setGridCellValue(state, color, used, id) {
     Map({ color, used })
   );
 }
+
+function getSameColorAdjacentCells(frameGrid, columns, rows, id, color) {
+  const adjacentCollection = [];
+  let auxId;
+
+  if ((id + 1) % columns !== 0) {
+    // Not at the very right
+    auxId = id + 1;
+    if (frameGrid.get(auxId).get('color') === color) {
+      adjacentCollection.push(auxId);
+    }
+  }
+  if (id % columns !== 0) {
+    // Not at the very left
+    auxId = id - 1;
+    if (frameGrid.get(auxId).get('color') === color) {
+      adjacentCollection.push(auxId);
+    }
+  }
+  if (id >= columns) {
+    // Not at the very top
+    auxId = id - columns;
+    if (frameGrid.get(auxId).get('color') === color) {
+      adjacentCollection.push(auxId);
+    }
+  }
+  if (id < (columns * rows) - columns) {
+    // Not at the very bottom
+    auxId = id + columns;
+    if (frameGrid.get(auxId).get('color') === color) {
+      adjacentCollection.push(auxId);
+    }
+  }
+
+  return adjacentCollection;
+}
+
+export function applyBucket(state, activeFrameIndex, id, sourceColor) {
+  const columns = state.get('columns');
+  const rows = state.get('rows');
+  const queue = [id];
+  let currentColor = state.get('currentColor').get('color');
+  let currentId;
+  let newState = state;
+  let adjacents;
+  let auxAdjacentId;
+  let auxAdjacentColor;
+
+  if (!currentColor) {
+    // If there is no color selected in the palette, it will choose the first one
+    currentColor = newState.getIn(['paletteGridData', 0, 'color']);
+    newState = newState.set('currentColor', Map({ color: currentColor, position: 0 }));
+  }
+
+  while (queue.length > 0) {
+    currentId = queue.shift();
+    newState = setGridCellValue(newState, currentColor, true, currentId);
+    adjacents = getSameColorAdjacentCells(
+      newState.getIn(
+        ['frames', activeFrameIndex, 'grid']
+      ),
+      columns, rows, currentId, sourceColor
+    );
+
+    for (let i = 0; i < adjacents.length; i++) {
+      auxAdjacentId = adjacents[i];
+      auxAdjacentColor = newState.getIn(
+        ['frames', activeFrameIndex, 'grid', auxAdjacentId, 'color']
+      );
+      // Avoid introduce repeated or painted already cell into the queue
+      if (
+        (queue.indexOf(auxAdjacentId) === -1) &&
+        (auxAdjacentColor !== currentColor)
+      ) {
+        queue.push(auxAdjacentId);
+      }
+    }
+  }
+
+  return newState;
+}

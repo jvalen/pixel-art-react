@@ -67,6 +67,12 @@ export function setEraser() {
   };
 }
 
+export function setBucket() {
+  return {
+    type: 'SET_BUCKET'
+  };
+}
+
 export function setEyedropper() {
   return {
     type: 'SET_EYEDROPPER'
