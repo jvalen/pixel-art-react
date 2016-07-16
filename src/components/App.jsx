@@ -156,7 +156,7 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'Paint bucket tool'
+                        'It fills an area of the current frame based on color similarity'
                         : null
                       }
                     >

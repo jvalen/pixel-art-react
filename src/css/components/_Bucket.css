@@ -1,5 +1,5 @@
 .bucket {
-  @mixin icon twitter;
+  @mixin icon bucket;
   &:hover {
     cursor: pointer;
   }

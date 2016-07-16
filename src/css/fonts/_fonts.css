@@ -83,3 +83,7 @@
 @define-extend help {
   content: "\f128";
 }
+
+@define-extend bucket {
+  content: "\f0f4";
+}
