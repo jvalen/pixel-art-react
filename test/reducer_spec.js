@@ -187,4 +187,27 @@ describe('reducer: DRAW_CELL', () => {
       nextState.get('currentColor').get('color')
     );
   });
+  it('Click in the first cell with the bucket tool selected', () => {
+    const dummyAction = {
+      type: 'SET_INITIAL_STATE',
+      state: Map({})
+    };
+    const dummyState = reducer(Map(), dummyAction);
+
+    let action = {
+      type: 'SET_BUCKET'
+    };
+    let nextState = reducer(dummyState, action);
+
+    action = {
+      type: 'DRAW_CELL',
+      id: 0
+    };
+    nextState = reducer(nextState, action);
+
+    // Last cell should have the same color than the first one
+    expect(nextState.getIn(['frames', 0, 'grid', 399, 'color'])).to.equal(
+      nextState.get('currentColor').get('color')
+    );
+  });
 });
