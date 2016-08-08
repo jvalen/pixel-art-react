@@ -28,6 +28,7 @@ describe('reducer: SET_INITIAL_STATE', () => {
       eraserOn: false,
       eyedropperOn: false,
       colorPickerOn: false,
+      bucketOn: false,
       loading: false,
       notifications: List(),
       activeFrameIndex: 0,
