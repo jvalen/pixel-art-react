@@ -41,3 +41,17 @@
     lost-column: 1/3 3 0;
   }
 }
+
+.grid-4 {
+  lost-utility: clearfix;
+  & > div {
+    lost-column: 1/4 4 0;
+  }
+}
+
+.grid-2 {
+  lost-utility: clearfix;
+  & > div {
+    lost-column: 1/2 2 0;
+  }
+}

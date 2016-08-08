@@ -125,7 +125,7 @@ export default class App extends React.Component {
                   >
                     <UndoRedoContainer />
                   </div>
-                  <div className="app__tools-wrapper grid-3">
+                  <div className="app__tools-wrapper grid-2">
                     <div
                       data-tooltip={
                         this.state.helpOn ?
@@ -134,15 +134,6 @@ export default class App extends React.Component {
                       }
                     >
                       <EraserContainer />
-                    </div>
-                    <div
-                      data-tooltip={
-                        this.state.helpOn ?
-                        'Choose a new color that is not in your palette'
-                        : null
-                      }
-                    >
-                      <ColorPickerContainer />
                     </div>
                     <div
                       data-tooltip={
@@ -161,6 +152,15 @@ export default class App extends React.Component {
                       }
                     >
                       <BucketContainer />
+                    </div>
+                    <div
+                      data-tooltip={
+                        this.state.helpOn ?
+                        'Choose a new color that is not in your palette'
+                        : null
+                      }
+                    >
+                      <ColorPickerContainer />
                     </div>
                   </div>
                 </div>

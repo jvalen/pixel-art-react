@@ -82,7 +82,7 @@
         font-size: 1.8em;
         text-align: center;
         color: $color-mineShaft;
-        padding: 0.2em 0;
+        padding: 0.4em 0;
         width: 100%;
         &.selected {
           color: $color-silver;
