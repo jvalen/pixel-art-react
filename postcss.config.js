@@ -1,7 +1,7 @@
-module.exports = (ctx) => {
+module.exports = () => {
   return {
     plugins: [
-      require('postcss-import')({ addDependencyTo: ctx.webpack }),
+      require('postcss-import')(),
       require('precss')(),
       require('autoprefixer')({
         browsers: ['last 2 versions', 'IE > 8']

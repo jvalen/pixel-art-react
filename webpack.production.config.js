@@ -32,7 +32,7 @@ var config = {
       },
       {
         test:   /\.css$/,
-        loader: ExtractTextPlugin.extract({
+        use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
             'css-loader?importLoaders=1',
