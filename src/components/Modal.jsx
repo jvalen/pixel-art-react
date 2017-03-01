@@ -211,6 +211,7 @@ class Modal extends React.Component {
         isOpen={this.props.isOpen}
         onRequestClose={() => { this.props.close(); }}
         style={styles.modal}
+        contentLabel={`Dialog ${this.props.type || ''}`}
       >
         {this.getModalContent(this.props)}
       </ModalReact>
