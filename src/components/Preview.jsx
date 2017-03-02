@@ -1,11 +1,11 @@
 import React from 'react';
+import { StyleRoot } from 'radium';
 import {
   generatePixelDrawCss,
   generateAnimationCSSData,
   generateAnimationIntervals
 } from '../utils/cssParse';
-import { Animation } from './Animation';
-import { StyleRoot } from 'radium';
+import Animation from './Animation';
 
 const Preview = (props) => {
   const generatePreview = () => {
@@ -62,7 +62,7 @@ const Preview = (props) => {
   };
 
   return (
-    <div className="preview" style={style} onClick={props.onClick}>
+    <div className="preview" style={style}>
       {generatePreview()}
     </div>
   );
