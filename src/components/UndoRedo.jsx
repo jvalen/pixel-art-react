@@ -17,18 +17,18 @@ const UndoRedo = (props) => {
       <button
         onClick={() => { undo(); }}
       >
-        <span className="undo-redo__icon--undo"></span>
+        <span className="undo-redo__icon--undo" />
       </button>
       <button
         onClick={() => { redo(); }}
       >
-        <span className="undo-redo__icon--redo"></span>
+        <span className="undo-redo__icon--redo" />
       </button>
     </div>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

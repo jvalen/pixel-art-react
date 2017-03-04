@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const SimpleSpinner = (props) =>
+const SimpleSpinner = props =>
   <div className={`simple-spinner${props.loading ? ' display' : ''}`}>
-    <div className="circle"></div>
+    <div className="circle" />
   </div>
 ;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   loading: state.present.get('loading')
 });
 

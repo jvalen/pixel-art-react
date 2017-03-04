@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../store/actions/actionCreators';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import * as actionCreators from '../store/actions/actionCreators';
 
 const SimpleNotification = (props) => {
   const removeNotifications = () => {
@@ -32,14 +32,14 @@ const SimpleNotification = (props) => {
         {notifications}
       </ReactCSSTransitionGroup>
     </div>
-    );
+  );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   notifications: state.present.get('notifications')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

@@ -31,7 +31,7 @@ const SaveDrawing = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   frames: state.present.get('frames'),
   columns: state.present.get('columns'),
   rows: state.present.get('rows'),
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => ({
   paletteGridData: state.present.get('paletteGridData')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

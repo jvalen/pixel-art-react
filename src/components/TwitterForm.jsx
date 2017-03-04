@@ -65,8 +65,7 @@ export default class TwitterForm extends React.Component {
           ref="tweetText"
           onChange={(event) => { this.handleTextChange(event); }}
           defaultValue={this.state.initialText}
-        >
-        </textarea>
+        />
         <div
           className={
             `twitter-form__count
@@ -83,7 +82,7 @@ export default class TwitterForm extends React.Component {
           className="twitter-form__tweet"
           onClick={() => { this.tweetDrawing(this.props.tweetType); }}
         >
-          <span></span>TWEET
+          <span />TWEET
         </button>
       </div>
     );
