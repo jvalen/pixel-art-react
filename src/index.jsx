@@ -6,7 +6,7 @@ import Root from './components/Root';
 
 const devMode = process.env.NODE_ENV === 'development';
 if (devMode) {
-  const Perf = require('react-addons-perf');
+  const Perf = require('react-addons-perf'); // eslint-disable-line global-require
   window.Perf = Perf; // Expose react-addons-perf for dev purposes
 }
 
