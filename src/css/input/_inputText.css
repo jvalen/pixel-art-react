@@ -10,6 +10,7 @@ input[type="number"] {
   width: 100%;
   background-color: $color-tundora;
   transition: background-color 0.3s;
+
   &:focus {
     color: $color-mineShaft;
     background-color: $color-dustyGray;

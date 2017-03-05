@@ -11,9 +11,11 @@
   opacity: 0.4;
   top: 0;
   display: none;
+
   &.display {
     display: block;
   }
+
   .circle {
     height: 60px;
     width: 60px;
@@ -36,6 +38,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }

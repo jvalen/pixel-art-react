@@ -1,8 +1,10 @@
 .color-picker {
   .color-picker__button {
     @mixin icon paint-brush;
+
     display: block;
   }
+
   &:hover {
     cursor: pointer;
   }

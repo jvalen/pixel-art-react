@@ -4,17 +4,21 @@
   min-height: 1px;
   margin: 0 auto;
   width: 90%;
+
   div {
     float: left;
     border: 1px solid $color-scorpion;
     border-width: 0 1px 1px 0;
   }
+
   &.cell {
     cursor: cell;
   }
+
   &.context-menu {
     cursor: context-menu;
   }
+
   &.copy {
     cursor: copy;
   }

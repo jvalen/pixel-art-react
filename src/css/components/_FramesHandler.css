@@ -1,14 +1,18 @@
 .frames-handler {
   lost-utility: clearfix;
+
   .frames-handler__add {
     @mixin button gray;
+
     height: 86px;
     float: left;
   }
+
   .frame-handler__list {
     display: flex;
     background-color: rgba(51, 50, 50, 0.2);
     padding: 0.2em;
+
     .list__container {
       height: 85px;
       display: flex;

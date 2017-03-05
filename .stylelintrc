@@ -1,3 +1,14 @@
 {
-  "extends": "stylelint-config-standard"
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-lost"
+  ],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["mixin", "if", "extend", "/^define[a-z]*/"]
+      }
+    ],
+  }
 }

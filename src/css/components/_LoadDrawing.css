@@ -6,6 +6,7 @@
     display: block;
     text-align: center;
   }
+
   .load-drawing__container {
     max-height: 400;
     overflow-x: hidden;
@@ -13,10 +14,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     text-align: center;
+
     &.empty {
       overflow-y: hidden;
       display: block;
     }
+
     .load-drawing__drawing {
       position: relative;
       border: 3px solid black;
@@ -25,8 +28,10 @@
       min-height: 200;
       margin: 1em;
       padding: 0.5em 0;
+
       .drawing__delete {
         @mixin icon trash-o;
+
         position: absolute;
         font-size: 1.7em;
         color: white;
@@ -38,11 +43,13 @@
         border: 2px solid black;
         border-width: 0 0 2px 2px;
       }
+
       .preview {
         margin: 0 auto;
       }
     }
   }
+
   .load-drawing__export {
     overflow-y: scroll;
     background-color: $color-mineShaft;
@@ -50,6 +57,7 @@
     padding: 0.5em;
     text-align: left;
   }
+
   .load-drawing__import {
     font-family: $font-monospace;
     width: 100%;
@@ -60,8 +68,10 @@
     background-color: $color-mineShaft;
     color: $color-silver;
   }
+
   .import__button {
     @mixin button red;
+
     margin: 1.5em auto;
     display: table;
   }

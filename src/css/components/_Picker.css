@@ -39,6 +39,7 @@
     background-color: $color-tundora;
     border: 3px solid $color-boulder;
     flex: 1;
+
     button {
       color: $color-silver;
       background-color: $color-mineShaft;
@@ -49,9 +50,11 @@
       height: 2em;
       border-left: 3px solid $color-boulder;
     }
+
     button:hover {
       background-color: $color-tundora;
     }
+
     .button-add {
       border-bottom: 1px solid $color-boulder;
     }

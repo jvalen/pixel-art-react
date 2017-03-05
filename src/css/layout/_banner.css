@@ -7,6 +7,7 @@
   display: table;
   padding: 0.5em;
   font-size: 0.9em;
+
   .button-close {
     position: relative;
     line-height: 24px;
@@ -20,12 +21,14 @@
     margin: 0.5em auto;
     width: 11em;
   }
+
   .cookie-message {
     font-weight: 500;
     color: $color-silver;
     text-align: center;
     position: relative;
     display: block;
+
     a {
       text-decoration: none;
       color: $color-steelblue;

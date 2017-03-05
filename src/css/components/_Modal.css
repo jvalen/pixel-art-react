@@ -2,15 +2,19 @@
   button.close {
     @mixin button blue;
   }
+
   .modal__preview,
   .modal__load {
     margin: 2em 0 1em;
+
     .modal__preview--wrapper {
       margin: 1em auto;
       display: table;
     }
+
     fieldset {
       padding: 1em 0;
+
       label {
         margin: 1em 0.5em;
         display: inline-block;

@@ -2,15 +2,18 @@ header {
   padding: 0 1.4em;
   color: $color-silver;
   lost-utility: clearfix;
+
   .header__credits {
     text-align: right;
     margin-top: 1em;
     top: 1em;
     position: relative;
+
     a {
       text-decoration: none;
       color: $color-brandyRose;
     }
+
     h2 {
       display: block;
       font-size: 0.8em;

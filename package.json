@@ -5,6 +5,7 @@
   "author": "Javier Valencia Romero",
   "scripts": {
     "lint": "eslint --ext .js --ext .jsx .",
+    "csslint": "stylelint src/css/**/*.css",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch",
     "development": "webpack-dev-server",
@@ -93,17 +94,18 @@
     "node": "5.11.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-immutable": "^1.6.0",
     "eslint": "^3.16.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
+    "jsdom": "^9.11.0",
+    "mocha": "^3.2.0",
     "react-addons-perf": "^15.4.2",
     "stylelint": "^7.9.0",
-    "stylelint-config-standard": "^16.0.0",
-    "chai": "^3.5.0",
-    "chai-immutable": "^1.6.0",
-    "jsdom": "^9.11.0",
-    "mocha": "^3.2.0"
+    "stylelint-config-lost": "0.0.2",
+    "stylelint-config-standard": "^16.0.0"
   }
 }

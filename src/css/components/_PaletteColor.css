@@ -2,6 +2,7 @@
   float: left;
   border: 2px solid $color-scorpion;
   border-width: 2px;
+
   &.selected {
     border-color: white;
   }
