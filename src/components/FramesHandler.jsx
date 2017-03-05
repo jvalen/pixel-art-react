@@ -13,9 +13,8 @@ class FramesHandler extends React.Component {
 
   onScrollbarUpdate() {
     if (this.state.newFrame) {
-      const { scrollbars } = this.refs;
       this.setState({ newFrame: false });
-      scrollbars.scrollToRight();
+      this.scrollbars.scrollToRight();
     }
   }
 
@@ -58,7 +57,7 @@ class FramesHandler extends React.Component {
         <div className="frame-handler__list">
           <Scrollbars
             autoHeight
-            ref="scrollbars"
+            ref={(c) => { this.scrollbars = c; }}
             universal
             onUpdate={() => { this.onScrollbarUpdate(); }}
           >
