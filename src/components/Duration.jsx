@@ -22,11 +22,11 @@ const Duration = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   duration: state.present.get('duration')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

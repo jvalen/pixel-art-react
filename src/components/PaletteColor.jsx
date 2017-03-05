@@ -15,7 +15,7 @@ const PaletteColor = (props) => {
   };
 
   return (
-    <div
+    <button
       className={
         `palette-color
         ${selected ? 'selected' : ''}`

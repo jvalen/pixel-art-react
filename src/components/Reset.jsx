@@ -21,13 +21,13 @@ const Reset = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   columns: state.present.get('columns'),
   rows: state.present.get('rows'),
   activeFrameIndex: state.present.get('activeFrameIndex')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

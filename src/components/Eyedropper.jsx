@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 
-export const EyedropperContainer = connect(
+const EyedropperContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Eyedropper);

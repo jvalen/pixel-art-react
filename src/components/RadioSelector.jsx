@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RadioSelector = (props) => {
-  const options = (ops) =>
+  const options = ops =>
     ops.map((item, index) =>
       <label htmlFor={`${props.name}-${item.label}`} key={index}>
         <input

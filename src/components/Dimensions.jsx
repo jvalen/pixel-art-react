@@ -1,7 +1,7 @@
 import React from 'react';
-import Picker from './Picker';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Picker from './Picker';
 import * as actionCreators from '../store/actions/actionCreators';
 
 const Dimensions = (props) => {
@@ -27,12 +27,12 @@ const Dimensions = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   columns: state.present.get('columns'),
   rows: state.present.get('rows')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

@@ -9,7 +9,7 @@ const CssDisplay = (props) => {
       activeFrame, columns, rows, cellSize, 'string'
     );
 
-    if (!!cssString) {
+    if (cssString) {
       cssString = `box-shadow: ${cssString}; `;
       cssString += `height: ${cellSize}px; width: ${cellSize}px;`;
     }
@@ -19,7 +19,7 @@ const CssDisplay = (props) => {
 
   return (
     <div className="css-display">
-    {generateCss()}
+      {generateCss()}
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ModalReact from 'react-modal';
 import * as actionCreators from '../store/actions/actionCreators';
 
-import ModalReact from 'react-modal';
 import RadioSelector from './RadioSelector';
 import LoadDrawing from './LoadDrawing';
 import Preview from './Preview';
@@ -12,6 +12,44 @@ import DownloadDrawing from './DownloadDrawing';
 import TwitterForm from './TwitterForm';
 
 class Modal extends React.Component {
+  static generateRadioOptions(props) {
+    let options;
+
+    if (props.type !== 'load') {
+      options = [{
+        value: 'single',
+        label: 'single'
+      }];
+
+      if (props.frames.size > 1) {
+        const spritesheetSupport =
+        props.type === 'download' ||
+        props.type === 'twitter';
+
+        const animationOption = {
+          value: 'animation',
+          label: spritesheetSupport ? 'GIF' : 'animation'
+        };
+        options.push(animationOption);
+
+        if (spritesheetSupport) {
+          options.push({
+            value: 'spritesheet',
+            label: 'spritesheet'
+          });
+        }
+      }
+    } else {
+      options = [
+        { value: 'storage', label: 'Stored' },
+        { value: 'import', label: 'Import' },
+        { value: 'export', label: 'Export' }
+      ];
+    }
+
+    return options;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -22,41 +60,45 @@ class Modal extends React.Component {
   }
 
   getModalContent(props) {
-    const options = this.generateRadioOptions(props);
+    const options = this.constructor.generateRadioOptions(props);
     let content;
-    let radioOptions = props.type !== 'load' ?
-      <div className="modal__preview">
-        <RadioSelector
-          name="preview-type"
-          selected={this.state.previewType}
-          change={this.changeRadioType}
-          options={options}
-        />
-        {this.state.previewType !== 'spritesheet' ?
-          <div className="modal__preview--wrapper">
-            <Preview
-              key="0"
-              frames={props.frames}
-              columns={props.columns}
-              rows={props.rows}
-              cellSize={props.type === 'preview' ? props.cellSize : 5}
-              duration={props.duration}
-              activeFrameIndex={props.activeFrameIndex}
-              animate={this.state.previewType === 'animation'}
-            />
-          </div>
-        : null
-        }
-      </div>
+    const radioOptions = props.type !== 'load' ?
+      (
+        <div className="modal__preview">
+          <RadioSelector
+            name="preview-type"
+            selected={this.state.previewType}
+            change={this.changeRadioType}
+            options={options}
+          />
+          {this.state.previewType !== 'spritesheet' ?
+            <div className="modal__preview--wrapper">
+              <Preview
+                key="0"
+                frames={props.frames}
+                columns={props.columns}
+                rows={props.rows}
+                cellSize={props.type === 'preview' ? props.cellSize : 5}
+                duration={props.duration}
+                activeFrameIndex={props.activeFrameIndex}
+                animate={this.state.previewType === 'animation'}
+              />
+            </div>
+          : null
+          }
+        </div>
+      )
       :
-      <div className="modal__load">
-        <RadioSelector
-          name="load-type"
-          selected={this.state.loadType}
-          change={this.changeRadioType}
-          options={options}
-        />
-      </div>
+      (
+        <div className="modal__load">
+          <RadioSelector
+            name="load-type"
+            selected={this.state.loadType}
+            change={this.changeRadioType}
+            options={options}
+          />
+        </div>
+      )
       ;
 
     switch (props.type) {
@@ -71,12 +113,10 @@ class Modal extends React.Component {
             rows={props.rows}
             cellSize={props.cellSize}
             paletteGridData={props.paletteGridData}
-            actions={
-              {
-                setDrawing: props.actions.setDrawing,
-                sendNotification: props.actions.sendNotification
-              }
-            }
+            actions={{
+              setDrawing: props.actions.setDrawing,
+              sendNotification: props.actions.sendNotification
+            }}
           />
         );
         break;
@@ -119,12 +159,10 @@ class Modal extends React.Component {
             duration={props.duration}
             paletteGridData={props.paletteGridData}
             tweetType={this.state.previewType}
-            actions={
-              {
-                showSpinner: props.actions.showSpinner,
-                sendNotification: props.actions.sendNotification
-              }
-            }
+            actions={{
+              showSpinner: props.actions.showSpinner,
+              sendNotification: props.actions.sendNotification
+            }}
           />
         );
         break;
@@ -140,44 +178,6 @@ class Modal extends React.Component {
         {content}
       </div>
     );
-  }
-
-  generateRadioOptions(props) {
-    let options;
-
-    if (props.type !== 'load') {
-      options = [{
-        value: 'single',
-        label: 'single'
-      }];
-
-      if (props.frames.size > 1) {
-        const spritesheetSupport =
-        props.type === 'download' ||
-        props.type === 'twitter';
-
-        const animationOption = {
-          value: 'animation',
-          label: spritesheetSupport ? 'GIF' : 'animation'
-        };
-        options.push(animationOption);
-
-        if (spritesheetSupport) {
-          options.push({
-            value: 'spritesheet',
-            label: 'spritesheet'
-          });
-        }
-      }
-    } else {
-      options = [
-        { value: 'storage', label: 'Stored' },
-        { value: 'import', label: 'Import' },
-        { value: 'export', label: 'Export' }
-      ];
-    }
-
-    return options;
   }
 
   changeRadioType(value, type) {
@@ -234,7 +234,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

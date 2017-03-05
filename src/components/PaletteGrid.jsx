@@ -28,12 +28,12 @@ const PaletteGrid = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   paletteGridData: state.present.get('paletteGridData'),
   currentColor: state.present.get('currentColor')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

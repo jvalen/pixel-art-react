@@ -30,7 +30,7 @@ const CopyCSS = (props) => {
       cellSize,
       'string'
     );
-    if (!!cssString) {
+    if (cssString) {
       cssString = `.pixelart-to-css {\n  box-shadow: ${cssString};\n  `;
       cssString += `height: ${cellSize}px;\n  width: ${cellSize}px;\n}`;
     }

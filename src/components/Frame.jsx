@@ -1,6 +1,6 @@
 import React from 'react';
-import Preview from './Preview';
 import { List } from 'immutable';
+import Preview from './Preview';
 
 export default class Frame extends React.Component {
   handleClick() {
@@ -44,11 +44,11 @@ export default class Frame extends React.Component {
           cellSize={2}
           activeFrameIndex={0}
         />
-        <div
+        <button
           className="delete"
           onClick={(event) => { this.deleteFrame(event); }}
         />
-        <div
+        <button
           className="duplicate"
           onClick={(event) => { this.duplicateFrame(event); }}
         />

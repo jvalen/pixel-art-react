@@ -5,7 +5,7 @@ import * as actionCreators from '../store/actions/actionCreators';
 
 const CellSize = (props) => {
   const handleCellSizeChange = (event) => {
-    props.actions.setCellSize(event.target.value | 0);
+    props.actions.setCellSize(+event.target.value || 0);
   };
 
   const { cellSize } = props;
@@ -25,11 +25,11 @@ const CellSize = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   cellSize: state.present.get('cellSize')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

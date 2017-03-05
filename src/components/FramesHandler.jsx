@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../store/actions/actionCreators';
 import { Scrollbars } from 'react-custom-scrollbars';
+import * as actionCreators from '../store/actions/actionCreators';
 import Frame from './Frame';
 
 class FramesHandler extends React.Component {
@@ -30,14 +30,12 @@ class FramesHandler extends React.Component {
         rows={this.props.rows}
         active={this.props.activeFrameIndex === index}
         lastFrame={this.props.frames.size - 1 === index}
-        actions={
-          {
-            changeActiveFrame: this.props.actions.changeActiveFrame,
-            deleteFrame: this.props.actions.deleteFrame,
-            duplicateFrame: this.props.actions.duplicateFrame,
-            changeFrameInterval: this.props.actions.changeFrameInterval
-          }
-        }
+        actions={{
+          changeActiveFrame: this.props.actions.changeActiveFrame,
+          deleteFrame: this.props.actions.deleteFrame,
+          duplicateFrame: this.props.actions.duplicateFrame,
+          changeFrameInterval: this.props.actions.changeFrameInterval
+        }}
       />
     );
   }
@@ -74,14 +72,14 @@ class FramesHandler extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   frames: state.present.get('frames'),
   columns: state.present.get('columns'),
   rows: state.present.get('rows'),
   activeFrameIndex: state.present.get('activeFrameIndex')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import Preview from './Preview';
 import { fromJS } from 'immutable';
+import Preview from './Preview';
 import {
   getDataFromStorage, removeProjectFromStorage,
   generateExportString, exportedStringToProjectData

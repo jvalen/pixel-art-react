@@ -14,9 +14,7 @@ const PixelCanvas = (props) => {
     };
   });
 
-  const onCellEvent = id => {
-    props.actions.drawCell(id);
-  };
+  const onCellEvent = id => props.actions.drawCell(id);
 
   let gridExtraClass = 'cell';
   if (props.eraserOn) {
@@ -45,7 +43,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 
