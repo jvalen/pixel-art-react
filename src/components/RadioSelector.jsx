@@ -2,8 +2,8 @@ import React from 'react';
 
 const RadioSelector = (props) => {
   const options = ops =>
-    ops.map((item, index) =>
-      <label htmlFor={`${props.name}-${item.label}`} key={index}>
+    ops.map(item =>
+      <label htmlFor={`${props.name}-${item.label}`} key={item.id}>
         <input
           type="radio"
           value={item.value}

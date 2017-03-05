@@ -18,7 +18,8 @@ class Modal extends React.Component {
     if (props.type !== 'load') {
       options = [{
         value: 'single',
-        label: 'single'
+        label: 'single',
+        id: 3
       }];
 
       if (props.frames.size > 1) {
@@ -28,22 +29,24 @@ class Modal extends React.Component {
 
         const animationOption = {
           value: 'animation',
-          label: spritesheetSupport ? 'GIF' : 'animation'
+          label: spritesheetSupport ? 'GIF' : 'animation',
+          id: 4
         };
         options.push(animationOption);
 
         if (spritesheetSupport) {
           options.push({
             value: 'spritesheet',
-            label: 'spritesheet'
+            label: 'spritesheet',
+            id: 5
           });
         }
       }
     } else {
       options = [
-        { value: 'storage', label: 'Stored' },
-        { value: 'import', label: 'Import' },
-        { value: 'export', label: 'Export' }
+        { value: 'storage', label: 'Stored', id: 0 },
+        { value: 'import', label: 'Import', id: 1 },
+        { value: 'export', label: 'Export', id: 2 }
       ];
     }
 
