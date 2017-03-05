@@ -6,7 +6,7 @@ import { initStorage, getDataFromStorage } from './storage';
   1. Hide spinner
   2. Load a project if there is a current one
 */
-export function initialSetup(dispatch, storage) {
+const initialSetup = (dispatch, storage) => {
   dispatch(actionCreators.hideSpinner());
 
   const dataStored = getDataFromStorage(storage);
@@ -30,4 +30,6 @@ export function initialSetup(dispatch, storage) {
     // If no data initialize storage
     initStorage(storage);
   }
-}
+};
+
+export default initialSetup;

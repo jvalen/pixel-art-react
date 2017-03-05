@@ -18,7 +18,7 @@ import NewProjectContainer from './NewProject';
 import SimpleNotificationContainer from './SimpleNotification';
 import SimpleSpinnerContainer from './SimpleSpinner';
 import UndoRedoContainer from './UndoRedo';
-import { initialSetup } from '../utils/startup';
+import initialSetup from '../utils/startup';
 
 export default class App extends React.Component {
   constructor() {

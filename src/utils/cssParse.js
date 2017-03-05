@@ -64,7 +64,7 @@ export function exportAnimationData(keyframes, duration) {
   result += '@keyframes x {\n';
 
   for (const key in keyframes) {
-    if (keyframes.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(keyframes, key)) {
       const boxShadow = keyframes[key].boxShadow;
       result += `${key}{\n  box-shadow: ${boxShadow}\n  }\n`;
     }

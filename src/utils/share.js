@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { generatePixelDrawCss, generateAnimationIntervals } from './cssParse';
 
-export function shareDrawing(imageData, text, action, sendNotification) {
+const shareDrawing = (imageData, text, action, sendNotification) => {
   const duration = imageData.duration * 1000; // Milliseconds
   const framesCount = imageData.frames.size;
   let drawingData;
@@ -98,4 +98,6 @@ export function shareDrawing(imageData, text, action, sendNotification) {
       break;
     default:
   }
-}
+};
+
+export default shareDrawing;

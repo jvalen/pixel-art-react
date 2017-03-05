@@ -1,4 +1,5 @@
 import { exampleEyes } from '../../examples/example-eyes/json-eyes';
+
 const STORAGE_KEY = 'pixelart-react-v2-0-1';
 
 /*

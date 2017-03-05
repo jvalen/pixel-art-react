@@ -1,5 +1,5 @@
 import React from 'react';
-import { shareDrawing } from '../utils/share';
+import shareDrawing from '../utils/share';
 import { saveProjectToStorage } from '../utils/storage';
 
 export default class TwitterForm extends React.Component {

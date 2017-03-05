@@ -16,7 +16,7 @@ function removeFiles(paths) {
  */
 function generateFrame(frameData, width, height, opacity, pixelSize) {
   const frame = frameData.map(
-    (elem) =>
+    elem =>
       ({
         x: elem[0],
         y: elem[1],
