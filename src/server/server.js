@@ -3,7 +3,6 @@
  */
 import { renderToString } from 'react-dom/server';
 import undoable from 'redux-undo';
-import reducer from '../store/reducers/reducer';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -14,6 +13,7 @@ import { OAuth } from 'oauth';
 import session from 'express-session';
 import React from 'react';
 import { createStore } from 'redux';
+import reducer from '../store/reducers/reducer';
 import pkgjson from '../../package.json';
 import {
   drawFrame,
@@ -22,7 +22,8 @@ import {
 } from '../utils/imageGeneration';
 import Root from '../components/Root';
 
-const app = module.exports = express();
+const app = express();
+module.exports = app;
 console.log(`Version deployed: ${pkgjson.version}`);
 
 /**
