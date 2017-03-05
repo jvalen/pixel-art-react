@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../store/actions/actionCreators';
 import Picker from 'react-color';
+import * as actionCreators from '../store/actions/actionCreators';
 
 class ColorPicker extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class ColorPicker extends React.Component {
 
   handleChange(color) {
     this.setState({ background: color.hex });
-    this.props.actions.setCustomColor(`#${color.hex}`);
+    this.props.actions.setCustomColor(color.hex);
   }
 
   handleClose() {
@@ -54,23 +54,22 @@ class ColorPicker extends React.Component {
     const isSelected = this.props.colorPickerOn && this.state.displayColorPicker;
 
     return (
-      <div className={`color-picker${isSelected ? ' selected' : ''}`}>
-        <div
-          className="color-picker__button"
+      <div className="color-picker">
+        <button
+          className={`color-picker__button${isSelected ? ' selected' : ''}`}
           onClick={() => { this.handleClick(); }}
-        >
-        </div>
+        />
         <div style={styles.picker}>
-            {this.state.displayColorPicker ?
-              <div style={styles.popover} is="popover">
-                <div style={styles.cover} is="cover" onClick={() => { this.handleClose(); }} />
-                <Picker
-                  color={this.state.background}
-                  onChange={(color) => { this.handleChange(color); }}
-                  onClose={() => { this.handleClose(); }}
-                  type="sketch"
-                />
-              </div>
+          {this.state.displayColorPicker ?
+            <div style={styles.popover} is="popover">
+              <div style={styles.cover} is="cover" onClick={() => { this.handleClose(); }} />
+              <Picker
+                color={this.state.background}
+                onChange={(color) => { this.handleChange(color); }}
+                onClose={() => { this.handleClose(); }}
+                type="sketch"
+              />
+            </div>
               : null
              }
         </div>
@@ -79,11 +78,11 @@ class ColorPicker extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   colorPickerOn: state.present.get('colorPickerOn')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

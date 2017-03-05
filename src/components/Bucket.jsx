@@ -9,18 +9,18 @@ const Bucket = (props) => {
   };
 
   return (
-    <div
+    <button
       className={`bucket${props.bucketOn ? ' selected' : ''}`}
       onClick={() => { handleClick(); }}
     />
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   bucketOn: state.present.get('bucketOn')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

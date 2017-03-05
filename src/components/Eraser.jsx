@@ -9,18 +9,18 @@ const Eraser = (props) => {
   };
 
   return (
-    <div
+    <button
       className={`eraser${props.eraserOn ? ' selected' : ''}`}
       onClick={() => { handleClick(); }}
     />
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   eraserOn: state.present.get('eraserOn')
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 

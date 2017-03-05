@@ -9,18 +9,18 @@ const Eyedropper = (props) => {
   };
 
   return (
-    <div
+    <button
       className={`eyedropper${props.eyedropperOn ? ' selected' : ''}`}
       onClick={() => { handleClick(); }}
     />
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   eyedropperOn: state.present.get('eyedropperOn'),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 
