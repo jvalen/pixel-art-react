@@ -3,8 +3,7 @@ import { expect } from 'chai';
 
 import reducer from '../src/store/reducers/reducer';
 import {
-  createGrid, createPalette, resetIntervals, setGridCellValue,
-  checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette
+  createGrid, createPalette
 } from '../src/store/reducers/reducerHelpers';
 
 
