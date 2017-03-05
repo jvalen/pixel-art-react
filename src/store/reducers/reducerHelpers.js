@@ -25,7 +25,7 @@ export function resizeGrid(frame, gridProperty, behaviour, initialColor, dimensi
         currentFrameGrid = currentFrameGrid.splice(i - 1, 1);
       }
     }
-  } else {
+  } else if (gridProperty === 'rows') {
     // Resize by rows
     if (behaviour === 'add') {
       // Add a row at the end
@@ -84,7 +84,7 @@ export function createPalette() {
 }
 
 export function checkColorInPalette(palette, color) {
-  const sameColors = palette.filter((currentColor) =>
+  const sameColors = palette.filter(currentColor =>
     (currentColor.get('color') === color)
   );
   return (sameColors.size > 0);
