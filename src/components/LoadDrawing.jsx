@@ -27,7 +27,7 @@ export default class LoadDrawing extends React.Component {
 
   importProject() {
     const importedProject =
-      exportedStringToProjectData(this.refs.importProject.value);
+      exportedStringToProjectData(this.importProject.value);
 
     if (importedProject) {
       const {
@@ -50,7 +50,7 @@ export default class LoadDrawing extends React.Component {
 
   removeFromStorage(key, e) {
     e.stopPropagation();
-    if (!!browserStorage) {
+    if (browserStorage) {
       const removed = removeProjectFromStorage(browserStorage, key);
       if (removed) {
         this.props.actions.sendNotification('Drawing deleted');
@@ -72,7 +72,7 @@ export default class LoadDrawing extends React.Component {
   }
 
   giveMeDrawings() {
-    if (!!browserStorage) {
+    if (browserStorage) {
       const dataStored = getDataFromStorage(browserStorage);
       if (dataStored) {
         if (dataStored.stored.length > 0) {
@@ -99,7 +99,7 @@ export default class LoadDrawing extends React.Component {
                   activeFrameIndex={0}
                   duration={1}
                 />
-                <div
+                <button
                   data-key={i}
                   className="drawing__delete"
                   onClick={(event) => { this.removeFromStorage(i, event); }}
@@ -121,7 +121,7 @@ export default class LoadDrawing extends React.Component {
             <h2>Paste a previously exported code</h2>
             <textarea
               className="load-drawing__import"
-              ref="importProject"
+              ref={(c) => { this.importProject = c; }}
               defaultValue={''}
             />
             <button
