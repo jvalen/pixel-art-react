@@ -23,7 +23,6 @@ class FramesHandler extends React.Component {
       <Frame
         key={index}
         data-id={index}
-        index={index}
         frame={frameData}
         columns={this.props.columns}
         rows={this.props.rows}

@@ -25,8 +25,8 @@ export default class Frame extends React.Component {
     e.stopPropagation();
     if (this.props.active) {
       this.props.actions.changeFrameInterval(
-        this.props.index,
-        this.refs.percentage.value
+        this.props['data-id'],
+        this.percentage.value
       );
     }
   }
@@ -57,7 +57,7 @@ export default class Frame extends React.Component {
           value={this.props.frame.get('interval')}
           onChange={(event) => { this.changeInterval(event); }}
           className="frame__percentage"
-          ref="percentage"
+          ref={(c) => { this.percentage = c; }}
           disabled={this.props.lastFrame || !this.props.active}
         />
       </div>
