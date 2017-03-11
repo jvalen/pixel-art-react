@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import shortid from 'shortid';
 import * as actionCreators from '../store/actions/actionCreators';
 import { saveProjectToStorage } from '../utils/storage';
 
@@ -12,7 +13,8 @@ const SaveDrawing = (props) => {
       cellSize: props.cellSize,
       columns: props.columns,
       rows: props.rows,
-      animate: props.frames.size > 1
+      animate: props.frames.size > 1,
+      id: shortid.generate()
     };
 
     if (saveProjectToStorage(localStorage, drawingToSave)) {

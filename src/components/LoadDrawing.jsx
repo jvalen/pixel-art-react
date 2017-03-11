@@ -83,24 +83,23 @@ export default class LoadDrawing extends React.Component {
               columns: data.columns,
               frames: fromJS(data.frames), // Parse to immutable
               paletteGridData: fromJS(data.paletteGridData),
-              rows: data.rows
+              rows: data.rows,
+              id: data.id
             };
 
             return (
               <div
-                key={i}
+                key={elem.id}
                 onClick={() => { this.drawingClick(elem); }}
                 className="load-drawing__drawing"
               >
                 <Preview
-                  key={i + 1}
-                  id={i}
+                  key={elem.id}
                   storedData={elem}
                   activeFrameIndex={0}
                   duration={1}
                 />
                 <button
-                  data-key={i}
                   className="drawing__delete"
                   onClick={(event) => { this.removeFromStorage(i, event); }}
                 />
