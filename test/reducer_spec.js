@@ -1,40 +1,7 @@
-import { List, Map, fromJS } from 'immutable';
+import { Map } from 'immutable';
 import { expect } from 'chai';
 
 import reducer from '../src/store/reducers/reducer';
-import {
-  createGrid, createPalette
-} from '../src/store/reducers/reducerHelpers';
-
-
-describe('reducer: SET_INITIAL_STATE', () => {
-  it('set the initial state', () => {
-    const initialState = Map();
-    const action = {
-      type: 'SET_INITIAL_STATE',
-      state: Map({})
-    };
-    const nextState = reducer(initialState, action);
-
-    expect(nextState).to.deep.equal(fromJS({
-      frames: [createGrid(20 * 20, '#313131', 100)],
-      paletteGridData: createPalette(),
-      cellSize: 10,
-      columns: 20,
-      rows: 20,
-      currentColor: { color: '#000000', position: 0 },
-      initialColor: '#313131',
-      eraserOn: false,
-      eyedropperOn: false,
-      colorPickerOn: false,
-      bucketOn: false,
-      loading: false,
-      notifications: List(),
-      activeFrameIndex: 0,
-      duration: 1
-    }));
-  });
-});
 
 describe('reducer: CHANGE_DIMENSIONS', () => {
   it('add a column', () => {
