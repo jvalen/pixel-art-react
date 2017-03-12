@@ -21,7 +21,10 @@
         "react/prefer-es6-class": 1,
         "no-restricted-syntax": 0,
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "quote-props": ["error", "consistent"],
+        "no-console": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     },
     "globals": {
         "$": true
