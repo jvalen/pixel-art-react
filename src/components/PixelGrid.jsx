@@ -5,11 +5,11 @@ const PixelGrid = ({
   cells, onMouseUp, onMouseDown, onMouseOver, onTouchMove, extraClass
 }) => (
   <div className={`grid-container ${extraClass}`}>
-    {cells.map((cell, i) => (
+    {cells.map(cell => (
       <PixelCell
-        key={i}
+        key={cell.id}
         cell={cell}
-        id={i}
+        id={cell.id}
         onMouseUp={(id, ev) => onMouseUp(id, ev)}
         onMouseDown={(id, ev) => onMouseDown(id, ev)}
         onMouseOver={(id, ev) => onMouseOver(id, ev)}
