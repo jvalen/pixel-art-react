@@ -24,7 +24,8 @@
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         "quote-props": ["error", "consistent"],
         "no-console": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "jsx-a11y/no-static-element-interactions": 0
     },
     "globals": {
         "$": true
