@@ -28,7 +28,7 @@ Check the results of this simple project:
 
 ## Example
 
-You can find an example project data ready to import [here](examples/example-eyes/exported-eyes.txt).
+You can find an example project data ready to import [here](examples/import-export/cat.txt).
 
 In addition a project will be loaded by default, check this out clicking on the **LOAD** button. Of course you can delete this project anytime you want.
 
