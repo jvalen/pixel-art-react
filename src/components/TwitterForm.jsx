@@ -45,7 +45,7 @@ export default class TwitterForm extends React.Component {
             cellSize,
             duration
           },
-          this.refs.tweetText.value,
+          this.tweetText.value,
           'twitter',
           this.props.actions.sendNotification
         );
@@ -62,7 +62,7 @@ export default class TwitterForm extends React.Component {
           You are about to share your awesome drawing on Twitter
         </h2>
         <textarea
-          ref="tweetText"
+          ref={(c) => { this.tweetText = c; }}
           onChange={(event) => { this.handleTextChange(event); }}
           defaultValue={this.state.initialText}
         />
