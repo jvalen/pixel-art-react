@@ -27,7 +27,7 @@ export default class LoadDrawing extends React.Component {
 
   importProject() {
     const importedProject =
-      exportedStringToProjectData(this.importProject.value);
+      exportedStringToProjectData(this.importProjectData.value);
 
     if (importedProject) {
       const {
@@ -120,7 +120,7 @@ export default class LoadDrawing extends React.Component {
             <h2>Paste a previously exported code</h2>
             <textarea
               className="load-drawing__import"
-              ref={(c) => { this.importProject = c; }}
+              ref={(c) => { this.importProjectData = c; }}
               defaultValue={''}
             />
             <button
