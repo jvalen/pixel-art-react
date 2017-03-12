@@ -12,9 +12,9 @@ const SimpleNotification = (props) => {
   };
 
 
-  const notifications = props.notifications.map((item, i) =>
-    <div key={i} className="simple-notification">
-      {item}
+  const notifications = props.notifications.map(item =>
+    <div key={item.id} className="simple-notification">
+      {item.message}
     </div>
   );
 

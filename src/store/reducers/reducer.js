@@ -224,7 +224,7 @@ function hideSpinner(state) {
 
 function sendNotification(state, message) {
   return state.merge({
-    notifications: message === '' ? List() : List([message])
+    notifications: message === '' ? List() : List([{ message, id: 0 }])
   });
 }
 
