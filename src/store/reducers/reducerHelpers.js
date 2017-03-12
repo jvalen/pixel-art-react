@@ -1,4 +1,5 @@
 import { List, Map } from 'immutable';
+import shortid from 'shortid';
 
 export function createGrid(cellsCount, initialColor, intervalPercentage) {
   let newGrid = List();
@@ -6,7 +7,7 @@ export function createGrid(cellsCount, initialColor, intervalPercentage) {
   for (let i = 0; i < cellsCount; i++) {
     newGrid = newGrid.push(Map({ color: initialColor, used: false }));
   }
-  return Map({ grid: newGrid, interval: intervalPercentage });
+  return Map({ grid: newGrid, interval: intervalPercentage, key: shortid.generate() });
 }
 
 export function resizeGrid(frame, gridProperty, behaviour, initialColor, dimensions) {
@@ -41,6 +42,10 @@ export function resizeGrid(frame, gridProperty, behaviour, initialColor, dimensi
   }
 
   return currentFrameGrid;
+}
+
+export function cloneGrid(grid, interval) {
+  return Map({ grid, interval, key: shortid.generate() });
 }
 
 export function createPalette() {
@@ -116,7 +121,7 @@ export function resetIntervals(frames) {
   return frames.reduce((acc, frame, index) => {
     const percentage = index ===
       frames.size - 1 ? 100 : Math.round(((index + 1) * equalPercentage) * 10) / 10;
-    return acc.push(Map({ grid: frame.get('grid'), interval: percentage }));
+    return acc.push(Map({ grid: frame.get('grid'), interval: percentage, key: frame.get('key') }));
   }, List([]));
 }
 

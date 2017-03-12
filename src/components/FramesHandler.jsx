@@ -21,7 +21,7 @@ class FramesHandler extends React.Component {
   getFrames() {
     return this.props.frames.map((frameData, index) =>
       <Frame
-        key={index}
+        key={frameData.get('key')}
         data-id={index}
         frame={frameData}
         columns={this.props.columns}

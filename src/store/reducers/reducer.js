@@ -2,7 +2,7 @@ import { List, Map } from 'immutable';
 import {
   createGrid, resizeGrid, createPalette, resetIntervals, setGridCellValue,
   checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette,
-  applyBucket
+  applyBucket, cloneGrid
 } from './reducerHelpers';
 
 const GRID_INITIAL_COLOR = '#313131';
@@ -53,7 +53,8 @@ function changeDimensions(state, gridProperty, behaviour) {
               GRID_INITIAL_COLOR,
               { columns: state.get('columns'), rows: state.get('rows') }
             ),
-          interval: state.getIn(['frames', i, 'interval'])
+          interval: state.getIn(['frames', i, 'interval']),
+          key: state.getIn(['frames', i, 'key'])
         }
       )
     );
@@ -263,8 +264,11 @@ function deleteFrame(state, frameId) {
 
 function duplicateFrame(state, frameId) {
   const frames = state.get('frames');
+  const prevFrame = frames.get(frameId);
   return state.merge({
-    frames: resetIntervals(frames.splice(frameId, 0, frames.get(frameId))),
+    frames: resetIntervals(frames.splice(
+      frameId, 0, cloneGrid(prevFrame.get('grid'), prevFrame.get('interval'))
+    )),
     activeFrameIndex: frameId + 1
   });
 }
