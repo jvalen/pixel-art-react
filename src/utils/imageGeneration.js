@@ -1,5 +1,6 @@
 import gm from 'gm';
 import fs from 'fs';
+
 const exec = require('child_process').exec;
 
 /**
