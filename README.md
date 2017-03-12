@@ -12,7 +12,7 @@ Create as much drawings as you want in your project adding new frames and then c
 
 Please check the following example:
 
-![pixel-art-react](screenshots/screenshot-pink.png)
+![pixel-art-react](screenshots/screenshot-cat.png)
 
 The app layout is responsive and adjust itself to the screen width. You can see different layout examples (desktop and mobile) in the screenshot.
 
@@ -22,7 +22,7 @@ You will be able to **load**, **save**, **import**, **export** projects, **undo*
 
 Check the results of this simple project:
 
-![](screenshots/animation-pink.gif)
+![](screenshots/animation-cat.gif)
 
 ##### See it live at [pixelart-to-css-react](http://pixelart.jvrpath.com/)
 
