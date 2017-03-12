@@ -92,7 +92,7 @@
     "whatwg-fetch": "^2.0.2"
   },
   "engines": {
-    "node": "5.11.0"
+    "node": "5.12.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
