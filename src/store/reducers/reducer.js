@@ -115,7 +115,9 @@ function setCustomColor(state, customColor) {
   } else {
     // There is a color selected in the palette
     newState.paletteGridData = paletteGridData.set(
-      currentColor.get('position'), Map({ color: customColor })
+      currentColor.get('position'), Map({
+        color: customColor, id: currentColor.get('color')
+      })
     );
   }
 

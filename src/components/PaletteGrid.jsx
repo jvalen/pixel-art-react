@@ -11,7 +11,7 @@ const PaletteGrid = (props) => {
 
     return paletteGridData.map((color, i) =>
       <PaletteColor
-        key={i}
+        key={color.get('id')}
         positionInPalette={i}
         width={width}
         color={color.get('color')}
