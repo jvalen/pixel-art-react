@@ -295,7 +295,7 @@ export default class App extends React.Component {
               being used. Thank you. "
             link={{
               msg: '',
-              url: 'http://www.jvrpath.com/pixelarttocss/cookies.html',
+              url: 'http://www.jvalen.com/pixelarttocss/cookies.html',
               target: '_blank'
             }}
             onAccept={() => this.hideCookiesBanner()}
