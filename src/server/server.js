@@ -49,6 +49,14 @@ const oa = new OAuth(
   'HMAC-SHA1'
 );
 
+app.use((req, res, next) => {
+  const host = req.get('Host');
+  if (host === configData.LEGACY_DOMAIN) {
+    return res.redirect(301, configData.ACTIVE_DOMAIN);
+  }
+  return next();
+});
+
 app.set('views', `${__dirname}/../views`);
 app.set('view engine', 'pug');
 app.use(express.static(`${__dirname}/../../deploy`));
