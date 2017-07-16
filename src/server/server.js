@@ -54,6 +54,9 @@ app.use((req, res, next) => {
   if (host === configData.LEGACY_DOMAIN) {
     return res.redirect(301, configData.ACTIVE_DOMAIN);
   }
+  if (!req.secure && ENV !== 'development') {
+    return res.redirect(301, configData.ACTIVE_DOMAIN);
+  }
   return next();
 });
 
