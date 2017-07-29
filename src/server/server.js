@@ -102,7 +102,8 @@ function handleRender(req, res) {
   // Send the rendered page back to the client
   res.render('index.pug', {
     reactOutput: html,
-    initialState: JSON.stringify(initialState)
+    initialState: JSON.stringify(initialState),
+    googleAnalyticsId: configData.GOOGLE_ANALYTICS_ID
   });
 }
 
