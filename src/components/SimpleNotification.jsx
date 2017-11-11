@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import * as actionCreators from '../store/actions/actionCreators';
 
 const SimpleNotification = (props) => {
@@ -10,12 +10,17 @@ const SimpleNotification = (props) => {
       props.actions.sendNotification('');
     }, props.duration);
   };
-
-
+  const timeout = { enter: props.fadeInTime, exit: props.fadeOutTime };
   const notifications = props.notifications.map(item =>
-    <div key={item.id} className="simple-notification">
-      {item.message}
-    </div>
+    <CSSTransition
+      key={item.id}
+      timeout={timeout}
+      classNames="simple-notification"
+    >
+      <div key={item.id} className="simple-notification">
+        {item.message}
+      </div>
+    </CSSTransition>
   );
 
   if (notifications.size > 0) {
@@ -23,15 +28,9 @@ const SimpleNotification = (props) => {
   }
 
   return (
-    <div>
-      <ReactCSSTransitionGroup
-        transitionName="simple-notification"
-        transitionEnterTimeout={props.fadeInTime}
-        transitionLeaveTimeout={props.fadeOutTime}
-      >
-        {notifications}
-      </ReactCSSTransitionGroup>
-    </div>
+    <TransitionGroup>
+      {notifications}
+    </TransitionGroup>
   );
 };
 

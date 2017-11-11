@@ -22,11 +22,11 @@
   transition: opacity 1000ms ease-in;
 }
 
-.simple-notification-leave {
+.simple-notification-exit {
   opacity: 1;
 }
 
-.simple-notification-leave.simple-notification-leave-active {
+.simple-notification-exit.simple-notification-exit-active {
   opacity: 0.01;
   transition: opacity 1000ms ease-out;
 }
