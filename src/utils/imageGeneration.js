@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
  */
 function removeFiles(paths) {
   for (let i = 0; i < paths.length; i++) {
-    fs.unlink(paths[i]);
+    fs.unlink(paths[i], () => {});
   }
 }
 
@@ -82,17 +82,19 @@ export function drawFrame(data, path, callback) {
   const width = cssData.cols * cssData.pixelSize;
   const height = cssData.rows * cssData.pixelSize;
   const opacity = 0;
+  const pathExtension = path + '.png';
+  const frameFileName = pathExtension.split('images/tmp/')[1];
   const gmImg = generateFrame(
     cssData.drawingData, width, height, opacity, cssData.pixelSize
   );
 
   gmImg.write(
-    path,
+    pathExtension,
     (err) => {
       if (err) {
         console.log(err);
       }
-      callback();
+      callback(frameFileName);
     }
   );
 }
@@ -105,7 +107,7 @@ export function drawGif(data, path, transparent, callback) {
   const width = cssData.cols * cssData.pixelSize;
   const height = cssData.rows * cssData.pixelSize;
   const opacity = 0;
-  const splittedPath = path.split('.');
+  const splittedPath = [path, 'gif'];
 
   const framesFilesData = createFrameImages(
     cssData, width, height, opacity, splittedPath
@@ -162,7 +164,7 @@ export function drawSpritesheet(data, path, callback) {
   const width = cssData.cols * cssData.pixelSize;
   const height = cssData.rows * cssData.pixelSize;
   const opacity = 0;
-  const splittedPath = path.split('.');
+  const splittedPath = [path, 'png'];
   const framesFilesData = createFrameImages(
     cssData, width, height, opacity, splittedPath
   );

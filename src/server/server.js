@@ -180,13 +180,7 @@ app.get('/auth/twitter/callback', (req, res, next) => {
           res.send('auth twitter callback: error');
         } else {
           const request = req;
-
-          let suffix = '.png';
-          if (request.session.cssData.type === 'animation') {
-            suffix = '.gif';
-          }
-
-          const randomName = temp.path({ suffix });
+          const randomName = temp.path();
           const imgPath = `images${randomName}`;
           const client = new Twitter({
             consumer_key: configData.TWITTER_CONSUMER_KEY,
@@ -210,8 +204,8 @@ app.get('/auth/twitter/callback', (req, res, next) => {
               });
               break;
             default:
-              drawFrame(request.session.cssData, imgPath, () => {
-                tweetWithMedia(client, request, res, imgPath);
+              drawFrame(request.session.cssData, imgPath, (singleFramePath) => {
+                tweetWithMedia(client, request, res, singleFramePath);
               });
           }
         }
@@ -227,12 +221,7 @@ app.post('/auth/download', (req, res) => {
     const requestBody = req.body;
     requestBody.drawingData = JSON.parse(requestBody.drawingData);
 
-    let suffix = '.png';
-    if (requestBody.type === 'animation') {
-      suffix = '.gif';
-    }
-
-    const randomName = temp.path({ suffix });
+    const randomName = temp.path();
     const imgPath = `images${randomName}`;
 
     switch (requestBody.type) {
@@ -247,8 +236,8 @@ app.post('/auth/download', (req, res) => {
         });
         break;
       default:
-        drawFrame(requestBody, imgPath, () => {
-          res.send({ fileUrl: `/download${randomName}` });
+        drawFrame(requestBody, imgPath, (singleFramePath) => {
+          res.send({ fileUrl: `/download/tmp/${singleFramePath}` });
         });
     }
   } catch (e) {
@@ -268,7 +257,7 @@ app.get('/download/tmp/:filename', (req, res) => {
     hadError = true;
   });
   stream.on('close', () => {
-    if (!hadError) fs.unlink(filePath);
+    if (!hadError) fs.unlink(filePath, () => {});
   });
 });
 
