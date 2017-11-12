@@ -11,6 +11,7 @@
     "development": "webpack-dev-server",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "server": "node ./src/server/loader",
+    "server-debug": "node --inspect ./src/server/loader",    
     "start": "npm run server",
     "postinstall": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
