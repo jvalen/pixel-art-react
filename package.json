@@ -1,6 +1,6 @@
 {
   "name": "pixel-art-react",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "Draw and animate Pixel Art, then export the results to CSS, share or download them, powered by React",
   "author": "Javier Valencia Romero",
   "scripts": {
@@ -11,7 +11,7 @@
     "development": "webpack-dev-server",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "server": "node ./src/server/loader",
-    "server-debug": "node --inspect ./src/server/loader",    
+    "server-debug": "node --inspect ./src/server/loader",
     "start": "npm run server",
     "postinstall": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
