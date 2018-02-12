@@ -1,16 +1,18 @@
 import { List, Map } from 'immutable';
 import shortid from 'shortid';
 
-export function createGrid(cellsCount, initialColor, intervalPercentage) {
+export const GRID_INITIAL_COLOR = '#313131';
+
+export function createGrid(cellsCount, intervalPercentage) {
   let newGrid = List();
   // Set every cell with the initial color
   for (let i = 0; i < cellsCount; i++) {
-    newGrid = newGrid.push(Map({ color: initialColor, used: false }));
+    newGrid = newGrid.push('');
   }
   return Map({ grid: newGrid, interval: intervalPercentage, key: shortid.generate() });
 }
 
-export function resizeGrid(frame, gridProperty, behaviour, initialColor, dimensions) {
+export function resizeGrid(frame, gridProperty, behaviour, dimensions) {
   const totalCells = dimensions.rows * dimensions.columns;
   let currentFrameGrid = frame;
 
@@ -19,7 +21,7 @@ export function resizeGrid(frame, gridProperty, behaviour, initialColor, dimensi
     if (behaviour === 'add') {
       // Add a row at the end
       for (let i = totalCells; i > 0; i -= dimensions.columns) {
-        currentFrameGrid = currentFrameGrid.splice(i, 0, Map({ color: initialColor, used: false }));
+        currentFrameGrid = currentFrameGrid.splice(i, 0, '');
       }
     } else {
       for (let i = totalCells; i > 0; i -= dimensions.columns) {
@@ -31,7 +33,7 @@ export function resizeGrid(frame, gridProperty, behaviour, initialColor, dimensi
     if (behaviour === 'add') {
       // Add a row at the end
       for (let i = 0; i < dimensions.columns; i++) {
-        currentFrameGrid = currentFrameGrid.push(Map({ color: initialColor, used: false }));
+        currentFrameGrid = currentFrameGrid.push('');
       }
     } else {
       // Remove the last row
@@ -109,9 +111,9 @@ export function addColorToLastCellInPalette(palette, newColor) {
   return palette.map((currentColor, i, collection) => {
     if (i === collection.size - 1) {
       // Last cell
-      return (Map({ color: newColor }));
+      return (Map({ color: newColor, id: i }));
     }
-    return (Map({ color: currentColor.get('color') }));
+    return (Map({ color: currentColor.get('color'), id: i }));
   });
 }
 
@@ -125,11 +127,15 @@ export function resetIntervals(frames) {
   }, List([]));
 }
 
-export function setGridCellValue(state, color, used, id) {
+export function setGridCellValue(state, color, id) {
   return state.setIn(
     ['frames', state.get('activeFrameIndex'), 'grid', id],
-    Map({ color, used })
+    color
   );
+}
+
+function isSameColor(colorA, colorB) {
+  return (colorA || GRID_INITIAL_COLOR) === (colorB || GRID_INITIAL_COLOR);
 }
 
 function getSameColorAdjacentCells(frameGrid, columns, rows, id, color) {
@@ -139,28 +145,28 @@ function getSameColorAdjacentCells(frameGrid, columns, rows, id, color) {
   if ((id + 1) % columns !== 0) {
     // Not at the very right
     auxId = id + 1;
-    if (frameGrid.get(auxId).get('color') === color) {
+    if (isSameColor(frameGrid.get(auxId), color)) {
       adjacentCollection.push(auxId);
     }
   }
   if (id % columns !== 0) {
     // Not at the very left
     auxId = id - 1;
-    if (frameGrid.get(auxId).get('color') === color) {
+    if (isSameColor(frameGrid.get(auxId), color)) {
       adjacentCollection.push(auxId);
     }
   }
   if (id >= columns) {
     // Not at the very top
     auxId = id - columns;
-    if (frameGrid.get(auxId).get('color') === color) {
+    if (isSameColor(frameGrid.get(auxId), color)) {
       adjacentCollection.push(auxId);
     }
   }
   if (id < (columns * rows) - columns) {
     // Not at the very bottom
     auxId = id + columns;
-    if (frameGrid.get(auxId).get('color') === color) {
+    if (isSameColor(frameGrid.get(auxId), color)) {
       adjacentCollection.push(auxId);
     }
   }
@@ -187,7 +193,7 @@ export function applyBucket(state, activeFrameIndex, id, sourceColor) {
 
   while (queue.length > 0) {
     currentId = queue.shift();
-    newState = setGridCellValue(newState, currentColor, true, currentId);
+    newState = setGridCellValue(newState, currentColor, currentId);
     adjacents = getSameColorAdjacentCells(
       newState.getIn(
         ['frames', activeFrameIndex, 'grid']
@@ -198,7 +204,7 @@ export function applyBucket(state, activeFrameIndex, id, sourceColor) {
     for (let i = 0; i < adjacents.length; i++) {
       auxAdjacentId = adjacents[i];
       auxAdjacentColor = newState.getIn(
-        ['frames', activeFrameIndex, 'grid', auxAdjacentId, 'color']
+        ['frames', activeFrameIndex, 'grid', auxAdjacentId]
       );
       // Avoid introduce repeated or painted already cell into the queue
       if (

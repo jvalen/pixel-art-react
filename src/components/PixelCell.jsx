@@ -1,5 +1,7 @@
 import React from 'react';
 
+const GRID_INITIAL_COLOR = '#313131';
+
 export default class PixelCell extends React.Component {
   shouldComponentUpdate(nextProps) {
     const keys = ['color', 'width'];
@@ -8,13 +10,13 @@ export default class PixelCell extends React.Component {
   }
   render() {
     const {
-      id, cell: { color, width },
-      onMouseDown, onMouseUp, onMouseOver, onTouchMove
+      cell: { color, width },
+      id, onMouseDown, onMouseUp, onMouseOver, onTouchMove
     } = this.props;
     const styles = {
       width: `${width}%`,
       paddingBottom: `${width}%`,
-      backgroundColor: color
+      backgroundColor: color || GRID_INITIAL_COLOR
     };
 
     return (

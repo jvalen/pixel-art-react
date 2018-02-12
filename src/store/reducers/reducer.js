@@ -2,17 +2,15 @@ import { List, Map } from 'immutable';
 import {
   createGrid, resizeGrid, createPalette, resetIntervals, setGridCellValue,
   checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette,
-  applyBucket, cloneGrid
+  applyBucket, cloneGrid, GRID_INITIAL_COLOR
 } from './reducerHelpers';
-
-const GRID_INITIAL_COLOR = '#313131';
 
 function setInitialState(state) {
   const cellSize = 10;
   const columns = 20;
   const rows = 20;
   const currentColor = { color: '#000000', position: 0 };
-  const frame = createGrid(columns * rows, GRID_INITIAL_COLOR, 100);
+  const frame = createGrid(columns * rows, 100);
   const paletteGrid = createPalette();
 
   const initialState = {
@@ -22,7 +20,6 @@ function setInitialState(state) {
     columns,
     rows,
     currentColor,
-    initialColor: GRID_INITIAL_COLOR,
     eraserOn: false,
     eyedropperOn: false,
     colorPickerOn: false,
@@ -50,7 +47,6 @@ function changeDimensions(state, gridProperty, behaviour) {
               state.getIn(['frames', i, 'grid']),
               gridProperty,
               behaviour,
-              GRID_INITIAL_COLOR,
               { columns: state.get('columns'), rows: state.get('rows') }
             ),
           interval: state.getIn(['frames', i, 'interval']),
@@ -132,8 +128,8 @@ function drawCell(state, id) {
   if (bucketOn || eyedropperOn) {
     const activeFrameIndex = state.get('activeFrameIndex');
     const cellColor = state.getIn(
-      ['frames', activeFrameIndex, 'grid', id, 'color']
-    );
+      ['frames', activeFrameIndex, 'grid', id]
+    ) || GRID_INITIAL_COLOR;
 
     if (eyedropperOn) {
       return setColorSelected(state, cellColor, null);
@@ -142,11 +138,8 @@ function drawCell(state, id) {
     return applyBucket(state, activeFrameIndex, id, cellColor);
   }
   // eraserOn or regular cell paint
-  const used = !eraserOn;
-  const color = eraserOn ?
-  state.get('initialColor') :
-  state.get('currentColor').get('color');
-  return setGridCellValue(state, color, used, id);
+  const color = eraserOn ? '' : state.get('currentColor').get('color');
+  return setGridCellValue(state, color, id);
 }
 
 function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
@@ -205,7 +198,6 @@ function resetGrid(state, columns, rows, activeFrameIndex) {
   const currentInterval = state.get('frames').get(activeFrameIndex).get('interval');
   const newGrid = createGrid(
     parseInt(columns, 10) * parseInt(rows, 10),
-    GRID_INITIAL_COLOR,
     currentInterval
   );
 
@@ -235,7 +227,6 @@ function changeActiveFrame(state, frameIndex) {
 function createNewFrame(state) {
   const newFrames = state.get('frames').push(createGrid(
     parseInt(state.get('columns'), 10) * parseInt(state.get('rows'), 10),
-    GRID_INITIAL_COLOR,
     100
   ));
   return state.merge({
