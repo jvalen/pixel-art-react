@@ -19,7 +19,9 @@ const CopyCSS = (props) => {
         generateAnimationCSSData(
           frames, generateAnimationIntervals(frames),
           columns, rows, cellSize
-        ), duration);
+        ),
+        duration
+      );
       return cssAnimationString;
     }
     // Show info of only one frame

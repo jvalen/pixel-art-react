@@ -4,9 +4,18 @@ import { generatePixelDrawCss } from '../utils/cssParse';
 
 const CssDisplay = (props) => {
   const generateCss = () => {
-    const { activeFrame, columns, rows, cellSize } = props;
+    const {
+      activeFrame,
+      columns,
+      rows,
+      cellSize
+    } = props;
     let cssString = generatePixelDrawCss(
-      activeFrame, columns, rows, cellSize, 'string'
+      activeFrame,
+      columns,
+      rows,
+      cellSize,
+      'string'
     );
 
     if (cssString) {
@@ -35,7 +44,5 @@ function mapStateToProps(state) {
   };
 }
 
-const CssDisplayContainer = connect(
-  mapStateToProps
-)(CssDisplay);
+const CssDisplayContainer = connect(mapStateToProps)(CssDisplay);
 export default CssDisplayContainer;

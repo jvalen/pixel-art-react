@@ -71,11 +71,11 @@ export default class App extends React.Component {
           className="app__frames-container"
           data-tooltip={
             this.state.helpOn ?
-            `Create an awesome animation secuence.
-            You can modify the duration of each frame, changing its own value.
-            The number indicates where the frame ends in a range from 0 to 100.
-            `
-            : null
+              `Create an awesome animation secuence.
+              You can modify the duration of each frame, changing its own value.
+              The number indicates where the frame ends in a range from 0 to 100.
+              `
+              : null
           }
         >
           <FramesHandlerContainer />
@@ -88,8 +88,8 @@ export default class App extends React.Component {
                   <div
                     data-tooltip={
                       this.state.helpOn ?
-                      'New project'
-                      : null
+                        'New project'
+                        : null
                     }
                   >
                     <NewProjectContainer />
@@ -100,8 +100,8 @@ export default class App extends React.Component {
                       onClick={() => { this.changeModalType('load'); }}
                       data-tooltip={
                         this.state.helpOn ?
-                        'Load projects you stored before'
-                        : null
+                          'Load projects you stored before'
+                          : null
                       }
                     >
                       LOAD
@@ -109,8 +109,8 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'Save your project'
-                        : null
+                          'Save your project'
+                          : null
                       }
                     >
                       <SaveDrawingContainer />
@@ -119,8 +119,8 @@ export default class App extends React.Component {
                   <div
                     data-tooltip={
                       this.state.helpOn ?
-                      'Undo Redo actions'
-                      : null
+                        'Undo Redo actions'
+                        : null
                     }
                   >
                     <UndoRedoContainer />
@@ -129,8 +129,8 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'Remove colors'
-                        : null
+                          'Remove colors'
+                          : null
                       }
                     >
                       <EraserContainer />
@@ -138,8 +138,8 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'Sample a color from your drawing'
-                        : null
+                          'Sample a color from your drawing'
+                          : null
                       }
                     >
                       <EyedropperContainer />
@@ -147,8 +147,8 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'It fills an area of the current frame based on color similarity'
-                        : null
+                          'It fills an area of the current frame based on color similarity'
+                          : null
                       }
                     >
                       <BucketContainer />
@@ -156,8 +156,8 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'Choose a new color that is not in your palette'
-                        : null
+                          'Choose a new color that is not in your palette'
+                          : null
                       }
                     >
                       <ColorPickerContainer />
@@ -175,8 +175,8 @@ export default class App extends React.Component {
                     onClick={() => { this.changeModalType('copycss'); }}
                     data-tooltip={
                       this.state.helpOn ?
-                      'Check your CSS generated code'
-                      : null
+                        'Check your CSS generated code'
+                        : null
                     }
                   >
                     css
@@ -187,8 +187,8 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'Tweet your creation in different formats'
-                        : null
+                          'Tweet your creation in different formats'
+                          : null
                       }
                     >
                       <button
@@ -199,8 +199,8 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         this.state.helpOn ?
-                        'Download your creation in different formats'
-                        : null
+                          'Download your creation in different formats'
+                          : null
                       }
                     >
                       <button
@@ -234,8 +234,8 @@ export default class App extends React.Component {
                     onClick={() => { this.changeModalType('preview'); }}
                     data-tooltip={
                       this.state.helpOn ?
-                      'Show a preview of your project'
-                      : null
+                        'Show a preview of your project'
+                        : null
                     }
                   >
                     PREVIEW
@@ -243,8 +243,8 @@ export default class App extends React.Component {
                   <div
                     data-tooltip={
                       this.state.helpOn ?
-                      'Reset the selected frame'
-                      : null
+                        'Reset the selected frame'
+                        : null
                     }
                   >
                     <ResetContainer />
@@ -252,8 +252,8 @@ export default class App extends React.Component {
                   <div
                     data-tooltip={
                       this.state.helpOn ?
-                      'Number of columns and rows'
-                      : null
+                        'Number of columns and rows'
+                        : null
                     }
                   >
                     <DimensionsContainer />
@@ -263,8 +263,8 @@ export default class App extends React.Component {
                   <div
                     data-tooltip={
                       this.state.helpOn ?
-                      'Size of one tile in px'
-                      : null
+                        'Size of one tile in px'
+                        : null
                     }
                   >
                     <CellSizeContainer />
@@ -272,8 +272,8 @@ export default class App extends React.Component {
                   <div
                     data-tooltip={
                       this.state.helpOn ?
-                      'Animation duration in seconds'
-                      : null
+                        'Animation duration in seconds'
+                        : null
                     }
                   >
                     <DurationContainer />
@@ -302,7 +302,7 @@ export default class App extends React.Component {
             cookie="user-has-accepted-cookies"
             dismissOnScroll={false}
           />
-        :
+          :
           null
         }
         <ModalContainer

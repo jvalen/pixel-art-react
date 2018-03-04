@@ -16,14 +16,11 @@ function removeFiles(paths) {
  * Draw a single frame from CSS exported data
  */
 function generateFrame(frameData, width, height, opacity, pixelSize) {
-  const frame = frameData.map(
-    elem =>
-      ({
-        x: elem[0],
-        y: elem[1],
-        color: elem[3]
-      })
-  );
+  const frame = frameData.map(elem => ({
+    x: elem[0],
+    y: elem[1],
+    color: elem[3]
+  }));
 
   const BGCOLOR = '#000000';
   const FILLCOLOR = (
@@ -38,7 +35,10 @@ function generateFrame(frameData, width, height, opacity, pixelSize) {
   for (let i = 0; i < frame.length; i++) {
     const aux = frame[i];
     gmImg.fill(aux.color).drawRectangle(
-      aux.x - pixelSize, aux.y - pixelSize, aux.x, aux.y
+      aux.x - pixelSize,
+      aux.y - pixelSize,
+      aux.x,
+      aux.y
     );
   }
 
@@ -82,10 +82,14 @@ export function drawFrame(data, path, callback) {
   const width = cssData.cols * cssData.pixelSize;
   const height = cssData.rows * cssData.pixelSize;
   const opacity = 0;
-  const pathExtension = path + '.png';
+  const pathExtension = `${path}.png`;
   const frameFileName = pathExtension.split('images/tmp/')[1];
   const gmImg = generateFrame(
-    cssData.drawingData, width, height, opacity, cssData.pixelSize
+    cssData.drawingData,
+    width,
+    height,
+    opacity,
+    cssData.pixelSize
   );
 
   gmImg.write(
@@ -109,9 +113,7 @@ export function drawGif(data, path, transparent, callback) {
   const opacity = 0;
   const splittedPath = [path, 'gif'];
 
-  const framesFilesData = createFrameImages(
-    cssData, width, height, opacity, splittedPath
-  );
+  const framesFilesData = createFrameImages(cssData, width, height, opacity, splittedPath);
 
   Promise.all(framesFilesData.promises).then(() => {
     const paths = framesFilesData.framePaths;

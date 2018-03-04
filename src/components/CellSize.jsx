@@ -14,13 +14,13 @@ const CellSize = (props) => {
     <div className="cell-size">
       <label htmlFor="cell-size__input">
         Pixel Size
+        <input
+          type="number"
+          value={cellSize}
+          onChange={(ev) => { handleCellSizeChange(ev); }}
+          id="cell-size__input"
+        />
       </label>
-      <input
-        type="number"
-        value={cellSize}
-        onChange={(ev) => { handleCellSizeChange(ev); }}
-        id="cell-size__input"
-      />
     </div>
   );
 };

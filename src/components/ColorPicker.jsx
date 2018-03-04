@@ -70,8 +70,8 @@ class ColorPicker extends React.Component {
                 type="sketch"
               />
             </div>
-              : null
-             }
+            : null
+          }
         </div>
       </div>
     );
