@@ -1,6 +1,6 @@
 import { exampleCat } from '../../examples/import-export/json-cat';
 
-const STORAGE_KEY = 'pixelart-react-v2-1-2';
+const STORAGE_KEY = 'pixelart-react-v3-0-0';
 
 /*
  *  Storage data structure
@@ -65,7 +65,7 @@ export function saveProjectToStorage(storage, projectData) {
     storage.setItem(STORAGE_KEY, JSON.stringify(dataStored));
     return true;
   } catch (e) {
-    return false;  // There was an error
+    return false; // There was an error
   }
 }
 
