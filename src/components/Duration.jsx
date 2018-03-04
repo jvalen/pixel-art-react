@@ -11,13 +11,13 @@ const Duration = (props) => {
     <div className="duration">
       <label htmlFor="duration__input">
         Duration
+        <input
+          type="number"
+          value={props.duration}
+          onChange={(event) => { handleChange(event); }}
+          id="duration__input"
+        />
       </label>
-      <input
-        type="number"
-        value={props.duration}
-        onChange={(event) => { handleChange(event); }}
-        id="duration__input"
-      />
     </div>
   );
 };

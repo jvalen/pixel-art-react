@@ -11,7 +11,7 @@ const SimpleNotification = (props) => {
     }, props.duration);
   };
   const timeout = { enter: props.fadeInTime, exit: props.fadeOutTime };
-  const notifications = props.notifications.map(item =>
+  const notifications = props.notifications.map(item => (
     <CSSTransition
       key={item.id}
       timeout={timeout}
@@ -21,7 +21,7 @@ const SimpleNotification = (props) => {
         {item.message}
       </div>
     </CSSTransition>
-  );
+  ));
 
   if (notifications.size > 0) {
     removeNotifications();

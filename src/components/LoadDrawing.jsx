@@ -121,7 +121,7 @@ export default class LoadDrawing extends React.Component {
             <textarea
               className="load-drawing__import"
               ref={(c) => { this.importProjectData = c; }}
-              defaultValue={''}
+              defaultValue=""
             />
             <button
               className="import__button"

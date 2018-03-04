@@ -9,7 +9,7 @@ const PaletteGrid = (props) => {
     const { paletteGridData, currentColor } = props;
     const width = 100 / 6;
 
-    return paletteGridData.map((color, i) =>
+    return paletteGridData.map((color, i) => (
       <PaletteColor
         key={color.get('id')}
         positionInPalette={i}
@@ -18,7 +18,7 @@ const PaletteGrid = (props) => {
         selected={currentColor.get('position') === i}
         actions={{ setColorSelected: props.actions.setColorSelected }}
       />
-    );
+    ));
   };
 
   return (

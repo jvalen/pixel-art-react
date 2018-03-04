@@ -6,20 +6,29 @@
   margin-bottom: 2em;
 
   label.picker__columns {
-    @mixin icon columns;
+    @mixin icon columns;    
   }
 
   label.picker__rows {
     @mixin icon rows;
   }
 
-  label {
+  label.picker__columns, label.picker__rows {
+    display: flex;
+    flex: 0 0 100%;
+  }
+
+  label {    
     flex: 0.5;
     font-size: 2em !important;
     color: $color-mineShaft;
     position: relative;
     margin: 0 auto;
     text-align: center;
+    &::before {
+      display: inline-block;
+      width: 1.5em;
+    }
   }
 
   .picker__container,
@@ -35,6 +44,8 @@
   }
 
   .picker__container {
+    font-family: $font-pixel;
+    font-size: 16px;
     color: $color-silver;
     background-color: $color-tundora;
     border: 3px solid $color-boulder;

@@ -52,9 +52,7 @@ describe('reducer: SET_COLOR_SELECTED', () => {
       paletteColorPosition: 2,
     };
     const nextState = reducer(dummyState, action);
-    expect(nextState.get('currentColor').get('color')).to.equal(
-      '#ffffff'
-    );
+    expect(nextState.get('currentColor').get('color')).to.equal('#ffffff');
   });
 
   it('color provided is inside the palette but the position is unknown', () => {
@@ -86,9 +84,8 @@ describe('reducer: SET_COLOR_SELECTED', () => {
       paletteColorPosition: null, // Unknown position
     };
     const nextState = reducer(dummyState, action);
-    expect(nextState.get('currentColor').get('position')).to.equal(
-      nextState.get('paletteGridData').size - 1
-    );
+    expect(nextState.get('currentColor').get('position'))
+      .to.equal(nextState.get('paletteGridData').size - 1);
   });
 });
 
@@ -105,12 +102,10 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
       customColor: '#123456'
     };
     const nextState = reducer(dummyState, action);
-    expect(nextState.get('currentColor').get('color')).to.equal(
-      '#123456'
-    );
-    expect(nextState.get('currentColor').get('position')).to.equal(
-      0
-    );
+    expect(nextState.get('currentColor').get('color'))
+      .to.equal('#123456');
+    expect(nextState.get('currentColor').get('position'))
+      .to.equal(0);
   });
   it('there is no color selected, it should create one at the end of the palette', () => {
     const dummyAction = {
@@ -128,12 +123,10 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
     };
 
     const nextState = reducer(dummyState, action);
-    expect(nextState.get('currentColor').get('color')).to.equal(
-      '#ff0000'
-    );
-    expect(nextState.get('currentColor').get('position')).to.equal(
-      nextState.get('paletteGridData').size - 1
-    );
+    expect(nextState.get('currentColor').get('color'))
+      .to.equal('#ff0000');
+    expect(nextState.get('currentColor').get('position'))
+      .to.equal(nextState.get('paletteGridData').size - 1);
   });
 });
 describe('reducer: DRAW_CELL', () => {
@@ -149,9 +142,8 @@ describe('reducer: DRAW_CELL', () => {
       id: 0
     };
     const nextState = reducer(dummyState, action);
-    expect(nextState.getIn(['frames', 0, 'grid', 0, 'color'])).to.equal(
-      nextState.get('currentColor').get('color')
-    );
+    expect(nextState.getIn(['frames', 0, 'grid', 0, 'color']))
+      .to.equal(nextState.get('currentColor').get('color'));
   });
   it('Click in the first cell with the bucket tool selected', () => {
     const dummyAction = {
@@ -172,8 +164,7 @@ describe('reducer: DRAW_CELL', () => {
     nextState = reducer(nextState, action);
 
     // Last cell should have the same color than the first one
-    expect(nextState.getIn(['frames', 0, 'grid', 399, 'color'])).to.equal(
-      nextState.get('currentColor').get('color')
-    );
+    expect(nextState.getIn(['frames', 0, 'grid', 399, 'color']))
+      .to.equal(nextState.get('currentColor').get('color'));
   });
 });

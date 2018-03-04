@@ -66,13 +66,11 @@ app.use(express.static(`${__dirname}/../../deploy`));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-app.use(session(
-  {
-    secret: configData.EXPRESS_SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true
-  }
-));
+app.use(session({
+  secret: configData.EXPRESS_SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
+}));
 
 /**
  * Redux helper functions
@@ -93,9 +91,7 @@ function handleRender(req, res) {
   });
 
   // Render the component to a string
-  const html = renderToString(
-    <Root store={store} />
-  );
+  const html = renderToString(<Root store={store} />);
 
   const initialState = store.getState();
 
@@ -157,9 +153,7 @@ app.post('/auth/twitter', (req, res) => {
         request.session.cssData = request.body;
 
         res.contentType('application/json');
-        const data = JSON.stringify(
-          `https://twitter.com/oauth/authenticate?oauth_token=${oauthToken}`
-        );
+        const data = JSON.stringify(`https://twitter.com/oauth/authenticate?oauth_token=${oauthToken}`);
         res.header('Content-Length', data.length);
         res.end(data);
       } catch (e) {
@@ -264,5 +258,6 @@ app.get('/download/tmp/:filename', (req, res) => {
 app.listen(process.env.PORT || PORTSERVER, () => {
   console.log(
     'Express server listening on port %d in %s mode',
-    process.env.PORT || PORTSERVER, app.settings.env);
+    process.env.PORT || PORTSERVER, app.settings.env
+  );
 });

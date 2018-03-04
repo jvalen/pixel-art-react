@@ -92,8 +92,7 @@ export function createPalette() {
 
 export function checkColorInPalette(palette, color) {
   const sameColors = palette.filter(currentColor =>
-    (currentColor.get('color') === color)
-  );
+    (currentColor.get('color') === color));
   return (sameColors.size > 0);
 }
 
@@ -195,17 +194,13 @@ export function applyBucket(state, activeFrameIndex, id, sourceColor) {
     currentId = queue.shift();
     newState = setGridCellValue(newState, currentColor, currentId);
     adjacents = getSameColorAdjacentCells(
-      newState.getIn(
-        ['frames', activeFrameIndex, 'grid']
-      ),
+      newState.getIn(['frames', activeFrameIndex, 'grid']),
       columns, rows, currentId, sourceColor
     );
 
     for (let i = 0; i < adjacents.length; i++) {
       auxAdjacentId = adjacents[i];
-      auxAdjacentColor = newState.getIn(
-        ['frames', activeFrameIndex, 'grid', auxAdjacentId]
-      );
+      auxAdjacentColor = newState.getIn(['frames', activeFrameIndex, 'grid', auxAdjacentId]);
       // Avoid introduce repeated or painted already cell into the queue
       if (
         (queue.indexOf(auxAdjacentId) === -1) &&

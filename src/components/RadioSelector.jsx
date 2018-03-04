@@ -2,7 +2,7 @@ import React from 'react';
 
 const RadioSelector = (props) => {
   const options = ops =>
-    ops.map(item =>
+    ops.map(item => (
       <label htmlFor={`${props.name}-${item.label}`} key={item.id}>
         <input
           type="radio"
@@ -14,7 +14,7 @@ const RadioSelector = (props) => {
         />
         <span>{item.label}</span>
       </label>
-    );
+    ));
 
   return (
     <fieldset className="radio-selector">

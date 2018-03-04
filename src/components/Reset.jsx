@@ -8,7 +8,8 @@ const Reset = (props) => {
     props.actions.resetGrid(
       props.columns,
       props.rows,
-      props.activeFrameIndex);
+      props.activeFrameIndex
+    );
   };
 
   return (

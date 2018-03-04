@@ -87,7 +87,7 @@ class Modal extends React.Component {
                 animate={this.state.previewType === 'animation'}
               />
             </div>
-          : null
+            : null
           }
         </div>
       )
@@ -101,8 +101,7 @@ class Modal extends React.Component {
             options={options}
           />
         </div>
-      )
-      ;
+      );
 
     switch (props.type) {
       case 'load':

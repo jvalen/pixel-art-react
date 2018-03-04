@@ -1,7 +1,7 @@
 import gm from 'gm';
 import fs from 'fs';
 
-const exec = require('child_process').exec;
+const { exec } = require('child_process');
 
 /**
  * Remove files from a given path array
@@ -59,7 +59,7 @@ function createFrameImages(cssData, width, height, opacity, splittedPath) {
         (err) => {
           if (err) {
             console.log(err);
-            reject(`Rejected ${frameFilePath}`);
+            reject(new Error(`Rejected ${frameFilePath}`));
           } else {
             fulfill(`Fulfilled ${frameFilePath}`);
           }
@@ -119,8 +119,8 @@ export function drawGif(data, path, transparent, callback) {
     const paths = framesFilesData.framePaths;
     const gifAnimatedPath = ` ${splittedPath[0]}-final.${splittedPath[1]}`;
     const gifFileName = gifAnimatedPath.split('images/tmp/')[1];
-    const duration = cssData.animationInfo.duration;
-    const intervals = cssData.animationInfo.intervals;
+    const { duration } = cssData.animationInfo;
+    const { intervals } = cssData.animationInfo;
     const opacityOptions = transparent ? ' ' : ' -background white -alpha remove';
 
     let creatingGifCommand = 'convert -dispose previous -loop 0';
@@ -168,7 +168,11 @@ export function drawSpritesheet(data, path, callback) {
   const opacity = 0;
   const splittedPath = [path, 'png'];
   const framesFilesData = createFrameImages(
-    cssData, width, height, opacity, splittedPath
+    cssData,
+    width,
+    height,
+    opacity,
+    splittedPath
   );
 
   Promise.all(framesFilesData.promises).then(() => {

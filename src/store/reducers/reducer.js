@@ -39,21 +39,17 @@ function changeDimensions(state, gridProperty, behaviour) {
   let newFrames = List();
 
   for (let i = 0; i < framesCount; i++) {
-    newFrames = newFrames.push(
-      Map(
-        {
-          grid:
-            resizeGrid(
-              state.getIn(['frames', i, 'grid']),
-              gridProperty,
-              behaviour,
-              { columns: state.get('columns'), rows: state.get('rows') }
-            ),
-          interval: state.getIn(['frames', i, 'interval']),
-          key: state.getIn(['frames', i, 'key'])
-        }
-      )
-    );
+    newFrames = newFrames.push(Map({
+      grid:
+        resizeGrid(
+          state.getIn(['frames', i, 'grid']),
+          gridProperty,
+          behaviour,
+          { columns: state.get('columns'), rows: state.get('rows') }
+        ),
+      interval: state.getIn(['frames', i, 'interval']),
+      key: state.getIn(['frames', i, 'key'])
+    }));
   }
 
   const newValues = {
@@ -78,7 +74,8 @@ function setColorSelected(state, newColorSelected, positionInPalette) {
   if (!checkColorInPalette(paletteGridData, newColorSelected)) {
     // If there is no newColorSelected in the palette it will create one
     paletteGridData = addColorToLastCellInPalette(
-      paletteGridData, newColorSelected
+      paletteGridData,
+      newColorSelected
     );
     newColor.position = paletteGridData.size - 1;
   } else if (positionInPalette === null) {
@@ -105,13 +102,15 @@ function setCustomColor(state, customColor) {
   if (!checkColorInPalette(paletteGridData, currentColor.get('color'))) {
     // If there is no colorSelected in the palette it will create one
     newState.paletteGridData = addColorToLastCellInPalette(
-      paletteGridData, customColor
+      paletteGridData,
+      customColor
     );
     newState.currentColor.position = newState.paletteGridData.size - 1;
   } else {
     // There is a color selected in the palette
     newState.paletteGridData = paletteGridData.set(
-      currentColor.get('position'), Map({
+      currentColor.get('position'),
+      Map({
         color: customColor, id: currentColor.get('color')
       })
     );
@@ -127,9 +126,7 @@ function drawCell(state, id) {
 
   if (bucketOn || eyedropperOn) {
     const activeFrameIndex = state.get('activeFrameIndex');
-    const cellColor = state.getIn(
-      ['frames', activeFrameIndex, 'grid', id]
-    ) || GRID_INITIAL_COLOR;
+    const cellColor = state.getIn(['frames', activeFrameIndex, 'grid', id]) || GRID_INITIAL_COLOR;
 
     if (eyedropperOn) {
       return setColorSelected(state, cellColor, null);
@@ -260,7 +257,9 @@ function duplicateFrame(state, frameId) {
   const prevFrame = frames.get(frameId);
   return state.merge({
     frames: resetIntervals(frames.splice(
-      frameId, 0, cloneGrid(prevFrame.get('grid'), prevFrame.get('interval'))
+      frameId,
+      0,
+      cloneGrid(prevFrame.get('grid'), prevFrame.get('interval'))
     )),
     activeFrameIndex: frameId + 1
   });
@@ -275,7 +274,7 @@ function changeFrameInterval(state, frameIndex, interval) {
     frames: state.get('frames').updateIn(
       [frameIndex, 'interval'],
       () => interval
-     )
+    )
   });
 }
 
@@ -287,7 +286,9 @@ export default function (state = Map(), action) {
       return changeDimensions(state, action.gridProperty, action.behaviour);
     case 'SET_COLOR_SELECTED':
       return setColorSelected(
-        state, action.newColorSelected, action.paletteColorPosition
+        state,
+        action.newColorSelected,
+        action.paletteColorPosition
       );
     case 'SET_CUSTOM_COLOR':
       return setCustomColor(state, action.customColor);
@@ -296,7 +297,8 @@ export default function (state = Map(), action) {
     case 'SET_DRAWING':
       return setDrawing(
         state, action.frames, action.paletteGridData,
-        action.cellSize, action.columns, action.rows);
+        action.cellSize, action.columns, action.rows
+      );
     case 'SET_ERASER':
       return setEraser(state);
     case 'SET_BUCKET':
@@ -310,7 +312,8 @@ export default function (state = Map(), action) {
     case 'SET_RESET_GRID':
       return resetGrid(
         state, action.columns, action.rows,
-        action.activeFrameIndex);
+        action.activeFrameIndex
+      );
     case 'SHOW_SPINNER':
       return showSpinner(state);
     case 'HIDE_SPINNER':

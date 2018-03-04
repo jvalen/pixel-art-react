@@ -9,7 +9,9 @@ const DownloadDrawing = (props) => {
     } = props;
 
     shareDrawing(
-      { type, frames, activeFrame, columns, rows, cellSize, duration },
+      {
+        type, frames, activeFrame, columns, rows, cellSize, duration
+      },
       '',
       'download',
       props.actions.sendNotification

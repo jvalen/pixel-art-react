@@ -19,7 +19,7 @@ class FramesHandler extends React.Component {
   }
 
   getFrames() {
-    return this.props.frames.map((frameData, index) =>
+    return this.props.frames.map((frameData, index) => (
       <Frame
         key={frameData.get('key')}
         data-id={index}
@@ -35,7 +35,7 @@ class FramesHandler extends React.Component {
           changeFrameInterval: this.props.actions.changeFrameInterval
         }}
       />
-    );
+    ));
   }
 
   handleClick() {

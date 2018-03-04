@@ -65,7 +65,7 @@ export function exportAnimationData(keyframes, duration) {
 
   for (const key in keyframes) {
     if (Object.prototype.hasOwnProperty.call(keyframes, key)) {
-      const boxShadow = keyframes[key].boxShadow;
+      const { boxShadow } = keyframes[key];
       result += `${key}{\n  box-shadow: ${boxShadow}\n  }\n`;
     }
   }
@@ -93,9 +93,8 @@ export function generateAnimationCSSData(frames, intervalData, columns, rows, ce
     const currentBoxShadow = generatePixelDrawCss(frame, columns, rows, cellSize, 'string');
     const minValue = index === 0 ? 0 : intervalData[index] + 0.01;
     const maxValue = intervalData[index + 1];
-    intervalAcc[`${minValue}%, ${maxValue}%`] =
-    { boxShadow:
-        `${currentBoxShadow};height: ${cellSize}px; width: ${cellSize}px;`
+    intervalAcc[`${minValue}%, ${maxValue}%`] = {
+      boxShadow: `${currentBoxShadow};height: ${cellSize}px; width: ${cellSize}px;`
     };
 
     return intervalAcc;
