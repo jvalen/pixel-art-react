@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
+  mode: "production",
   entry: [
     './src/index.jsx',
     'whatwg-fetch'
