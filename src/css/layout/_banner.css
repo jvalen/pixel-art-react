@@ -6,6 +6,7 @@
   clear: both;
   display: table;
   padding: 0.5em;
+  text-align: center;
   font-size: 0.9em;
 
   .button-close {
@@ -16,7 +17,6 @@
     font-weight: 500;
     color: $color-mineShaft;
     cursor: pointer;
-    text-align: center;
     padding: 0.2em;
     margin: 0.5em auto;
     width: 11em;
@@ -25,7 +25,6 @@
   .cookie-message {
     font-weight: 500;
     color: $color-silver;
-    text-align: center;
     position: relative;
     display: block;
 
