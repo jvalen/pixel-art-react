@@ -45,6 +45,7 @@
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "body-parser": "^1.18.2",
+    "box-shadow-pixels": "0.0.3",
     "cookie-parser": "^1.4.3",
     "copy-webpack-plugin": "^4.5.1",
     "cors": "^2.8.4",

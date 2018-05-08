@@ -17,9 +17,9 @@ function removeFiles(paths) {
  */
 function generateFrame(frameData, width, height, opacity, pixelSize) {
   const frame = frameData.map(elem => ({
-    x: elem[0],
-    y: elem[1],
-    color: elem[3]
+    x: elem.x,
+    y: elem.y,
+    color: elem.color
   }));
 
   const BGCOLOR = '#000000';

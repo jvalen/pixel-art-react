@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleRoot } from 'radium';
 import {
   generatePixelDrawCss,
-  generateAnimationCSSData,
-  generateAnimationIntervals
+  generateAnimationCSSData
 } from '../utils/cssParse';
 import Animation from './Animation';
 
@@ -25,15 +24,11 @@ const Preview = (props) => {
     };
 
     if (animation) {
-      animationData =
-      generateAnimationCSSData(
-        frames, generateAnimationIntervals(frames),
-        columns, rows, cellSize
-      );
+      animationData = generateAnimationCSSData(frames, columns, cellSize);
     } else {
       cssString = generatePixelDrawCss(
         frames.get(activeFrameIndex),
-        columns, rows, cellSize, 'string'
+        columns, cellSize, 'string'
       );
 
       styles.previewWrapper.boxShadow = cssString;

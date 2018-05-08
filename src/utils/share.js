@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
-import { generatePixelDrawCss, generateAnimationIntervals } from './cssParse';
+import { generatePixelDrawCss } from './cssParse';
+import { generateAnimationIntervals } from 'box-shadow-pixels';
 
 const shareDrawing = (imageData, text, action, sendNotification) => {
   const duration = imageData.duration * 1000; // Milliseconds
@@ -12,7 +13,6 @@ const shareDrawing = (imageData, text, action, sendNotification) => {
       drawingData = generatePixelDrawCss(
         imageData.activeFrame,
         imageData.columns,
-        imageData.rows,
         imageData.cellSize,
         'array'
       );
@@ -24,7 +24,6 @@ const shareDrawing = (imageData, text, action, sendNotification) => {
         acc.push(generatePixelDrawCss(
           currentFrame,
           imageData.columns,
-          imageData.rows,
           imageData.cellSize,
           'array'
         ));

@@ -13,17 +13,10 @@ const CssDisplay = (props) => {
     let cssString = generatePixelDrawCss(
       activeFrame,
       columns,
-      rows,
       cellSize,
       'string'
     );
-
-    if (cssString) {
-      cssString = `box-shadow: ${cssString}; `;
-      cssString += `height: ${cellSize}px; width: ${cellSize}px;`;
-    }
-
-    return <div>{cssString}</div>;
+    return <div>{cssString || ''}</div>;
   };
 
   return (

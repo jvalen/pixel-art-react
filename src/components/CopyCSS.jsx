@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-  generatePixelDrawCss,
-  generateAnimationCSSData,
-  generateAnimationIntervals,
+  getCssImageClassOutput,
   exportAnimationData
 } from '../utils/cssParse';
 
@@ -15,28 +13,15 @@ const CopyCSS = (props) => {
     } = props;
 
     if (animationCode) {
-      const cssAnimationString = exportAnimationData(
-        generateAnimationCSSData(
-          frames, generateAnimationIntervals(frames),
-          columns, rows, cellSize
-        ),
-        duration
-      );
+      const cssAnimationString = exportAnimationData(frames, columns, cellSize, duration);
       return cssAnimationString;
     }
-    // Show info of only one frame
-    let cssString = generatePixelDrawCss(
+
+    return getCssImageClassOutput(
       frames.get(activeFrameIndex),
       columns,
-      rows,
-      cellSize,
-      'string'
+      cellSize
     );
-    if (cssString) {
-      cssString = `.pixelart-to-css {\n  box-shadow: ${cssString};\n  `;
-      cssString += `height: ${cellSize}px;\n  width: ${cellSize}px;\n}`;
-    }
-    return cssString;
   };
 
   return (
