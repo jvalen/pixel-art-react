@@ -13,6 +13,7 @@ import { OAuth } from 'oauth';
 import session from 'express-session';
 import React from 'react';
 import { createStore } from 'redux';
+import { SET_INITIAL_STATE, SHOW_SPINNER } from '../store/actions/actionTypes';
 import reducer from '../store/reducers/reducer';
 import pkgjson from '../../package.json';
 import {
@@ -83,11 +84,11 @@ function handleRender(req, res) {
 
   // Dispatch initial state
   store.dispatch({
-    type: 'SET_INITIAL_STATE',
+    type: SET_INITIAL_STATE,
     state: {}
   });
   store.dispatch({
-    type: 'SHOW_SPINNER'
+    type: SHOW_SPINNER
   });
 
   // Render the component to a string

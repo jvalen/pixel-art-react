@@ -4,6 +4,7 @@ import {
   checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette,
   applyBucket, cloneGrid, GRID_INITIAL_COLOR
 } from './reducerHelpers';
+import * as types from '../actions/actionTypes';
 
 function setInitialState(state) {
   const cellSize = 10;
@@ -280,59 +281,59 @@ function changeFrameInterval(state, frameIndex, interval) {
 
 export default function (state = Map(), action) {
   switch (action.type) {
-    case 'SET_INITIAL_STATE':
+    case types.SET_INITIAL_STATE:
       return setInitialState(state);
-    case 'CHANGE_DIMENSIONS':
+    case types.CHANGE_DIMENSIONS:
       return changeDimensions(state, action.gridProperty, action.behaviour);
-    case 'SET_COLOR_SELECTED':
+    case types.SET_COLOR_SELECTED:
       return setColorSelected(
         state,
         action.newColorSelected,
         action.paletteColorPosition
       );
-    case 'SET_CUSTOM_COLOR':
+    case types.SET_CUSTOM_COLOR:
       return setCustomColor(state, action.customColor);
-    case 'DRAW_CELL':
+    case types.DRAW_CELL:
       return drawCell(state, action.id);
-    case 'SET_DRAWING':
+    case types.SET_DRAWING:
       return setDrawing(
         state, action.frames, action.paletteGridData,
         action.cellSize, action.columns, action.rows
       );
-    case 'SET_ERASER':
+    case types.SET_ERASER:
       return setEraser(state);
-    case 'SET_BUCKET':
+    case types.SET_BUCKET:
       return setBucket(state);
-    case 'SET_EYEDROPPER':
+    case types.SET_EYEDROPPER:
       return setEyedropper(state);
-    case 'SET_COLOR_PICKER':
+    case types.SET_COLOR_PICKER:
       return setColorPicker(state);
-    case 'SET_CELL_SIZE':
+    case types.SET_CELL_SIZE:
       return setCellSize(state, action.cellSize);
-    case 'SET_RESET_GRID':
+    case types.SET_RESET_GRID:
       return resetGrid(
         state, action.columns, action.rows,
         action.activeFrameIndex
       );
-    case 'SHOW_SPINNER':
+    case types.SHOW_SPINNER:
       return showSpinner(state);
-    case 'HIDE_SPINNER':
+    case types.HIDE_SPINNER:
       return hideSpinner(state);
-    case 'SEND_NOTIFICATION':
+    case types.SEND_NOTIFICATION:
       return sendNotification(state, action.message);
-    case 'CHANGE_ACTIVE_FRAME':
+    case types.CHANGE_ACTIVE_FRAME:
       return changeActiveFrame(state, action.frameIndex);
-    case 'CREATE_NEW_FRAME':
+    case types.CREATE_NEW_FRAME:
       return createNewFrame(state);
-    case 'DELETE_FRAME':
+    case types.DELETE_FRAME:
       return deleteFrame(state, action.frameId);
-    case 'DUPLICATE_FRAME':
+    case types.DUPLICATE_FRAME:
       return duplicateFrame(state, action.frameId);
-    case 'SET_DURATION':
+    case types.SET_DURATION:
       return setDuration(state, action.duration);
-    case 'CHANGE_FRAME_INTERVAL':
+    case types.CHANGE_FRAME_INTERVAL:
       return changeFrameInterval(state, action.frameIndex, action.interval);
-    case 'NEW_PROJECT':
+    case types.NEW_PROJECT:
       return setInitialState(state);
     default:
   }
