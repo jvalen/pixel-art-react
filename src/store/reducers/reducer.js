@@ -6,10 +6,10 @@ import {
 } from './reducerHelpers';
 import * as types from '../actions/actionTypes';
 
-function setInitialState(state) {
+function setInitialState(state, options = {}) {
   const cellSize = 10;
-  const columns = 20;
-  const rows = 20;
+  const columns = options.columns || 20;
+  const rows = options.rows || 20;
   const currentColor = { color: '#000000', position: 0 };
   const frame = createGrid(columns * rows, 100);
   const paletteGrid = createPalette();
@@ -282,7 +282,7 @@ function changeFrameInterval(state, frameIndex, interval) {
 export default function (state = Map(), action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
-      return setInitialState(state);
+      return setInitialState(state, action.options);
     case types.CHANGE_DIMENSIONS:
       return changeDimensions(state, action.gridProperty, action.behaviour);
     case types.SET_COLOR_SELECTED:
@@ -334,7 +334,7 @@ export default function (state = Map(), action) {
     case types.CHANGE_FRAME_INTERVAL:
       return changeFrameInterval(state, action.frameIndex, action.interval);
     case types.NEW_PROJECT:
-      return setInitialState(state);
+      return setInitialState(state, action.options);
     default:
   }
   return state;

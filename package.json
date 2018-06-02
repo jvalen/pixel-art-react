@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .js --ext .jsx .",
     "csslint": "stylelint src/css/**/*.css",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'",
+    "test": "jest",
     "test:watch": "npm run test -- --watch",
     "development": "webpack-dev-server --hot",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
@@ -29,18 +29,11 @@
     "express"
   ],
   "license": "MIT",
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ]
-  },
   "dependencies": {
     "autoprefixer": "^8.4.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-react-transform": "^3.0.0",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
@@ -95,15 +88,14 @@
     "node": "8.11.1"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-immutable": "^2.0.0-alpha.1",
+    "babel-jest": "^22.4.3",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "jsdom": "^11.9.0",
-    "mocha": "^5.1.1",
+    "jest": "^22.4.3",
     "stylelint": "^9.2.0",
     "stylelint-config-lost": "0.0.3",
     "stylelint-config-standard": "^18.2.0",

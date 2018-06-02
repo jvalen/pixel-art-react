@@ -1,9 +1,10 @@
 import { ActionCreators } from 'redux-undo';
 import * as types from './actionTypes';
 
-export function setInitialState() {
+export function setInitialState(options) {
   return {
-    type: types.SET_INITIAL_STATE
+    type: types.SET_INITIAL_STATE,
+    options
   };
 }
 
@@ -12,14 +13,6 @@ export function changeDimensions(gridProperty, behaviour) {
     type: types.CHANGE_DIMENSIONS,
     gridProperty,
     behaviour
-  };
-}
-
-export function setGridDimension(columns, rows) {
-  return {
-    type: types.SET_GRID_DIMENSION,
-    columns,
-    rows
   };
 }
 
