@@ -27,6 +27,10 @@
 }
 
 @media only screen and (max-width: 730px) {
+  .app__copycss-button {
+    margin-top: 1.4em !important;
+  }
+
   .app__central-container {
     .col-1-4 {
       &.left {
@@ -67,10 +71,6 @@
 
   .app__preview-button {
     margin-top: 1em !important;
-  }
-
-  .app__copycss-button {
-    margin-top: 1.4em !important;
   }
 
   body {

@@ -15,9 +15,6 @@
 
   .app__frames-container[data-tooltip]::after {
     width: 80%;
-  }
-
-  .app__frames-container[data-tooltip]::after {
     margin-left: -40%;
   }
 

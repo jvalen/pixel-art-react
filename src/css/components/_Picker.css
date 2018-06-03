@@ -6,25 +6,27 @@
   margin-bottom: 2em;
 
   label.picker__columns {
-    @mixin icon columns;    
+    @mixin icon columns;
   }
 
   label.picker__rows {
     @mixin icon rows;
   }
 
-  label.picker__columns, label.picker__rows {
+  label.picker__columns,
+  label.picker__rows {
     display: flex;
     flex: 0 0 100%;
   }
 
-  label {    
+  label {
     flex: 0.5;
     font-size: 2em !important;
     color: $color-mineShaft;
     position: relative;
     margin: 0 auto;
     text-align: center;
+
     &::before {
       display: inline-block;
       width: 1.5em;

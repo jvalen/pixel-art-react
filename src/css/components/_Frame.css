@@ -35,6 +35,14 @@
     border-width: 2px 0 0 2px;
   }
 
+  .frame__percentage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 23px;
+    border-top: 2px solid $color-tundora;
+  }
+
   &.active {
     border: 2px solid $color-tamarillo;
     opacity: 1;
@@ -55,13 +63,5 @@
     .frame__percentage {
       border-color: $color-tamarillo;
     }
-  }
-
-  .frame__percentage {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 23px;
-    border-top: 2px solid $color-tundora;
   }
 }

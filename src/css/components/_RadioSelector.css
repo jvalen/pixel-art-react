@@ -4,6 +4,12 @@
   margin: 0 auto;
 
   label {
+    span {
+      padding: 0.6em 1em;
+      border: 1px solid $color-scorpion;
+      transition: all 0.3s;
+    }
+
     input {
       display: none;
 
@@ -17,12 +23,6 @@
           box-shadow: 0 0 0 2px $color-scorpion inset;
         }
       }
-    }
-
-    span {
-      padding: 0.6em 1em;
-      border: 1px solid $color-scorpion;
-      transition: all 0.3s;
     }
 
     margin: 0 0.5em;
