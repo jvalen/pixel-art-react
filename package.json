@@ -69,7 +69,8 @@
     "whatwg-fetch": "^2.0.4"
   },
   "engines": {
-    "node": "8.11.1"
+    "node": "8.11.1",
+    "npm": "6.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
