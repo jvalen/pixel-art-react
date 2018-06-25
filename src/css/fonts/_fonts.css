@@ -12,21 +12,20 @@
 }
 
 @font-face {
-  font-family: 'FontAwesome';
-  src: url('fonts/files/fontawesome-webfont.eot?v=4.5.0');
+  font-family: 'WebFontIcons';
+  src: url('fonts/files/webfont-icons.eot?v=4.5.0');
   src:
-    url('fonts/files/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'),
-    url('fonts/files/fontawesome-webfont.woff2?v=4.5.0') format('woff2'),
-    url('fonts/files/fontawesome-webfont.woff?v=4.5.0') format('woff'),
-    url('fonts/files/fontawesome-webfont.ttf?v=4.5.0') format('truetype'),
-    url('fonts/files/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+    url('fonts/files/webfont-icons.eot?#iefix&v=4.5.0') format('embedded-opentype'),
+    url('fonts/files/webfont-icons.woff?v=4.5.0') format('woff'),
+    url('fonts/files/webfont-icons.ttf?v=4.5.0') format('truetype'),
+    url('fonts/files/webfont-icons.svg?v=4.5.0#webfonticons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @define-mixin icon $type {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px/1 WebFontIcons;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -38,53 +37,53 @@
 }
 
 @define-extend eyedropper {
-  content: "\f1fb";
+  content: "\62";
 }
 
 @define-extend paint-brush {
-  content: "\f1fc";
+  content: "\6d";
 }
 
 @define-extend eraser {
-  content: "\f12d";
+  content: "\6c";
 }
 
 @define-extend trash-o {
-  content: "\f014";
+  content: "\68";
 }
 
 @define-extend files-o {
-  content: "\f0c5";
+  content: "\69";
 }
 
 @define-extend download {
-  content: "\f019";
+  content: "\66";
 }
 
 @define-extend twitter {
-  content: "\f099";
+  content: "\65";
 }
 
 @define-extend undo {
-  content: "\f0e2";
+  content: "\63";
 }
 
 @define-extend repeat {
-  content: "\f01e";
+  content: "\64";
 }
 
 @define-extend columns {
-  content: "\f07e";
+  content: "\6b";
 }
 
 @define-extend rows {
-  content: "\f07d";
+  content: "\6a";
 }
 
 @define-extend help {
-  content: "\f128";
+  content: "\67";
 }
 
 @define-extend bucket {
-  content: "\f0f4";
+  content: "\61";
 }
