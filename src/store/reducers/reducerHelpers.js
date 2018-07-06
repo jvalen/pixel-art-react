@@ -173,6 +173,15 @@ function getSameColorAdjacentCells(frameGrid, columns, rows, id, color) {
   return adjacentCollection;
 }
 
+export function isPaletteColorSelected(state) {
+  return state.get('currentColor').get('color');
+}
+
+export function resetPaletteSelectedColorState(state) {
+  let currentColor = state.getIn(['paletteGridData', 0, 'color']);
+  return state.set('currentColor', Map({ color: currentColor, position: 0 }));
+}
+
 export function applyBucket(state, activeFrameIndex, id, sourceColor) {
   const columns = state.get('columns');
   const rows = state.get('rows');
@@ -184,10 +193,10 @@ export function applyBucket(state, activeFrameIndex, id, sourceColor) {
   let auxAdjacentId;
   let auxAdjacentColor;
 
-  if (!currentColor) {
-    // If there is no color selected in the palette, it will choose the first one
-    currentColor = newState.getIn(['paletteGridData', 0, 'color']);
-    newState = newState.set('currentColor', Map({ color: currentColor, position: 0 }));
+  if (!isPaletteColorSelected(state)) {
+    // If there is no color selected in the palette, it will choose the first one    
+    newState = resetPaletteSelectedColorState(newState);
+    currentColor = newState.get('currentColor').get('color');
   }
 
   while (queue.length > 0) {

@@ -2,7 +2,8 @@ import { List, Map } from 'immutable';
 import {
   createGrid, resizeGrid, createPalette, resetIntervals, setGridCellValue,
   checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette,
-  applyBucket, cloneGrid, GRID_INITIAL_COLOR
+  applyBucket, cloneGrid, GRID_INITIAL_COLOR, isPaletteColorSelected,
+  resetPaletteSelectedColorState
 } from './reducerHelpers';
 import * as types from '../actions/actionTypes';
 
@@ -124,20 +125,27 @@ function drawCell(state, id) {
   const bucketOn = state.get('bucketOn');
   const eyedropperOn = state.get('eyedropperOn');
   const eraserOn = state.get('eraserOn');
+  let newState = state;
+  let color = '';
 
   if (bucketOn || eyedropperOn) {
     const activeFrameIndex = state.get('activeFrameIndex');
     const cellColor = state.getIn(['frames', activeFrameIndex, 'grid', id]) || GRID_INITIAL_COLOR;
 
     if (eyedropperOn) {
-      return setColorSelected(state, cellColor, null);
+      return setColorSelected(newState, cellColor, null);
     }
     // bucketOn
-    return applyBucket(state, activeFrameIndex, id, cellColor);
+    return applyBucket(newState, activeFrameIndex, id, cellColor);
   }
-  // eraserOn or regular cell paint
-  const color = eraserOn ? '' : state.get('currentColor').get('color');
-  return setGridCellValue(state, color, id);
+  // regular cell paint
+  if (!eraserOn) {
+    if (!isPaletteColorSelected(newState)) {
+      newState = resetPaletteSelectedColorState(newState);
+    }
+    color = newState.get('currentColor').get('color');
+  }
+  return setGridCellValue(newState, color, id);
 }
 
 function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
