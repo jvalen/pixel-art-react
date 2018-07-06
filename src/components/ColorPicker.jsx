@@ -8,8 +8,7 @@ class ColorPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayColorPicker: false,
-      background: '#ffffff'
+      displayColorPicker: false
     };
   }
 
@@ -21,7 +20,6 @@ class ColorPicker extends React.Component {
   }
 
   handleChange(color) {
-    this.setState({ background: color.hex });
     this.props.actions.setCustomColor(color.hex);
   }
 
@@ -52,6 +50,8 @@ class ColorPicker extends React.Component {
     };
 
     const isSelected = this.props.colorPickerOn && this.state.displayColorPicker;
+    const currentColor = this.props.currentColor.get('color');
+    const initialPickerColor = currentColor || '#ffffff';
 
     return (
       <div className="color-picker">
@@ -64,7 +64,7 @@ class ColorPicker extends React.Component {
             <div style={styles.popover} is="popover">
               <div style={styles.cover} is="cover" onClick={() => { this.handleClose(); }} />
               <Picker
-                color={this.state.background}
+                color={initialPickerColor}
                 onChange={(color) => { this.handleChange(color); }}
                 onClose={() => { this.handleClose(); }}
                 type="sketch"
@@ -79,7 +79,8 @@ class ColorPicker extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  colorPickerOn: state.present.get('colorPickerOn')
+  colorPickerOn: state.present.get('colorPickerOn'),
+  currentColor: state.present.get('currentColor')
 });
 
 const mapDispatchToProps = dispatch => ({
