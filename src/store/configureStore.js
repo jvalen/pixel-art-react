@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import undoable, { includeAction } from 'redux-undo';
 import { fromJS } from 'immutable';
 import reducer from '../store/reducers/reducer';
-import { 
+import {
   SET_INITIAL_STATE,
   CHANGE_DIMENSIONS,
   DRAW_CELL,

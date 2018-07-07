@@ -10,7 +10,7 @@ const Preview = (props) => {
   const generatePreview = () => {
     const { activeFrameIndex, duration } = props;
     const {
-      frames, columns, rows, cellSize, animate
+      frames, columns, cellSize, animate
     } = props.storedData || props;
     const animation = frames.size > 1 && animate;
     let animationData;

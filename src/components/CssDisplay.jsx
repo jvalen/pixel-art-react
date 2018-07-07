@@ -7,10 +7,9 @@ const CssDisplay = (props) => {
     const {
       activeFrame,
       columns,
-      rows,
       cellSize
     } = props;
-    let cssString = generatePixelDrawCss(
+    const cssString = generatePixelDrawCss(
       activeFrame,
       columns,
       cellSize,
@@ -32,7 +31,6 @@ function mapStateToProps(state) {
   return {
     activeFrame: frames.get(activeFrameIndex),
     columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
     cellSize: state.present.get('cellSize')
   };
 }

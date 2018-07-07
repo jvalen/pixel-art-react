@@ -1,9 +1,10 @@
-import { 
+import {
   getImageData,
   getImageCssClassOutput,
   getAnimationKeyframes,
   getAnimationCssClassOutput
 } from 'box-shadow-pixels';
+
 const PIXELART_CSS_CLASS_NAME = 'pixelart-to-css';
 
 export function generatePixelDrawCss(frame, columns, cellSize, type) {

@@ -50,15 +50,15 @@ describe('reducer: DRAW_CELL', () => {
     const nextState = reducer(dummyState, actions.drawCell(0));
 
     expect(nextState.getIn(['frames', 0, 'grid', 0]))
-    .toEqual(nextState.get('currentColor').get('color'));
+      .toEqual(nextState.get('currentColor').get('color'));
   });
 
   it('should fill the empty grid with the selected color if bucket tool is active', () => {
-    const dummyState = reducer(Map(), actions.setInitialState({columns: 2, rows: 2}));
+    const dummyState = reducer(Map(), actions.setInitialState({ columns: 2, rows: 2 }));
     const currentColor = dummyState.get('currentColor').get('color');
-    let nextState = reducer(reducer(dummyState, actions.setBucket()), actions.drawCell(0));
+    const nextState = reducer(reducer(dummyState, actions.setBucket()), actions.drawCell(0));
 
     expect(nextState.getIn(['frames', 0, 'grid']).toJS())
-    .toEqual([currentColor, currentColor, currentColor, currentColor]);
+      .toEqual([currentColor, currentColor, currentColor, currentColor]);
   });
 });

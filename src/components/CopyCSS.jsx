@@ -7,7 +7,7 @@ import {
 const CopyCSS = (props) => {
   const generateCSS = () => {
     const {
-      frames, columns, rows,
+      frames, columns,
       cellSize, activeFrameIndex,
       animationCode, duration
     } = props;

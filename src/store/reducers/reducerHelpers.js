@@ -178,7 +178,7 @@ export function isPaletteColorSelected(state) {
 }
 
 export function resetPaletteSelectedColorState(state) {
-  let currentColor = state.getIn(['paletteGridData', 0, 'color']);
+  const currentColor = state.getIn(['paletteGridData', 0, 'color']);
   return state.set('currentColor', Map({ color: currentColor, position: 0 }));
 }
 
@@ -194,7 +194,7 @@ export function applyBucket(state, activeFrameIndex, id, sourceColor) {
   let auxAdjacentColor;
 
   if (!isPaletteColorSelected(state)) {
-    // If there is no color selected in the palette, it will choose the first one    
+    // If there is no color selected in the palette, it will choose the first one
     newState = resetPaletteSelectedColorState(newState);
     currentColor = newState.get('currentColor').get('color');
   }

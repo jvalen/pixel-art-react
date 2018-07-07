@@ -2,13 +2,15 @@
     "extends": ["airbnb"],
     "env": {
         "browser": true,
-        "node": true,
-        "mocha": true
+        "node": true,        
+        "jest": true
     },
-    "ecmaFeatures": {
-        "forOf": true,
-        "jsx": true,
-        "es6": true
+    "parserOptions": {
+        "ecmaFeatures": {
+            "forOf": true,
+            "jsx": true,
+            "es6": true
+        }
     },
     "rules": {
         "comma-dangle": 0,
