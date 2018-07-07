@@ -36,6 +36,9 @@ export default class Frame extends React.Component {
       <div
         className={`frame${this.props.active ? ' active' : ''}`}
         onClick={() => { this.handleClick(); }}
+        onKeyPress={() => { this.handleClick(); }}
+        role="button"
+        tabIndex={0}
       >
         <Preview
           frames={List([this.props.frame])}

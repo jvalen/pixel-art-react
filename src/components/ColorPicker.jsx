@@ -62,10 +62,15 @@ class ColorPicker extends React.Component {
         <div style={styles.picker}>
           {this.state.displayColorPicker ?
             <div style={styles.popover} is="popover">
-              <div style={styles.cover} is="cover" onClick={() => { this.handleClose(); }} />
+              <div
+                style={styles.cover}
+                is="cover"
+                onClick={() => { this.handleClose(); }}
+                role="presentation"
+              />
               <Picker
                 color={initialPickerColor}
-                onChange={(color) => { this.handleChange(color); }}
+                onChangeComplete={(color) => { this.handleChange(color); }}
                 onClose={() => { this.handleClose(); }}
                 type="sketch"
               />

@@ -13,6 +13,7 @@ const PixelGrid = ({
         onMouseUp={(id, ev) => onMouseUp(id, ev)}
         onMouseDown={(id, ev) => onMouseDown(id, ev)}
         onMouseOver={(id, ev) => onMouseOver(id, ev)}
+        onFocus={(id, ev) => onMouseOver(id, ev)}
         onTouchMove={(id, ev) => onTouchMove(id, ev)}
       />
     ))}

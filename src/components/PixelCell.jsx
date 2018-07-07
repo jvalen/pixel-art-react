@@ -24,6 +24,7 @@ export default class PixelCell extends React.Component {
         onMouseDown={ev => onMouseDown(id, ev)}
         onMouseUp={ev => onMouseUp(id, ev)}
         onMouseOver={ev => onMouseOver(id, ev)}
+        onFocus={ev => onMouseOver(id, ev)}
         onTouchStart={ev => onMouseDown(id, ev)}
         onTouchEnd={ev => onMouseUp(id, ev)}
         onTouchCancel={ev => onMouseUp(id, ev)}

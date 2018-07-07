@@ -59,6 +59,7 @@ export default class GridWrapper extends React.Component {
         onMouseUp={this.handleMouseUp}
         onMouseDown={this.handleMouseDown}
         onMouseOver={this.handleMouseOver}
+        onFocus={this.handleMouseOver}
         onTouchMove={this.handleTouchMove}
         extraClass={this.props.extraClass}
       />

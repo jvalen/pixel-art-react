@@ -91,7 +91,10 @@ export default class LoadDrawing extends React.Component {
               <div
                 key={elem.id}
                 onClick={() => { this.drawingClick(elem); }}
+                onKeyPress={() => { this.drawingClick(elem); }}
                 className="load-drawing__drawing"
+                role="button"
+                tabIndex={0}
               >
                 <Preview
                   key={elem.id}
