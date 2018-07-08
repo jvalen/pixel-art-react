@@ -62,6 +62,10 @@ class Modal extends React.Component {
     this.changeRadioType = this.changeRadioType.bind(this);
   }
 
+  componentWillMount() {
+    ModalReact.setAppElement('body');
+  }
+
   getModalContent(props) {
     const options = this.constructor.generateRadioOptions(props);
     let content;

@@ -55,7 +55,7 @@
     "react-cookie-banner": "3.0.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.3.2",
-    "react-modal": "^3.4.4",
+    "react-modal": "^3.5.1",
     "react-redux": "^5.0.7",
     "react-transform-hmr": "^1.0.4",
     "react-transition-group": "^2.3.1",
