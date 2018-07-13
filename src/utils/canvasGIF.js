@@ -58,7 +58,7 @@ function renderFrames(settings, sendNotification) {
     });
 
   gif.setRepeat(0); // loop indefinitely
-  gif.setTransparent('#ffffff');
+  gif.setDispose(3); // restore to previous
   gif.writeHeader();
 
   switch (type) {
