@@ -53,7 +53,7 @@ function renderFrames(settings, sendNotification) {
       document.body.removeChild(a);
       setTimeout(() => {
         window.URL.revokeObjectURL(blobURL);
-        sendNotification('downloading...');
+        sendNotification('Downloading...');
       }, 100);
     });
 
@@ -68,22 +68,23 @@ function renderFrames(settings, sendNotification) {
         width, height, cellSize, cellSize
       ));
       break;
-    default:
-      frames.forEach((frame, idx) => {
+    default: {
+      let previousInterval = 0;
+      frames.forEach((frame, idx, framesArray) => {
+        const isLastFrame = idx === framesArray.length - 1;
+        const currentInterval = isLastFrame ? 100 : frames.get(idx).get('interval');
+        const diff = currentInterval - previousInterval;
+        const delay = diff * 0.01 * durationInMillisecond;
+
+        gif.setDelay(delay);
+        previousInterval = currentInterval;
+
         gif.addFrame(renderFrameToCanvas(
           canvas, frame,
           width, height, cellSize, cellSize
         ));
-
-        const nextFrame = frames.get(idx + 1);
-        if (nextFrame) {
-          const diff = nextFrame.get('interval') - frame.get('interval');
-          const delay = diff * 0.01 * durationInMillisecond;
-          gif.setDelay(delay);
-        } else {
-          gif.setDelay(0);
-        }
       });
+    }
   }
   gif.finish();
 }
