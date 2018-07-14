@@ -31,7 +31,7 @@ function renderFrameToCanvas(
 function renderFrames(settings, sendNotification) {
   const {
     type,
-    frames, duration,
+    frames, duration, activeFrame,
     rows, columns, cellSize,
   } = settings;
 
@@ -64,7 +64,7 @@ function renderFrames(settings, sendNotification) {
   switch (type) {
     case 'single':
       gif.addFrame(renderFrameToCanvas(
-        canvas, frames.get(0),
+        canvas, activeFrame,
         width, height, cellSize, cellSize
       ));
       break;
