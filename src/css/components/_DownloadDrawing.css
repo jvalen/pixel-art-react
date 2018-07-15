@@ -1,17 +1,6 @@
-.download-btn-group {
-  margin: 0 auto;
-  text-align: center;
-}
-
 .download-btn {
-  margin: 1.5em 0.5em;
-  display: inline-block;
-}
-
-.download-btn.download-drawing {
   @mixin button brown;
-}
 
-.download-btn.download-gif {
-  @mixin button blue;
+  margin: 1.5em auto;
+  display: table;
 }

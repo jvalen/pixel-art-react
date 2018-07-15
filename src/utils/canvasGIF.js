@@ -5,27 +5,50 @@ function randomName() {
   return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
 }
 
-function renderFrameToCanvas(
-  canvas, frame,
-  width, height, cellWidth, cellHeight
-) {
-  const ctx = canvas.getContext('2d');
-  ctx.canvas.width = width;
-  ctx.canvas.height = height;
-
-  const cols = Math.floor(width / cellWidth);
-  frame.get('grid').forEach((fillStyle, idx) => {
+function fillCanvasWithFrame(canvas, frameInfo) {
+  const {
+    frame, cols, cellSize, frameHeight, frameIdx
+  } = frameInfo;
+  const ctx = canvas;
+  frame.get('grid').forEach((fillStyle, pixelIdx) => {
     if (!fillStyle) {
       return;
     }
     ctx.fillStyle = fillStyle;
 
-    const col = idx % cols;
-    const row = Math.floor(idx / cols);
-    ctx.fillRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
+    const col = pixelIdx % cols;
+    const row = Math.floor(pixelIdx / cols);
+    ctx.fillRect(col * cellSize, (row * cellSize) + (frameHeight * frameIdx), cellSize, cellSize);
   });
+  return ctx;
+}
 
-  return ctx.getImageData(0, 0, width, height).data;
+function renderImageToCanvas(type, canvasInfo, currentFrameInfo, frames) {
+  const {
+    canvas, canvasHeight, canvasWidth
+  } = canvasInfo;
+  const {
+    frame, frameHeight, frameWidth, cellSize
+  } = currentFrameInfo;
+  const cols = Math.floor(frameWidth / cellSize);
+  let ctx = canvas.getContext('2d');
+  ctx.canvas.width = canvasWidth;
+  ctx.canvas.height = canvasHeight;
+  switch (type) {
+    case 'spritesheet':
+      frames.forEach((currentFrame, frameIdx) => {
+        ctx = fillCanvasWithFrame(ctx, {
+          frame: currentFrame, cols, cellSize, frameHeight, frameIdx
+        });
+      });
+      break;
+    default:
+      ctx = fillCanvasWithFrame(ctx, {
+        frame, cols, cellSize, frameHeight, frameIdx: 0
+      });
+      break;
+  }
+  return ctx.getImageData(0, 0, canvasWidth, canvasHeight).data;
 }
 
 function renderFrames(settings, sendNotification) {
@@ -36,11 +59,13 @@ function renderFrames(settings, sendNotification) {
   } = settings;
 
   const durationInMillisecond = duration * 1000;
-  const width = columns * cellSize;
-  const height = rows * cellSize;
+  const frameWidth = columns * cellSize;
+  const frameHeight = rows * cellSize;
+  const canvasWidth = frameWidth;
+  const canvasHeight = type === 'spritesheet' ? frameHeight * frames.size : frameHeight;
 
   const canvas = document.createElement('canvas');
-  const gif = new GIFEncoder(width, height);
+  const gif = new GIFEncoder(canvasWidth, canvasHeight);
   gif.pipe(blobStream())
     .on('finish', function () {
       const blobURL = this.toBlobURL();
@@ -63,9 +88,16 @@ function renderFrames(settings, sendNotification) {
 
   switch (type) {
     case 'single':
-      gif.addFrame(renderFrameToCanvas(
-        canvas, activeFrame,
-        width, height, cellSize, cellSize
+    case 'spritesheet':
+      gif.addFrame(renderImageToCanvas(
+        type,
+        {
+          canvas, canvasHeight, canvasWidth
+        },
+        {
+          frame: activeFrame, frameHeight, frameWidth, cellSize
+        },
+        frames
       ));
       break;
     default: {
@@ -79,9 +111,14 @@ function renderFrames(settings, sendNotification) {
         gif.setDelay(delay);
         previousInterval = currentInterval;
 
-        gif.addFrame(renderFrameToCanvas(
-          canvas, frame,
-          width, height, cellSize, cellSize
+        gif.addFrame(renderImageToCanvas(
+          type,
+          {
+            canvas, canvasHeight, canvasWidth
+          },
+          {
+            frame, frameHeight, frameWidth, cellSize
+          }
         ));
       });
     }
