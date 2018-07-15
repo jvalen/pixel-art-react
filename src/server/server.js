@@ -211,51 +211,6 @@ app.get('/auth/twitter/callback', (req, res, next) => {
   }
 });
 
-app.post('/auth/download', (req, res) => {
-  try {
-    const requestBody = req.body;
-    requestBody.drawingData = JSON.parse(requestBody.drawingData);
-
-    const randomName = temp.path();
-    const imgPath = `images${randomName}`;
-
-    switch (requestBody.type) {
-      case 'animation':
-        drawGif(requestBody, imgPath, true, (gifPath) => {
-          res.send({ fileUrl: `/download/tmp/${gifPath}` });
-        });
-        break;
-      case 'spritesheet':
-        drawSpritesheet(requestBody, imgPath, (spritesheetPath) => {
-          res.send({ fileUrl: `/download/tmp/${spritesheetPath}` });
-        });
-        break;
-      default:
-        drawFrame(requestBody, imgPath, (singleFramePath) => {
-          res.send({ fileUrl: `/download/tmp/${singleFramePath}` });
-        });
-    }
-  } catch (e) {
-    res.status(500).send('Download error');
-  }
-});
-
-app.get('/download/tmp/:filename', (req, res) => {
-  const filePath = `${__dirname}/../../images/tmp/${req.params.filename}`;
-
-  // Stream and delete the file
-  const stream = fs.createReadStream(filePath, { bufferSize: 64 * 1024 });
-  stream.pipe(res);
-
-  let hadError = false;
-  stream.on('error', () => {
-    hadError = true;
-  });
-  stream.on('close', () => {
-    if (!hadError) fs.unlink(filePath, () => {});
-  });
-});
-
 app.listen(process.env.PORT || PORTSERVER, () => {
   console.log(
     'Express server listening on port %d in %s mode',

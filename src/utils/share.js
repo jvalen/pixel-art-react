@@ -48,30 +48,6 @@ const shareDrawing = (imageData, text, action, sendNotification) => {
   };
 
   switch (action) {
-    case 'download':
-      sendNotification('Downloading...');
-      fetch('/auth/download', {
-        credentials: 'same-origin',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(css)
-      }).then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          // Open a new tab with the image
-          response.json().then((responseText) => {
-            window.open(responseText.fileUrl);
-          });
-        } else {
-          sendNotification('Sorry: Error downloading');
-        }
-      }, () => {
-        // Handle network error
-        sendNotification('Sorry: Error downloading');
-      });
-      break;
     case 'twitter':
       fetch('/auth/twitter', {
         credentials: 'same-origin',
