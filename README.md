@@ -1,6 +1,7 @@
 # Pixel Art to CSS
 
 <a target='_blank' href='http://www.recurse.com' title='Made at the Recurse Center'><img src='https://cloud.githubusercontent.com/assets/2883345/11325206/336ea5f4-9150-11e5-9e90-d86ad31993d8.png' height='20px'/></a>
+<a href="https://travis-ci.com/jvalen/pixel-art-react"><img src="https://travis-ci.com/jvalen/pixel-art-react.svg?branch=master" alt="travis ci"></a>
 
 ### Did you know that you can draw and animate pixel art using CSS?
 
