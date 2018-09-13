@@ -11,8 +11,6 @@ const PixelCanvas = (props) => {
     color
   }));
 
-  const onCellEvent = id => props.actions.drawCell(id);
-
   let gridExtraClass = 'cell';
   if (props.eraserOn) {
     gridExtraClass = 'context-menu';
@@ -23,7 +21,6 @@ const PixelCanvas = (props) => {
   return (
     <GridWrapper
       cells={cells}
-      onCellEvent={onCellEvent}
       extraClass={gridExtraClass}
     />
   );

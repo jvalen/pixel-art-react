@@ -169,3 +169,23 @@ export function undo() {
 export function redo() {
   return (ActionCreators.redo());
 }
+
+export function startToDrag(id) {
+  return {
+    type: types.START_TO_DRAG,
+    id
+  };
+}
+
+export function mouseOver(id) {
+  return {
+    type: types.MOUSE_OVER,
+    id
+  };
+}
+
+export function drop() {
+  return {
+    type: types.DROP,
+  };
+}

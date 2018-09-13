@@ -62,3 +62,53 @@ describe('reducer: DRAW_CELL', () => {
       .toEqual([currentColor, currentColor, currentColor, currentColor]);
   });
 });
+
+describe('reducer: START_TO_DRAG', () => {
+  it('should draw the first cell of the grid with the selected color', () => {
+    const dummyState = reducer(Map(), actions.setInitialState({}));
+    const nextState = reducer(dummyState, actions.startToDrag(0));
+
+    expect(nextState.getIn(['frames', 0, 'grid', 0]))
+      .toEqual(nextState.get('currentColor').get('color'));
+  });
+
+  it('should set dragging state to true', () => {
+    const dummyState = reducer(Map(), actions.setInitialState({}));
+    const nextState = reducer(dummyState, actions.startToDrag(0));
+
+    expect(nextState.get('dragging'))
+      .toEqual(true);
+  });
+});
+
+describe('reducer: MOUSE_OVER', () => {
+  describe('when state is dragging', () => {
+    it('should draw the first cell of the grid with the selected color', () => {
+      const dummyState = reducer(Map(), actions.setInitialState({})).set('dragging', true);
+      const nextState = reducer(dummyState, actions.mouseOver(0));
+
+      expect(nextState.getIn(['frames', 0, 'grid', 0]))
+        .toEqual(nextState.get('currentColor').get('color'));
+    });
+  });
+
+  describe('when state is not dragging', () => {
+    it('should not draw the first cell', () => {
+      const dummyState = reducer(Map(), actions.setInitialState({}));
+      const nextState = reducer(dummyState, actions.mouseOver(0));
+
+      expect(nextState.getIn(['frames', 0, 'grid', 0]))
+        .toEqual('');
+    });
+  });
+
+  describe('reducer: DROP', () => {
+    it('should set dragging state to false', () => {
+      const dummyState = reducer(Map(), actions.setInitialState({})).set('dragging', true);
+      const nextState = reducer(dummyState, actions.drop());
+
+      expect(nextState.get('dragging'))
+        .toEqual(false);
+    });
+  });
+});

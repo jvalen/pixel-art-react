@@ -22,3 +22,6 @@ export const DUPLICATE_FRAME = 'DUPLICATE_FRAME';
 export const SET_DURATION = 'SET_DURATION';
 export const CHANGE_FRAME_INTERVAL = 'CHANGE_FRAME_INTERVAL';
 export const NEW_PROJECT = 'NEW_PROJECT';
+export const START_TO_DRAG = 'START_TO_DRAG';
+export const MOUSE_OVER = 'MOUSE_OVER';
+export const DROP = 'DROP';

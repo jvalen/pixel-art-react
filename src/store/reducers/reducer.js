@@ -287,6 +287,22 @@ function changeFrameInterval(state, frameIndex, interval) {
   });
 }
 
+function continueDragging(state, id) {
+  return state.get('dragging') ? drawCell(state, id) : state;
+}
+
+function startToDrag(state, id) {
+  return drawCell(state, id).merge({
+    dragging: true
+  });
+}
+
+function drop(state) {
+  return state.merge({
+    dragging: false
+  });
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
@@ -343,6 +359,12 @@ export default function (state = Map(), action) {
       return changeFrameInterval(state, action.frameIndex, action.interval);
     case types.NEW_PROJECT:
       return setInitialState(state, action.options);
+    case types.START_TO_DRAG:
+      return startToDrag(state, action.id);
+    case types.MOUSE_OVER:
+      return continueDragging(state, action.id);
+    case types.DROP:
+      return drop(state);
     default:
   }
   return state;
