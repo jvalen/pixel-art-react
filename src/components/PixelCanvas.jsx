@@ -25,6 +25,7 @@ const PixelCanvas = (props) => {
       cells={cells}
       onCellEvent={onCellEvent}
       extraClass={gridExtraClass}
+      drawHandlersFactory={props.drawHandlersFactory}
     />
   );
 };

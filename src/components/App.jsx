@@ -19,6 +19,7 @@ import SimpleNotificationContainer from './SimpleNotification';
 import SimpleSpinnerContainer from './SimpleSpinner';
 import UndoRedoContainer from './UndoRedo';
 import initialSetup from '../utils/startup';
+import drawHandlersProvider from '../utils/drawHandlersProvider';
 
 export default class App extends React.Component {
   constructor() {
@@ -29,6 +30,7 @@ export default class App extends React.Component {
       helpOn: false,
       showCookiesBanner: true
     };
+    Object.assign(this, drawHandlersProvider(this));
   }
 
   componentDidMount() {
@@ -60,7 +62,12 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="app__main">
+      <div
+        className="app__main"
+        onMouseUp={this.onMouseUp}
+        onTouchEnd={this.onMouseUp}
+        onTouchCancel={this.onMouseUp}
+      >
         <SimpleSpinnerContainer />
         <SimpleNotificationContainer
           fadeInTime={1000}
@@ -223,7 +230,7 @@ export default class App extends React.Component {
             </div>
           </div>
           <div className="center col-2-4">
-            <PixelCanvasContainer />
+            <PixelCanvasContainer drawHandlersFactory={this.drawHandlersFactory} />
           </div>
           <div className="right col-1-4">
             <div className="app__right-side">
