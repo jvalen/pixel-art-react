@@ -10,9 +10,11 @@ export default class PixelCell extends React.Component {
   }
   render() {
     const {
-      cell: { color, width },
-      id, onMouseDown, onMouseUp, onMouseOver, onTouchMove
+      cell: { color, width }, id, drawHandlers
     } = this.props;
+    const {
+      onMouseDown, onMouseOver, onTouchMove
+    } = drawHandlers;
     const styles = {
       width: `${width}%`,
       paddingBottom: `${width}%`,
@@ -22,12 +24,9 @@ export default class PixelCell extends React.Component {
     return (
       <div
         onMouseDown={ev => onMouseDown(id, ev)}
-        onMouseUp={ev => onMouseUp(id, ev)}
         onMouseOver={ev => onMouseOver(id, ev)}
         onFocus={ev => onMouseOver(id, ev)}
         onTouchStart={ev => onMouseDown(id, ev)}
-        onTouchEnd={ev => onMouseUp(id, ev)}
-        onTouchCancel={ev => onMouseUp(id, ev)}
         onTouchMove={ev => onTouchMove(id, ev)}
         style={styles}
       />
