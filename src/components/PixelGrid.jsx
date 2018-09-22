@@ -2,11 +2,11 @@ import React from 'react';
 import PixelCell from './PixelCell';
 
 const PixelGrid = ({
-  cells, drawHandlers, classes, onTouchMove
+  cells, drawHandlers, classes
 }) => (
   <div
     className={classes}
-    onTouchMove={onTouchMove}
+    onTouchMove={drawHandlers.onTouchMove}
   >
     {cells.map(cell => (
       <PixelCell

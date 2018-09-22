@@ -16,6 +16,13 @@ export function changeDimensions(gridProperty, behaviour) {
   };
 }
 
+export function updateGridBoundaries(gridElement) {
+  return {
+    type: types.UPDATE_GRID_BOUNDARIES,
+    gridElement
+  };
+}
+
 export function setColorSelected(newColorSelected, paletteColorPosition) {
   return {
     type: types.SET_COLOR_SELECTED,
