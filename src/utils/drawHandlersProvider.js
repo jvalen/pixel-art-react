@@ -1,6 +1,5 @@
 const drawHandlersProvider = component => ({
-  onMouseUp(ev) {
-    ev.preventDefault();
+  onMouseUp() {
     component.setState({
       dragging: false
     });
