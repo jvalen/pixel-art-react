@@ -12,7 +12,6 @@ export default class GridWrapper extends React.Component {
       <PixelGrid
         cells={props.cells}
         drawHandlers={props.drawHandlers}
-        onTouchMove={props.onTouchMove}
         classes={props.classes}
       />
     );

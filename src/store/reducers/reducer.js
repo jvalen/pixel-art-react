@@ -287,6 +287,15 @@ function changeFrameInterval(state, frameIndex, interval) {
   });
 }
 
+function updateGridBoundaries(state, action) {
+  const {
+    x, y, width, height
+  } = action.gridElement.getBoundingClientRect();
+  return state.set('gridBoundaries', {
+    x, y, width, height
+  });
+}
+
 export default function (state = Map(), action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
@@ -343,6 +352,8 @@ export default function (state = Map(), action) {
       return changeFrameInterval(state, action.frameIndex, action.interval);
     case types.NEW_PROJECT:
       return setInitialState(state, action.options);
+    case types.UPDATE_GRID_BOUNDARIES:
+      return updateGridBoundaries(state, action);
     default:
   }
   return state;
