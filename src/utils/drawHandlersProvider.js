@@ -16,8 +16,7 @@ const fromEventToId = (ev, props) => {
 };
 
 const drawHandlersProvider = rootComponent => ({
-  onMouseUp(ev) {
-    ev.preventDefault();
+  onMouseUp() {
     rootComponent.setState({
       dragging: false
     });
@@ -44,6 +43,5 @@ const drawHandlersProvider = rootComponent => ({
     };
   }
 });
-
 
 export default drawHandlersProvider;
