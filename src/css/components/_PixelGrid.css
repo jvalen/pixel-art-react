@@ -4,6 +4,7 @@
   min-height: 1px;
   margin: 0 auto;
   width: 90%;
+  touch-action: none;
 
   div {
     float: left;
