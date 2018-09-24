@@ -33,13 +33,16 @@ const SaveDrawing = (props) => {
   );
 };
 
-const mapStateToProps = state => ({
-  frames: state.present.get('frames'),
-  columns: state.present.get('columns'),
-  rows: state.present.get('rows'),
-  cellSize: state.present.get('cellSize'),
-  paletteGridData: state.present.get('paletteGridData')
-});
+const mapStateToProps = (state) => {
+  const frames = state.present.get('frames');
+  return {
+    frames: frames.get('list'),
+    columns: frames.get('columns'),
+    rows: frames.get('rows'),
+    cellSize: state.present.get('cellSize'),
+    paletteGridData: state.present.getIn(['palette', 'grid'])
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)

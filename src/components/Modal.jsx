@@ -227,14 +227,14 @@ class Modal extends React.Component {
 
 const mapStateToProps = (state) => {
   const frames = state.present.get('frames');
-  const activeFrameIndex = state.present.get('activeFrameIndex');
+  const activeFrameIndex = frames.get('activeIndex');
   return {
-    frames,
+    frames: frames.get('list'),
     activeFrameIndex,
-    activeFrame: frames.get(activeFrameIndex),
-    paletteGridData: state.present.get('paletteGridData'),
-    columns: state.present.get('columns'),
-    rows: state.present.get('rows'),
+    activeFrame: frames.getIn(['list', activeFrameIndex]),
+    paletteGridData: state.present.getIn(['palette', 'grid']),
+    columns: frames.get('columns'),
+    rows: frames.get('rows'),
     cellSize: state.present.get('cellSize'),
     duration: state.present.get('duration')
   };

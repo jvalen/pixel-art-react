@@ -14,9 +14,9 @@ describe('actions', () => {
     const expectedAction = {
       type: types.CHANGE_DIMENSIONS,
       gridProperty: 'columns',
-      behaviour: 'add'
+      increment: 1
     };
-    expect(actions.changeDimensions('columns', 'add')).toEqual(expectedAction);
+    expect(actions.changeDimensions('columns', 1)).toEqual(expectedAction);
   });
 
   it('should create an action to set the color selected', () => {
@@ -101,12 +101,9 @@ describe('actions', () => {
 
   it('should create an action to set the reset the grid', () => {
     const expectedAction = {
-      type: types.SET_RESET_GRID,
-      columns: 5,
-      rows: 5,
-      activeFrameIndex: 0
+      type: types.SET_RESET_GRID
     };
-    expect(actions.resetGrid(5, 5, 0)).toEqual(expectedAction);
+    expect(actions.resetGrid()).toEqual(expectedAction);
   });
 
   it('should create an action to show the spinner', () => {

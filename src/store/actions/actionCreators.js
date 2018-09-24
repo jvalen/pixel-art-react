@@ -8,11 +8,11 @@ export function setInitialState(options) {
   };
 }
 
-export function changeDimensions(gridProperty, behaviour) {
+export function changeDimensions(gridProperty, increment) {
   return {
     type: types.CHANGE_DIMENSIONS,
     gridProperty,
-    behaviour
+    increment
   };
 }
 
@@ -93,12 +93,9 @@ export function setCellSize(cellSize) {
   };
 }
 
-export function resetGrid(columns, rows, activeFrameIndex) {
+export function resetGrid() {
   return {
-    type: types.SET_RESET_GRID,
-    columns,
-    rows,
-    activeFrameIndex
+    type: types.SET_RESET_GRID
   };
 }
 
