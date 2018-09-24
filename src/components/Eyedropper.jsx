@@ -17,7 +17,7 @@ const Eyedropper = (props) => {
 };
 
 const mapStateToProps = state => ({
-  eyedropperOn: state.present.get('eyedropperOn'),
+  eyedropperOn: state.present.getIn(['drawingTools', 'eyedropperOn'])
 });
 
 const mapDispatchToProps = dispatch => ({

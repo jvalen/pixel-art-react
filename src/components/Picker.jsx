@@ -13,14 +13,14 @@ const Picker = ({ type, value, action }) => (
         <div className="picker__value">{value}</div>
         <div className="picker__buttons">
           <button
-            onClick={() => { action(type, 'add'); }}
+            onClick={() => { action(type, 1); }}
             className="button-add"
             id={`picker__add-${type}`}
           >
             +
           </button>
           <button
-            onClick={() => { action(type, 'remove'); }}
+            onClick={() => { action(type, -1); }}
             className="button-remove"
             id={`picker__remove-${type}`}
           >

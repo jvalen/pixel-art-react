@@ -17,7 +17,7 @@ const Bucket = (props) => {
 };
 
 const mapStateToProps = state => ({
-  bucketOn: state.present.get('bucketOn')
+  bucketOn: state.present.getIn(['drawingTools', 'bucketOn'])
 });
 
 const mapDispatchToProps = dispatch => ({

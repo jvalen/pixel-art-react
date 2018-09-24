@@ -19,15 +19,15 @@ class FramesHandler extends React.Component {
   }
 
   getFrames() {
-    return this.props.frames.map((frameData, index) => (
+    return this.props.list.map((frameData, index) => (
       <Frame
         key={frameData.get('key')}
         data-id={index}
         frame={frameData}
         columns={this.props.columns}
         rows={this.props.rows}
-        active={this.props.activeFrameIndex === index}
-        lastFrame={this.props.frames.size - 1 === index}
+        active={this.props.activeIndex === index}
+        lastFrame={this.props.list.size - 1 === index}
         actions={{
           changeActiveFrame: this.props.actions.changeActiveFrame,
           deleteFrame: this.props.actions.deleteFrame,
@@ -70,12 +70,7 @@ class FramesHandler extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  frames: state.present.get('frames'),
-  columns: state.present.get('columns'),
-  rows: state.present.get('rows'),
-  activeFrameIndex: state.present.get('activeFrameIndex')
-});
+const mapStateToProps = state => state.present.get('frames').toObject();
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
