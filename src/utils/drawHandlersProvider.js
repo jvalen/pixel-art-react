@@ -1,3 +1,8 @@
+const fromPositionToId = (posX, posY, grid, columns) => {
+  const id = posX + (columns * posY);
+  return id < grid.size && posX >= 0 && posX < columns && posY >= 0 ? id : null;
+};
+
 const fromEventToId = (ev, props) => {
   const [{
     radiusX, radiusY, clientX, clientY
@@ -11,8 +16,7 @@ const fromEventToId = (ev, props) => {
   } = props;
   const posX = Math.round(((clientX - x - radiusX) * columns) / width);
   const posY = Math.round(((clientY - y - radiusY) * columns) / height);
-  const id = posX < 0 || posY < 0 ? null : posX + (columns * posY);
-  return id !== null && id < activeFrame.get('grid').size ? id : null;
+  return fromPositionToId(posX, posY, activeFrame.get('grid'), columns);
 };
 
 const drawHandlersProvider = rootComponent => ({
