@@ -78,22 +78,23 @@ export function prepare(palette) {
   return palette;
 }
 
-export function setSelectedColor(palette, color) {
-  let newColor = color;
-  const selectedColor = newColor.get('color');
+export function selectColor(palette, color) {
+  return palette.set('currentColor', color);
+}
+
+export function eyedropColor(palette, selectedColor) {
+  let currentColor = Map({ color: selectedColor });
   let grid = palette.get('grid');
 
   if (!isColorInPalette(grid, selectedColor)) {
-    // If there is no newColorSelected in the palette it will create one
     grid = addColorToLastGridCell(grid, selectedColor);
-    newColor = newColor.set('position', grid.size - 1);
-  } else if (newColor.get('position') === null) {
-    // Eyedropper called this function, the color position is unknown
-    newColor = newColor.set('position', getPositionFirstMatchInPalette(grid, selectedColor));
+    currentColor = currentColor.set('position', grid.size - 1);
+  } else {
+    currentColor = currentColor.set('position', getPositionFirstMatchInPalette(grid, selectedColor));
   }
 
   return palette.merge({
-    currentColor: newColor,
+    currentColor,
     grid
   });
 }

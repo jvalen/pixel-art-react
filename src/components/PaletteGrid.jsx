@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../store/actions/actionCreators';
+import { selectPaletteColor } from '../store/actions/actionCreators';
 import PaletteColor from './PaletteColor';
 
 const PaletteGrid = (props) => {
@@ -16,7 +16,7 @@ const PaletteGrid = (props) => {
         width={width}
         color={color.get('color')}
         selected={currentColor.get('position') === i}
-        actions={{ setColorSelected: props.actions.setColorSelected }}
+        selectPaletteColor={props.selectPaletteColor}
       />
     ));
   };
@@ -30,9 +30,9 @@ const PaletteGrid = (props) => {
 
 const mapStateToProps = state => state.present.get('palette').toObject();
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+  selectPaletteColor
+}, dispatch);
 
 const PaletteGridContainer = connect(
   mapStateToProps,

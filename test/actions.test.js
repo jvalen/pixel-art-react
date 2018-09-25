@@ -19,13 +19,13 @@ describe('actions', () => {
     expect(actions.changeDimensions('columns', 1)).toEqual(expectedAction);
   });
 
-  it('should create an action to set the color selected', () => {
-    const expectedAction = {
-      type: types.SET_COLOR_SELECTED,
-      newColorSelected: '#FFFFFF',
-      paletteColorPosition: 0
-    };
-    expect(actions.setColorSelected('#FFFFFF', 0)).toEqual(expectedAction);
+  it('should create an action to select the palette color', () => {
+    const type = types.SELECT_PALETTE_COLOR;
+    const color = '#FFFFFF';
+    const position = 0;
+    expect(actions.selectPaletteColor(color, position)).toEqual({
+      type, color, position
+    });
   });
 
   it('should create an action to set the custom color', () => {
@@ -37,11 +37,10 @@ describe('actions', () => {
   });
 
   it('should create an action to draw a cell', () => {
-    const expectedAction = {
-      type: types.DRAW_CELL,
-      id: 0
-    };
-    expect(actions.drawCell(0)).toEqual(expectedAction);
+    const type = types.DRAW_CELL;
+    const id = 0;
+    const color = '#f3f3f3';
+    expect(actions.drawCell({ id, color })).toEqual({ type, id, color });
   });
 
   it('should create an action to set a drawing', () => {
@@ -64,31 +63,27 @@ describe('actions', () => {
   });
 
   it('should create an action to set the eraser tool', () => {
-    const expectedAction = {
-      type: types.SET_ERASER
-    };
-    expect(actions.setEraser()).toEqual(expectedAction);
+    const type = types.SWITCH_TOOL;
+    const tool = 'ERASER';
+    expect(actions.switchTool(tool)).toEqual({ type, tool });
   });
 
   it('should create an action to set the bucket tool', () => {
-    const expectedAction = {
-      type: types.SET_BUCKET
-    };
-    expect(actions.setBucket()).toEqual(expectedAction);
+    const type = types.SWITCH_TOOL;
+    const tool = 'BUCKET';
+    expect(actions.switchTool(tool)).toEqual({ type, tool });
   });
 
   it('should create an action to set the eye-dropper tool', () => {
-    const expectedAction = {
-      type: types.SET_EYEDROPPER
-    };
-    expect(actions.setEyedropper()).toEqual(expectedAction);
+    const type = types.SWITCH_TOOL;
+    const tool = 'EYEDROPPER';
+    expect(actions.switchTool(tool)).toEqual({ type, tool });
   });
 
   it('should create an action to set the color picker tool', () => {
-    const expectedAction = {
-      type: types.SET_COLOR_PICKER
-    };
-    expect(actions.setColorPicker()).toEqual(expectedAction);
+    const type = types.SWITCH_TOOL;
+    const tool = 'COLOR_PICKER';
+    expect(actions.switchTool(tool)).toEqual({ type, tool });
   });
 
   it('should create an action to set the cell size', () => {

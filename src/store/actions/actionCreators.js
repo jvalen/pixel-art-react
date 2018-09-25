@@ -23,11 +23,11 @@ export function updateGridBoundaries(gridElement) {
   };
 }
 
-export function setColorSelected(newColorSelected, paletteColorPosition) {
+export function selectPaletteColor(color, position) {
   return {
-    type: types.SET_COLOR_SELECTED,
-    newColorSelected,
-    paletteColorPosition
+    type: types.SELECT_PALETTE_COLOR,
+    color,
+    position
   };
 }
 
@@ -38,10 +38,11 @@ export function setCustomColor(customColor) {
   };
 }
 
-export function drawCell(id) {
+export function drawCell({ id, color }) {
   return {
     type: types.DRAW_CELL,
-    id
+    id,
+    color
   };
 }
 
@@ -62,27 +63,10 @@ export function endDrag() {
   };
 }
 
-export function setEraser() {
+export function switchTool(tool) {
   return {
-    type: types.SET_ERASER
-  };
-}
-
-export function setBucket() {
-  return {
-    type: types.SET_BUCKET
-  };
-}
-
-export function setEyedropper() {
-  return {
-    type: types.SET_EYEDROPPER
-  };
-}
-
-export function setColorPicker() {
-  return {
-    type: types.SET_COLOR_PICKER
+    type: types.SWITCH_TOOL,
+    tool
   };
 }
 

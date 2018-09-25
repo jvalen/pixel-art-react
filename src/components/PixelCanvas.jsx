@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { drawCell, updateGridBoundaries } from '../store/actions/actionCreators';
 import GridWrapper from './GridWrapper';
 import throttle from '../utils/throttle';
+import { ERASER, EYEDROPPER } from '../store/reducers/drawingToolReducer';
 
 const gridContainerClass = 'grid-container';
 
@@ -25,7 +26,7 @@ class PixelCanvas extends React.Component {
 
   render() {
     const { props } = this;
-    const cells = props.activeFrame.get('grid').map((color, i) => ({
+    const cells = props.grid.map((color, i) => ({
       id: i,
       width: 100 / props.columns,
       color
@@ -52,16 +53,16 @@ const mapStateToProps = (state) => {
   const frames = state.present.get('frames');
   const activeFrameIndex = frames.get('activeIndex');
   return {
-    activeFrame: frames.getIn(['list', activeFrameIndex]),
+    grid: frames.getIn(['list', activeFrameIndex, 'grid']),
     columns: frames.get('columns'),
-    eyedropperOn: state.present.getIn(['drawingTools', 'eyedropperOn']),
-    eraserOn: state.present.getIn(['drawingTools', 'eraserOn']),
+    eyedropperOn: state.present.get('drawingTool') === EYEDROPPER,
+    eraserOn: state.present.get('drawingTool') === ERASER,
     gridBoundaries: state.present.get('gridBoundaries')
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  drawCell: id => dispatch(drawCell(id)),
+  drawCell: cellProps => dispatch(drawCell(cellProps)),
   updateGridBoundaries: throttle(() => {
     const gridElement = document.getElementsByClassName(gridContainerClass)[0];
     dispatch(updateGridBoundaries(gridElement));

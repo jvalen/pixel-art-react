@@ -2,12 +2,10 @@ import React from 'react';
 
 const PaletteColor = (props) => {
   const {
-    positionInPalette, width, color, selected, actions
+    positionInPalette, width, color, selected, selectPaletteColor
   } = props;
 
-  const handleClick = () => {
-    actions.setColorSelected(color, positionInPalette);
-  };
+  const handleClick = () => selectPaletteColor(color, positionInPalette);
 
   const cellColor = color;
   const styles = {
@@ -23,7 +21,7 @@ const PaletteColor = (props) => {
         ${selected ? 'selected' : ''}`
       }
       style={styles}
-      onClick={() => { handleClick(); }}
+      onClick={handleClick}
     />
   );
 };
