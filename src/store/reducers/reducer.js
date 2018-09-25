@@ -27,13 +27,11 @@ function setInitialState(state, action) {
   const cellSize = 10;
   const frames = initFrames(action.options);
   const palette = createPalette();
-  const drawingTool = drawingToolReducer(state.get('drawingTool'), action);
 
   const initialState = {
     frames,
     palette,
     cellSize,
-    drawingTool,
     loading: false,
     notifications: List(),
     duration: 1
@@ -81,18 +79,13 @@ function selectPaletteColor(state, action) {
     color: getCellColor(action),
     position: action.position
   });
-
-  return state.merge({
-    drawingTool: drawingToolReducer(state.get('drawingTool'), action),
-    palette: selectColorFromPalette(state.get('palette'), newColor)
-  });
+  const palette = selectColorFromPalette(state.get('palette'), newColor);
+  return state.set('palette', palette);
 }
 
 function eyedropColor(state, action) {
-  return state.merge({
-    drawingTool: drawingToolReducer(state.get('drawingTool'), action),
-    palette: eyedropColorFromPalette(state.get('palette'), getCellColor(action))
-  });
+  const palette = eyedropColorFromPalette(state.get('palette'), getCellColor(action));
+  return state.set('palette', palette);
 }
 
 function setCustomColor(state, customColor) {
@@ -132,13 +125,12 @@ function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
 }
 
 function switchTool(state, action) {
-  let newState = state;
   if (action.tool === 'ERASER') {
-    newState = newState.set('palette', state.get('palette').set('currentColor', Map({
+    return state.set('palette', state.get('palette').set('currentColor', Map({
       color: null, position: -1
     })));
   }
-  return newState.update('drawingTool', drawingTool => drawingToolReducer(drawingTool, action));
+  return state;
 }
 
 function setCellSize(state, cellSize) {
@@ -203,7 +195,7 @@ function updateGridBoundaries(state, action) {
   });
 }
 
-export default function (state = Map(), action) {
+function partialReducer(state, action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
       return setInitialState(state, action);
@@ -254,4 +246,10 @@ export default function (state = Map(), action) {
     default:
   }
   return state;
+}
+
+export default function (state = Map(), action) {
+  return partialReducer(state, action).merge({
+    drawingTool: drawingToolReducer(state.get('drawingTool'), action)
+  });
 }
