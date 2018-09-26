@@ -15,10 +15,11 @@ const fromEventToId = (ev, props) => {
   return id !== null && id < grid.size ? id : null;
 };
 
-const getCellActionProps = ({ grid, drawingTool }, id) => ({
+const getCellActionProps = ({ grid, drawingTool, paletteColor }, id) => ({
   id,
   color: grid.get(id),
-  drawingTool
+  drawingTool,
+  paletteColor
 });
 
 const drawHandlersProvider = rootComponent => ({
