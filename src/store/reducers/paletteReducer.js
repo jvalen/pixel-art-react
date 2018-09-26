@@ -4,7 +4,7 @@ import { GRID_INITIAL_COLOR } from './pixelGrid';
 import { PENCIL, BUCKET, EYEDROPPER } from './drawingToolStates';
 
 const getPositionFirstMatchInPalette = (grid, color) =>
-  grid.findIndex(currentColor => currentColor.get('color') === color);
+  grid.findIndex(gridColor => gridColor.get('color') === color);
 
 const isColorInPalette = (grid, color) =>
   getPositionFirstMatchInPalette(grid, color) !== -1;
