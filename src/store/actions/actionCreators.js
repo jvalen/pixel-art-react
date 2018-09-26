@@ -38,12 +38,10 @@ export function setCustomColor(customColor) {
   };
 }
 
-export function drawCell({ id, color }) {
-  return {
-    type: types.DRAW_CELL,
-    id,
-    color
-  };
+export function drawCell(actionProps) {
+  return Object.assign({
+    type: types.DRAW_CELL
+  }, actionProps);
 }
 
 export function setDrawing(frames, paletteGridData, cellSize, columns, rows) {

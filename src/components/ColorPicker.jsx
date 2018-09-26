@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Picker from 'react-color';
 import { switchTool, setCustomColor } from '../store/actions/actionCreators';
-import { COLOR_PICKER } from '../store/reducers/drawingToolReducer';
+import { COLOR_PICKER } from '../store/reducers/drawingToolStates';
 
 class ColorPicker extends React.Component {
   constructor(props) {

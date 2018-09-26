@@ -1,7 +1,8 @@
-import reducer, {
+import {
   PENCIL, BUCKET, ERASER,
   EYEDROPPER, COLOR_PICKER
-} from '../src/store/reducers/drawingToolReducer';
+} from '../src/store/reducers/drawingToolStates';
+import reducer from '../src/store/reducers/drawingToolReducer';
 import * as actions from '../src/store/actions/actionCreators';
 
 const otherAction = () => ({});
@@ -25,14 +26,14 @@ describe('drawing tool reducer: NEW_PROJECT', () => {
 });
 
 describe('drawing tool reducer: SELECT_PALETTE_COLOR', () => {
-  it('should set PENCIL state if state is EYEDROPPER', () => {
+  it('should set PENCIL state when state is EYEDROPPER', () => {
     const state = EYEDROPPER;
     const nextState = reducer(state, actions.selectPaletteColor());
 
     expect(nextState).toEqual(PENCIL);
   });
 
-  it('should set PENCIL state if state is ERASER', () => {
+  it('should set PENCIL state when state is ERASER', () => {
     const state = ERASER;
     const nextState = reducer(state, actions.selectPaletteColor());
 

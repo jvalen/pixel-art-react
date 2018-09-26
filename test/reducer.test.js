@@ -1,6 +1,7 @@
 import { Map } from 'immutable';
 import reducer from '../src/store/reducers/reducer';
 import * as actions from '../src/store/actions/actionCreators';
+import { BUCKET, EYEDROPPER } from '../src/store/reducers/drawingToolStates';
 
 const applyActions = (actionList, state = Map()) => actionList.reduce(reducer, state);
 
@@ -59,7 +60,7 @@ describe('reducer: DRAW_CELL', () => {
     const dummyState = reducer(Map(), actions.setInitialState({ columns: 2, rows: 2 }));
     const currentColor = dummyState.getIn(['palette', 'currentColor', 'color']);
     const nextState = applyActions([
-      actions.switchTool('BUCKET'),
+      actions.switchTool(BUCKET),
       actions.drawCell({ id })
     ], dummyState);
 
@@ -70,10 +71,11 @@ describe('reducer: DRAW_CELL', () => {
   it('should set the new color in the last palette spot if eyedropper tool is active', () => {
     const id = 1;
     const color = '#A1A1A1';
+    const drawingTool = EYEDROPPER;
     const nextState = applyActions([
       actions.setInitialState({}),
-      actions.switchTool('EYEDROPPER'),
-      actions.drawCell({ id, color })
+      actions.switchTool(drawingTool),
+      actions.drawCell({ id, color, drawingTool })
     ]);
     const paletteColorCount = nextState.getIn(['palette', 'grid']).size;
 

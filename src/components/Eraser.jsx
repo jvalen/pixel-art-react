@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { switchTool } from '../store/actions/actionCreators';
-import { ERASER } from '../store/reducers/drawingToolReducer';
+import { ERASER } from '../store/reducers/drawingToolStates';
 
 const Eraser = props => (
   <button

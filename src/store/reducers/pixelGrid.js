@@ -90,7 +90,7 @@ export function resize(grid, gridProperty, increment, dimensions) {
 }
 
 export function applyBucket(grid, {
-  id, sourceColor, currentColor, columns, rows
+  id, cellColor, paletteColor, columns, rows
 }) {
   const queue = [id];
   let currentId;
@@ -101,8 +101,8 @@ export function applyBucket(grid, {
 
   while (queue.length > 0) {
     currentId = queue.shift();
-    newGrid = drawPixel(newGrid, currentColor, currentId);
-    adjacents = getSameColorAdjacentCells(newGrid, columns, rows, currentId, sourceColor);
+    newGrid = drawPixel(newGrid, paletteColor, currentId);
+    adjacents = getSameColorAdjacentCells(newGrid, columns, rows, currentId, cellColor);
 
     for (let i = 0; i < adjacents.length; i++) {
       auxAdjacentId = adjacents[i];
@@ -110,7 +110,7 @@ export function applyBucket(grid, {
       // Avoid introduce repeated or painted already cell into the queue
       if (
         (queue.indexOf(auxAdjacentId) === -1) &&
-        (auxAdjacentColor !== currentColor)
+        (auxAdjacentColor !== paletteColor)
       ) {
         queue.push(auxAdjacentId);
       }

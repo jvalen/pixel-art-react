@@ -1,11 +1,5 @@
 import { List, Map, fromJS } from 'immutable';
-import {
-  setCustomColor as setCustomColorToPalette,
-  selectColor as selectColorFromPalette,
-  eyedropColor as eyedropColorFromPalette,
-  create as createPalette,
-  prepare as preparePalette
-} from './palette';
+import paletteReducer from './paletteReducer';
 import {
   init as initFrames,
   reset as resetFrame,
@@ -26,7 +20,7 @@ import * as types from '../actions/actionTypes';
 function setInitialState(state, action) {
   const cellSize = 10;
   const frames = initFrames(action.options);
-  const palette = createPalette();
+  const palette = paletteReducer(state, action);
 
   const initialState = {
     frames,
@@ -55,41 +49,39 @@ function drawPixel(state, color, id) {
   return state.set('frames', newFrames);
 }
 
-export function applyBucket(state, id, sourceColor) {
+function getCellColor({ color }) {
+  return color || GRID_INITIAL_COLOR;
+}
+
+export function applyBucket(state, action) {
+  const { id } = action;
+  const cellColor = getCellColor(action);
   const {
     columns, rows, list, activeIndex
   } = state.get('frames').toObject();
   const activeGrid = list.getIn([activeIndex, 'grid']);
-  const newState = state.update('palette', preparePalette);
-  const currentColor = newState.getIn(['palette', 'currentColor', 'color']);
+  const palette = state.get('palette');
+  const newState = state.set('palette', paletteReducer(palette, action));
+  const paletteColor = newState.getIn(['palette', 'currentColor', 'color']);
 
   const newGrid = applyBucketToGrid(activeGrid, {
-    id, currentColor, sourceColor, columns, rows
+    id, paletteColor, cellColor, columns, rows
   });
 
   return newState.setIn(['frames', 'list', activeIndex, 'grid'], newGrid);
 }
 
-function getCellColor({ color }) {
-  return color || GRID_INITIAL_COLOR;
-}
-
 function selectPaletteColor(state, action) {
-  const newColor = Map({
-    color: getCellColor(action),
-    position: action.position
-  });
-  const palette = selectColorFromPalette(state.get('palette'), newColor);
-  return state.set('palette', palette);
+  return state.set('palette', paletteReducer(state.get('palette'), action));
 }
 
 function eyedropColor(state, action) {
-  const palette = eyedropColorFromPalette(state.get('palette'), getCellColor(action));
+  const palette = paletteReducer(state.get('palette'), action);
   return state.set('palette', palette);
 }
 
-function setCustomColor(state, customColor) {
-  return state.set('palette', setCustomColorToPalette(state.get('palette'), customColor));
+function setCustomColor(state, action) {
+  return state.set('palette', paletteReducer(state.get('palette'), action));
 }
 
 function drawCell(state, action) {
@@ -99,19 +91,23 @@ function drawCell(state, action) {
   let color = '';
 
   if (drawingTool === 'EYEDROPPER') {
-    return eyedropColor(newState, action);
+    return eyedropColor(state, action);
   } else if (drawingTool === 'BUCKET') {
-    return applyBucket(newState, id, getCellColor(action));
+    return applyBucket(newState, action);
   }
   // regular cell paint
   if (drawingTool !== 'ERASER') {
-    newState = newState.update('palette', preparePalette);
+    const palette = state.get('palette');
+    newState = newState.set('palette', paletteReducer(palette, action));
     color = newState.getIn(['palette', 'currentColor', 'color']);
   }
   return drawPixel(newState, color, id);
 }
 
-function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
+function setDrawing(state, action) {
+  const {
+    frames, cellSize, columns, rows
+  } = action;
   return state.merge({
     frames: fromJS({
       list: frames,
@@ -119,18 +115,13 @@ function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
       rows,
       activeIndex: 0
     }),
-    palette: state.get('palette').set('grid', fromJS(paletteGridData)),
+    palette: paletteReducer(state.get('palette'), action),
     cellSize
   });
 }
 
 function switchTool(state, action) {
-  if (action.tool === 'ERASER') {
-    return state.set('palette', state.get('palette').set('currentColor', Map({
-      color: null, position: -1
-    })));
-  }
-  return state;
+  return state.set('palette', paletteReducer(state.get('palette'), action));
 }
 
 function setCellSize(state, cellSize) {
@@ -202,19 +193,13 @@ function partialReducer(state, action) {
     case types.CHANGE_DIMENSIONS:
       return changeDimensions(state, action);
     case types.SELECT_PALETTE_COLOR:
-      return selectPaletteColor(
-        state,
-        action
-      );
+      return selectPaletteColor(state, action);
     case types.SET_CUSTOM_COLOR:
-      return setCustomColor(state, action.customColor);
+      return setCustomColor(state, action);
     case types.DRAW_CELL:
       return drawCell(state, action);
     case types.SET_DRAWING:
-      return setDrawing(
-        state, action.frames, action.paletteGridData,
-        action.cellSize, action.columns, action.rows
-      );
+      return setDrawing(state, action);
     case types.SWITCH_TOOL:
       return switchTool(state, action);
     case types.SET_CELL_SIZE:

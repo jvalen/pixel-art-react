@@ -15,9 +15,10 @@ const fromEventToId = (ev, props) => {
   return id !== null && id < grid.size ? id : null;
 };
 
-const getCellProps = (props, id) => ({
+const getCellActionProps = ({ grid, drawingTool }, id) => ({
   id,
-  color: props.grid.get(id)
+  color: grid.get(id),
+  drawingTool
 });
 
 const drawHandlersProvider = rootComponent => ({
@@ -30,25 +31,25 @@ const drawHandlersProvider = rootComponent => ({
     return {
       onMouseDown(id, ev) {
         const { props } = gridComponent;
-        const cellProps = getCellProps(props, id);
+        const actionProps = getCellActionProps(props, id);
         ev.preventDefault();
-        if (!rootComponent.state.dragging) props.drawCell(cellProps);
+        if (!rootComponent.state.dragging) props.drawCell(actionProps);
         rootComponent.setState({
           dragging: true
         });
       },
       onMouseOver(id, ev) {
         const { props } = gridComponent;
-        const cellProps = getCellProps(props, id);
+        const actionProps = getCellActionProps(props, id);
         ev.preventDefault();
-        if (rootComponent.state.dragging) props.drawCell(cellProps);
+        if (rootComponent.state.dragging) props.drawCell(actionProps);
       },
       onTouchMove(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
         const id = fromEventToId(ev, props);
-        const cellProps = getCellProps(props, id);
-        if (id !== null && rootComponent.state.dragging) props.drawCell(cellProps);
+        const actionProps = getCellActionProps(props, id);
+        if (id !== null && rootComponent.state.dragging) props.drawCell(actionProps);
       }
     };
   }
