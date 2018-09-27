@@ -11,6 +11,7 @@ class ColorPicker extends React.Component {
       displayColorPicker: false
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick() {
@@ -46,9 +47,11 @@ class ColorPicker extends React.Component {
       }
     };
     const { props } = this;
-    const isSelected = props.colorPickerOn && this.state.displayColorPicker;
-    const currentColor = props.currentColor.get('color');
-    const initialPickerColor = currentColor || '#ffffff';
+    const {
+      colorPickerOn, paletteColor
+    } = props;
+    const isSelected = colorPickerOn && this.state.displayColorPicker;
+    const initialPickerColor = paletteColor || '#ffffff';
 
     return (
       <div className="color-picker">
@@ -62,13 +65,13 @@ class ColorPicker extends React.Component {
               <div
                 style={styles.cover}
                 is="cover"
-                onClick={() => { this.handleClose(); }}
+                onClick={this.handleClose}
                 role="presentation"
               />
               <Picker
                 color={initialPickerColor}
                 onChangeComplete={props.setCustomColor}
-                onClose={() => { this.handleClose(); }}
+                onClose={this.handleClose}
                 type="sketch"
               />
             </div>
@@ -80,10 +83,13 @@ class ColorPicker extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  colorPickerOn: state.present.get('drawingTool') === COLOR_PICKER,
-  currentColor: state.present.getIn(['palette', 'currentColor'])
-});
+const mapStateToProps = (state) => {
+  const palette = state.present.get('palette');
+  return {
+    colorPickerOn: state.present.get('drawingTool') === COLOR_PICKER,
+    paletteColor: palette.getIn(['grid', palette.get('position'), 'color'])
+  };
+};
 
 const switchColorPickerAction = switchTool(COLOR_PICKER);
 const mapDispatchToProps = dispatch => ({

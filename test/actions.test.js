@@ -21,10 +21,9 @@ describe('actions', () => {
 
   it('should create an action to select the palette color', () => {
     const type = types.SELECT_PALETTE_COLOR;
-    const color = '#FFFFFF';
     const position = 0;
-    expect(actions.selectPaletteColor(color, position)).toEqual({
-      type, color, position
+    expect(actions.selectPaletteColor(position)).toEqual({
+      type, position
     });
   });
 

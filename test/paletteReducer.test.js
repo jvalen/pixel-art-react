@@ -30,10 +30,7 @@ describe('reducer: SET_INITIAL_STATE', () => {
   it('palette grid should be initialized', () => {
     const nextState = reducer(undefined, actions.setInitialState({}));
 
-    expect(nextState.get('currentColor').toJS()).toEqual({
-      color: '#000000',
-      position: 0
-    });
+    expect(nextState.get('position')).toEqual(0);
   });
 });
 
@@ -49,10 +46,7 @@ describe('reducer: NEW_PROJECT', () => {
   it('palette grid should be initialized', () => {
     const nextState = reducer(undefined, actions.newProject());
 
-    expect(nextState.get('currentColor').toJS()).toEqual({
-      color: '#000000',
-      position: 0
-    });
+    expect(nextState.get('position')).toEqual(0);
   });
 });
 
@@ -77,7 +71,7 @@ describe('reducer: DRAW_CELL', () => {
       });
 
       it('should set cell color as selected color', () => {
-        expect(nextState.getIn(['currentColor', 'color'])).toEqual(CELL_COLOR);
+        expect(nextState.get('position')).toEqual(grid.size - 1);
       });
     });
 
@@ -97,10 +91,7 @@ describe('reducer: DRAW_CELL', () => {
       });
 
       it('should set cell color as selected color', () => {
-        expect(nextState.get('currentColor').toJS()).toEqual({
-          color: CELL_COLOR,
-          position: 1
-        });
+        expect(nextState.get('position')).toEqual(1);
       });
     });
   });
@@ -111,7 +102,7 @@ describe('reducer: DRAW_CELL', () => {
         drawingTool = PENCIL;
         state = Map({
           grid,
-          currentColor: Map()
+          position: -1
         });
 
         nextState = reducer(state, actions.drawCell({
@@ -124,8 +115,7 @@ describe('reducer: DRAW_CELL', () => {
       });
 
       it('should set first cell as selected color', () => {
-        const firstGridCell = nextState.getIn(['grid', 0]);
-        expect(nextState.getIn(['currentColor', 'color'])).toEqual(firstGridCell.get('color'));
+        expect(nextState.get('position')).toEqual(0);
       });
     });
 
@@ -134,7 +124,7 @@ describe('reducer: DRAW_CELL', () => {
         drawingTool = PENCIL;
         state = Map({
           grid,
-          currentColor: Map({ color: '#445566' })
+          position: 2
         });
 
         nextState = reducer(state, actions.drawCell({
@@ -152,7 +142,7 @@ describe('reducer: DRAW_CELL', () => {
         drawingTool = BUCKET;
         state = Map({
           grid,
-          currentColor: Map()
+          position: -1
         });
 
         nextState = reducer(state, actions.drawCell({
@@ -165,8 +155,7 @@ describe('reducer: DRAW_CELL', () => {
       });
 
       it('should set first cell as selected color', () => {
-        const firstGridCell = nextState.getIn(['grid', 0]);
-        expect(nextState.getIn(['currentColor', 'color'])).toEqual(firstGridCell.get('color'));
+        expect(nextState.get('position')).toEqual(0);
       });
     });
 
@@ -175,7 +164,7 @@ describe('reducer: DRAW_CELL', () => {
         drawingTool = BUCKET;
         state = Map({
           grid,
-          currentColor: Map({ color: '#445566' })
+          position: 1
         });
 
         nextState = reducer(state, actions.drawCell({
@@ -189,15 +178,20 @@ describe('reducer: DRAW_CELL', () => {
 });
 
 describe('reducer: SELECT_PALETTE_COLOR', () => {
-  it('should set the new color as the current color selected', () => {
-    const selectedColor = '#FFFFFF';
-    const position = 2;
-    const nextState = reducer(Map(), actions.selectPaletteColor(selectedColor, position));
+  const position = 2;
+  let state;
+  let nextState;
+  beforeEach(() => {
+    state = Map({ grid });
+    nextState = reducer(state, actions.selectPaletteColor(position));
+  });
 
-    expect(nextState.get('currentColor').toJS()).toEqual({
-      color: selectedColor,
-      position
-    });
+  it('should keep the grid with the same values', () => {
+    expect(nextState.get('grid').toJS()).toEqual(state.get('grid').toJS());
+  });
+
+  it('should update the position of active cell', () => {
+    expect(nextState.get('position')).toEqual(position);
   });
 });
 
@@ -209,7 +203,7 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
     beforeEach(() => {
       state = Map({
         grid,
-        currentColor: Map()
+        position: -1
       });
 
       nextState = reducer(state, actions.setCustomColor(customColor));
@@ -220,20 +214,21 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
     });
 
     it('should set custom color as selected color', () => {
-      expect(nextState.getIn(['currentColor', 'color'])).toEqual(customColor);
+      expect(nextState.get('position')).toEqual(grid.size - 1);
     });
   });
 
   describe('palette color is selected', () => {
     it('should set the custom color in selected palette cell', () => {
+      const position = 1;
       state = Map({
         grid,
-        currentColor: Map({ color: '#AAAAAA', position: 1 })
+        position
       });
 
       nextState = reducer(state, actions.setCustomColor(customColor));
 
-      expect(nextState.getIn(['currentColor', 'color'])).toEqual(customColor);
+      expect(nextState.getIn(['grid', position, 'color'])).toEqual(customColor);
     });
   });
 });

@@ -5,7 +5,7 @@ const PaletteColor = (props) => {
     positionInPalette, width, color, selected, selectPaletteColor
   } = props;
 
-  const handleClick = () => selectPaletteColor(color, positionInPalette);
+  const handleClick = () => selectPaletteColor(positionInPalette);
 
   const cellColor = color;
   const styles = {
