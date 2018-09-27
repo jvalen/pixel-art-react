@@ -1,14 +1,6 @@
 import { List, Map, fromJS } from 'immutable';
 import paletteReducer from './paletteReducer';
-import {
-  init as initFrames,
-  reset as resetFrame,
-  clone as cloneFrame,
-  add as addFrame,
-  remove as removeFrame,
-  changeDimensions as changeFrameDimensions,
-  changeActive
-} from './frames';
+import framesReducer from './framesReducer';
 import {
   GRID_INITIAL_COLOR,
   applyBucket as applyBucketToGrid,
@@ -19,7 +11,7 @@ import * as types from '../actions/actionTypes';
 
 function setInitialState(state, action) {
   const cellSize = 10;
-  const frames = initFrames(action.options);
+  const frames = framesReducer(state, action);
 
   const initialState = {
     frames,
@@ -32,9 +24,9 @@ function setInitialState(state, action) {
   return state.merge(initialState);
 }
 
-function changeDimensions(state, { gridProperty, increment }) {
+function changeDimensions(state, action) {
   return state.merge({
-    frames: changeFrameDimensions(state.get('frames'), gridProperty, increment)
+    frames: framesReducer(state.get('frames'), action)
   });
 }
 
@@ -102,9 +94,9 @@ function setCellSize(state, cellSize) {
   return state.merge({ cellSize });
 }
 
-function resetGrid(state) {
+function resetGrid(state, action) {
   return state.merge({
-    frames: resetFrame(state.get('frames'))
+    frames: framesReducer(state.get('frames'), action)
   });
 }
 
@@ -122,20 +114,23 @@ function sendNotification(state, message) {
   });
 }
 
-function changeActiveFrame(state, frameIndex) {
-  return state.update('frames', frames => changeActive(frames, frameIndex));
+function changeActiveFrame(state, action) {
+  return state.update('frames', frames => framesReducer(frames, action));
 }
 
-function createNewFrame(state) {
-  return state.update('frames', addFrame);
+function createNewFrame(state, action) {
+  const frames = state.get('frames');
+  return state.set('frames', framesReducer(frames, action));
 }
 
-function deleteFrame(state, frameId) {
-  return state.update('frames', frames => removeFrame(frames, frameId));
+function deleteFrame(state, action) {
+  const frames = state.get('frames');
+  return state.set('frames', framesReducer(frames, action));
 }
 
-function duplicateFrame(state, frameId) {
-  return state.update('frames', frames => cloneFrame(frames, frameId));
+function duplicateFrame(state, action) {
+  const frames = state.get('frames');
+  return state.set('frames', framesReducer(frames, action));
 }
 
 function setDuration(state, duration) {
@@ -181,13 +176,13 @@ function partialReducer(state, action) {
     case types.SEND_NOTIFICATION:
       return sendNotification(state, action.message);
     case types.CHANGE_ACTIVE_FRAME:
-      return changeActiveFrame(state, action.frameIndex);
+      return changeActiveFrame(state, action);
     case types.CREATE_NEW_FRAME:
-      return createNewFrame(state);
+      return createNewFrame(state, action);
     case types.DELETE_FRAME:
-      return deleteFrame(state, action.frameId);
+      return deleteFrame(state, action);
     case types.DUPLICATE_FRAME:
-      return duplicateFrame(state, action.frameId);
+      return duplicateFrame(state, action);
     case types.SET_DURATION:
       return setDuration(state, action.duration);
     case types.CHANGE_FRAME_INTERVAL:
