@@ -9,12 +9,10 @@ import {
 import drawingToolReducer from './drawingToolReducer';
 import * as types from '../actions/actionTypes';
 
-function setInitialState(state, action) {
+function setInitialState(state) {
   const cellSize = 10;
-  const frames = framesReducer(state, action);
 
   const initialState = {
-    frames,
     cellSize,
     loading: false,
     notifications: List(),
@@ -22,12 +20,6 @@ function setInitialState(state, action) {
   };
 
   return state.merge(initialState);
-}
-
-function changeDimensions(state, action) {
-  return state.merge({
-    frames: framesReducer(state.get('frames'), action)
-  });
 }
 
 function drawPixel(state, color, id) {
@@ -94,12 +86,6 @@ function setCellSize(state, cellSize) {
   return state.merge({ cellSize });
 }
 
-function resetGrid(state, action) {
-  return state.merge({
-    frames: framesReducer(state.get('frames'), action)
-  });
-}
-
 function showSpinner(state) {
   return state.merge({ loading: true });
 }
@@ -112,25 +98,6 @@ function sendNotification(state, message) {
   return state.merge({
     notifications: message === '' ? List() : List([{ message, id: 0 }])
   });
-}
-
-function changeActiveFrame(state, action) {
-  return state.update('frames', frames => framesReducer(frames, action));
-}
-
-function createNewFrame(state, action) {
-  const frames = state.get('frames');
-  return state.set('frames', framesReducer(frames, action));
-}
-
-function deleteFrame(state, action) {
-  const frames = state.get('frames');
-  return state.set('frames', framesReducer(frames, action));
-}
-
-function duplicateFrame(state, action) {
-  const frames = state.get('frames');
-  return state.set('frames', framesReducer(frames, action));
 }
 
 function setDuration(state, duration) {
@@ -158,37 +125,25 @@ function updateGridBoundaries(state, action) {
 function partialReducer(state, action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
-      return setInitialState(state, action);
-    case types.CHANGE_DIMENSIONS:
-      return changeDimensions(state, action);
+      return setInitialState(state);
     case types.DRAW_CELL:
       return drawCell(state, action);
     case types.SET_DRAWING:
       return setDrawing(state, action);
     case types.SET_CELL_SIZE:
       return setCellSize(state, action.cellSize);
-    case types.SET_RESET_GRID:
-      return resetGrid(state);
     case types.SHOW_SPINNER:
       return showSpinner(state);
     case types.HIDE_SPINNER:
       return hideSpinner(state);
     case types.SEND_NOTIFICATION:
       return sendNotification(state, action.message);
-    case types.CHANGE_ACTIVE_FRAME:
-      return changeActiveFrame(state, action);
-    case types.CREATE_NEW_FRAME:
-      return createNewFrame(state, action);
-    case types.DELETE_FRAME:
-      return deleteFrame(state, action);
-    case types.DUPLICATE_FRAME:
-      return duplicateFrame(state, action);
     case types.SET_DURATION:
       return setDuration(state, action.duration);
     case types.CHANGE_FRAME_INTERVAL:
       return changeFrameInterval(state, action.frameIndex, action.interval);
     case types.NEW_PROJECT:
-      return setInitialState(state, action);
+      return setInitialState(state);
     case types.UPDATE_GRID_BOUNDARIES:
       return updateGridBoundaries(state, action);
     default:
@@ -199,6 +154,7 @@ function partialReducer(state, action) {
 export default function (state = Map(), action) {
   return partialReducer(state, action).merge({
     drawingTool: drawingToolReducer(state.get('drawingTool'), action),
-    palette: paletteReducer(state.get('palette'), action)
+    palette: paletteReducer(state.get('palette'), action),
+    frames: framesReducer(state.get('frames'), action)
   });
 }
