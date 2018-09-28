@@ -1,9 +1,13 @@
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import shortid from 'shortid';
 import {
+  GRID_INITIAL_COLOR,
   create as createGrid,
-  resize as resizeGrid
+  resize as resizeGrid,
+  applyBucket as applyBucketToGrid,
+  drawPixel as drawPixelToGrid
 } from './pixelGrid';
+import { BUCKET, EYEDROPPER, ERASER } from './drawingToolStates';
 import * as types from '../actions/actionTypes';
 
 const create = (cellsCount, intervalPercentage) => Map({
@@ -113,11 +117,69 @@ const changeDimensions = (frames, { gridProperty, increment }) => {
   });
 };
 
+const changeFrameInterval = (frames, { frameIndex, interval }) =>
+  frames.setIn([frameIndex, 'interval'], interval);
+
+const drawPixel = (frames, color, id) => frames.updateIn(
+  ['list', frames.get('activeIndex'), 'grid'],
+  grid => drawPixelToGrid(grid, color, id)
+);
+
+const getCellColor = ({ color }) => color || GRID_INITIAL_COLOR;
+
+const applyBucket = (frames, action) => {
+  const { id, paletteColor } = action;
+  const cellColor = getCellColor(action);
+  const {
+    columns, rows, list, activeIndex
+  } = frames.toObject();
+  const activeGrid = list.getIn([activeIndex, 'grid']);
+
+  const newGrid = applyBucketToGrid(activeGrid, {
+    id, paletteColor, cellColor, columns, rows
+  });
+
+  return frames.setIn(['list', activeIndex, 'grid'], newGrid);
+};
+
+const drawCell = (frames, action) => {
+  const { id, drawingTool } = action;
+  let color = '';
+
+  if (drawingTool === EYEDROPPER) {
+    return frames;
+  } else if (drawingTool === BUCKET) {
+    return applyBucket(frames, action);
+  }
+  // regular cell paint
+  if (drawingTool !== ERASER) {
+    color = action.paletteColor;
+  }
+  return drawPixel(frames, color, id);
+};
+
+const setFrames = (frames, action) => {
+  const {
+    columns, rows
+  } = action;
+  const frameList = action.frames;
+  return fromJS({
+    list: frameList,
+    columns,
+    rows,
+    activeIndex: 0
+  });
+};
+
 export default function (frames, action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
     case types.NEW_PROJECT:
       return initFrames(action);
+    case types.SET_DRAWING:
+      return setFrames(frames, action);
+    case types.DRAW_CELL:
+      return drawCell(frames, action);
     case types.SET_RESET_GRID:
       return resetFrame(frames);
     case types.CHANGE_ACTIVE_FRAME:
@@ -130,6 +192,8 @@ export default function (frames, action) {
       return duplicateFrame(frames, action);
     case types.CHANGE_DIMENSIONS:
       return changeDimensions(frames, action);
+    case types.CHANGE_FRAME_INTERVAL:
+      return changeFrameInterval(frames, action);
     default:
       return frames;
   }

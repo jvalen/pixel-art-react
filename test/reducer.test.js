@@ -51,10 +51,10 @@ describe('reducer: DRAW_CELL', () => {
   it('should fill the empty grid with the palette color if bucket tool is active', () => {
     const id = 0;
     const paletteColor = '#333333';
+    const drawingTool = BUCKET;
     const nextState = applyActions([
       actions.setInitialState({ columns: 2, rows: 2 }),
-      actions.switchTool(BUCKET),
-      actions.drawCell({ id, paletteColor })
+      actions.drawCell({ id, paletteColor, drawingTool })
     ]);
 
     expect(nextState.getIn(['frames', 'list', 0, 'grid']).toJS())
