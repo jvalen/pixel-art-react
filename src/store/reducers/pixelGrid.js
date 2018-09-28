@@ -64,7 +64,7 @@ export function resize(grid, gridProperty, increment, dimensions) {
     if (increment > 0) {
       // Add a row at the end
       for (let i = totalCells; i > 0; i -= dimensions.columns) {
-        newGrid = newGrid.insert(i, 0, '');
+        newGrid = newGrid.insert(i, '');
       }
     } else {
       for (let i = totalCells; i > 0; i -= dimensions.columns) {
@@ -90,9 +90,10 @@ export function resize(grid, gridProperty, increment, dimensions) {
 }
 
 export function applyBucket(grid, {
-  id, cellColor, paletteColor, columns, rows
+  id, paletteColor, columns, rows
 }) {
   const queue = [id];
+  const cellColor = grid.get(id);
   let currentId;
   let newGrid = grid;
   let adjacents;

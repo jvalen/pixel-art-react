@@ -1,7 +1,6 @@
 import { List, Map, fromJS } from 'immutable';
 import shortid from 'shortid';
 import {
-  GRID_INITIAL_COLOR,
   create as createGrid,
   resize as resizeGrid,
   applyBucket as applyBucketToGrid,
@@ -39,7 +38,7 @@ const initFrames = (action = {}) => {
   });
 };
 
-const resetFrame = (frames) => {
+const resetGrid = (frames) => {
   const activeIndex = frames.get('activeIndex');
   return frames.updateIn(['list', activeIndex], frame => create(
     frame.get('grid').size,
@@ -118,25 +117,21 @@ const changeDimensions = (frames, { gridProperty, increment }) => {
 };
 
 const changeFrameInterval = (frames, { frameIndex, interval }) =>
-  frames.setIn([frameIndex, 'interval'], interval);
+  frames.setIn(['list', frameIndex, 'interval'], interval);
 
 const drawPixel = (frames, color, id) => frames.updateIn(
   ['list', frames.get('activeIndex'), 'grid'],
   grid => drawPixelToGrid(grid, color, id)
 );
 
-const getCellColor = ({ color }) => color || GRID_INITIAL_COLOR;
-
 const applyBucket = (frames, action) => {
   const { id, paletteColor } = action;
-  const cellColor = getCellColor(action);
   const {
     columns, rows, list, activeIndex
   } = frames.toObject();
   const activeGrid = list.getIn([activeIndex, 'grid']);
-
   const newGrid = applyBucketToGrid(activeGrid, {
-    id, paletteColor, cellColor, columns, rows
+    id, paletteColor, columns, rows
   });
 
   return frames.setIn(['list', activeIndex, 'grid'], newGrid);
@@ -181,7 +176,7 @@ export default function (frames, action) {
     case types.DRAW_CELL:
       return drawCell(frames, action);
     case types.SET_RESET_GRID:
-      return resetFrame(frames);
+      return resetGrid(frames);
     case types.CHANGE_ACTIVE_FRAME:
       return changeActiveFrame(frames, action);
     case types.CREATE_NEW_FRAME:
