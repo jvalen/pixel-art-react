@@ -6,7 +6,6 @@ import {
   applyBucket as applyBucketToGrid,
   drawPixel as drawPixelToGrid
 } from './pixelGrid';
-import { BUCKET, EYEDROPPER, ERASER } from './drawingToolStates';
 import * as types from '../actions/actionTypes';
 
 const create = (cellsCount, intervalPercentage) => Map({
@@ -124,6 +123,10 @@ const drawPixel = (frames, color, id) => frames.updateIn(
   grid => drawPixelToGrid(grid, color, id)
 );
 
+const applyPencil = (frames, { paletteColor, id }) => drawPixel(frames, paletteColor, id);
+
+const applyEraser = (frames, { id }) => drawPixel(frames, '', id);
+
 const applyBucket = (frames, action) => {
   const { id, paletteColor } = action;
   const {
@@ -135,22 +138,6 @@ const applyBucket = (frames, action) => {
   });
 
   return frames.setIn(['list', activeIndex, 'grid'], newGrid);
-};
-
-const drawCell = (frames, action) => {
-  const { id, drawingTool } = action;
-  let color = '';
-
-  if (drawingTool === EYEDROPPER) {
-    return frames;
-  } else if (drawingTool === BUCKET) {
-    return applyBucket(frames, action);
-  }
-  // regular cell paint
-  if (drawingTool !== ERASER) {
-    color = action.paletteColor;
-  }
-  return drawPixel(frames, color, id);
 };
 
 const setFrames = (frames, action) => {
@@ -173,8 +160,12 @@ export default function (frames, action) {
       return initFrames(action);
     case types.SET_DRAWING:
       return setFrames(frames, action);
-    case types.DRAW_CELL:
-      return drawCell(frames, action);
+    case types.APPLY_PENCIL:
+      return applyPencil(frames, action);
+    case types.APPLY_ERASER:
+      return applyEraser(frames, action);
+    case types.APPLY_BUCKET:
+      return applyBucket(frames, action);
     case types.SET_RESET_GRID:
       return resetGrid(frames);
     case types.CHANGE_ACTIVE_FRAME:

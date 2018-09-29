@@ -3,6 +3,7 @@ import {
   EYEDROPPER, COLOR_PICKER
 } from '../src/store/reducers/drawingToolStates';
 import reducer from '../src/store/reducers/drawingToolReducer';
+import { APPLY_EYEDROPPER } from '../src/store/actions/actionTypes';
 import * as actions from '../src/store/actions/actionCreators';
 
 const otherAction = () => ({});
@@ -20,6 +21,14 @@ describe('drawing tool reducer: NEW_PROJECT', () => {
   it('should set PENCIL state', () => {
     const state = ERASER;
     const nextState = reducer(state, actions.newProject());
+
+    expect(nextState).toEqual(PENCIL);
+  });
+});
+
+describe('drawing tool reducer: APPLY_EYEDROPPER', () => {
+  it('should set PENCIL state when eyedropper action is performed', () => {
+    const nextState = reducer('', { type: APPLY_EYEDROPPER });
 
     expect(nextState).toEqual(PENCIL);
   });
@@ -50,36 +59,6 @@ describe('drawing tool reducer: SELECT_PALETTE_COLOR', () => {
   it('should keep the same state when state is PENCIL', () => {
     const state = PENCIL;
     const nextState = reducer(state, actions.selectPaletteColor());
-
-    expect(nextState).toEqual(state);
-  });
-});
-
-describe('drawing tool reducer: DRAW_CELL', () => {
-  it('should set PENCIL state when cell event is performed and state is EYEDROPPER', () => {
-    const state = EYEDROPPER;
-    const nextState = reducer(state, actions.drawCell({}));
-
-    expect(nextState).toEqual(PENCIL);
-  });
-
-  it('should keep the same state when cell event is performed and state is ERASER', () => {
-    const state = ERASER;
-    const nextState = reducer(state, actions.drawCell({}));
-
-    expect(nextState).toEqual(state);
-  });
-
-  it('should keep the same state when cell event is performed and state is BUCKET', () => {
-    const state = BUCKET;
-    const nextState = reducer(state, actions.drawCell({}));
-
-    expect(nextState).toEqual(state);
-  });
-
-  it('should keep the same state when cell event is performed and state is PENCIL', () => {
-    const state = PENCIL;
-    const nextState = reducer(state, actions.drawCell({}));
 
     expect(nextState).toEqual(state);
   });

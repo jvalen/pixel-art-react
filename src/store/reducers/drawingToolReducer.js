@@ -23,11 +23,10 @@ export default function drawingToolReducer(drawingTool, action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
     case types.NEW_PROJECT:
+    case types.APPLY_EYEDROPPER:
       return PENCIL;
     case types.SELECT_PALETTE_COLOR:
       return [EYEDROPPER, ERASER].reduce(disableTool, drawingTool);
-    case types.DRAW_CELL:
-      return disableTool(drawingTool, EYEDROPPER);
     case types.SWITCH_TOOL:
       return switchTool(drawingTool, action.tool);
     default:

@@ -1,6 +1,6 @@
 import { List, Map } from 'immutable';
 import reducer from '../src/store/reducers/framesReducer';
-import { PENCIL, ERASER, BUCKET, EYEDROPPER } from '../src/store/reducers/drawingToolStates';
+import { APPLY_PENCIL, APPLY_ERASER, APPLY_BUCKET } from '../src/store/actions/actionTypes';
 import * as actions from '../src/store/actions/actionCreators';
 
 const firstGridMock = [
@@ -103,97 +103,82 @@ describe('reducer: NEW_PROJECT', () => {
   });
 });
 
-describe('framesReducer: DRAW_CELL', () => {
+describe('framesReducer: APPLY_PENCIL', () => {
   const paletteColor = '#444444';
+  const type = APPLY_PENCIL;
 
-  describe('pencil tool active', () => {
-    const drawingTool = PENCIL;
-
-    it('draws cell with the palette color', () => {
-      const state = framesMock();
-      const nextState = reducer(state, actions.drawCell({
-        drawingTool, paletteColor, id: 1
-      }));
-
-      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-        '#111111', paletteColor,
-        '#222222', '#222222',
-        '#222222', '#333333'
-      ]);
+  it('draws cell with the palette color', () => {
+    const state = framesMock();
+    const nextState = reducer(state, {
+      type, paletteColor, id: 1
     });
+
+    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
+      '#111111', paletteColor,
+      '#222222', '#222222',
+      '#222222', '#333333'
+    ]);
+  });
+});
+
+describe('framesReducer: APPLY_ERASER', () => {
+  const type = APPLY_ERASER;
+
+  it('draws cell with the palette color', () => {
+    const state = framesMock();
+    const nextState = reducer(state, {
+      type, id: 3
+    });
+
+    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
+      '#111111', '#111111',
+      '#222222', '',
+      '#222222', '#333333'
+    ]);
+  });
+});
+
+describe('framesReducer: APPLY_BUCKET', () => {
+  const paletteColor = '#444444';
+  const type = APPLY_BUCKET;
+
+  it('drawing color area with two cells', () => {
+    const state = framesMock();
+    const nextState = reducer(state, {
+      type, paletteColor, id: 1
+    });
+
+    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
+      paletteColor, paletteColor,
+      '#222222', '#222222',
+      '#222222', '#333333'
+    ]);
   });
 
-  describe('eraser tool active', () => {
-    const drawingTool = ERASER;
-
-    it('draws cell with the palette color', () => {
-      const state = framesMock();
-      const nextState = reducer(state, actions.drawCell({
-        drawingTool, paletteColor, id: 3
-      }));
-
-      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-        '#111111', '#111111',
-        '#222222', '',
-        '#222222', '#333333'
-      ]);
+  it('drawing color area with three cells', () => {
+    const state = framesMock();
+    const nextState = reducer(state, {
+      type, paletteColor, id: 2
     });
+
+    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
+      '#111111', '#111111',
+      paletteColor, paletteColor,
+      paletteColor, '#333333'
+    ]);
   });
 
-  describe('bucket tool active', () => {
-    const drawingTool = BUCKET;
-
-    it('drawing color area with two cells', () => {
-      const state = framesMock();
-      const nextState = reducer(state, actions.drawCell({
-        drawingTool, paletteColor, id: 1
-      }));
-
-      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-        paletteColor, paletteColor,
-        '#222222', '#222222',
-        '#222222', '#333333'
-      ]);
+  it('drawing color area with one cell', () => {
+    const state = framesMock();
+    const nextState = reducer(state, {
+      type, paletteColor, id: 5
     });
 
-    it('drawing color area with three cells', () => {
-      const state = framesMock();
-      const nextState = reducer(state, actions.drawCell({
-        drawingTool, paletteColor, id: 2
-      }));
-
-      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-        '#111111', '#111111',
-        paletteColor, paletteColor,
-        paletteColor, '#333333'
-      ]);
-    });
-
-    it('drawing color area with one cell', () => {
-      const state = framesMock();
-      const nextState = reducer(state, actions.drawCell({
-        drawingTool, paletteColor, id: 5
-      }));
-
-      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-        '#111111', '#111111',
-        '#222222', '#222222',
-        '#222222', paletteColor
-      ]);
-    });
-  });
-
-  describe('eyedropper tool active', () => {
-    const drawingTool = EYEDROPPER;
-
-    it('frames states is not changed', () => {
-      const state = framesMock();
-      const nextState = reducer(state, actions.drawCell({
-        drawingTool, paletteColor, id: 4
-      }));
-
-      expect(nextState.toJS()).toEqual(state.toJS());
-    });
+    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
+      '#111111', '#111111',
+      '#222222', '#222222',
+      '#222222', paletteColor
+    ]);
   });
 });
 

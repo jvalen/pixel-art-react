@@ -5,7 +5,10 @@ import reducer from '../store/reducers/reducer';
 import {
   SET_INITIAL_STATE,
   CHANGE_DIMENSIONS,
-  DRAW_CELL,
+  APPLY_PENCIL,
+  APPLY_ERASER,
+  APPLY_BUCKET,
+  APPLY_EYEDROPPER,
   SHOW_SPINNER,
   NEW_PROJECT,
   SET_DRAWING,
@@ -13,18 +16,23 @@ import {
   SET_RESET_GRID
 } from '../store/actions/actionTypes';
 
+const createIncludedActions = () => includeAction([
+  CHANGE_DIMENSIONS,
+  APPLY_PENCIL,
+  APPLY_ERASER,
+  APPLY_BUCKET,
+  APPLY_EYEDROPPER,
+  SET_DRAWING,
+  SET_CELL_SIZE,
+  SET_RESET_GRID,
+  NEW_PROJECT
+]);
+
 const configureStore = (devMode) => {
   let store;
   if (devMode) {
     store = createStore(undoable(reducer, {
-      filter: includeAction([
-        CHANGE_DIMENSIONS,
-        DRAW_CELL,
-        SET_DRAWING,
-        SET_CELL_SIZE,
-        SET_RESET_GRID,
-        NEW_PROJECT
-      ]),
+      filter: createIncludedActions(),
       debug: true
     }));
 
@@ -48,14 +56,7 @@ const configureStore = (devMode) => {
     initialState.past = initialState.past.map(item => fromJS(item));
 
     store = createStore(undoable(reducer, {
-      filter: includeAction([
-        CHANGE_DIMENSIONS,
-        DRAW_CELL,
-        SET_DRAWING,
-        SET_CELL_SIZE,
-        SET_RESET_GRID,
-        NEW_PROJECT
-      ]),
+      filter: createIncludedActions(),
       debug: false
     }), initialState);
   }
