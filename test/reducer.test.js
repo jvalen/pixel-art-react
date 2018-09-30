@@ -5,16 +5,16 @@ import * as actions from '../src/store/actions/actionCreators';
 describe('reducer: CHANGE_DIMENSIONS', () => {
   it('should add a column', () => {
     const dummyState = reducer(Map(), actions.setInitialState({}));
-    const nextState = reducer(dummyState, actions.changeDimensions('columns', 'add'));
+    const nextState = reducer(dummyState, actions.changeDimensions('columns', 1));
 
-    expect(nextState.get('columns')).toEqual(21);
+    expect(nextState.getIn(['frames', 'columns'])).toEqual(21);
   });
 
   it('should remove a row', () => {
     const dummyState = reducer(Map(), actions.setInitialState({}));
-    const nextState = reducer(dummyState, actions.changeDimensions('rows', 'remove'));
+    const nextState = reducer(dummyState, actions.changeDimensions('rows', -1));
 
-    expect(nextState.get('rows')).toEqual(19);
+    expect(nextState.getIn(['frames', 'rows'])).toEqual(19);
   });
 });
 
@@ -23,15 +23,15 @@ describe('reducer: SET_COLOR_SELECTED', () => {
     const dummyState = reducer(Map(), actions.setInitialState({}));
     const nextState = reducer(dummyState, actions.setColorSelected('#FFFFFF', 2));
 
-    expect(nextState.get('currentColor').get('color')).toEqual('#FFFFFF');
+    expect(nextState.getIn(['palette', 'currentColor', 'color'])).toEqual('#FFFFFF');
   });
 
   it('should set the new color in the last palette spot if it does not exist already', () => {
     const dummyState = reducer(Map(), actions.setInitialState({}));
     const nextState = reducer(dummyState, actions.setColorSelected('#FF0000', null));
-    const paletteColorCount = nextState.get('paletteGridData').size;
+    const paletteColorCount = nextState.getIn(['palette', 'grid']).size;
 
-    expect(nextState.get('currentColor').get('position')).toEqual(paletteColorCount - 1);
+    expect(nextState.getIn(['palette', 'currentColor', 'position'])).toEqual(paletteColorCount - 1);
   });
 });
 
@@ -40,7 +40,7 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
     const dummyState = reducer(Map(), actions.setInitialState({}));
     const nextState = reducer(dummyState, actions.setCustomColor('#123456'));
 
-    expect(nextState.get('currentColor').get('color')).toEqual('#123456');
+    expect(nextState.getIn(['palette', 'currentColor', 'color'])).toEqual('#123456');
   });
 });
 
@@ -49,16 +49,16 @@ describe('reducer: DRAW_CELL', () => {
     const dummyState = reducer(Map(), actions.setInitialState({}));
     const nextState = reducer(dummyState, actions.drawCell(0));
 
-    expect(nextState.getIn(['frames', 0, 'grid', 0]))
-      .toEqual(nextState.get('currentColor').get('color'));
+    expect(nextState.getIn(['frames', 'list', 0, 'grid', 0]))
+      .toEqual(nextState.getIn(['palette', 'currentColor', 'color']));
   });
 
   it('should fill the empty grid with the selected color if bucket tool is active', () => {
     const dummyState = reducer(Map(), actions.setInitialState({ columns: 2, rows: 2 }));
-    const currentColor = dummyState.get('currentColor').get('color');
+    const currentColor = dummyState.getIn(['palette', 'currentColor', 'color']);
     const nextState = reducer(reducer(dummyState, actions.setBucket()), actions.drawCell(0));
 
-    expect(nextState.getIn(['frames', 0, 'grid']).toJS())
+    expect(nextState.getIn(['frames', 'list', 0, 'grid']).toJS())
       .toEqual([currentColor, currentColor, currentColor, currentColor]);
   });
 });

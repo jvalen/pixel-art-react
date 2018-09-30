@@ -84,8 +84,8 @@ class ColorPicker extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  colorPickerOn: state.present.get('colorPickerOn'),
-  currentColor: state.present.get('currentColor')
+  colorPickerOn: state.present.getIn(['palette', 'colorPickerOn']),
+  currentColor: state.present.getIn(['palette', 'currentColor'])
 });
 
 const mapDispatchToProps = dispatch => ({

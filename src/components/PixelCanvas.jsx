@@ -50,12 +50,12 @@ class PixelCanvas extends React.Component {
 
 const mapStateToProps = (state) => {
   const frames = state.present.get('frames');
-  const activeFrameIndex = state.present.get('activeFrameIndex');
+  const activeFrameIndex = frames.get('activeIndex');
   return {
-    activeFrame: frames.get(activeFrameIndex),
-    columns: state.present.get('columns'),
-    eyedropperOn: state.present.get('eyedropperOn'),
-    eraserOn: state.present.get('eraserOn'),
+    activeFrame: frames.getIn(['list', activeFrameIndex]),
+    columns: frames.get('columns'),
+    eyedropperOn: state.present.getIn(['drawingTools', 'eyedropperOn']),
+    eraserOn: state.present.getIn(['drawingTools', 'eraserOn']),
     gridBoundaries: state.present.get('gridBoundaries')
   };
 };

@@ -1,214 +1,164 @@
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import {
-  createGrid, resizeGrid, createPalette, resetIntervals, setGridCellValue,
-  checkColorInPalette, addColorToLastCellInPalette, getPositionFirstMatchInPalette,
-  applyBucket, cloneGrid, GRID_INITIAL_COLOR, isPaletteColorSelected,
-  resetPaletteSelectedColorState
-} from './reducerHelpers';
+  setCustomColor as setCustomColorToPalette,
+  setSelectedColor as setSelectedColorToPalette,
+  create as createPalette,
+  prepare as preparePalette
+} from './palette';
+import {
+  init as initFrames,
+  reset as resetFrame,
+  clone as cloneFrame,
+  add as addFrame,
+  remove as removeFrame,
+  changeDimensions as changeFrameDimensions,
+  changeActive
+} from './frames';
+import {
+  GRID_INITIAL_COLOR,
+  applyBucket as applyBucketToGrid,
+  drawPixel as drawPixelToGrid
+} from './pixelGrid';
+import {
+  init as initDrawingTools,
+  reset as resetDrawingTools,
+  switchOnEraser,
+  switchBucket,
+  switchOnEyedropper,
+  switchOnColorPicker
+} from './drawingTools';
 import * as types from '../actions/actionTypes';
 
 function setInitialState(state, options = {}) {
   const cellSize = 10;
-  const columns = options.columns || 20;
-  const rows = options.rows || 20;
-  const currentColor = { color: '#000000', position: 0 };
-  const frame = createGrid(columns * rows, 100);
-  const paletteGrid = createPalette();
+  const frames = initFrames(options);
+  const palette = createPalette();
+  const drawingTools = initDrawingTools();
 
   const initialState = {
-    frames: [frame],
-    paletteGridData: paletteGrid,
+    frames,
+    palette,
     cellSize,
-    columns,
-    rows,
-    currentColor,
-    eraserOn: false,
-    eyedropperOn: false,
-    colorPickerOn: false,
-    bucketOn: false,
+    drawingTools,
     loading: false,
     notifications: List(),
-    activeFrameIndex: 0,
     duration: 1
   };
 
   return state.merge(initialState);
 }
 
-function changeDimensions(state, gridProperty, behaviour) {
-  const framesCount = state.get('frames').size;
-  const propertyValue = state.get(gridProperty);
-  let newFrames = List();
+function changeDimensions(state, { gridProperty, increment }) {
+  return state.merge({
+    frames: changeFrameDimensions(state.get('frames'), gridProperty, increment)
+  });
+}
 
-  for (let i = 0; i < framesCount; i++) {
-    newFrames = newFrames.push(Map({
-      grid:
-        resizeGrid(
-          state.getIn(['frames', i, 'grid']),
-          gridProperty,
-          behaviour,
-          { columns: state.get('columns'), rows: state.get('rows') }
-        ),
-      interval: state.getIn(['frames', i, 'interval']),
-      key: state.getIn(['frames', i, 'key'])
-    }));
-  }
-
-  const newValues = {
-    frames: newFrames
-  };
-  newValues[gridProperty] = parseInt(
-    behaviour === 'add' ? propertyValue + 1 : propertyValue - 1,
-    10
+function drawPixel(state, color, id) {
+  const frames = state.get('frames');
+  const newFrames = frames.updateIn(
+    ['list', frames.get('activeIndex'), 'grid'],
+    grid => drawPixelToGrid(grid, color, id)
   );
-  return state.merge(newValues);
+  return state.set('frames', newFrames);
+}
+
+export function applyBucket(state, id, sourceColor) {
+  const {
+    columns, rows, list, activeIndex
+  } = state.get('frames').toObject();
+  const activeGrid = list.getIn([activeIndex, 'grid']);
+  const newState = state.update('palette', preparePalette);
+  const currentColor = newState.getIn(['palette', 'currentColor', 'color']);
+
+  const newGrid = applyBucketToGrid(activeGrid, {
+    id, currentColor, sourceColor, columns, rows
+  });
+
+  return newState.setIn(['frames', 'list', activeIndex, 'grid'], newGrid);
 }
 
 function setColorSelected(state, newColorSelected, positionInPalette) {
-  const newColor = { color: newColorSelected, position: positionInPalette };
-  const newState = {
-    eraserOn: false,
-    eyedropperOn: false,
-    colorPickerOn: false
-  };
-  let paletteGridData = state.get('paletteGridData');
+  const newColor = Map({ color: newColorSelected, position: positionInPalette });
 
-  if (!checkColorInPalette(paletteGridData, newColorSelected)) {
-    // If there is no newColorSelected in the palette it will create one
-    paletteGridData = addColorToLastCellInPalette(
-      paletteGridData,
-      newColorSelected
-    );
-    newColor.position = paletteGridData.size - 1;
-  } else if (positionInPalette === null) {
-    // Eyedropper called this function, the color position is unknown
-    newColor.position =
-      getPositionFirstMatchInPalette(paletteGridData, newColorSelected);
-  }
-  newState.currentColor = newColor;
-  newState.paletteGridData = paletteGridData;
-
-  return state.merge(newState);
+  return state.merge({
+    drawingTools: resetDrawingTools(state.get('drawingTools')),
+    palette: setSelectedColorToPalette(state.get('palette'), newColor)
+  });
 }
 
 function setCustomColor(state, customColor) {
-  const currentColor = state.get('currentColor');
-  const paletteGridData = state.get('paletteGridData');
-  const newState = {
-    currentColor: {
-      color: customColor,
-      position: currentColor.get('position')
-    }
-  };
-
-  if (!checkColorInPalette(paletteGridData, currentColor.get('color'))) {
-    // If there is no colorSelected in the palette it will create one
-    newState.paletteGridData = addColorToLastCellInPalette(
-      paletteGridData,
-      customColor
-    );
-    newState.currentColor.position = newState.paletteGridData.size - 1;
-  } else {
-    // There is a color selected in the palette
-    newState.paletteGridData = paletteGridData.set(
-      currentColor.get('position'),
-      Map({
-        color: customColor, id: currentColor.get('color')
-      })
-    );
-  }
-
-  return state.merge(newState);
+  return state.set('palette', setCustomColorToPalette(state.get('palette'), customColor));
 }
 
-function drawCell(state, id) {
-  const bucketOn = state.get('bucketOn');
-  const eyedropperOn = state.get('eyedropperOn');
-  const eraserOn = state.get('eraserOn');
+function drawCell(state, action) {
+  const { id } = action;
+  const {
+    bucketOn, eyedropperOn, eraserOn
+  } = state.get('drawingTools').toObject();
   let newState = state;
   let color = '';
 
   if (bucketOn || eyedropperOn) {
-    const activeFrameIndex = state.get('activeFrameIndex');
-    const cellColor = state.getIn(['frames', activeFrameIndex, 'grid', id]) || GRID_INITIAL_COLOR;
+    const frames = state.get('frames');
+    const activeFrameIndex = frames.get('activeIndex');
+    const cellColor = frames.getIn(['list', activeFrameIndex, 'grid', id]) || GRID_INITIAL_COLOR;
 
     if (eyedropperOn) {
       return setColorSelected(newState, cellColor, null);
     }
     // bucketOn
-    return applyBucket(newState, activeFrameIndex, id, cellColor);
+    return applyBucket(newState, id, cellColor);
   }
   // regular cell paint
   if (!eraserOn) {
-    if (!isPaletteColorSelected(newState)) {
-      newState = resetPaletteSelectedColorState(newState);
-    }
-    color = newState.get('currentColor').get('color');
+    newState = newState.update('palette', preparePalette);
+    color = newState.getIn(['palette', 'currentColor', 'color']);
   }
-  return setGridCellValue(newState, color, id);
+  return drawPixel(newState, color, id);
 }
 
 function setDrawing(state, frames, paletteGridData, cellSize, columns, rows) {
   return state.merge({
-    frames,
-    paletteGridData,
-    cellSize,
-    columns,
-    rows,
-    activeFrameIndex: 0
+    frames: fromJS({
+      list: frames,
+      columns,
+      rows,
+      activeIndex: 0
+    }),
+    palette: state.get('palette').set('grid', fromJS(paletteGridData)),
+    cellSize
   });
 }
 
 function setEraser(state) {
   return state.merge({
-    currentColor: { color: null, position: -1 },
-    eraserOn: true,
-    eyedropperOn: false,
-    colorPickerOn: false,
-    bucketOn: false
+    palette: state.get('palette').set('currentColor', Map({
+      color: null, position: -1
+    })),
+    drawingTools: switchOnEraser()
   });
 }
 
 function setBucket(state) {
-  return state.merge({
-    eraserOn: false,
-    eyedropperOn: false,
-    colorPickerOn: false,
-    bucketOn: !state.get('bucketOn')
-  });
+  return state.set('drawingTools', switchBucket(state.get('drawingTools')));
 }
 
 function setEyedropper(state) {
-  return state.merge({
-    eraserOn: false,
-    eyedropperOn: true,
-    colorPickerOn: false,
-    bucketOn: false
-  });
+  return state.set('drawingTools', switchOnEyedropper());
 }
 
 function setColorPicker(state) {
-  return state.merge({
-    eraserOn: false,
-    eyedropperOn: false,
-    colorPickerOn: true,
-    bucketOn: false
-  });
+  return state.set('drawingTools', switchOnColorPicker());
 }
 
 function setCellSize(state, cellSize) {
   return state.merge({ cellSize });
 }
 
-function resetGrid(state, columns, rows, activeFrameIndex) {
-  const currentInterval = state.get('frames').get(activeFrameIndex).get('interval');
-  const newGrid = createGrid(
-    parseInt(columns, 10) * parseInt(rows, 10),
-    currentInterval
-  );
-
+function resetGrid(state) {
   return state.merge({
-    frames: state.get('frames').update(activeFrameIndex, () => newGrid)
+    frames: resetFrame(state.get('frames'))
   });
 }
 
@@ -227,51 +177,19 @@ function sendNotification(state, message) {
 }
 
 function changeActiveFrame(state, frameIndex) {
-  return state.merge({ activeFrameIndex: frameIndex });
+  return state.update('frames', frames => changeActive(frames, frameIndex));
 }
 
 function createNewFrame(state) {
-  const newFrames = state.get('frames').push(createGrid(
-    parseInt(state.get('columns'), 10) * parseInt(state.get('rows'), 10),
-    100
-  ));
-  return state.merge({
-    frames: resetIntervals(newFrames),
-    activeFrameIndex: newFrames.size - 1
-  });
+  return state.update('frames', addFrame);
 }
 
 function deleteFrame(state, frameId) {
-  const activeFrameIndex = state.get('activeFrameIndex');
-  const newState = {};
-  let frames = state.get('frames');
-
-  if (frames.size > 1) {
-    const reduceFrameIndex =
-      (activeFrameIndex >= frameId) &&
-      (activeFrameIndex > 0);
-
-    frames = frames.splice(frameId, 1);
-    newState.frames = resetIntervals(frames);
-
-    if (reduceFrameIndex) {
-      newState.activeFrameIndex = frames.size - 1;
-    }
-  }
-  return state.merge(newState);
+  return state.update('frames', frames => removeFrame(frames, frameId));
 }
 
 function duplicateFrame(state, frameId) {
-  const frames = state.get('frames');
-  const prevFrame = frames.get(frameId);
-  return state.merge({
-    frames: resetIntervals(frames.splice(
-      frameId,
-      0,
-      cloneGrid(prevFrame.get('grid'), prevFrame.get('interval'))
-    )),
-    activeFrameIndex: frameId + 1
-  });
+  return state.update('frames', frames => cloneFrame(frames, frameId));
 }
 
 function setDuration(state, duration) {
@@ -281,7 +199,7 @@ function setDuration(state, duration) {
 function changeFrameInterval(state, frameIndex, interval) {
   return state.merge({
     frames: state.get('frames').updateIn(
-      [frameIndex, 'interval'],
+      ['list', frameIndex, 'interval'],
       () => interval
     )
   });
@@ -301,7 +219,7 @@ export default function (state = Map(), action) {
     case types.SET_INITIAL_STATE:
       return setInitialState(state, action.options);
     case types.CHANGE_DIMENSIONS:
-      return changeDimensions(state, action.gridProperty, action.behaviour);
+      return changeDimensions(state, action);
     case types.SET_COLOR_SELECTED:
       return setColorSelected(
         state,
@@ -311,7 +229,7 @@ export default function (state = Map(), action) {
     case types.SET_CUSTOM_COLOR:
       return setCustomColor(state, action.customColor);
     case types.DRAW_CELL:
-      return drawCell(state, action.id);
+      return drawCell(state, action);
     case types.SET_DRAWING:
       return setDrawing(
         state, action.frames, action.paletteGridData,
@@ -328,10 +246,7 @@ export default function (state = Map(), action) {
     case types.SET_CELL_SIZE:
       return setCellSize(state, action.cellSize);
     case types.SET_RESET_GRID:
-      return resetGrid(
-        state, action.columns, action.rows,
-        action.activeFrameIndex
-      );
+      return resetGrid(state);
     case types.SHOW_SPINNER:
       return showSpinner(state);
     case types.HIDE_SPINNER:

@@ -27,10 +27,10 @@ const CssDisplay = (props) => {
 
 function mapStateToProps(state) {
   const frames = state.present.get('frames');
-  const activeFrameIndex = state.present.get('activeFrameIndex');
+  const activeFrameIndex = frames.get('activeIndex');
   return {
-    activeFrame: frames.get(activeFrameIndex),
-    columns: state.present.get('columns'),
+    activeFrame: frames.getIn(['list', activeFrameIndex]),
+    columns: frames.get('columns'),
     cellSize: state.present.get('cellSize')
   };
 }
