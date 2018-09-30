@@ -145,7 +145,7 @@ function setDuration(state, duration) {
 function changeFrameInterval(state, frameIndex, interval) {
   return state.merge({
     frames: state.get('frames').updateIn(
-      [frameIndex, 'interval'],
+      ['list', frameIndex, 'interval'],
       () => interval
     )
   });
