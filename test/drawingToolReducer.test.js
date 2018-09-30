@@ -1,0 +1,120 @@
+import reducer, {
+  PENCIL, BUCKET, ERASER,
+  EYEDROPPER, COLOR_PICKER
+} from '../src/store/reducers/drawingToolReducer';
+import * as actions from '../src/store/actions/actionCreators';
+
+const otherAction = () => ({});
+
+describe('drawing tool reducer: SET_INITIAL_STATE', () => {
+  it('should set PENCIL state', () => {
+    const state = EYEDROPPER;
+    const nextState = reducer(state, actions.setInitialState({}));
+
+    expect(nextState).toEqual(PENCIL);
+  });
+});
+
+describe('drawing tool reducer: NEW_PROJECT', () => {
+  it('should set PENCIL state', () => {
+    const state = ERASER;
+    const nextState = reducer(state, actions.newProject());
+
+    expect(nextState).toEqual(PENCIL);
+  });
+});
+
+describe('drawing tool reducer: SELECT_PALETTE_COLOR', () => {
+  it('should set PENCIL state if state is EYEDROPPER', () => {
+    const state = EYEDROPPER;
+    const nextState = reducer(state, actions.selectPaletteColor());
+
+    expect(nextState).toEqual(PENCIL);
+  });
+
+  it('should set PENCIL state if state is ERASER', () => {
+    const state = ERASER;
+    const nextState = reducer(state, actions.selectPaletteColor());
+
+    expect(nextState).toEqual(PENCIL);
+  });
+
+  it('should keep the same state when state is BUCKET', () => {
+    const state = BUCKET;
+    const nextState = reducer(state, actions.selectPaletteColor());
+
+    expect(nextState).toEqual(state);
+  });
+
+  it('should keep the same state when state is PENCIL', () => {
+    const state = PENCIL;
+    const nextState = reducer(state, actions.selectPaletteColor());
+
+    expect(nextState).toEqual(state);
+  });
+});
+
+describe('drawing tool reducer: DRAW_CELL', () => {
+  it('should set PENCIL state when cell event is performed and state is EYEDROPPER', () => {
+    const state = EYEDROPPER;
+    const nextState = reducer(state, actions.drawCell({}));
+
+    expect(nextState).toEqual(PENCIL);
+  });
+
+  it('should keep the same state when cell event is performed and state is ERASER', () => {
+    const state = ERASER;
+    const nextState = reducer(state, actions.drawCell({}));
+
+    expect(nextState).toEqual(state);
+  });
+
+  it('should keep the same state when cell event is performed and state is BUCKET', () => {
+    const state = BUCKET;
+    const nextState = reducer(state, actions.drawCell({}));
+
+    expect(nextState).toEqual(state);
+  });
+
+  it('should keep the same state when cell event is performed and state is PENCIL', () => {
+    const state = PENCIL;
+    const nextState = reducer(state, actions.drawCell({}));
+
+    expect(nextState).toEqual(state);
+  });
+});
+
+describe('drawing tool reducer: SWITCH_TOOL', () => {
+  it('should set the action tool when state is PENCIL', () => {
+    const tool = ERASER;
+    const state = PENCIL;
+    const nextState = reducer(state, actions.switchTool(tool));
+
+    expect(nextState).toEqual(tool);
+  });
+
+  it('should set the action PENCIL when state is the same as action tool', () => {
+    const tool = EYEDROPPER;
+    const state = EYEDROPPER;
+    const nextState = reducer(state, actions.switchTool(tool));
+
+    expect(nextState).toEqual(PENCIL);
+  });
+
+  it('should set the action tool when state is different to action tool', () => {
+    const tool = COLOR_PICKER;
+    const state = BUCKET;
+    const nextState = reducer(state, actions.switchTool(tool));
+
+    expect(nextState).toEqual(tool);
+  });
+});
+
+describe('drawing tool reducer: <<other action>>', () => {
+  it('should keep the same state', () => {
+    const state = BUCKET;
+    const nextState = reducer(state, otherAction());
+
+    expect(nextState).toEqual(state);
+  });
+});

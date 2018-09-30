@@ -1,27 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actionCreators from '../store/actions/actionCreators';
+import { switchTool } from '../store/actions/actionCreators';
+import { ERASER } from '../store/reducers/drawingToolReducer';
 
-const Eraser = (props) => {
-  const handleClick = () => {
-    props.actions.setEraser();
-  };
-
-  return (
-    <button
-      className={`eraser${props.eraserOn ? ' selected' : ''}`}
-      onClick={() => { handleClick(); }}
-    />
-  );
-};
+const Eraser = props => (
+  <button
+    className={`eraser${props.eraserOn ? ' selected' : ''}`}
+    onClick={props.switchEraser}
+  />
+);
 
 const mapStateToProps = state => ({
-  eraserOn: state.present.getIn(['drawingTools', 'eraserOn'])
+  eraserOn: state.present.get('drawingTool') === ERASER
 });
 
+const switchEraserAction = switchTool(ERASER);
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
+  switchEraser: () => dispatch(switchEraserAction)
 });
 
 const EraserContainer = connect(

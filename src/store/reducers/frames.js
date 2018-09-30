@@ -23,7 +23,7 @@ function resetIntervals(frameList) {
   });
 }
 
-export function init(options) {
+export function init(options = {}) {
   const columns = parseInt(options.columns, 10) || 20;
   const rows = parseInt(options.rows, 10) || 20;
   const list = resetIntervals(List([create(columns * rows)]));

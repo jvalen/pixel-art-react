@@ -9,15 +9,20 @@ const fromEventToId = (ev, props) => {
   }] = ev.targetTouches;
   const {
     columns,
-    activeFrame,
+    grid,
     gridBoundaries: {
       x, y, width, height
     }
   } = props;
   const posX = Math.round(((clientX - x - radiusX) * columns) / width);
   const posY = Math.round(((clientY - y - radiusY) * columns) / height);
-  return fromPositionToId(posX, posY, activeFrame.get('grid'), columns);
+  return fromPositionToId(posX, posY, grid, columns);
 };
+
+const getCellProps = (props, id) => ({
+  id,
+  color: props.grid.get(id)
+});
 
 const drawHandlersProvider = rootComponent => ({
   onMouseUp() {
@@ -28,21 +33,26 @@ const drawHandlersProvider = rootComponent => ({
   drawHandlersFactory(gridComponent) {
     return {
       onMouseDown(id, ev) {
+        const { props } = gridComponent;
+        const cellProps = getCellProps(props, id);
         ev.preventDefault();
-        if (!rootComponent.state.dragging) gridComponent.props.drawCell(id);
+        if (!rootComponent.state.dragging) props.drawCell(cellProps);
         rootComponent.setState({
           dragging: true
         });
       },
       onMouseOver(id, ev) {
+        const { props } = gridComponent;
+        const cellProps = getCellProps(props, id);
         ev.preventDefault();
-        if (rootComponent.state.dragging) gridComponent.props.drawCell(id);
+        if (rootComponent.state.dragging) props.drawCell(cellProps);
       },
       onTouchMove(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
         const id = fromEventToId(ev, props);
-        if (id !== null && rootComponent.state.dragging) props.drawCell(id);
+        const cellProps = getCellProps(props, id);
+        if (id !== null && rootComponent.state.dragging) props.drawCell(cellProps);
       }
     };
   }

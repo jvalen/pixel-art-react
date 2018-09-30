@@ -1,27 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actionCreators from '../store/actions/actionCreators';
+import { switchTool } from '../store/actions/actionCreators';
+import { BUCKET } from '../store/reducers/drawingToolReducer';
 
-const Bucket = (props) => {
-  const handleClick = () => {
-    props.actions.setBucket();
-  };
-
-  return (
-    <button
-      className={`bucket${props.bucketOn ? ' selected' : ''}`}
-      onClick={() => { handleClick(); }}
-    />
-  );
-};
+const Bucket = props => (
+  <button
+    className={`bucket${props.bucketOn ? ' selected' : ''}`}
+    onClick={props.switchBucket}
+  />
+);
 
 const mapStateToProps = state => ({
-  bucketOn: state.present.getIn(['drawingTools', 'bucketOn'])
+  bucketOn: state.present.get('drawingTool') === BUCKET
 });
 
+const switchBucketAction = switchTool(BUCKET);
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
+  switchBucket: () => dispatch(switchBucketAction)
 });
 
 const BucketContainer = connect(

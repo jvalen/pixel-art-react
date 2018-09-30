@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Picker from 'react-color';
-import * as actionCreators from '../store/actions/actionCreators';
+import { switchTool, setCustomColor } from '../store/actions/actionCreators';
+import { COLOR_PICKER } from '../store/reducers/drawingToolReducer';
 
 class ColorPicker extends React.Component {
   constructor(props) {
@@ -10,17 +10,14 @@ class ColorPicker extends React.Component {
     this.state = {
       displayColorPicker: false
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.props.actions.setColorPicker();
+    this.props.switchColorPicker();
     if (!this.state.displayColorPicker) {
       this.setState({ displayColorPicker: !this.state.displayColorPicker });
     }
-  }
-
-  handleChange(color) {
-    this.props.actions.setCustomColor(color.hex);
   }
 
   handleClose() {
@@ -48,16 +45,16 @@ class ColorPicker extends React.Component {
         left: 0
       }
     };
-
-    const isSelected = this.props.colorPickerOn && this.state.displayColorPicker;
-    const currentColor = this.props.currentColor.get('color');
+    const { props } = this;
+    const isSelected = props.colorPickerOn && this.state.displayColorPicker;
+    const currentColor = props.currentColor.get('color');
     const initialPickerColor = currentColor || '#ffffff';
 
     return (
       <div className="color-picker">
         <button
           className={`color-picker__button${isSelected ? ' selected' : ''}`}
-          onClick={() => { this.handleClick(); }}
+          onClick={this.handleClick}
         />
         <div style={styles.picker}>
           {this.state.displayColorPicker ?
@@ -70,7 +67,7 @@ class ColorPicker extends React.Component {
               />
               <Picker
                 color={initialPickerColor}
-                onChangeComplete={(color) => { this.handleChange(color); }}
+                onChangeComplete={props.setCustomColor}
                 onClose={() => { this.handleClose(); }}
                 type="sketch"
               />
@@ -84,12 +81,14 @@ class ColorPicker extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  colorPickerOn: state.present.getIn(['palette', 'colorPickerOn']),
+  colorPickerOn: state.present.get('drawingTool') === COLOR_PICKER,
   currentColor: state.present.getIn(['palette', 'currentColor'])
 });
 
+const switchColorPickerAction = switchTool(COLOR_PICKER);
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch)
+  switchColorPicker: () => dispatch(switchColorPickerAction),
+  setCustomColor: color => dispatch(setCustomColor(color.hex))
 });
 
 const ColorPickerContainer = connect(
