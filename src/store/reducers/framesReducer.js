@@ -1,12 +1,49 @@
 import { List, Map, fromJS } from 'immutable';
 import shortid from 'shortid';
-import {
-  create as createGrid,
-  resize as resizeGrid,
-  applyBucket as applyBucketToGrid,
-  drawPixel as drawPixelToGrid
-} from './pixelGrid';
 import * as types from '../actions/actionTypes';
+
+const createGrid = (numCells) => {
+  let newGrid = List();
+  // Set every cell with the initial color
+  for (let i = 0; i < numCells; i++) {
+    newGrid = newGrid.push('');
+  }
+  return newGrid;
+};
+
+const resizeGrid = (grid, gridProperty, increment, dimensions) => {
+  const totalCells = dimensions.rows * dimensions.columns;
+  let newGrid = grid;
+
+  if (gridProperty === 'columns') {
+    // Resize by columns
+    if (increment > 0) {
+      // Add a row at the end
+      for (let i = totalCells; i > 0; i -= dimensions.columns) {
+        newGrid = newGrid.insert(i, '');
+      }
+    } else {
+      for (let i = totalCells; i > 0; i -= dimensions.columns) {
+        newGrid = newGrid.splice(i - 1, 1);
+      }
+    }
+  } else if (gridProperty === 'rows') {
+    // Resize by rows
+    if (increment > 0) {
+      // Add a row at the end
+      for (let i = 0; i < dimensions.columns; i++) {
+        newGrid = newGrid.push('');
+      }
+    } else {
+      // Remove the last row
+      for (let i = 0; i < dimensions.columns; i++) {
+        newGrid = newGrid.splice(-1, 1);
+      }
+    }
+  }
+
+  return newGrid;
+};
 
 const create = (cellsCount, intervalPercentage) => Map({
   grid: createGrid(cellsCount),
@@ -35,14 +72,6 @@ const initFrames = (action = {}) => {
     rows,
     activeIndex: 0
   });
-};
-
-const resetGrid = (frames) => {
-  const activeIndex = frames.get('activeIndex');
-  return frames.updateIn(['list', activeIndex], frame => create(
-    frame.get('grid').size,
-    frame.get('interval')
-  ));
 };
 
 const changeActiveFrame = (frames, action) => {
@@ -115,31 +144,6 @@ const changeDimensions = (frames, { gridProperty, increment }) => {
   });
 };
 
-const changeFrameInterval = (frames, { frameIndex, interval }) =>
-  frames.setIn(['list', frameIndex, 'interval'], interval);
-
-const drawPixel = (frames, color, id) => frames.updateIn(
-  ['list', frames.get('activeIndex'), 'grid'],
-  grid => drawPixelToGrid(grid, color, id)
-);
-
-const applyPencil = (frames, { paletteColor, id }) => drawPixel(frames, paletteColor, id);
-
-const applyEraser = (frames, { id }) => drawPixel(frames, '', id);
-
-const applyBucket = (frames, action) => {
-  const { id, paletteColor } = action;
-  const {
-    columns, rows, list, activeIndex
-  } = frames.toObject();
-  const activeGrid = list.getIn([activeIndex, 'grid']);
-  const newGrid = applyBucketToGrid(activeGrid, {
-    id, paletteColor, columns, rows
-  });
-
-  return frames.setIn(['list', activeIndex, 'grid'], newGrid);
-};
-
 const setFrames = (frames, action) => {
   const {
     columns, rows
@@ -160,14 +164,6 @@ export default function (frames, action) {
       return initFrames(action);
     case types.SET_DRAWING:
       return setFrames(frames, action);
-    case types.APPLY_PENCIL:
-      return applyPencil(frames, action);
-    case types.APPLY_ERASER:
-      return applyEraser(frames, action);
-    case types.APPLY_BUCKET:
-      return applyBucket(frames, action);
-    case types.SET_RESET_GRID:
-      return resetGrid(frames);
     case types.CHANGE_ACTIVE_FRAME:
       return changeActiveFrame(frames, action);
     case types.CREATE_NEW_FRAME:
@@ -178,8 +174,6 @@ export default function (frames, action) {
       return duplicateFrame(frames, action);
     case types.CHANGE_DIMENSIONS:
       return changeDimensions(frames, action);
-    case types.CHANGE_FRAME_INTERVAL:
-      return changeFrameInterval(frames, action);
     default:
       return frames;
   }

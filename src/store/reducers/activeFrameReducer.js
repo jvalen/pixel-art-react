@@ -1,12 +1,19 @@
-import { List } from 'immutable';
+import * as types from '../actions/actionTypes';
 
 export const GRID_INITIAL_COLOR = '#313131';
 
-function isSameColor(colorA, colorB) {
-  return (colorA || GRID_INITIAL_COLOR) === (colorB || GRID_INITIAL_COLOR);
-}
+const updateFrameProp = prop => propReducer => (frames, action) => {
+  const activeIndex = frames.get('activeIndex');
+  return frames.updateIn(['list', activeIndex, prop], stateProp => propReducer(stateProp, action));
+};
 
-function getSameColorAdjacentCells(frameGrid, columns, rows, id, color) {
+const updateGrid = updateFrameProp('grid');
+const updateInterval = updateFrameProp('interval');
+
+const isSameColor = (colorA, colorB) =>
+  (colorA || GRID_INITIAL_COLOR) === (colorB || GRID_INITIAL_COLOR);
+
+const getSameColorAdjacentCells = (frameGrid, columns, rows, id, color) => {
   const adjacentCollection = [];
   let auxId;
 
@@ -40,58 +47,13 @@ function getSameColorAdjacentCells(frameGrid, columns, rows, id, color) {
   }
 
   return adjacentCollection;
-}
+};
 
-export function create(numCells) {
-  let newGrid = List();
-  // Set every cell with the initial color
-  for (let i = 0; i < numCells; i++) {
-    newGrid = newGrid.push('');
-  }
-  return newGrid;
-}
+const drawPixel = (pixelGrid, color, id) => pixelGrid.set(id, color);
 
-export function drawPixel(grid, color, id) {
-  return grid.set(id, color);
-}
-
-export function resize(grid, gridProperty, increment, dimensions) {
-  const totalCells = dimensions.rows * dimensions.columns;
-  let newGrid = grid;
-
-  if (gridProperty === 'columns') {
-    // Resize by columns
-    if (increment > 0) {
-      // Add a row at the end
-      for (let i = totalCells; i > 0; i -= dimensions.columns) {
-        newGrid = newGrid.insert(i, '');
-      }
-    } else {
-      for (let i = totalCells; i > 0; i -= dimensions.columns) {
-        newGrid = newGrid.splice(i - 1, 1);
-      }
-    }
-  } else if (gridProperty === 'rows') {
-    // Resize by rows
-    if (increment > 0) {
-      // Add a row at the end
-      for (let i = 0; i < dimensions.columns; i++) {
-        newGrid = newGrid.push('');
-      }
-    } else {
-      // Remove the last row
-      for (let i = 0; i < dimensions.columns; i++) {
-        newGrid = newGrid.splice(-1, 1);
-      }
-    }
-  }
-
-  return newGrid;
-}
-
-export function applyBucket(grid, {
+const applyBucketToGrid = (grid, {
   id, paletteColor, columns, rows
-}) {
+}) => {
   const queue = [id];
   const cellColor = grid.get(id);
   let currentId;
@@ -119,4 +81,34 @@ export function applyBucket(grid, {
   }
 
   return newGrid;
+};
+
+const applyPencilToGrid = (pixelGrid, { paletteColor, id }) =>
+  drawPixel(pixelGrid, paletteColor, id);
+
+const applyBucket = updateGrid(applyBucketToGrid);
+
+const applyPencil = updateGrid(applyPencilToGrid);
+
+const applyEraser = updateGrid((pixelGrid, { id }) => drawPixel(pixelGrid, '', id));
+
+const resetGrid = updateGrid(pixelGrid => pixelGrid.map(() => ''));
+
+const changeFrameInterval = updateInterval((previousInterval, { interval }) => interval);
+
+export default function (frames, action) {
+  switch (action.type) {
+    case types.APPLY_PENCIL:
+      return applyPencil(frames, action);
+    case types.APPLY_ERASER:
+      return applyEraser(frames, action);
+    case types.APPLY_BUCKET:
+      return applyBucket(frames, action);
+    case types.SET_RESET_GRID:
+      return resetGrid(frames);
+    case types.CHANGE_FRAME_INTERVAL:
+      return changeFrameInterval(frames, action);
+    default:
+      return frames;
+  }
 }

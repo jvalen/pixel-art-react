@@ -138,10 +138,9 @@ export function setDuration(duration) {
   };
 }
 
-export function changeFrameInterval(frameIndex, interval) {
+export function changeFrameInterval(interval) {
   return {
     type: types.CHANGE_FRAME_INTERVAL,
-    frameIndex,
     interval
   };
 }

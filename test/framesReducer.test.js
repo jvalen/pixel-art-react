@@ -1,6 +1,5 @@
 import { List, Map } from 'immutable';
 import reducer from '../src/store/reducers/framesReducer';
-import { APPLY_PENCIL, APPLY_ERASER, APPLY_BUCKET } from '../src/store/actions/actionTypes';
 import * as actions from '../src/store/actions/actionCreators';
 
 const firstGridMock = [
@@ -100,106 +99,6 @@ describe('reducer: NEW_PROJECT', () => {
     expect(nextState.getIn(['list', 0, 'grid', 111])).toEqual('');
     expect(nextState.getIn(['list', 0, 'grid', 222])).toEqual('');
     expect(nextState.getIn(['list', 0, 'grid', 333])).toEqual('');
-  });
-});
-
-describe('framesReducer: APPLY_PENCIL', () => {
-  const paletteColor = '#444444';
-  const type = APPLY_PENCIL;
-
-  it('draws cell with the palette color', () => {
-    const state = framesMock();
-    const nextState = reducer(state, {
-      type, paletteColor, id: 1
-    });
-
-    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111', paletteColor,
-      '#222222', '#222222',
-      '#222222', '#333333'
-    ]);
-  });
-});
-
-describe('framesReducer: APPLY_ERASER', () => {
-  const type = APPLY_ERASER;
-
-  it('draws cell with the palette color', () => {
-    const state = framesMock();
-    const nextState = reducer(state, {
-      type, id: 3
-    });
-
-    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111', '#111111',
-      '#222222', '',
-      '#222222', '#333333'
-    ]);
-  });
-});
-
-describe('framesReducer: APPLY_BUCKET', () => {
-  const paletteColor = '#444444';
-  const type = APPLY_BUCKET;
-
-  it('drawing color area with two cells', () => {
-    const state = framesMock();
-    const nextState = reducer(state, {
-      type, paletteColor, id: 1
-    });
-
-    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      paletteColor, paletteColor,
-      '#222222', '#222222',
-      '#222222', '#333333'
-    ]);
-  });
-
-  it('drawing color area with three cells', () => {
-    const state = framesMock();
-    const nextState = reducer(state, {
-      type, paletteColor, id: 2
-    });
-
-    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111', '#111111',
-      paletteColor, paletteColor,
-      paletteColor, '#333333'
-    ]);
-  });
-
-  it('drawing color area with one cell', () => {
-    const state = framesMock();
-    const nextState = reducer(state, {
-      type, paletteColor, id: 5
-    });
-
-    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111', '#111111',
-      '#222222', '#222222',
-      '#222222', paletteColor
-    ]);
-  });
-});
-
-describe('framesReducer: SET_RESET_GRID', () => {
-  it('resets the grid', () => {
-    const state = framesMock();
-    const nextState = reducer(state, actions.resetGrid());
-
-    expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual(['', '', '', '', '', '']);
-  });
-});
-
-describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
-  it('resets the grid', () => {
-    const frameIndex = 2;
-    const state = Map({
-      frames: Map({ activeIndex: 0 })
-    });
-    const nextState = reducer(state, actions.changeActiveFrame(frameIndex));
-
-    expect(nextState.get('activeIndex')).toEqual(frameIndex);
   });
 });
 
@@ -351,18 +250,14 @@ describe('framesReducer: CHANGE_DIMENSIONS', () => {
   });
 });
 
-describe('framesReducer: CHANGE_FRAME_INTERVAL', () => {
-  it('changes the interval of frame', () => {
-    const frameIndex = 1;
-    const interval = 70;
+describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
+  it('resets the grid', () => {
+    const frameIndex = 2;
     const state = Map({
-      list: List([
-        Map({ interval: 50 }),
-        Map({ interval: 100 })
-      ])
+      frames: Map({ activeIndex: 0 })
     });
-    const nextState = reducer(state, actions.changeFrameInterval(frameIndex, interval));
+    const nextState = reducer(state, actions.changeActiveFrame(frameIndex));
 
-    expect(nextState.getIn(['list', frameIndex, 'interval'])).toEqual(interval);
+    expect(nextState.get('activeIndex')).toEqual(frameIndex);
   });
 });
