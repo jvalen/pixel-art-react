@@ -180,7 +180,7 @@ function setDuration(state, duration) {
 function changeFrameInterval(state, frameIndex, interval) {
   return state.merge({
     frames: state.get('frames').updateIn(
-      [frameIndex, 'interval'],
+      ['list', frameIndex, 'interval'],
       () => interval
     )
   });
@@ -202,10 +202,7 @@ function partialReducer(state, action) {
     case types.CHANGE_DIMENSIONS:
       return changeDimensions(state, action);
     case types.SELECT_PALETTE_COLOR:
-      return selectPaletteColor(
-        state,
-        action
-      );
+      return selectPaletteColor(state, action);
     case types.SET_CUSTOM_COLOR:
       return setCustomColor(state, action.customColor);
     case types.DRAW_CELL:
