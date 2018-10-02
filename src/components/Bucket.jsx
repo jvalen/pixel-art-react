@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { switchTool } from '../store/actions/actionCreators';
-import { BUCKET } from '../store/reducers/drawingToolReducer';
+import { BUCKET } from '../store/reducers/drawingToolStates';
 
 const Bucket = props => (
   <button

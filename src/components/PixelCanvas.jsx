@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { drawCell, updateGridBoundaries } from '../store/actions/actionCreators';
 import GridWrapper from './GridWrapper';
 import throttle from '../utils/throttle';
-import { ERASER, EYEDROPPER } from '../store/reducers/drawingToolReducer';
+import { ERASER, EYEDROPPER } from '../store/reducers/drawingToolStates';
 
 const gridContainerClass = 'grid-container';
 
@@ -52,11 +52,15 @@ class PixelCanvas extends React.Component {
 const mapStateToProps = (state) => {
   const frames = state.present.get('frames');
   const activeFrameIndex = frames.get('activeIndex');
+  const drawingTool = state.present.get('drawingTool');
+  const palette = state.present.get('palette');
   return {
     grid: frames.getIn(['list', activeFrameIndex, 'grid']),
     columns: frames.get('columns'),
-    eyedropperOn: state.present.get('drawingTool') === EYEDROPPER,
-    eraserOn: state.present.get('drawingTool') === ERASER,
+    drawingTool,
+    paletteColor: palette.getIn(['currentColor', 'color']) || palette.getIn(['grid', 0, 'color']),
+    eyedropperOn: drawingTool === EYEDROPPER,
+    eraserOn: drawingTool === ERASER,
     gridBoundaries: state.present.get('gridBoundaries')
   };
 };

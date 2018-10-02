@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { switchTool } from '../store/actions/actionCreators';
-import { EYEDROPPER } from '../store/reducers/drawingToolReducer';
+import { EYEDROPPER } from '../store/reducers/drawingToolStates';
 
 const Eyedropper = props => (
   <button

@@ -1,6 +1,7 @@
 import { Map } from 'immutable';
 import reducer from '../src/store/reducers/reducer';
 import * as actions from '../src/store/actions/actionCreators';
+import { BUCKET, EYEDROPPER } from '../src/store/reducers/drawingToolStates';
 
 const applyActions = (actionList, state = Map()) => actionList.reduce(reducer, state);
 
@@ -45,35 +46,37 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
 describe('reducer: DRAW_CELL', () => {
   it('should draw the first cell of the grid with the selected color', () => {
     const id = 0;
+    const paletteColor = '#333333';
     const nextState = applyActions([
       actions.setInitialState({}),
-      actions.drawCell({ id })
+      actions.drawCell({ id, paletteColor })
     ]);
 
     expect(nextState.getIn(['frames', 'list', 0, 'grid', id]))
-      .toEqual(nextState.getIn(['palette', 'currentColor', 'color']));
+      .toEqual(paletteColor);
   });
 
-  it('should fill the empty grid with the selected color if bucket tool is active', () => {
+  it('should fill the empty grid with the palette color if bucket tool is active', () => {
     const id = 0;
-    const dummyState = reducer(Map(), actions.setInitialState({ columns: 2, rows: 2 }));
-    const currentColor = dummyState.getIn(['palette', 'currentColor', 'color']);
+    const paletteColor = '#333333';
     const nextState = applyActions([
-      actions.switchTool('BUCKET'),
-      actions.drawCell({ id })
-    ], dummyState);
+      actions.setInitialState({ columns: 2, rows: 2 }),
+      actions.switchTool(BUCKET),
+      actions.drawCell({ id, paletteColor })
+    ]);
 
     expect(nextState.getIn(['frames', 'list', 0, 'grid']).toJS())
-      .toEqual([currentColor, currentColor, currentColor, currentColor]);
+      .toEqual([paletteColor, paletteColor, paletteColor, paletteColor]);
   });
 
   it('should set the new color in the last palette spot if eyedropper tool is active', () => {
     const id = 1;
     const color = '#A1A1A1';
+    const drawingTool = EYEDROPPER;
     const nextState = applyActions([
       actions.setInitialState({}),
-      actions.switchTool('EYEDROPPER'),
-      actions.drawCell({ id, color })
+      actions.switchTool(drawingTool),
+      actions.drawCell({ id, color, drawingTool })
     ]);
     const paletteColorCount = nextState.getIn(['palette', 'grid']).size;
 
