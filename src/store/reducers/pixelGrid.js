@@ -64,7 +64,7 @@ export function resize(grid, gridProperty, increment, dimensions) {
     if (increment > 0) {
       // Add a row at the end
       for (let i = totalCells; i > 0; i -= dimensions.columns) {
-        newGrid = newGrid.insert(i, 0, '');
+        newGrid = newGrid.insert(i, '');
       }
     } else {
       for (let i = totalCells; i > 0; i -= dimensions.columns) {

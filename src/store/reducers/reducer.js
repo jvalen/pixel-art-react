@@ -145,7 +145,7 @@ function setDuration(state, duration) {
 function changeFrameInterval(state, frameIndex, interval) {
   return state.merge({
     frames: state.get('frames').updateIn(
-      [frameIndex, 'interval'],
+      ['list', frameIndex, 'interval'],
       () => interval
     )
   });
@@ -158,6 +158,10 @@ function updateGridBoundaries(state, action) {
   return state.set('gridBoundaries', {
     x, y, width, height
   });
+}
+
+function generateDefaultState() {
+  return setInitialState(Map(), { type: types.SET_INITIAL_STATE, state: {} });
 }
 
 function partialReducer(state, action) {
@@ -201,7 +205,7 @@ function partialReducer(state, action) {
   return state;
 }
 
-export default function (state = Map(), action) {
+export default function (state = generateDefaultState(), action) {
   return partialReducer(state, action).merge({
     drawingTool: drawingToolReducer(state.get('drawingTool'), action),
     palette: paletteReducer(state.get('palette'), action)

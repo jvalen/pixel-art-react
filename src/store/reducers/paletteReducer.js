@@ -101,7 +101,7 @@ const setCustomColor = (palette, { customColor }) => {
 
 const setPalette = (palette, action) => palette.set('grid', fromJS(action.paletteGridData));
 
-export default function paletteReducer(palette, action) {
+export default function paletteReducer(palette = createPalette(), action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
     case types.NEW_PROJECT:
