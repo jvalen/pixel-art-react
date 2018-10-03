@@ -160,6 +160,10 @@ function updateGridBoundaries(state, action) {
   });
 }
 
+function generateDefaultState() {
+  return setInitialState(Map(), { type: types.SET_INITIAL_STATE, state: {} });
+}
+
 function partialReducer(state, action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
@@ -201,7 +205,7 @@ function partialReducer(state, action) {
   return state;
 }
 
-export default function (state = Map(), action) {
+export default function (state = generateDefaultState(), action) {
   return partialReducer(state, action).merge({
     drawingTool: drawingToolReducer(state.get('drawingTool'), action),
     palette: paletteReducer(state.get('palette'), action)

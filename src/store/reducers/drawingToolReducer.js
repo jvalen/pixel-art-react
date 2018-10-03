@@ -19,7 +19,7 @@ const disableTool = (drawingTool, tool) => {
   return drawingTool;
 };
 
-export default function drawingToolReducer(drawingTool, action) {
+export default function drawingToolReducer(drawingTool = PENCIL, action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
     case types.NEW_PROJECT:
