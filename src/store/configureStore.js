@@ -3,7 +3,6 @@ import undoable, { includeAction } from 'redux-undo';
 import { fromJS } from 'immutable';
 import reducer from '../store/reducers/reducer';
 import {
-  SET_INITIAL_STATE,
   CHANGE_DIMENSIONS,
   DRAW_CELL,
   SHOW_SPINNER,
@@ -25,27 +24,16 @@ const configureStore = (devMode) => {
         SET_RESET_GRID,
         NEW_PROJECT
       ]),
-      debug: true
+      debug: true,
+      ignoreInitialState: true
     }));
 
-    /*
-      In production mode, the following actions are already dispatched
-      (Isomorphic app)
-    */
-    store.dispatch({
-      type: SET_INITIAL_STATE,
-      state: {}
-    });
     store.dispatch({
       type: SHOW_SPINNER
     });
   } else {
-    // Collects initial state created in the server side
     const initialState = window.__INITIAL_STATE__;
-
-    /* Make immutable the initial state */
     initialState.present = fromJS(initialState.present);
-    initialState.past = initialState.past.map(item => fromJS(item));
 
     store = createStore(undoable(reducer, {
       filter: includeAction([
@@ -56,7 +44,8 @@ const configureStore = (devMode) => {
         SET_RESET_GRID,
         NEW_PROJECT
       ]),
-      debug: false
+      debug: false,
+      ignoreInitialState: true
     }), initialState);
   }
 

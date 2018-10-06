@@ -166,7 +166,7 @@ const setFrames = (frames, action) => {
   });
 };
 
-export default function (frames, action) {
+export default function (frames = initFrames(), action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
     case types.NEW_PROJECT:
