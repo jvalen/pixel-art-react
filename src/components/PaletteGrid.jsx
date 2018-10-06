@@ -6,16 +6,16 @@ import PaletteColor from './PaletteColor';
 
 const PaletteGrid = (props) => {
   const getColors = () => {
-    const { grid, currentColor } = props;
+    const { grid, position } = props;
     const width = 100 / 6;
 
-    return grid.map((color, i) => (
+    return grid.map((color, index) => (
       <PaletteColor
         key={color.get('id')}
-        positionInPalette={i}
+        positionInPalette={index}
         width={width}
         color={color.get('color')}
-        selected={currentColor.get('position') === i}
+        selected={position === index}
         selectPaletteColor={props.selectPaletteColor}
       />
     ));

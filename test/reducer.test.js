@@ -25,21 +25,13 @@ describe('reducer: CHANGE_DIMENSIONS', () => {
   });
 });
 
-describe('reducer: SELECT_PALETTE_COLOR', () => {
-  it('should set the new color as the current color selected', () => {
-    const dummyState = reducer(Map(), actions.setInitialState({}));
-    const nextState = reducer(dummyState, actions.selectPaletteColor('#FFFFFF', 2));
-
-    expect(nextState.getIn(['palette', 'currentColor', 'color'])).toEqual('#FFFFFF');
-  });
-});
-
 describe('reducer: SET_CUSTOM_COLOR', () => {
   it('should set the current palette color to the custom one', () => {
     const dummyState = reducer(Map(), actions.setInitialState({}));
     const nextState = reducer(dummyState, actions.setCustomColor('#123456'));
+    const nextPalette = nextState.get('palette');
 
-    expect(nextState.getIn(['palette', 'currentColor', 'color'])).toEqual('#123456');
+    expect(nextPalette.getIn(['grid', nextPalette.get('position'), 'color'])).toEqual('#123456');
   });
 });
 
@@ -80,7 +72,7 @@ describe('reducer: DRAW_CELL', () => {
     ]);
     const paletteColorCount = nextState.getIn(['palette', 'grid']).size;
 
-    expect(nextState.getIn(['palette', 'currentColor', 'position'])).toEqual(paletteColorCount - 1);
+    expect(nextState.getIn(['palette', 'position'])).toEqual(paletteColorCount - 1);
   });
 });
 

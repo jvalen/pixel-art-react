@@ -23,10 +23,9 @@ export function updateGridBoundaries(gridElement) {
   };
 }
 
-export function selectPaletteColor(color, position) {
+export function selectPaletteColor(position) {
   return {
     type: types.SELECT_PALETTE_COLOR,
-    color,
     position
   };
 }

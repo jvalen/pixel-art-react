@@ -54,11 +54,13 @@ const mapStateToProps = (state) => {
   const activeFrameIndex = frames.get('activeIndex');
   const drawingTool = state.present.get('drawingTool');
   const palette = state.present.get('palette');
+  const position = palette.get('position');
+  const paletteCellPosition = position === -1 ? 0 : position;
   return {
     grid: frames.getIn(['list', activeFrameIndex, 'grid']),
     columns: frames.get('columns'),
     drawingTool,
-    paletteColor: palette.getIn(['currentColor', 'color']) || palette.getIn(['grid', 0, 'color']),
+    paletteColor: palette.getIn(['grid', paletteCellPosition, 'color']),
     eyedropperOn: drawingTool === EYEDROPPER,
     eraserOn: drawingTool === ERASER,
     gridBoundaries: state.present.get('gridBoundaries')
