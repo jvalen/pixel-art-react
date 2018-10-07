@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 import { renderToString } from 'react-dom/server';
-import undoable from 'redux-undo';
+import undoable, { includeAction } from 'redux-undo';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -13,7 +13,6 @@ import { OAuth } from 'oauth';
 import session from 'express-session';
 import React from 'react';
 import { createStore } from 'redux';
-import { SET_INITIAL_STATE, SHOW_SPINNER } from '../store/actions/actionTypes';
 import reducer from '../store/reducers/reducer';
 import pkgjson from '../../package.json';
 import {
@@ -22,6 +21,15 @@ import {
   drawSpritesheet
 } from '../utils/imageGeneration';
 import Root from '../components/Root';
+import {
+  SHOW_SPINNER,
+  CHANGE_DIMENSIONS,
+  DRAW_CELL,
+  NEW_PROJECT,
+  SET_DRAWING,
+  SET_CELL_SIZE,
+  SET_RESET_GRID
+} from '../store/actions/actionTypes';
 
 const app = express();
 module.exports = app;
@@ -79,14 +87,18 @@ app.use(session({
 function handleRender(req, res) {
   // Create a new Redux store instance
   const store = createStore(undoable(reducer, {
-    debug: false
+    filter: includeAction([
+      CHANGE_DIMENSIONS,
+      DRAW_CELL,
+      SET_DRAWING,
+      SET_CELL_SIZE,
+      SET_RESET_GRID,
+      NEW_PROJECT
+    ]),
+    debug: false,
+    ignoreInitialState: true
   }));
 
-  // Dispatch initial state
-  store.dispatch({
-    type: SET_INITIAL_STATE,
-    state: {}
-  });
   store.dispatch({
     type: SHOW_SPINNER
   });

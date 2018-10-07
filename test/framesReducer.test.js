@@ -192,7 +192,7 @@ describe('framesReducer: SET_RESET_GRID', () => {
 });
 
 describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
-  it('resets the grid', () => {
+  it('should set the given frame as active', () => {
     const frameIndex = 2;
     const state = Map({
       frames: Map({ activeIndex: 0 })
@@ -200,6 +200,33 @@ describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
     const nextState = reducer(state, actions.changeActiveFrame(frameIndex));
 
     expect(nextState.get('activeIndex')).toEqual(frameIndex);
+  });
+});
+
+describe('framesReducer: REORDER_FRAME', () => {
+  let state;
+  let nextState;
+  beforeEach(() => {
+    state = multipleFramesMock();
+  });
+
+  describe('Moving a frame from left to right', () => {
+    it('should set the desired frame after the target one', () => {
+      nextState = reducer(state, actions.reorderFrame(0, 1));
+      expect(nextState.getIn(['list', 1, 'grid']).toJS()).toEqual(firstGridMock);
+    });
+  });
+
+  describe('Moving a frame from right to left', () => {
+    it('should set the desired frame before the target one', () => {
+      nextState = reducer(state, actions.reorderFrame(1, 0));
+      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual(secondGridMock);
+    });
+  });
+
+  it('should set the reordered frame as the active', () => {
+    nextState = reducer(state, actions.reorderFrame(0, 1));
+    expect(nextState.get('activeIndex')).toEqual(1);
   });
 });
 

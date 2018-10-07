@@ -1,14 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import * as actionCreators from '../store/actions/actionCreators';
 import Frame from './Frame';
+
 
 class FramesHandler extends React.Component {
   constructor(props) {
     super(props);
     this.state = { newFrame: false };
+    this.onDragEnd = this.onDragEnd.bind(this);
+  }
+
+  onDragEnd(result) {
+    const { destination, source } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    this.props.actions.reorderFrame(source.index, destination.index);
   }
 
   onScrollbarUpdate() {
@@ -22,7 +42,7 @@ class FramesHandler extends React.Component {
     return this.props.list.map((frameData, index) => (
       <Frame
         key={frameData.get('key')}
-        data-id={index}
+        dataId={index}
         frame={frameData}
         columns={this.props.columns}
         rows={this.props.rows}
@@ -43,7 +63,6 @@ class FramesHandler extends React.Component {
     this.setState({ newFrame: true });
   }
 
-
   render() {
     return (
       <div className="frames-handler">
@@ -60,9 +79,20 @@ class FramesHandler extends React.Component {
             universal
             onUpdate={() => { this.onScrollbarUpdate(); }}
           >
-            <div className="list__container">
-              {this.getFrames()}
-            </div>
+            <DragDropContext onDragEnd={this.onDragEnd}>
+              <Droppable droppableId="droppable" direction="horizontal">
+                {provided => (
+                  <div
+                    className="list__container"
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {this.getFrames()}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </Scrollbars>
         </div>
       </div>

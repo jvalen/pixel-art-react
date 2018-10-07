@@ -111,6 +111,14 @@ export function changeActiveFrame(frameIndex) {
   };
 }
 
+export function reorderFrame(selectedIndex, destinationIndex) {
+  return {
+    type: types.REORDER_FRAME,
+    selectedIndex,
+    destinationIndex
+  };
+}
+
 export function createNewFrame() {
   return {
     type: types.CREATE_NEW_FRAME
