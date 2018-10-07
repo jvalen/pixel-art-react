@@ -90,9 +90,10 @@ export function resize(grid, gridProperty, increment, dimensions) {
 }
 
 export function applyBucket(grid, {
-  id, cellColor, paletteColor, columns, rows
+  id, paletteColor, columns, rows
 }) {
   const queue = [id];
+  const cellColor = grid.get(id);
   let currentId;
   let newGrid = grid;
   let adjacents;
