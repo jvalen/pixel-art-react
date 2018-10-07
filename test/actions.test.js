@@ -130,6 +130,15 @@ describe('actions', () => {
     expect(actions.changeActiveFrame(1)).toEqual(expectedAction);
   });
 
+  it('should create an action to reorder the dragged frame', () => {
+    const expectedAction = {
+      type: types.REORDER_FRAME,
+      selectedIndex: 0,
+      destinationIndex: 1
+    };
+    expect(actions.reorderFrame(0, 1)).toEqual(expectedAction);
+  });
+
   it('should create an action to create a new frame', () => {
     const expectedAction = {
       type: types.CREATE_NEW_FRAME
