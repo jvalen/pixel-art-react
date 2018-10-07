@@ -1,3 +1,4 @@
+import { PENCIL, ERASER } from '../src/store/reducers/drawingToolStates';
 import * as actions from '../src/store/actions/actionCreators';
 import * as types from '../src/store/actions/actionTypes';
 
@@ -35,11 +36,34 @@ describe('actions', () => {
     expect(actions.setCustomColor('#F0F0F0')).toEqual(expectedAction);
   });
 
-  it('should create an action to draw a cell', () => {
-    const type = types.DRAW_CELL;
+  it('should create APPLY_PENCIL when drawing tool is the pencil', () => {
+    const drawingTool = PENCIL;
     const id = 0;
     const color = '#f3f3f3';
-    expect(actions.drawCell({ id, color })).toEqual({ type, id, color });
+    const paletteColor = '#a2a2a2';
+    expect(actions.cellAction({
+      drawingTool, id, color, paletteColor
+    })).toEqual({
+      type: `APPLY_${drawingTool}`,
+      id,
+      color,
+      paletteColor
+    });
+  });
+
+  it('should create APPLY_ERASER when drawing tool is the eraser', () => {
+    const drawingTool = ERASER;
+    const id = 0;
+    const color = '#f3f3f3';
+    const paletteColor = '#a2a2a2';
+    expect(actions.cellAction({
+      drawingTool, id, color, paletteColor
+    })).toEqual({
+      type: `APPLY_${drawingTool}`,
+      id,
+      color,
+      paletteColor
+    });
   });
 
   it('should create an action to set a drawing', () => {

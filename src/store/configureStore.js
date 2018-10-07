@@ -4,7 +4,10 @@ import { fromJS } from 'immutable';
 import reducer from '../store/reducers/reducer';
 import {
   CHANGE_DIMENSIONS,
-  DRAW_CELL,
+  APPLY_PENCIL,
+  APPLY_ERASER,
+  APPLY_BUCKET,
+  APPLY_EYEDROPPER,
   SHOW_SPINNER,
   NEW_PROJECT,
   SET_DRAWING,
@@ -12,18 +15,23 @@ import {
   SET_RESET_GRID
 } from '../store/actions/actionTypes';
 
+const createIncludedActions = () => includeAction([
+  CHANGE_DIMENSIONS,
+  APPLY_PENCIL,
+  APPLY_ERASER,
+  APPLY_BUCKET,
+  APPLY_EYEDROPPER,
+  SET_DRAWING,
+  SET_CELL_SIZE,
+  SET_RESET_GRID,
+  NEW_PROJECT
+]);
+
 const configureStore = (devMode) => {
   let store;
   if (devMode) {
     store = createStore(undoable(reducer, {
-      filter: includeAction([
-        CHANGE_DIMENSIONS,
-        DRAW_CELL,
-        SET_DRAWING,
-        SET_CELL_SIZE,
-        SET_RESET_GRID,
-        NEW_PROJECT
-      ]),
+      filter: createIncludedActions(),
       debug: true,
       ignoreInitialState: true
     }));
@@ -36,14 +44,7 @@ const configureStore = (devMode) => {
     initialState.present = fromJS(initialState.present);
 
     store = createStore(undoable(reducer, {
-      filter: includeAction([
-        CHANGE_DIMENSIONS,
-        DRAW_CELL,
-        SET_DRAWING,
-        SET_CELL_SIZE,
-        SET_RESET_GRID,
-        NEW_PROJECT
-      ]),
+      filter: createIncludedActions(),
       debug: false,
       ignoreInitialState: true
     }), initialState);

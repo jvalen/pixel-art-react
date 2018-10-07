@@ -2,7 +2,6 @@ import { List, Map, fromJS } from 'immutable';
 import shortid from 'shortid';
 import * as types from '../actions/actionTypes';
 import { GRID_INITIAL_COLOR } from './pixelGrid';
-import { PENCIL, BUCKET, EYEDROPPER } from './drawingToolStates';
 
 const getPositionFirstMatchInPalette = (grid, color) =>
   grid.findIndex(gridColor => gridColor.get('color') === color);
@@ -80,11 +79,8 @@ const eyedropColor = (palette, action) => {
   return palette.set('position', getPositionFirstMatchInPalette(grid, cellColor));
 };
 
-const updatePalette = (palette, action) => {
-  const { drawingTool } = action;
-  if (drawingTool === EYEDROPPER) {
-    return eyedropColor(palette, action);
-  } else if ((drawingTool === PENCIL || drawingTool === BUCKET) && !isColorSelected(palette)) {
+const preparePalette = (palette) => {
+  if (!isColorSelected(palette)) {
     return resetSelectedColorState(palette);
   }
   return palette;
@@ -106,8 +102,11 @@ export default function paletteReducer(palette = createPalette(), action) {
     case types.SET_INITIAL_STATE:
     case types.NEW_PROJECT:
       return createPalette();
-    case types.DRAW_CELL:
-      return updatePalette(palette, action);
+    case types.APPLY_EYEDROPPER:
+      return eyedropColor(palette, action);
+    case types.APPLY_PENCIL:
+    case types.APPLY_BUCKET:
+      return preparePalette(palette);
     case types.SELECT_PALETTE_COLOR:
       return selectPaletteColor(palette, action);
     case types.SET_CUSTOM_COLOR:

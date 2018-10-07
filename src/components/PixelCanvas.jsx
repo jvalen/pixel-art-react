@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { drawCell, updateGridBoundaries } from '../store/actions/actionCreators';
+import { cellAction, updateGridBoundaries } from '../store/actions/actionCreators';
 import GridWrapper from './GridWrapper';
 import throttle from '../utils/throttle';
 import { ERASER, EYEDROPPER } from '../store/reducers/drawingToolStates';
@@ -68,7 +68,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  drawCell: cellProps => dispatch(drawCell(cellProps)),
+  cellAction: cellProps => dispatch(cellAction(cellProps)),
   updateGridBoundaries: throttle(() => {
     const gridElement = document.getElementsByClassName(gridContainerClass)[0];
     dispatch(updateGridBoundaries(gridElement));
