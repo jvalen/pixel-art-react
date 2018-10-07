@@ -53,6 +53,7 @@
     "react": "^16.3.2",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-addons-shallow-compare": "^15.6.2",
+    "react-beautiful-dnd": "^9.0.2",
     "react-color": "^2.14.1",
     "react-cookie-banner": "3.0.0",
     "react-custom-scrollbars": "^4.2.1",
