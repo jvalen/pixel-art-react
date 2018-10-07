@@ -5,20 +5,20 @@ import Preview from './Preview';
 
 export default class Frame extends React.Component {
   handleClick() {
-    this.props.actions.changeActiveFrame(this.props['data-id']);
+    this.props.actions.changeActiveFrame(this.props.dataId);
   }
 
   deleteFrame(e) {
     e.stopPropagation();
     if (this.props.active) {
-      this.props.actions.deleteFrame(this.props['data-id']);
+      this.props.actions.deleteFrame(this.props.dataId);
     }
   }
 
   duplicateFrame(e) {
     e.stopPropagation();
     if (this.props.active) {
-      this.props.actions.duplicateFrame(this.props['data-id']);
+      this.props.actions.duplicateFrame(this.props.dataId);
     }
   }
 
@@ -26,7 +26,7 @@ export default class Frame extends React.Component {
     e.stopPropagation();
     if (this.props.active) {
       this.props.actions.changeFrameInterval(
-        this.props['data-id'],
+        this.props.dataId,
         this.percentage.value
       );
     }
@@ -34,7 +34,7 @@ export default class Frame extends React.Component {
 
   render() {
     return (
-      <Draggable key={this.props['data-id']} draggableId={this.props['data-id']} index={this.props['data-id']}>
+      <Draggable key={this.props.dataId} draggableId={this.props.dataId} index={this.props.dataId}>
         {provided => (
           <div
             className={`frame${this.props.active ? ' active' : ''}`}

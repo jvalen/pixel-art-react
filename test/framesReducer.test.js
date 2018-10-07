@@ -207,8 +207,7 @@ describe('framesReducer: SET_RESET_GRID', () => {
 });
 
 describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
-  //TODO: Cambiar esto!!!!!!!!!!!!!!!!!!!!!!!!!
-  it('resets the grid', () => {
+  it('should set the given frame as active', () => {
     const frameIndex = 2;
     const state = Map({
       frames: Map({ activeIndex: 0 })
@@ -219,7 +218,7 @@ describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
   });
 });
 
-describe('framesReducer: REORDER_FRAME', () => {  
+describe('framesReducer: REORDER_FRAME', () => {
   let state;
   let nextState;
   beforeEach(() => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import * as actionCreators from '../store/actions/actionCreators';
 import Frame from './Frame';
@@ -42,7 +42,7 @@ class FramesHandler extends React.Component {
     return this.props.list.map((frameData, index) => (
       <Frame
         key={frameData.get('key')}
-        data-id={index}
+        dataId={index}
         frame={frameData}
         columns={this.props.columns}
         rows={this.props.rows}
