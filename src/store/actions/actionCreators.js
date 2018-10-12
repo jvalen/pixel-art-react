@@ -37,10 +37,15 @@ export function setCustomColor(customColor) {
   };
 }
 
-export function drawCell(actionProps) {
-  return Object.assign({
-    type: types.DRAW_CELL
-  }, actionProps);
+export function cellAction({
+  drawingTool, id, color, paletteColor
+}) {
+  return {
+    type: `APPLY_${drawingTool}`,
+    id,
+    color,
+    paletteColor
+  };
 }
 
 export function setDrawing(frames, paletteGridData, cellSize, columns, rows) {

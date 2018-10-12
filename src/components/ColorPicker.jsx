@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Picker from 'react-color';
 import { switchTool, setCustomColor } from '../store/actions/actionCreators';
-import { COLOR_PICKER } from '../store/reducers/drawingToolStates';
+import { COLOR_PICKER, PENCIL } from '../store/reducers/drawingToolStates';
 
 class ColorPicker extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class ColorPicker extends React.Component {
 
   handleClose() {
     this.setState({ displayColorPicker: false });
+    this.props.setPencilTool();
   }
 
   render() {
@@ -92,9 +93,11 @@ const mapStateToProps = (state) => {
 };
 
 const switchColorPickerAction = switchTool(COLOR_PICKER);
+const setPencilToolAction = switchTool(PENCIL);
 const mapDispatchToProps = dispatch => ({
   switchColorPicker: () => dispatch(switchColorPickerAction),
-  setCustomColor: color => dispatch(setCustomColor(color.hex))
+  setCustomColor: color => dispatch(setCustomColor(color.hex)),
+  setPencilTool: () => dispatch(setPencilToolAction)
 });
 
 const ColorPickerContainer = connect(

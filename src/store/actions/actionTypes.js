@@ -1,9 +1,14 @@
+import { PENCIL, ERASER, BUCKET, EYEDROPPER } from '../reducers/drawingToolStates';
+
 export const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
 export const CHANGE_DIMENSIONS = 'CHANGE_DIMENSIONS';
 export const SET_GRID_DIMENSION = 'SET_GRID_DIMENSION';
 export const SELECT_PALETTE_COLOR = 'SELECT_PALETTE_COLOR';
 export const SET_CUSTOM_COLOR = 'SET_CUSTOM_COLOR';
-export const DRAW_CELL = 'DRAW_CELL';
+export const APPLY_PENCIL = `APPLY_${PENCIL}`;
+export const APPLY_ERASER = `APPLY_${ERASER}`;
+export const APPLY_BUCKET = `APPLY_${BUCKET}`;
+export const APPLY_EYEDROPPER = `APPLY_${EYEDROPPER}`;
 export const SET_DRAWING = 'SET_DRAWING';
 export const END_DRAG = 'END_DRAG';
 export const SWITCH_TOOL = 'SWITCH_TOOL';
