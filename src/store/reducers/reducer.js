@@ -53,6 +53,10 @@ function updateGridBoundaries(state, action) {
   });
 }
 
+function generateDefaultState() {
+  return setInitialState(Map(), { type: types.SET_INITIAL_STATE, state: {} });
+}
+
 const pipeReducers = reducers => (initialState, action) =>
   reducers.reduce((state, reducer) => reducer(state, action), initialState);
 
@@ -81,7 +85,7 @@ function partialReducer(state, action) {
   return state;
 }
 
-export default function (state = Map(), action) {
+export default function (state = generateDefaultState(), action) {
   return partialReducer(state, action).merge({
     drawingTool: drawingToolReducer(state.get('drawingTool'), action),
     palette: paletteReducer(state.get('palette'), action),

@@ -61,6 +61,16 @@ const resetIntervals = (frameList) => {
   });
 };
 
+const getFrame = (frames, frameId) => {
+  const frameList = frames.get('list');
+  const frame = frameList.get(frameId);
+  return Map({
+    grid: frame.get('grid'),
+    interval: frame.get('interval'),
+    key: shortid.generate()
+  });
+};
+
 const initFrames = (action = {}) => {
   const options = action.options || {};
   const columns = parseInt(options.columns, 10) || 20;
@@ -77,6 +87,26 @@ const initFrames = (action = {}) => {
 const changeActiveFrame = (frames, action) => {
   const activeIndex = action.frameIndex;
   return frames.merge({ activeIndex });
+};
+
+const reorderFrame = (frames, action) => {
+  const frameList = frames.get('list');
+  const { selectedIndex, destinationIndex } = action;
+  const targetIsBefore = selectedIndex < destinationIndex;
+  const insertPosition = destinationIndex + (targetIsBefore ? 1 : 0);
+  const deletePosition = selectedIndex + (targetIsBefore ? 0 : 1);
+  const list = resetIntervals(frameList.splice(
+    insertPosition,
+    0,
+    getFrame(frames, selectedIndex)
+  ).splice(
+    deletePosition,
+    1
+  ));
+
+  return frames.merge({
+    list, activeIndex: destinationIndex
+  });
 };
 
 const createNewFrame = (frames) => {
@@ -107,15 +137,10 @@ const deleteFrame = (frames, action) => {
 const duplicateFrame = (frames, action) => {
   const { frameId } = action;
   const frameList = frames.get('list');
-  const frame = frameList.get(frameId);
   const list = resetIntervals(frameList.splice(
     frameId,
     0,
-    Map({
-      grid: frame.get('grid'),
-      interval: frame.get('interval'),
-      key: shortid.generate()
-    })
+    getFrame(frames, frameId)
   ));
   return frames.merge({
     list, activeIndex: frameId + 1
@@ -157,7 +182,7 @@ const setFrames = (frames, action) => {
   });
 };
 
-export default function (frames, action) {
+export default function (frames = initFrames(), action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
     case types.NEW_PROJECT:
@@ -166,6 +191,8 @@ export default function (frames, action) {
       return setFrames(frames, action);
     case types.CHANGE_ACTIVE_FRAME:
       return changeActiveFrame(frames, action);
+    case types.REORDER_FRAME:
+      return reorderFrame(frames, action);
     case types.CREATE_NEW_FRAME:
       return createNewFrame(frames);
     case types.DELETE_FRAME:

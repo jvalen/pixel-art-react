@@ -36,7 +36,7 @@ describe('actions', () => {
     expect(actions.setCustomColor('#F0F0F0')).toEqual(expectedAction);
   });
 
-  it('should create APPLY_PENCIL when drawing tool is a pencil', () => {
+  it('should create APPLY_PENCIL when drawing tool is the pencil', () => {
     const drawingTool = PENCIL;
     const id = 0;
     const color = '#f3f3f3';
@@ -51,7 +51,7 @@ describe('actions', () => {
     });
   });
 
-  it('should create APPLY_ERASER when drawing tool is a pencil', () => {
+  it('should create APPLY_ERASER when drawing tool is the eraser', () => {
     const drawingTool = ERASER;
     const id = 0;
     const color = '#f3f3f3';
@@ -152,6 +152,15 @@ describe('actions', () => {
       frameIndex: 1
     };
     expect(actions.changeActiveFrame(1)).toEqual(expectedAction);
+  });
+
+  it('should create an action to reorder the dragged frame', () => {
+    const expectedAction = {
+      type: types.REORDER_FRAME,
+      selectedIndex: 0,
+      destinationIndex: 1
+    };
+    expect(actions.reorderFrame(0, 1)).toEqual(expectedAction);
   });
 
   it('should create an action to create a new frame', () => {
