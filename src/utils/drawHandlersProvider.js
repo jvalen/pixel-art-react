@@ -19,12 +19,10 @@ const fromEventToId = (ev, props) => {
   return fromPositionToId(posX, posY, grid, columns);
 };
 
-const getCellActionProps = ({ grid, paletteColor, drawingTool }, id) => ({
-  id,
-  color: grid.get(id),
-  paletteColor,
-  drawingTool
-});
+const getCellActionProps = (props, id) => Object.assign({
+  color: props.grid.get(id),
+  id
+}, props);
 
 const drawHandlersProvider = rootComponent => ({
   onMouseUp() {

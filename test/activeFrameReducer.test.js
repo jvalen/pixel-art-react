@@ -55,11 +55,13 @@ describe('framesReducer: APPLY_ERASER', () => {
 describe('framesReducer: APPLY_BUCKET', () => {
   const paletteColor = '#444444';
   const type = APPLY_BUCKET;
+  const columns = 2;
+  const rows = 3;
 
   it('drawing color area with two cells', () => {
     const state = framesMock();
     const nextState = reducer(state, {
-      type, paletteColor, id: 1
+      type, paletteColor, columns, rows, id: 1
     });
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
@@ -72,7 +74,7 @@ describe('framesReducer: APPLY_BUCKET', () => {
   it('drawing color area with three cells', () => {
     const state = framesMock();
     const nextState = reducer(state, {
-      type, paletteColor, id: 2
+      type, paletteColor, columns, rows, id: 2
     });
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
@@ -85,7 +87,7 @@ describe('framesReducer: APPLY_BUCKET', () => {
   it('drawing color area with one cell', () => {
     const state = framesMock();
     const nextState = reducer(state, {
-      type, paletteColor, id: 5
+      type, paletteColor, columns, rows, id: 5
     });
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([

@@ -59,6 +59,7 @@ const mapStateToProps = (state) => {
   return {
     grid: frames.getIn(['list', activeFrameIndex, 'grid']),
     columns: frames.get('columns'),
+    rows: frames.get('rows'),
     drawingTool,
     paletteColor: palette.getIn(['grid', paletteCellPosition, 'color']),
     eyedropperOn: drawingTool === EYEDROPPER,

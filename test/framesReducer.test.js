@@ -290,7 +290,7 @@ describe('framesReducer: CHANGE_DIMENSIONS', () => {
 });
 
 describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
-  it('resets the grid', () => {
+  it('changes the active frame', () => {
     const frameIndex = 2;
     const state = Map({
       frames: Map({ activeIndex: 0 })

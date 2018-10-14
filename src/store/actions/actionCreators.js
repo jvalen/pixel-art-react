@@ -38,13 +38,15 @@ export function setCustomColor(customColor) {
 }
 
 export function cellAction({
-  drawingTool, id, color, paletteColor
+  id, drawingTool, color, paletteColor, columns, rows
 }) {
   return {
     type: `APPLY_${drawingTool}`,
     id,
     color,
-    paletteColor
+    paletteColor,
+    columns,
+    rows
   };
 }
 
