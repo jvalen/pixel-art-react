@@ -38,13 +38,15 @@ export function setCustomColor(customColor) {
 }
 
 export function cellAction({
-  drawingTool, id, color, paletteColor
+  id, drawingTool, color, paletteColor, columns, rows
 }) {
   return {
     type: `APPLY_${drawingTool}`,
     id,
     color,
-    paletteColor
+    paletteColor,
+    columns,
+    rows
   };
 }
 
@@ -146,10 +148,9 @@ export function setDuration(duration) {
   };
 }
 
-export function changeFrameInterval(frameIndex, interval) {
+export function changeFrameInterval(interval) {
   return {
     type: types.CHANGE_FRAME_INTERVAL,
-    frameIndex,
     interval
   };
 }

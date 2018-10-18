@@ -1,7 +1,7 @@
 import { List, Map, fromJS } from 'immutable';
 import shortid from 'shortid';
 import * as types from '../actions/actionTypes';
-import { GRID_INITIAL_COLOR } from './pixelGrid';
+import { GRID_INITIAL_COLOR } from './activeFrameReducer';
 
 const getPositionFirstMatchInPalette = (grid, color) =>
   grid.findIndex(gridColor => gridColor.get('color') === color);

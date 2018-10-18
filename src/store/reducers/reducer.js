@@ -1,6 +1,7 @@
 import { List, Map } from 'immutable';
 import paletteReducer from './paletteReducer';
 import framesReducer from './framesReducer';
+import activeFrameReducer from './activeFrameReducer';
 import drawingToolReducer from './drawingToolReducer';
 import * as types from '../actions/actionTypes';
 
@@ -56,6 +57,9 @@ function generateDefaultState() {
   return setInitialState(Map(), { type: types.SET_INITIAL_STATE, state: {} });
 }
 
+const pipeReducers = reducers => (initialState, action) =>
+  reducers.reduce((state, reducer) => reducer(state, action), initialState);
+
 function partialReducer(state, action) {
   switch (action.type) {
     case types.SET_INITIAL_STATE:
@@ -85,6 +89,6 @@ export default function (state = generateDefaultState(), action) {
   return partialReducer(state, action).merge({
     drawingTool: drawingToolReducer(state.get('drawingTool'), action),
     palette: paletteReducer(state.get('palette'), action),
-    frames: framesReducer(state.get('frames'), action)
+    frames: pipeReducers([framesReducer, activeFrameReducer])(state.get('frames'), action)
   });
 }
