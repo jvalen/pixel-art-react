@@ -15,16 +15,22 @@ const initialSetup = (dispatch, storage) => {
     const currentProjectIndex = dataStored.current;
     if (currentProjectIndex >= 0) {
       const {
-        frames, paletteGridData, columns, rows, cellSize
-      } = dataStored.stored[currentProjectIndex];
-
-      dispatch(actionCreators.setDrawing(
         frames,
         paletteGridData,
-        cellSize,
         columns,
-        rows
-      ));
+        rows,
+        cellSize
+      } = dataStored.stored[currentProjectIndex];
+
+      dispatch(
+        actionCreators.setDrawing(
+          frames,
+          paletteGridData,
+          cellSize,
+          columns,
+          rows
+        )
+      );
     }
   } else {
     // If no data initialize storage

@@ -14,7 +14,7 @@ const STORAGE_KEY = 'pixelart-react-v3-0-0';
  *   current: position
  *  }
  *
-*/
+ */
 
 function saveDataToStorage(storage, data) {
   try {
@@ -29,10 +29,13 @@ function saveDataToStorage(storage, data) {
   Storage initialization
 */
 export function initStorage(storage) {
-  storage.setItem(STORAGE_KEY, JSON.stringify({
-    stored: [exampleCat], // Load an example project data by default
-    current: 0
-  }));
+  storage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({
+      stored: [exampleCat], // Load an example project data by default
+      current: 0
+    })
+  );
 }
 
 /*

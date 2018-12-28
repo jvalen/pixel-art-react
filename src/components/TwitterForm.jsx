@@ -5,7 +5,8 @@ import { saveProjectToStorage } from '../utils/storage';
 export default class TwitterForm extends React.Component {
   constructor(props) {
     super(props);
-    const initialText = 'made with https://www.pixelartcss.com/ by @sprawlWalker #pixelart';
+    const initialText =
+      'made with https://www.pixelartcss.com/ by @sprawlWalker #pixelart';
     this.state = {
       charsLeft: props.maxChars - initialText.length,
       initialText
@@ -20,8 +21,13 @@ export default class TwitterForm extends React.Component {
   tweetDrawing(type) {
     if (this.state.charsLeft >= 0) {
       const {
-        frames, activeFrame, paletteGridData,
-        columns, rows, cellSize, duration
+        frames,
+        activeFrame,
+        paletteGridData,
+        columns,
+        rows,
+        cellSize,
+        duration
       } = this.props;
 
       // Store current drawing in the storage
@@ -58,31 +64,34 @@ export default class TwitterForm extends React.Component {
   render() {
     return (
       <div className="twitter-form">
-        <h2>
-          You are about to share your awesome drawing on Twitter
-        </h2>
+        <h2>You are about to share your awesome drawing on Twitter</h2>
         <textarea
-          ref={(c) => { this.tweetText = c; }}
-          onChange={(event) => { this.handleTextChange(event); }}
+          ref={c => {
+            this.tweetText = c;
+          }}
+          onChange={event => {
+            this.handleTextChange(event);
+          }}
           defaultValue={this.state.initialText}
         />
         <div
-          className={
-            `twitter-form__count
-            ${this.state.charsLeft < 0 ? ' max-reached' : ''}`
-          }
+          className={`twitter-form__count
+            ${this.state.charsLeft < 0 ? ' max-reached' : ''}`}
         >
           {this.state.charsLeft}
         </div>
         <h3>
-          Please customize your message above,
-          the drawing will be automatically included
+          Please customize your message above, the drawing will be automatically
+          included
         </h3>
         <button
           className="twitter-form__tweet"
-          onClick={() => { this.tweetDrawing(this.props.tweetType); }}
+          onClick={() => {
+            this.tweetDrawing(this.props.tweetType);
+          }}
         >
-          <span />TWEET
+          <span />
+          TWEET
         </button>
       </div>
     );

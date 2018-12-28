@@ -16,16 +16,17 @@ class Modal extends React.Component {
     let options;
 
     if (props.type !== 'load') {
-      options = [{
-        value: 'single',
-        label: 'single',
-        id: 3
-      }];
+      options = [
+        {
+          value: 'single',
+          label: 'single',
+          id: 3
+        }
+      ];
 
       if (props.frames.size > 1) {
         const spritesheetSupport =
-        props.type === 'download' ||
-        props.type === 'twitter';
+          props.type === 'download' || props.type === 'twitter';
 
         const animationOption = {
           value: 'animation',
@@ -69,8 +70,8 @@ class Modal extends React.Component {
   getModalContent(props) {
     const options = this.constructor.generateRadioOptions(props);
     let content;
-    const radioOptions = props.type !== 'load' ?
-      (
+    const radioOptions =
+      props.type !== 'load' ? (
         <div className="modal__preview">
           <RadioSelector
             name="preview-type"
@@ -78,7 +79,7 @@ class Modal extends React.Component {
             change={this.changeRadioType}
             options={options}
           />
-          {this.state.previewType !== 'spritesheet' ?
+          {this.state.previewType !== 'spritesheet' ? (
             <div className="modal__preview--wrapper">
               <Preview
                 key="0"
@@ -91,12 +92,9 @@ class Modal extends React.Component {
                 animate={this.state.previewType === 'animation'}
               />
             </div>
-            : null
-          }
+          ) : null}
         </div>
-      )
-      :
-      (
+      ) : (
         <div className="modal__load">
           <RadioSelector
             name="load-type"
@@ -177,7 +175,12 @@ class Modal extends React.Component {
 
     return (
       <div className="modal">
-        <button className="close" onClick={() => { props.close(); }}>
+        <button
+          className="close"
+          onClick={() => {
+            props.close();
+          }}
+        >
           CLOSE
         </button>
         {radioOptions}
@@ -215,7 +218,9 @@ class Modal extends React.Component {
     return (
       <ModalReact
         isOpen={this.props.isOpen}
-        onRequestClose={() => { this.props.close(); }}
+        onRequestClose={() => {
+          this.props.close();
+        }}
         style={styles.modal}
         contentLabel={`Dialog ${this.props.type || ''}`}
       >
@@ -225,7 +230,7 @@ class Modal extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const frames = state.present.get('frames');
   const activeFrameIndex = frames.get('activeIndex');
   return {

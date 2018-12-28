@@ -1,12 +1,13 @@
 @font-face {
   font-family: 'minecraftiaregular';
   src: url('fonts/files/minecraftia-regular-webfont.eot');
-  src:
-    url('fonts/files/minecraftia-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  src: url('fonts/files/minecraftia-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
     url('fonts/files/minecraftia-regular-webfont.woff2') format('woff2'),
     url('fonts/files/minecraftia-regular-webfont.woff') format('woff'),
     url('fonts/files/minecraftia-regular-webfont.ttf') format('truetype'),
-    url('fonts/files/minecraftia-regular-webfont.svg#minecraftiaregular') format('svg');
+    url('fonts/files/minecraftia-regular-webfont.svg#minecraftiaregular')
+      format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,8 +15,8 @@
 @font-face {
   font-family: 'WebFontIcons';
   src: url('fonts/files/webfont-icons.eot?v=4.5.0');
-  src:
-    url('fonts/files/webfont-icons.eot?#iefix&v=4.5.0') format('embedded-opentype'),
+  src: url('fonts/files/webfont-icons.eot?#iefix&v=4.5.0')
+      format('embedded-opentype'),
     url('fonts/files/webfont-icons.woff?v=4.5.0') format('woff'),
     url('fonts/files/webfont-icons.ttf?v=4.5.0') format('truetype'),
     url('fonts/files/webfont-icons.svg?v=4.5.0#webfonticons') format('svg');
@@ -37,53 +38,53 @@
 }
 
 @define-extend eyedropper {
-  content: "\62";
+  content: '\62';
 }
 
 @define-extend paint-brush {
-  content: "\6d";
+  content: '\6d';
 }
 
 @define-extend eraser {
-  content: "\6c";
+  content: '\6c';
 }
 
 @define-extend trash-o {
-  content: "\68";
+  content: '\68';
 }
 
 @define-extend files-o {
-  content: "\69";
+  content: '\69';
 }
 
 @define-extend download {
-  content: "\66";
+  content: '\66';
 }
 
 @define-extend twitter {
-  content: "\65";
+  content: '\65';
 }
 
 @define-extend undo {
-  content: "\63";
+  content: '\63';
 }
 
 @define-extend repeat {
-  content: "\64";
+  content: '\64';
 }
 
 @define-extend columns {
-  content: "\6b";
+  content: '\6b';
 }
 
 @define-extend rows {
-  content: "\6a";
+  content: '\6a';
 }
 
 @define-extend help {
-  content: "\67";
+  content: '\67';
 }
 
 @define-extend bucket {
-  content: "\61";
+  content: '\61';
 }

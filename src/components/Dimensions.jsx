@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import Picker from './Picker';
 import * as actionCreators from '../store/actions/actionCreators';
 
-const Dimensions = (props) => {
+const Dimensions = props => {
   const changeDimensions = (gridProperty, behaviour) => {
     props.actions.changeDimensions(gridProperty, behaviour);
   };
@@ -13,16 +13,8 @@ const Dimensions = (props) => {
 
   return (
     <div className="dimensions">
-      <Picker
-        type="columns"
-        value={columns}
-        action={changeDimensions}
-      />
-      <Picker
-        type="rows"
-        value={rows}
-        action={changeDimensions}
-      />
+      <Picker type="columns" value={columns} action={changeDimensions} />
+      <Picker type="rows" value={rows} action={changeDimensions} />
     </div>
   );
 };

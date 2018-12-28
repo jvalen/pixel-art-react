@@ -21,12 +21,14 @@ const shareDrawing = (imageData, text, action, sendNotification) => {
     default: {
       // Multiple frame type
       drawingData = imageData.frames.reduce((acc, currentFrame) => {
-        acc.push(generatePixelDrawCss(
-          currentFrame,
-          imageData.columns,
-          imageData.cellSize,
-          'array'
-        ));
+        acc.push(
+          generatePixelDrawCss(
+            currentFrame,
+            imageData.columns,
+            imageData.cellSize,
+            'array'
+          )
+        );
         return acc;
       }, []);
       break;
@@ -52,24 +54,28 @@ const shareDrawing = (imageData, text, action, sendNotification) => {
       fetch('/auth/twitter', {
         credentials: 'same-origin',
         method: 'POST',
+        // prettier-ignore
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(css)
-      }).then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          // Redirect to Twitter with the new token
-          response.json().then((responseText) => {
-            window.location = responseText;
-          });
-        } else {
+      }).then(
+        response => {
+          if (response.status >= 200 && response.status < 300) {
+            // Redirect to Twitter with the new token
+            response.json().then(responseText => {
+              window.location = responseText;
+            });
+          } else {
+            sendNotification('Sorry: Error sharing');
+          }
+        },
+        () => {
+          // Handle network error
           sendNotification('Sorry: Error sharing');
         }
-      }, () => {
-        // Handle network error
-        sendNotification('Sorry: Error sharing');
-      });
+      );
       break;
     default:
   }

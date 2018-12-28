@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-const CellSize = (props) => {
-  const handleCellSizeChange = (event) => {
+const CellSize = props => {
+  const handleCellSizeChange = event => {
     props.actions.setCellSize(+event.target.value || 0);
   };
 
@@ -17,7 +17,9 @@ const CellSize = (props) => {
         <input
           type="number"
           value={cellSize}
-          onChange={(ev) => { handleCellSizeChange(ev); }}
+          onChange={ev => {
+            handleCellSizeChange(ev);
+          }}
           id="cell-size__input"
         />
       </label>

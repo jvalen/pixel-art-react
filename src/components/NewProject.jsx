@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-const NewProject = (props) => {
+const NewProject = props => {
   const newProject = () => {
     props.actions.newProject();
   };
@@ -11,7 +11,9 @@ const NewProject = (props) => {
   return (
     <div className="new-project">
       <button
-        onClick={() => { newProject(); }}
+        onClick={() => {
+          newProject();
+        }}
       >
         NEW
       </button>

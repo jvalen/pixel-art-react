@@ -45,11 +45,12 @@ function setDuration(state, duration) {
 }
 
 function updateGridBoundaries(state, action) {
-  const {
-    x, y, width, height
-  } = action.gridElement.getBoundingClientRect();
+  const { x, y, width, height } = action.gridElement.getBoundingClientRect();
   return state.set('gridBoundaries', {
-    x, y, width, height
+    x,
+    y,
+    width,
+    height
   });
 }
 
@@ -85,10 +86,13 @@ function partialReducer(state, action) {
   return state;
 }
 
-export default function (state = generateDefaultState(), action) {
+export default function(state = generateDefaultState(), action) {
   return partialReducer(state, action).merge({
     drawingTool: drawingToolReducer(state.get('drawingTool'), action),
     palette: paletteReducer(state.get('palette'), action),
-    frames: pipeReducers([framesReducer, activeFrameReducer])(state.get('frames'), action)
+    frames: pipeReducers([framesReducer, activeFrameReducer])(
+      state.get('frames'),
+      action
+    )
   });
 }

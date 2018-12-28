@@ -5,7 +5,9 @@ const GRID_INITIAL_COLOR = '#313131';
 export default class PixelCell extends React.Component {
   shouldComponentUpdate(nextProps) {
     const keys = ['color', 'width'];
-    const isSame = keys.every(key => this.props.cell[key] === nextProps.cell[key]);
+    const isSame = keys.every(
+      key => this.props.cell[key] === nextProps.cell[key]
+    );
     return !isSame;
   }
   render() {

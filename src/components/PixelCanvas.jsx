@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { cellAction, updateGridBoundaries } from '../store/actions/actionCreators';
+import {
+  cellAction,
+  updateGridBoundaries
+} from '../store/actions/actionCreators';
 import GridWrapper from './GridWrapper';
 import throttle from '../utils/throttle';
 import { ERASER, EYEDROPPER } from '../store/reducers/drawingToolStates';
@@ -49,7 +52,7 @@ class PixelCanvas extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const frames = state.present.get('frames');
   const activeFrameIndex = frames.get('activeIndex');
   const drawingTool = state.present.get('drawingTool');

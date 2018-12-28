@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { selectPaletteColor } from '../store/actions/actionCreators';
 import PaletteColor from './PaletteColor';
 
-const PaletteGrid = (props) => {
+const PaletteGrid = props => {
   const getColors = () => {
     const { grid, position } = props;
     const width = 100 / 6;
@@ -21,18 +21,18 @@ const PaletteGrid = (props) => {
     ));
   };
 
-  return (
-    <div className="palette-grid">
-      {getColors()}
-    </div>
-  );
+  return <div className="palette-grid">{getColors()}</div>;
 };
 
 const mapStateToProps = state => state.present.get('palette').toObject();
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  selectPaletteColor
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      selectPaletteColor
+    },
+    dispatch
+  );
 
 const PaletteGridContainer = connect(
   mapStateToProps,

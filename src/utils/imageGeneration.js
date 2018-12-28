@@ -23,23 +23,17 @@ function generateFrame(frameData, width, height, opacity, pixelSize) {
   }));
 
   const BGCOLOR = '#000000';
-  const FILLCOLOR = (
-    `0${Math.round((1 - opacity) * 255).toString(16)}`
-  ).slice(-2);
-
-  const gmImg = gm(
-    width, height,
-    `${BGCOLOR}${FILLCOLOR}`
+  const FILLCOLOR = `0${Math.round((1 - opacity) * 255).toString(16)}`.slice(
+    -2
   );
+
+  const gmImg = gm(width, height, `${BGCOLOR}${FILLCOLOR}`);
 
   for (let i = 0; i < frame.length; i++) {
     const aux = frame[i];
-    gmImg.fill(aux.color).drawRectangle(
-      aux.x - pixelSize,
-      aux.y - pixelSize,
-      aux.x,
-      aux.y
-    );
+    gmImg
+      .fill(aux.color)
+      .drawRectangle(aux.x - pixelSize, aux.y - pixelSize, aux.x, aux.y);
   }
 
   return gmImg;
@@ -49,29 +43,35 @@ function generateFrame(frameData, width, height, opacity, pixelSize) {
  * Creates frame images
  */
 function createFrameImages(cssData, width, height, opacity, splittedPath) {
-  return cssData.drawingData.reduce((acc, frame, index) => {
-    const gmImg = generateFrame(frame, width, height, opacity, cssData.pixelSize);
+  return cssData.drawingData.reduce(
+    (acc, frame, index) => {
+      const gmImg = generateFrame(
+        frame,
+        width,
+        height,
+        opacity,
+        cssData.pixelSize
+      );
 
-    const frameFilePath = `${splittedPath[0]}-${index}.${splittedPath[1]}`;
-    const promise = new Promise((fulfill, reject) => {
-      gmImg.write(
-        frameFilePath,
-        (err) => {
+      const frameFilePath = `${splittedPath[0]}-${index}.${splittedPath[1]}`;
+      const promise = new Promise((fulfill, reject) => {
+        gmImg.write(frameFilePath, err => {
           if (err) {
             console.log(err);
             reject(new Error(`Rejected ${frameFilePath}`));
           } else {
             fulfill(`Fulfilled ${frameFilePath}`);
           }
-        }
-      );
-    });
+        });
+      });
 
-    acc.framePaths.push(frameFilePath);
-    acc.promises.push(promise);
+      acc.framePaths.push(frameFilePath);
+      acc.promises.push(promise);
 
-    return acc;
-  }, { framePaths: [], promises: [] });
+      return acc;
+    },
+    { framePaths: [], promises: [] }
+  );
 }
 
 /**
@@ -92,15 +92,12 @@ export function drawFrame(data, path, callback) {
     cssData.pixelSize
   );
 
-  gmImg.write(
-    pathExtension,
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
-      callback(frameFileName);
+  gmImg.write(pathExtension, err => {
+    if (err) {
+      console.log(err);
     }
-  );
+    callback(frameFileName);
+  });
 }
 
 /**
@@ -113,19 +110,28 @@ export function drawGif(data, path, transparent, callback) {
   const opacity = 0;
   const splittedPath = [path, 'gif'];
 
-  const framesFilesData = createFrameImages(cssData, width, height, opacity, splittedPath);
+  const framesFilesData = createFrameImages(
+    cssData,
+    width,
+    height,
+    opacity,
+    splittedPath
+  );
 
-  Promise.all(framesFilesData.promises).then(() => {
-    const paths = framesFilesData.framePaths;
-    const gifAnimatedPath = ` ${splittedPath[0]}-final.${splittedPath[1]}`;
-    const gifFileName = gifAnimatedPath.split('images/tmp/')[1];
-    const { duration } = cssData.animationInfo;
-    const { intervals } = cssData.animationInfo;
-    const opacityOptions = transparent ? ' ' : ' -background white -alpha remove';
+  Promise.all(framesFilesData.promises).then(
+    () => {
+      const paths = framesFilesData.framePaths;
+      const gifAnimatedPath = ` ${splittedPath[0]}-final.${splittedPath[1]}`;
+      const gifFileName = gifAnimatedPath.split('images/tmp/')[1];
+      const { duration } = cssData.animationInfo;
+      const { intervals } = cssData.animationInfo;
+      const opacityOptions = transparent
+        ? ' '
+        : ' -background white -alpha remove';
 
-    let creatingGifCommand = 'convert -dispose previous -loop 0';
-    for (let i = 0; i < paths.length; i++) {
-      /*
+      let creatingGifCommand = 'convert -dispose previous -loop 0';
+      for (let i = 0; i < paths.length; i++) {
+        /*
         Calculates the delay from the animation duration and
         frames intervals passed.
         i.e:
@@ -137,25 +143,27 @@ export function drawGif(data, path, transparent, callback) {
           Total delay 200 (2 seconds)
           NOTE: graphicsmagick delay option works in 1/100ths of a second
       */
-      const difference = intervals[i + 1] - intervals[i];
-      const currentDelay = (duration * difference) / 1000;
-      // console.log(difference, currentDelay);
-      creatingGifCommand += ` -delay ${currentDelay} ${paths[i]}`;
-    }
-    creatingGifCommand += `${opacityOptions}${gifAnimatedPath}`;
-
-    exec(creatingGifCommand, (err) => {
-      removeFiles(paths);
-      if (err) {
-        console.error(err);
-        return;
+        const difference = intervals[i + 1] - intervals[i];
+        const currentDelay = (duration * difference) / 1000;
+        // console.log(difference, currentDelay);
+        creatingGifCommand += ` -delay ${currentDelay} ${paths[i]}`;
       }
-      callback(gifFileName);
-      console.log('GIF created');
-    });
-  }, () => {
-    removeFiles(framesFilesData.framePaths);
-  });
+      creatingGifCommand += `${opacityOptions}${gifAnimatedPath}`;
+
+      exec(creatingGifCommand, err => {
+        removeFiles(paths);
+        if (err) {
+          console.error(err);
+          return;
+        }
+        callback(gifFileName);
+        console.log('GIF created');
+      });
+    },
+    () => {
+      removeFiles(framesFilesData.framePaths);
+    }
+  );
 }
 
 /**
@@ -175,25 +183,28 @@ export function drawSpritesheet(data, path, callback) {
     splittedPath
   );
 
-  Promise.all(framesFilesData.promises).then(() => {
-    const paths = framesFilesData.framePaths;
-    const spritesheetPath = `${splittedPath[0]}-final.${splittedPath[1]}`;
-    const spritesheetFileName = spritesheetPath.split('images/tmp/')[1];
+  Promise.all(framesFilesData.promises).then(
+    () => {
+      const paths = framesFilesData.framePaths;
+      const spritesheetPath = `${splittedPath[0]}-final.${splittedPath[1]}`;
+      const spritesheetFileName = spritesheetPath.split('images/tmp/')[1];
 
-    const result = gm(paths[0]);
-    for (let i = 1; i < paths.length; i++) {
-      result.append(paths[i]);
-    }
-    result.write(spritesheetPath, (err) => {
-      removeFiles(paths);
-      if (err) {
-        console.error(err);
-        return;
+      const result = gm(paths[0]);
+      for (let i = 1; i < paths.length; i++) {
+        result.append(paths[i]);
       }
-      callback(spritesheetFileName);
-      console.log('spritesheet created');
-    });
-  }, () => {
-    removeFiles(framesFilesData.framePaths);
-  });
+      result.write(spritesheetPath, err => {
+        removeFiles(paths);
+        if (err) {
+          console.error(err);
+          return;
+        }
+        callback(spritesheetFileName);
+        console.log('spritesheet created');
+      });
+    },
+    () => {
+      removeFiles(framesFilesData.framePaths);
+    }
+  );
 }

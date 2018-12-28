@@ -1,9 +1,5 @@
 import * as types from '../actions/actionTypes';
-import {
-  PENCIL,
-  ERASER,
-  EYEDROPPER
-} from './drawingToolStates';
+import { PENCIL, ERASER, EYEDROPPER } from './drawingToolStates';
 
 const switchTool = (drawingTool = PENCIL, tool) => {
   if (drawingTool === tool) {

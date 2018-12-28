@@ -25,47 +25,49 @@ const addColorToLastGridCell = (palette, newColor) => {
   });
 };
 
-const createPaletteGrid = () => List([
-  '#000000',
-  '#ff0000',
-  '#e91e63',
-  '#9c27b0',
-  '#673ab7',
-  '#3f51b5',
-  '#2196f3',
-  '#03a9f4',
-  '#00bcd4',
-  '#009688',
-  '#4caf50',
-  '#8bc34a',
-  '#cddc39',
-  '#9ee07a',
-  '#ffeb3b',
-  '#ffc107',
-  '#ff9800',
-  '#ffcdd2',
-  '#ff5722',
-  '#795548',
-  '#9e9e9e',
-  '#607d8b',
-  '#303f46',
-  '#ffffff',
-  '#383535',
-  '#383534',
-  '#383533',
-  '#383532',
-  '#383531',
-  '#383530'
-]).map(color => Map({ color, id: shortid.generate() }));
+const createPaletteGrid = () =>
+  List([
+    '#000000',
+    '#ff0000',
+    '#e91e63',
+    '#9c27b0',
+    '#673ab7',
+    '#3f51b5',
+    '#2196f3',
+    '#03a9f4',
+    '#00bcd4',
+    '#009688',
+    '#4caf50',
+    '#8bc34a',
+    '#cddc39',
+    '#9ee07a',
+    '#ffeb3b',
+    '#ffc107',
+    '#ff9800',
+    '#ffcdd2',
+    '#ff5722',
+    '#795548',
+    '#9e9e9e',
+    '#607d8b',
+    '#303f46',
+    '#ffffff',
+    '#383535',
+    '#383534',
+    '#383533',
+    '#383532',
+    '#383531',
+    '#383530'
+  ]).map(color => Map({ color, id: shortid.generate() }));
 
 const isColorSelected = palette => palette.get('position') !== -1;
 
 const resetSelectedColorState = palette => palette.set('position', 0);
 
-const createPalette = () => Map({
-  grid: createPaletteGrid(),
-  position: 0
-});
+const createPalette = () =>
+  Map({
+    grid: createPaletteGrid(),
+    position: 0
+  });
 
 const getCellColor = ({ color }) => color || GRID_INITIAL_COLOR;
 
@@ -76,17 +78,21 @@ const eyedropColor = (palette, action) => {
   if (!isColorInPalette(grid, cellColor)) {
     return addColorToLastGridCell(palette, cellColor);
   }
-  return palette.set('position', getPositionFirstMatchInPalette(grid, cellColor));
+  return palette.set(
+    'position',
+    getPositionFirstMatchInPalette(grid, cellColor)
+  );
 };
 
-const preparePalette = (palette) => {
+const preparePalette = palette => {
   if (!isColorSelected(palette)) {
     return resetSelectedColorState(palette);
   }
   return palette;
 };
 
-const selectPaletteColor = (palette, action) => palette.set('position', action.position);
+const selectPaletteColor = (palette, action) =>
+  palette.set('position', action.position);
 
 const setCustomColor = (palette, { customColor }) => {
   if (!isColorSelected(palette)) {
@@ -95,7 +101,8 @@ const setCustomColor = (palette, { customColor }) => {
   return palette.setIn(['grid', palette.get('position'), 'color'], customColor);
 };
 
-const setPalette = (palette, action) => palette.set('grid', fromJS(action.paletteGridData));
+const setPalette = (palette, action) =>
+  palette.set('grid', fromJS(action.paletteGridData));
 
 export default function paletteReducer(palette = createPalette(), action) {
   switch (action.type) {

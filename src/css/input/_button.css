@@ -1,4 +1,5 @@
-@define-mixin generate-button $color-text, $color-bg, $color-boxshadow, $color-bg-active {
+@define-mixin generate-button $color-text, $color-bg, $color-boxshadow,
+  $color-bg-active {
   background: none;
   border: none;
   outline: none;
@@ -25,23 +26,28 @@
 
 @define-mixin button $color, $font: $font-pixel {
   @if $color == red {
-    @mixin generate-button $color-silver, $color-tamarillo, $color-darkTan, $color-moccaccino;
+    @mixin generate-button $color-silver, $color-tamarillo, $color-darkTan,
+      $color-moccaccino;
   }
 
   @if $color == gray {
-    @mixin generate-button $color-silver, $color-mineShaft, $color-doveGray, $color-tundora;
+    @mixin generate-button $color-silver, $color-mineShaft, $color-doveGray,
+      $color-tundora;
   }
 
   @if $color == brown {
-    @mixin generate-button $color-silver, $color-lotus, $color-buccaneer, $color-cowboy;
+    @mixin generate-button $color-silver, $color-lotus, $color-buccaneer,
+      $color-cowboy;
   }
 
   @if $color == blue {
-    @mixin generate-button $color-silver, $color-steelblue, $color-sanMarino, $color-eastBay;
+    @mixin generate-button $color-silver, $color-steelblue, $color-sanMarino,
+      $color-eastBay;
   }
 
   @if $color == darkblue {
-    @mixin generate-button $color-silver, $color-chathamsBlue, $color-chambray, $color-cloudBurst;
+    @mixin generate-button $color-silver, $color-chathamsBlue, $color-chambray,
+      $color-cloudBurst;
   }
 
   @if $color == white {

@@ -6,12 +6,10 @@ import {
 } from '../utils/cssParse';
 import Animation from './Animation';
 
-const Preview = (props) => {
+const Preview = props => {
   const generatePreview = () => {
     const { activeFrameIndex, duration } = props;
-    const {
-      frames, columns, cellSize, animate
-    } = props.storedData || props;
+    const { frames, columns, cellSize, animate } = props.storedData || props;
     const animation = frames.size > 1 && animate;
     let animationData;
     let cssString;
@@ -28,7 +26,9 @@ const Preview = (props) => {
     } else {
       cssString = generatePixelDrawCss(
         frames.get(activeFrameIndex),
-        columns, cellSize, 'string'
+        columns,
+        cellSize,
+        'string'
       );
 
       styles.previewWrapper.boxShadow = cssString;
@@ -38,15 +38,11 @@ const Preview = (props) => {
 
     return (
       <div style={animation ? null : styles.previewWrapper}>
-        {animation ?
+        {animation ? (
           <StyleRoot>
-            <Animation
-              duration={duration}
-              boxShadow={animationData}
-            />
+            <Animation duration={duration} boxShadow={animationData} />
           </StyleRoot>
-          : null
-        }
+        ) : null}
       </div>
     );
   };

@@ -15,11 +15,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import reducer from '../store/reducers/reducer';
 import pkgjson from '../../package.json';
-import {
-  drawFrame,
-  drawGif,
-  drawSpritesheet
-} from '../utils/imageGeneration';
+import { drawFrame, drawGif, drawSpritesheet } from '../utils/imageGeneration';
 import Root from '../components/Root';
 import {
   SHOW_SPINNER,
@@ -75,29 +71,33 @@ app.use(express.static(`${__dirname}/../../deploy`));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-app.use(session({
-  secret: configData.EXPRESS_SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: configData.EXPRESS_SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 /**
  * Redux helper functions
  */
 function handleRender(req, res) {
   // Create a new Redux store instance
-  const store = createStore(undoable(reducer, {
-    filter: includeAction([
-      CHANGE_DIMENSIONS,
-      DRAW_CELL,
-      SET_DRAWING,
-      SET_CELL_SIZE,
-      SET_RESET_GRID,
-      NEW_PROJECT
-    ]),
-    debug: false,
-    ignoreInitialState: true
-  }));
+  const store = createStore(
+    undoable(reducer, {
+      filter: includeAction([
+        CHANGE_DIMENSIONS,
+        DRAW_CELL,
+        SET_DRAWING,
+        SET_CELL_SIZE,
+        SET_RESET_GRID,
+        NEW_PROJECT
+      ]),
+      debug: false,
+      ignoreInitialState: true
+    })
+  );
 
   store.dispatch({
     type: SHOW_SPINNER
@@ -133,7 +133,7 @@ function tweetWithMedia(client, request, response, path) {
         status: request.session.cssData.text,
         media_ids: media.media_id_string // Pass the media id string
       };
-      client.post('statuses/update', status, (e) => {
+      client.post('statuses/update', status, e => {
         if (!e) {
           // Success
           response.redirect('/');
@@ -166,7 +166,9 @@ app.post('/auth/twitter', (req, res) => {
         request.session.cssData = request.body;
 
         res.contentType('application/json');
-        const data = JSON.stringify(`https://twitter.com/oauth/authenticate?oauth_token=${oauthToken}`);
+        const data = JSON.stringify(
+          `https://twitter.com/oauth/authenticate?oauth_token=${oauthToken}`
+        );
         res.header('Content-Length', data.length);
         res.end(data);
       } catch (e) {
@@ -201,17 +203,21 @@ app.get('/auth/twitter/callback', (req, res, next) => {
 
           switch (request.session.cssData.type) {
             case 'animation':
-              drawGif(request.session.cssData, imgPath, false, (gifPath) => {
+              drawGif(request.session.cssData, imgPath, false, gifPath => {
                 tweetWithMedia(client, request, res, gifPath);
               });
               break;
             case 'spritesheet':
-              drawSpritesheet(request.session.cssData, imgPath, (spritesheetPath) => {
-                tweetWithMedia(client, request, res, spritesheetPath);
-              });
+              drawSpritesheet(
+                request.session.cssData,
+                imgPath,
+                spritesheetPath => {
+                  tweetWithMedia(client, request, res, spritesheetPath);
+                }
+              );
               break;
             default:
-              drawFrame(request.session.cssData, imgPath, (singleFramePath) => {
+              drawFrame(request.session.cssData, imgPath, singleFramePath => {
                 tweetWithMedia(client, request, res, singleFramePath);
               });
           }
@@ -226,6 +232,7 @@ app.get('/auth/twitter/callback', (req, res, next) => {
 app.listen(process.env.PORT || PORTSERVER, () => {
   console.log(
     'Express server listening on port %d in %s mode',
-    process.env.PORT || PORTSERVER, app.settings.env
+    process.env.PORT || PORTSERVER,
+    app.settings.env
   );
 });

@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import * as actionCreators from '../store/actions/actionCreators';
 import { saveProjectToStorage } from '../utils/storage';
 
-const SaveDrawing = (props) => {
+const SaveDrawing = props => {
   const save = () => {
     const drawingToSave = {
       frames: props.frames,
@@ -25,7 +25,9 @@ const SaveDrawing = (props) => {
   return (
     <div className="save-drawing">
       <button
-        onClick={() => { save(); }}
+        onClick={() => {
+          save();
+        }}
       >
         SAVE
       </button>
@@ -33,7 +35,7 @@ const SaveDrawing = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const frames = state.present.get('frames');
   return {
     frames: frames.get('list'),

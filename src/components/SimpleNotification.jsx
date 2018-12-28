@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import * as actionCreators from '../store/actions/actionCreators';
 
-const SimpleNotification = (props) => {
+const SimpleNotification = props => {
   const removeNotifications = () => {
     setTimeout(() => {
       props.actions.sendNotification('');
@@ -27,11 +27,7 @@ const SimpleNotification = (props) => {
     removeNotifications();
   }
 
-  return (
-    <TransitionGroup>
-      {notifications}
-    </TransitionGroup>
-  );
+  return <TransitionGroup>{notifications}</TransitionGroup>;
 };
 
 const mapStateToProps = state => ({

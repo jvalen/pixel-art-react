@@ -6,7 +6,6 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import * as actionCreators from '../store/actions/actionCreators';
 import Frame from './Frame';
 
-
 class FramesHandler extends React.Component {
   constructor(props) {
     super(props);
@@ -68,16 +67,22 @@ class FramesHandler extends React.Component {
       <div className="frames-handler">
         <button
           className="frames-handler__add"
-          onClick={() => { this.handleClick(); }}
+          onClick={() => {
+            this.handleClick();
+          }}
         >
           +
         </button>
         <div className="frame-handler__list">
           <Scrollbars
             autoHeight
-            ref={(c) => { this.scrollbars = c; }}
+            ref={c => {
+              this.scrollbars = c;
+            }}
             universal
-            onUpdate={() => { this.onScrollbarUpdate(); }}
+            onUpdate={() => {
+              this.onScrollbarUpdate();
+            }}
           >
             <DragDropContext onDragEnd={this.onDragEnd}>
               <Droppable droppableId="droppable" direction="horizontal">

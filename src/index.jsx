@@ -7,7 +7,4 @@ import Root from './components/Root';
 const devMode = process.env.NODE_ENV === 'development';
 const store = configureStore(devMode);
 
-ReactDOM.render(
-  <Root store={store} />,
-  document.getElementById('app')
-);
+ReactDOM.render(<Root store={store} />, document.getElementById('app'));

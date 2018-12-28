@@ -48,9 +48,7 @@ class ColorPicker extends React.Component {
       }
     };
     const { props } = this;
-    const {
-      colorPickerOn, paletteColor
-    } = props;
+    const { colorPickerOn, paletteColor } = props;
     const isSelected = colorPickerOn && this.state.displayColorPicker;
     const initialPickerColor = paletteColor || '#ffffff';
 
@@ -61,7 +59,7 @@ class ColorPicker extends React.Component {
           onClick={this.handleClick}
         />
         <div style={styles.picker}>
-          {this.state.displayColorPicker ?
+          {this.state.displayColorPicker ? (
             <div style={styles.popover} is="popover">
               <div
                 style={styles.cover}
@@ -76,15 +74,14 @@ class ColorPicker extends React.Component {
                 type="sketch"
               />
             </div>
-            : null
-          }
+          ) : null}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const palette = state.present.get('palette');
   return {
     colorPickerOn: state.present.get('drawingTool') === COLOR_PICKER,

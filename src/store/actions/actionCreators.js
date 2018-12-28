@@ -38,7 +38,12 @@ export function setCustomColor(customColor) {
 }
 
 export function cellAction({
-  id, drawingTool, color, paletteColor, columns, rows
+  id,
+  drawingTool,
+  color,
+  paletteColor,
+  columns,
+  rows
 }) {
   return {
     type: `APPLY_${drawingTool}`,
@@ -162,9 +167,9 @@ export function newProject() {
 }
 
 export function undo() {
-  return (ActionCreators.undo());
+  return ActionCreators.undo();
 }
 
 export function redo() {
-  return (ActionCreators.redo());
+  return ActionCreators.redo();
 }

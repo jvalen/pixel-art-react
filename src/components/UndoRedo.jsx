@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-const UndoRedo = (props) => {
+const UndoRedo = props => {
   const undo = () => {
     props.actions.undo();
   };
@@ -15,12 +15,16 @@ const UndoRedo = (props) => {
   return (
     <div className="undo-redo">
       <button
-        onClick={() => { undo(); }}
+        onClick={() => {
+          undo();
+        }}
       >
         <span className="undo-redo__icon--undo" />
       </button>
       <button
-        onClick={() => { redo(); }}
+        onClick={() => {
+          redo();
+        }}
       >
         <span className="undo-redo__icon--redo" />
       </button>

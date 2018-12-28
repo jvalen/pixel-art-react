@@ -15,26 +15,29 @@ import {
   SET_RESET_GRID
 } from '../store/actions/actionTypes';
 
-const createIncludedActions = () => includeAction([
-  CHANGE_DIMENSIONS,
-  APPLY_PENCIL,
-  APPLY_ERASER,
-  APPLY_BUCKET,
-  APPLY_EYEDROPPER,
-  SET_DRAWING,
-  SET_CELL_SIZE,
-  SET_RESET_GRID,
-  NEW_PROJECT
-]);
+const createIncludedActions = () =>
+  includeAction([
+    CHANGE_DIMENSIONS,
+    APPLY_PENCIL,
+    APPLY_ERASER,
+    APPLY_BUCKET,
+    APPLY_EYEDROPPER,
+    SET_DRAWING,
+    SET_CELL_SIZE,
+    SET_RESET_GRID,
+    NEW_PROJECT
+  ]);
 
-const configureStore = (devMode) => {
+const configureStore = devMode => {
   let store;
   if (devMode) {
-    store = createStore(undoable(reducer, {
-      filter: createIncludedActions(),
-      debug: true,
-      ignoreInitialState: true
-    }));
+    store = createStore(
+      undoable(reducer, {
+        filter: createIncludedActions(),
+        debug: true,
+        ignoreInitialState: true
+      })
+    );
 
     store.dispatch({
       type: SHOW_SPINNER
@@ -43,11 +46,14 @@ const configureStore = (devMode) => {
     const initialState = window.__INITIAL_STATE__;
     initialState.present = fromJS(initialState.present);
 
-    store = createStore(undoable(reducer, {
-      filter: createIncludedActions(),
-      debug: false,
-      ignoreInitialState: true
-    }), initialState);
+    store = createStore(
+      undoable(reducer, {
+        filter: createIncludedActions(),
+        debug: false,
+        ignoreInitialState: true
+      }),
+      initialState
+    );
   }
 
   return store;

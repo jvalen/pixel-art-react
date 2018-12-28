@@ -4,7 +4,9 @@ export const GRID_INITIAL_COLOR = '#313131';
 
 const updateFrameProp = prop => propReducer => (frames, action) => {
   const activeIndex = frames.get('activeIndex');
-  return frames.updateIn(['list', activeIndex, prop], stateProp => propReducer(stateProp, action));
+  return frames.updateIn(['list', activeIndex, prop], stateProp =>
+    propReducer(stateProp, action)
+  );
 };
 
 const updateGrid = updateFrameProp('grid');
@@ -38,7 +40,7 @@ const getSameColorAdjacentCells = (frameGrid, columns, rows, id, color) => {
       adjacentCollection.push(auxId);
     }
   }
-  if (id < (columns * rows) - columns) {
+  if (id < columns * rows - columns) {
     // Not at the very bottom
     auxId = id + columns;
     if (isSameColor(frameGrid.get(auxId), color)) {
@@ -51,9 +53,7 @@ const getSameColorAdjacentCells = (frameGrid, columns, rows, id, color) => {
 
 const drawPixel = (pixelGrid, color, id) => pixelGrid.set(id, color);
 
-const applyBucketToGrid = (grid, {
-  id, paletteColor, columns, rows
-}) => {
+const applyBucketToGrid = (grid, { id, paletteColor, columns, rows }) => {
   const queue = [id];
   const cellColor = grid.get(id);
   let currentId;
@@ -65,15 +65,21 @@ const applyBucketToGrid = (grid, {
   while (queue.length > 0) {
     currentId = queue.shift();
     newGrid = drawPixel(newGrid, paletteColor, currentId);
-    adjacents = getSameColorAdjacentCells(newGrid, columns, rows, currentId, cellColor);
+    adjacents = getSameColorAdjacentCells(
+      newGrid,
+      columns,
+      rows,
+      currentId,
+      cellColor
+    );
 
     for (let i = 0; i < adjacents.length; i++) {
       auxAdjacentId = adjacents[i];
       auxAdjacentColor = newGrid.get(auxAdjacentId);
       // Avoid introduce repeated or painted already cell into the queue
       if (
-        (queue.indexOf(auxAdjacentId) === -1) &&
-        (auxAdjacentColor !== paletteColor)
+        queue.indexOf(auxAdjacentId) === -1 &&
+        auxAdjacentColor !== paletteColor
       ) {
         queue.push(auxAdjacentId);
       }
@@ -90,13 +96,17 @@ const applyBucket = updateGrid(applyBucketToGrid);
 
 const applyPencil = updateGrid(applyPencilToGrid);
 
-const applyEraser = updateGrid((pixelGrid, { id }) => drawPixel(pixelGrid, '', id));
+const applyEraser = updateGrid((pixelGrid, { id }) =>
+  drawPixel(pixelGrid, '', id)
+);
 
 const resetGrid = updateGrid(pixelGrid => pixelGrid.map(() => ''));
 
-const changeFrameInterval = updateInterval((previousInterval, { interval }) => interval);
+const changeFrameInterval = updateInterval(
+  (previousInterval, { interval }) => interval
+);
 
-export default function (frames, action) {
+export default function(frames, action) {
   switch (action.type) {
     case types.APPLY_PENCIL:
       return applyPencil(frames, action);

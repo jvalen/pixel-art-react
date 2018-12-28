@@ -2,15 +2,18 @@ import React from 'react';
 import { fromJS } from 'immutable';
 import Preview from './Preview';
 import {
-  getDataFromStorage, removeProjectFromStorage,
-  generateExportString, exportedStringToProjectData
+  getDataFromStorage,
+  removeProjectFromStorage,
+  generateExportString,
+  exportedStringToProjectData
 } from '../utils/storage';
 
 /*
   Avoid error when server-side render doesn't recognize
   localstorage (browser feature)
 */
-const browserStorage = (typeof localStorage === 'undefined') ? null : localStorage;
+const browserStorage =
+  typeof localStorage === 'undefined' ? null : localStorage;
 
 export default class LoadDrawing extends React.Component {
   getExportCode() {
@@ -26,12 +29,17 @@ export default class LoadDrawing extends React.Component {
   }
 
   importProject() {
-    const importedProject =
-      exportedStringToProjectData(this.importProjectData.value);
+    const importedProject = exportedStringToProjectData(
+      this.importProjectData.value
+    );
 
     if (importedProject) {
       const {
-        frames, paletteGridData, columns, rows, cellSize
+        frames,
+        paletteGridData,
+        columns,
+        rows,
+        cellSize
       } = importedProject;
 
       this.props.actions.setDrawing(
@@ -44,7 +52,9 @@ export default class LoadDrawing extends React.Component {
       this.props.close();
       this.props.actions.sendNotification('Project successfully imported');
     } else {
-      this.props.actions.sendNotification("Sorry, the project couldn't be imported");
+      this.props.actions.sendNotification(
+        "Sorry, the project couldn't be imported"
+      );
     }
   }
 
@@ -90,8 +100,12 @@ export default class LoadDrawing extends React.Component {
             return (
               <div
                 key={elem.id}
-                onClick={() => { this.drawingClick(elem); }}
-                onKeyPress={() => { this.drawingClick(elem); }}
+                onClick={() => {
+                  this.drawingClick(elem);
+                }}
+                onKeyPress={() => {
+                  this.drawingClick(elem);
+                }}
                 className="load-drawing__drawing"
                 role="button"
                 tabIndex={0}
@@ -104,7 +118,9 @@ export default class LoadDrawing extends React.Component {
                 />
                 <button
                   className="drawing__delete"
-                  onClick={(event) => { this.removeFromStorage(i, event); }}
+                  onClick={event => {
+                    this.removeFromStorage(i, event);
+                  }}
                 />
               </div>
             );
@@ -123,12 +139,16 @@ export default class LoadDrawing extends React.Component {
             <h2>Paste a previously exported code</h2>
             <textarea
               className="load-drawing__import"
-              ref={(c) => { this.importProjectData = c; }}
+              ref={c => {
+                this.importProjectData = c;
+              }}
               defaultValue=""
             />
             <button
               className="import__button"
-              onClick={() => { this.importProject(); }}
+              onClick={() => {
+                this.importProject();
+              }}
             >
               IMPORT
             </button>
@@ -138,7 +158,9 @@ export default class LoadDrawing extends React.Component {
       case 'export': {
         return (
           <div className="load-drawing">
-            <h2>Select and copy the following code. Keep it save in a text file</h2>
+            <h2>
+              Select and copy the following code. Keep it save in a text file
+            </h2>
             <pre className="load-drawing__export">
               {`\n${this.getExportCode()}\n\n`}
             </pre>
@@ -152,11 +174,12 @@ export default class LoadDrawing extends React.Component {
           <div className="load-drawing">
             <h2>Select one of your awesome drawings</h2>
             <div
-              className={
-                `load-drawing__container
+              className={`load-drawing__container
                 ${!drawingsStored ? 'empty' : ''}`}
             >
-              {drawingsStored ? this.giveMeDrawings() : 'Nothing awesome yet...'}
+              {drawingsStored
+                ? this.giveMeDrawings()
+                : 'Nothing awesome yet...'}
             </div>
           </div>
         );
@@ -165,6 +188,6 @@ export default class LoadDrawing extends React.Component {
   }
 
   render() {
-    return (this.giveMeOptions(this.props.loadType));
+    return this.giveMeOptions(this.props.loadType);
   }
 }

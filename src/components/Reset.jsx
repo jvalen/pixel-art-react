@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { resetGrid } from '../store/actions/actionCreators';
 
 const Reset = props => (
-  <button
-    className="reset"
-    onClick={props.resetGrid}
-  >
+  <button className="reset" onClick={props.resetGrid}>
     RESET
   </button>
 );
