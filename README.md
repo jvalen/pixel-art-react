@@ -1,37 +1,46 @@
-# Pixel Art to CSS
+<h1 align="center">Pixel Art to CSS</h1>
+<p align="center">
+  <img width="200" src="screenshots/tree-pixelartcss.png">
+</p>
+<h2 align="center">Online Pixel Art editor</h2>
+<p align="center">
+  <h3 align="center">
+    Web application that allow us to animate pixel art and export the results to CSS.
+  </h3>
+</p>
+<p align="center">
+  <a target='_blank' href='http://www.recurse.com' title='Made at the Recurse Center'><img src='https://cloud.githubusercontent.com/assets/2883345/11325206/336ea5f4-9150-11e5-9e90-d86ad31993d8.png' height='20px'/></a>
+  <a href="https://travis-ci.com/jvalen/pixel-art-react"><img src="https://travis-ci.com/jvalen/pixel-art-react.svg?branch=master" alt="travis ci"></a>
+</p>
 
-<a target='_blank' href='http://www.recurse.com' title='Made at the Recurse Center'><img src='https://cloud.githubusercontent.com/assets/2883345/11325206/336ea5f4-9150-11e5-9e90-d86ad31993d8.png' height='20px'/></a>
-<a href="https://travis-ci.com/jvalen/pixel-art-react"><img src="https://travis-ci.com/jvalen/pixel-art-react.svg?branch=master" alt="travis ci"></a>
+## Did you know that you can create pixel art using CSS?
 
-### Did you know that you can draw and animate pixel art using CSS?
+[Try to draw](https://www.pixelartcss.com/) some pixels on the screen, it will generate the CSS code using **box-shadow** property. Create as much drawings as you want adding new frames and then check them in motion. It uses CSS **keyframes** to get the animation done.
 
-**pixel-art-react** is a handy and intuitive tool, that can help you to design your awesome drawings and animations!
+<p align="center">
+  <img src="screenshots/screenshot-cat.png">
+</p>
 
-Try to draw some pixels on the screen, **pixel-art-react** will generate the CSS code using **box-shadow** property.
+You will be able to **load**, **save**, **import**, **export** projects, **undo** **redo** your actions, change grid properties, **share** your work and **download** it, everything in a very easy and fast way.
 
-Create as much drawings as you want in your project adding new frames and then check them in motion! it will use CSS **keyframes** to get the animation done and the CSS code will be ready to use in your HTML blocks.
+<p align="center">
+  By default, you will find the following project within the <b>LOAD</b> section:
+</p>
 
-Please check the following example:
+<p align="center">
+  <img src="screenshots/animation-cat.gif">
+</p>
 
-![pixel-art-react](screenshots/screenshot-cat.png)
-
-The app layout is responsive and adjust itself to the screen width. You can see different layout examples (desktop and mobile) in the screenshot.
-
-The project is built with **React**, **Redux** and **ImmutableJS**. Trying to avoid side-effects in a functional way of programming.
-
-You will be able to **load**, **save**, **import**, **export** projects, **undo** **redo** your actions, change grid properties, **share** your drawings/animations and **download** them, everything in a very easy and fast way.
-
-Check the results of this simple project:
-
-![](screenshots/animation-cat.gif)
-
-##### See it live at [pixelartcss](https://www.pixelartcss.com/)
+<p align="center">
+  See it live at
+  <a target='_blank' href='https://www.pixelartcss.com/' title='pixelartcss'>
+    pixelartcss
+  </a>
+</p>
 
 ## Example
 
 You can find an example project data ready to import [here](examples/import-export/cat.txt).
-
-In addition a project will be loaded by default, check this out clicking on the **LOAD** button. Of course you can delete this project anytime you want.
 
 ## Technical overview
 
@@ -51,7 +60,7 @@ npm install
 
 ## Development
 
-If you just want to develop the interface with no need of back-end side, take advance of `webpack-dev-server` and `react-hot-loader`.
+If you just want to develop the interface with no need of back-end side.
 
 ```bash
 npm run development
@@ -69,7 +78,27 @@ npm run server
 
 A `config.json` is needed for deployment with the Twitter and express keys.
 
+## Lint
+
+There are several libraries used in the project that help us to keep our codebase healthy:
+
+- [ESlint](https://eslint.org/)
+- [stylelint](https://stylelint.io/)
+- [Prettier](https://prettier.io/)
+
+Every time we commit something it will execute the linters and format the staged files if needed.
+
+If you want to check them individually you could execute the following scripts:
+
+```bash
+npm run lint
+npm run csslint
+npm run format
+```
+
 ## Testing
+
+We are using [Jest](https://jestjs.io/) as the testing platform.
 
 ```bash
 npm run test
@@ -77,9 +106,9 @@ npm run test
 
 ## Contributing
 
-#### Help me to improve it, share and enjoy :)
+#### Help me to improve it :seedling:
 
-Please create a Github issue if there is something wrong or to be improved. Pull request are also welcome and they can be created to the develop branch.
+Please create a GitHub issue if there is something wrong or to be improved. Pull requests are also welcome, they should be created to the **develop branch**.
 
 ## License
 
