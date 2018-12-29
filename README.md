@@ -18,7 +18,7 @@
 [Try to draw](https://www.pixelartcss.com/) some pixels on the screen, it will generate the CSS code using **box-shadow** property. Create as much drawings as you want adding new frames and then check them in motion. It uses CSS **keyframes** to get the animation done.
 
 <p align="center">
-  <img src="screenshots/screenshot-cat.png">
+  <img src="screenshots/screenshot-potion.png">
 </p>
 
 You will be able to **load**, **save**, **import**, **export** projects, **undo** **redo** your actions, change grid properties, **share** your work and **download** it, everything in a very easy and fast way.
