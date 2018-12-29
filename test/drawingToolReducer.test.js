@@ -1,6 +1,9 @@
 import {
-  PENCIL, BUCKET, ERASER,
-  EYEDROPPER, COLOR_PICKER
+  PENCIL,
+  BUCKET,
+  ERASER,
+  EYEDROPPER,
+  COLOR_PICKER
 } from '../src/store/reducers/drawingToolStates';
 import reducer from '../src/store/reducers/drawingToolReducer';
 import { APPLY_EYEDROPPER } from '../src/store/actions/actionTypes';

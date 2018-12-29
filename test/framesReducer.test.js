@@ -3,27 +3,40 @@ import reducer from '../src/store/reducers/framesReducer';
 import * as actions from '../src/store/actions/actionCreators';
 
 const firstGridMock = [
-  '#111111', '#111111',
-  '#222222', '#222222',
-  '#222222', '#333333'
+  '#111111',
+  '#111111',
+  '#222222',
+  '#222222',
+  '#222222',
+  '#333333'
 ];
 const secondGridMock = [
-  '#ffffff', '#eeeeee',
-  '#eeeeee', '#eeeeee',
-  '#eeeeee', '#dddddd'
+  '#ffffff',
+  '#eeeeee',
+  '#eeeeee',
+  '#eeeeee',
+  '#eeeeee',
+  '#dddddd'
 ];
-const framesMock = () => Map({
-  list: List([Map({
-    grid: List(firstGridMock)
-  })]),
-  activeIndex: 0,
-  columns: 2,
-  rows: 3
-});
+const framesMock = () =>
+  Map({
+    list: List([
+      Map({
+        grid: List(firstGridMock)
+      })
+    ]),
+    activeIndex: 0,
+    columns: 2,
+    rows: 3
+  });
 const singletonFrameMock = framesMock;
-const multipleFramesMock = () => framesMock().setIn(['list', 1], Map({
-  grid: List(secondGridMock)
-}));
+const multipleFramesMock = () =>
+  framesMock().setIn(
+    ['list', 1],
+    Map({
+      grid: List(secondGridMock)
+    })
+  );
 
 describe('reducer: SET_INITIAL_STATE', () => {
   describe('default options', () => {
@@ -71,8 +84,14 @@ describe('reducer: SET_INITIAL_STATE', () => {
     });
 
     it('the initial color of grid elements is empty string', () => {
-      expect(nextState.getIn(['list', 0, 'grid']).toJS())
-        .toEqual(['', '', '', '', '', '']);
+      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
+      ]);
     });
   });
 });
@@ -124,14 +143,18 @@ describe('framesReducer: REORDER_FRAME', () => {
   describe('Moving a frame from left to right', () => {
     it('should set the desired frame after the target one', () => {
       nextState = reducer(state, actions.reorderFrame(0, 1));
-      expect(nextState.getIn(['list', 1, 'grid']).toJS()).toEqual(firstGridMock);
+      expect(nextState.getIn(['list', 1, 'grid']).toJS()).toEqual(
+        firstGridMock
+      );
     });
   });
 
   describe('Moving a frame from right to left', () => {
     it('should set the desired frame before the target one', () => {
       nextState = reducer(state, actions.reorderFrame(1, 0));
-      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual(secondGridMock);
+      expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual(
+        secondGridMock
+      );
     });
   });
 
@@ -149,7 +172,14 @@ describe('framesReducer: CREATE_NEW_FRAME', () => {
   });
 
   it('creates a new frame at the end', () => {
-    expect(nextState.getIn(['list', 1, 'grid']).toJS()).toEqual(['', '', '', '', '', '']);
+    expect(nextState.getIn(['list', 1, 'grid']).toJS()).toEqual([
+      '',
+      '',
+      '',
+      '',
+      '',
+      ''
+    ]);
   });
 
   it('changes the interval attributes', () => {
@@ -183,15 +213,21 @@ describe('framesReducer: DUPLICATE_FRAME', () => {
   });
 
   it('creates a new frame with the same grid colors', () => {
-    expect(nextState.getIn(['list', frameId + 1, 'grid']).toJS()).toEqual(firstGridMock);
+    expect(nextState.getIn(['list', frameId + 1, 'grid']).toJS()).toEqual(
+      firstGridMock
+    );
   });
 
   it('copied grid is not modified', () => {
-    expect(nextState.getIn(['list', frameId, 'grid']).toJS()).toEqual(firstGridMock);
+    expect(nextState.getIn(['list', frameId, 'grid']).toJS()).toEqual(
+      firstGridMock
+    );
   });
 
   it('grids after id + 1 are moved one index to the right', () => {
-    expect(nextState.getIn(['list', frameId + 2, 'grid']).toJS()).toEqual(secondGridMock);
+    expect(nextState.getIn(['list', frameId + 2, 'grid']).toJS()).toEqual(
+      secondGridMock
+    );
   });
 
   it('changes the interval attributes', () => {
@@ -214,9 +250,15 @@ describe('framesReducer: CHANGE_DIMENSIONS', () => {
 
       it('adds a new grid column', () => {
         expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-          firstGridMock[0], firstGridMock[1], '',
-          firstGridMock[2], firstGridMock[3], '',
-          firstGridMock[4], firstGridMock[5], ''
+          firstGridMock[0],
+          firstGridMock[1],
+          '',
+          firstGridMock[2],
+          firstGridMock[3],
+          '',
+          firstGridMock[4],
+          firstGridMock[5],
+          ''
         ]);
       });
 
@@ -257,10 +299,14 @@ describe('framesReducer: CHANGE_DIMENSIONS', () => {
 
       it('adds a new grid row', () => {
         expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-          firstGridMock[0], firstGridMock[1],
-          firstGridMock[2], firstGridMock[3],
-          firstGridMock[4], firstGridMock[5],
-          '', ''
+          firstGridMock[0],
+          firstGridMock[1],
+          firstGridMock[2],
+          firstGridMock[3],
+          firstGridMock[4],
+          firstGridMock[5],
+          '',
+          ''
         ]);
       });
 
@@ -277,8 +323,10 @@ describe('framesReducer: CHANGE_DIMENSIONS', () => {
 
       it('removes a new grid column', () => {
         expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-          firstGridMock[0], firstGridMock[1],
-          firstGridMock[2], firstGridMock[3]
+          firstGridMock[0],
+          firstGridMock[1],
+          firstGridMock[2],
+          firstGridMock[3]
         ]);
       });
 

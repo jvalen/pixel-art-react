@@ -14,10 +14,12 @@ describe('reducer: UPDATE_GRID_BOUNDARIES', () => {
       getBoundingClientRect: () => newBoundaries
     };
     const dummyState = reducer(Map(), actions.setInitialState({}));
-    const nextState = reducer(dummyState, actions.updateGridBoundaries(gridElement));
+    const nextState = reducer(
+      dummyState,
+      actions.updateGridBoundaries(gridElement)
+    );
 
-    expect(nextState.get('gridBoundaries'))
-      .toEqual(newBoundaries);
+    expect(nextState.get('gridBoundaries')).toEqual(newBoundaries);
   });
 
   it('grid boundaries is not updated with properties distinct to x, y, width or height', () => {
@@ -32,9 +34,11 @@ describe('reducer: UPDATE_GRID_BOUNDARIES', () => {
       getBoundingClientRect: () => newBoundaries
     };
     const dummyState = reducer(Map(), actions.setInitialState({}));
-    const nextState = reducer(dummyState, actions.updateGridBoundaries(gridElement));
+    const nextState = reducer(
+      dummyState,
+      actions.updateGridBoundaries(gridElement)
+    );
 
-    expect(nextState.get('gridBoundaries').extraProp)
-      .toEqual(undefined);
+    expect(nextState.get('gridBoundaries').extraProp).toEqual(undefined);
   });
 });

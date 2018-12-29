@@ -1,6 +1,10 @@
 import { List, Map } from 'immutable';
 import reducer from '../src/store/reducers/paletteReducer';
-import { APPLY_PENCIL, APPLY_BUCKET, APPLY_EYEDROPPER } from '../src/store/actions/actionTypes';
+import {
+  APPLY_PENCIL,
+  APPLY_BUCKET,
+  APPLY_EYEDROPPER
+} from '../src/store/actions/actionTypes';
 import * as actions from '../src/store/actions/actionCreators';
 
 const CELL_COLOR = '#FFFFFF';
@@ -62,7 +66,9 @@ describe('paletteReducer: APPLY_EYEDROPPER', () => {
     });
 
     it('should update the last cell of grid', () => {
-      expect(nextState.getIn(['grid', grid.size - 1, 'color'])).toEqual(CELL_COLOR);
+      expect(nextState.getIn(['grid', grid.size - 1, 'color'])).toEqual(
+        CELL_COLOR
+      );
     });
 
     it('should set cell color as selected color', () => {
@@ -194,7 +200,9 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
     });
 
     it('should update the last cell of grid', () => {
-      expect(nextState.getIn(['grid', grid.size - 1, 'color'])).toEqual(customColor);
+      expect(nextState.getIn(['grid', grid.size - 1, 'color'])).toEqual(
+        customColor
+      );
     });
 
     it('should set custom color as selected color', () => {

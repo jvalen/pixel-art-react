@@ -51,7 +51,7 @@ npm install
 
 ## Development
 
-If you just want to develop the interface with no need of back-end side, take advance of ```webpack-dev-server``` and ```react-hot-loader```.
+If you just want to develop the interface with no need of back-end side, take advance of `webpack-dev-server` and `react-hot-loader`.
 
 ```bash
 npm run development
@@ -67,7 +67,7 @@ npm run deploy
 npm run server
 ```
 
-A ```config.json``` is needed for deployment with the Twitter and express keys.
+A `config.json` is needed for deployment with the Twitter and express keys.
 
 ## Testing
 
@@ -76,9 +76,10 @@ npm run test
 ```
 
 ## Contributing
-#### Help me to improve it, share and enjoy :)
-Please create a Github issue if there is something wrong or to be improved. Pull request are also welcome and they can be created to the develop branch.
 
+#### Help me to improve it, share and enjoy :)
+
+Please create a Github issue if there is something wrong or to be improved. Pull request are also welcome and they can be created to the develop branch.
 
 ## License
 

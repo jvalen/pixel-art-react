@@ -24,7 +24,8 @@ describe('actions', () => {
     const type = types.SELECT_PALETTE_COLOR;
     const position = 0;
     expect(actions.selectPaletteColor(position)).toEqual({
-      type, position
+      type,
+      position
     });
   });
 
@@ -41,9 +42,14 @@ describe('actions', () => {
     const id = 0;
     const color = '#f3f3f3';
     const paletteColor = '#a2a2a2';
-    expect(actions.cellAction({
-      drawingTool, id, color, paletteColor
-    })).toEqual({
+    expect(
+      actions.cellAction({
+        drawingTool,
+        id,
+        color,
+        paletteColor
+      })
+    ).toEqual({
       type: `APPLY_${drawingTool}`,
       id,
       color,
@@ -56,9 +62,14 @@ describe('actions', () => {
     const id = 0;
     const color = '#f3f3f3';
     const paletteColor = '#a2a2a2';
-    expect(actions.cellAction({
-      drawingTool, id, color, paletteColor
-    })).toEqual({
+    expect(
+      actions.cellAction({
+        drawingTool,
+        id,
+        color,
+        paletteColor
+      })
+    ).toEqual({
       type: `APPLY_${drawingTool}`,
       id,
       color,
