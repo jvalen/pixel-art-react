@@ -4,7 +4,7 @@
 <h1 align="center">Pixel Art to CSS</h1>
 <p align="center">
   <h3 align="center">  
-    Web application that allow us to animate pixel art and export the results to CSS.
+    Web application that allows us to animate pixel art and export the results to CSS.
   </h3>
 </p>
 <p align="center">
