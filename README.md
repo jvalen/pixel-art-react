@@ -1,10 +1,9 @@
-<h1 align="center">Pixel Art to CSS</h1>
 <p align="center">
   <img width="200" src="screenshots/tree-pixelartcss.png">
 </p>
-<h2 align="center">Online Pixel Art editor</h2>
+<h1 align="center">Pixel Art to CSS</h1>
 <p align="center">
-  <h3 align="center">
+  <h3 align="center">  
     Web application that allow us to animate pixel art and export the results to CSS.
   </h3>
 </p>
@@ -23,24 +22,15 @@
 
 You will be able to **load**, **save**, **import**, **export** projects, **undo** **redo** your actions, change grid properties, **share** your work and **download** it, everything in a very easy and fast way.
 
-<p align="center">
-  By default, you will find the following project within the <b>LOAD</b> section:
-</p>
-
-<p align="center">
-  <img src="screenshots/animation-cat.gif">
-</p>
-
-<p align="center">
-  See it live at
-  <a target='_blank' href='https://www.pixelartcss.com/' title='pixelartcss'>
-    pixelartcss
-  </a>
-</p>
-
 ## Example
 
-You can find an example project data ready to import [here](examples/import-export/cat.txt).
+By default, you will find the following project within the <b>LOAD</b> section:
+
+![Cat animation example](screenshots/animation-cat.gif)
+
+See it live at [pixelartcss](https://www.pixelartcss.com/)
+
+You can also import it directly submitting [this](examples/import-export/cat.txt) code.
 
 ## Technical overview
 
