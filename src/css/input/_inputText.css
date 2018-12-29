@@ -1,9 +1,4 @@
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
-input[type='text'],
-input[type='number'] {
+@define-mixin inputText {
   appearance: none;
   box-shadow: none;
   border-radius: none;
@@ -15,15 +10,23 @@ input[type='number'] {
   background-color: $color-tundora;
   transition: background-color 0.3s;
 
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
   &:focus {
     color: $color-mineShaft;
     background-color: $color-dustyGray;
     outline: none;
+  }
+}
+
+input[type='text'],
+input[type='number'] {
+  @mixin inputText;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
