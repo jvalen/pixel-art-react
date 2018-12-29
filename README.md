@@ -4,7 +4,7 @@
 <h1 align="center">Pixel Art to CSS</h1>
 <p align="center">
   <h3 align="center">  
-    Web application that allows us to animate pixel art and export the results to CSS.
+    Animate pixel art and get CSS
   </h3>
 </p>
 <p align="center">
@@ -14,13 +14,19 @@
 
 ## Did you know that you can create pixel art using CSS?
 
-[Try to draw](https://www.pixelartcss.com/) some pixels on the screen, it will generate the CSS code using **box-shadow** property. Create as much drawings as you want adding new frames and then check them in motion. It uses CSS **keyframes** to get the animation done.
+**Pixel Art to CSS** is an online editor that helps you with that task.
+
+Combining the power of both **box-shadow** and **keyframes** CSS properties, you will get CSS code ready to use in your site.
+
+Furthermore, you can download or share your work in different formats such as a static image, animated GIF or sprite like image.
+
+:pencil2: [Try it out](https://www.pixelartcss.com/)
 
 <p align="center">
-  <img src="screenshots/screenshot-potion.png">
+  <img width="600" src="screenshots/screenshot-potion.png">
 </p>
 
-You will be able to **load**, **save**, **import**, **export** projects, **undo** **redo** your actions, change grid properties, **share** your work and **download** it, everything in a very easy and fast way.
+**Pixel Art to CSS** aims to be an intuitive tool by its simplicity, however it is equipped with a wide range of features: customize your color palette, go back and forth in time, modify animation settings, save or load your projects, among others.
 
 ## Example
 
@@ -58,7 +64,7 @@ npm run development
 
 ## Deploy
 
-Create the final build and run the generated react html on a express server using SSR.
+Create the final build and run the generated React HTML on the server using SSR.
 
 ```bash
 npm run deploy
