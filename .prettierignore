@@ -2,5 +2,7 @@ node_modules
 build
 dist
 deploy
+*config.js
 images
 screenshots
+examples
