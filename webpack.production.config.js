@@ -1,9 +1,9 @@
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var config = {
+const config = {
   mode: "production",
   entry: [
     './src/index.jsx',
@@ -11,15 +11,15 @@ var config = {
   ],
   plugins: [
     new CopyWebpackPlugin([
-        { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
-        { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
-        { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' }
+      { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
+      { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
+      { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' }
     ]),
     new ExtractTextPlugin({
       filename: "css/main.css"
     }),
     new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"'
     })
   ],
   target: "web",
@@ -51,7 +51,7 @@ var config = {
     extensions: ['.js', '.jsx']
   },
   output: {
-    path: __dirname + '/deploy',
+    path: path.join(__dirname, '/deploy'),
     publicPath: '/',
     filename: 'bundle.js'
   }

@@ -1,5 +1,6 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   mode: "development",
@@ -9,7 +10,7 @@ module.exports = {
     'whatwg-fetch'
   ],
   output: {
-    path: __dirname + '/build',
+    path: path.join(__dirname, '/build'),
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -48,7 +49,7 @@ module.exports = {
       inject: true
     }),
     new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"development"'
+      'process.env.NODE_ENV': '"development"'
     }),
   ],
   target: "web",
