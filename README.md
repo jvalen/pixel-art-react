@@ -36,11 +36,11 @@ You can also import it directly submitting [this](examples/import-export/cat.txt
 
 This application has been built with the following technologies:
 
-- [React](https://facebook.github.io/react/): Library to build the UI
-- [Redux](http://redux.js.org/): Implements a Flux like architecture
-- [ImmutableJS](https://facebook.github.io/immutable-js/) Helps to keep the data immutable
-- [PostCSS](https://github.com/postcss/postcss) Handle the app CSS
-- [NodeJS](https://nodejs.org/en/) + [Express](http://expressjs.com/) (Server side to build an universal application, create and serve the generated drawings)
+- [React](https://facebook.github.io/react/): Library to build the UI.
+- [Redux](http://redux.js.org/): Implements a Flux like architecture.
+- [ImmutableJS](https://facebook.github.io/immutable-js/) Helps to keep the data immutable aiming to avoid side effects.
+- [PostCSS](https://github.com/postcss/postcss) Handle the app CSS.
+- [NodeJS](https://nodejs.org/en/) + [Express](http://expressjs.com/) (Server side to build an universal application, create and serve the generated drawings).
 
 ## Installation
 
@@ -50,7 +50,7 @@ npm install
 
 ## Development
 
-If you just want to develop the interface with no need of back-end side.
+If you just want to develop the interface with no need of the back-end side.
 
 ```bash
 npm run development
@@ -58,7 +58,7 @@ npm run development
 
 ## Deploy
 
-Create the final build and run the generated react html on a express server making in an isomorphic way.
+Create the final build and run the generated react html on a express server using SSR.
 
 ```bash
 npm run deploy
