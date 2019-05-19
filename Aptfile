@@ -3,4 +3,4 @@ libpng-dev
 zlib1g-dev
 libjasper-dev
 libjasper1
-libpng12-0
+libpng12
