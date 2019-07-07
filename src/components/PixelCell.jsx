@@ -10,6 +10,7 @@ export default class PixelCell extends React.Component {
     );
     return !isSame;
   }
+
   render() {
     const {
       cell: { color, width },

@@ -15,6 +15,7 @@ const UndoRedo = props => {
   return (
     <div className="undo-redo">
       <button
+        type="button"
         onClick={() => {
           undo();
         }}
@@ -22,6 +23,7 @@ const UndoRedo = props => {
         <span className="undo-redo__icon--undo" />
       </button>
       <button
+        type="button"
         onClick={() => {
           redo();
         }}

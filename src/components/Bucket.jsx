@@ -5,6 +5,7 @@ import { BUCKET } from '../store/reducers/drawingToolStates';
 
 const Bucket = props => (
   <button
+    type="button"
     className={`bucket${props.bucketOn ? ' selected' : ''}`}
     onClick={props.switchBucket}
   />

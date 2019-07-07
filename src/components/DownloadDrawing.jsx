@@ -21,6 +21,7 @@ const DownloadDrawing = props => {
 
   return (
     <button
+      type="button"
       className="download-btn"
       onClick={() => {
         download(props.downloadType);

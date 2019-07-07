@@ -20,6 +20,7 @@ const PaletteColor = props => {
 
   return (
     <button
+      type="button"
       className={`palette-color
         ${selected ? 'selected' : ''}`}
       style={styles}

@@ -5,6 +5,7 @@ import { ERASER } from '../store/reducers/drawingToolStates';
 
 const Eraser = props => (
   <button
+    type="button"
     className={`eraser${props.eraserOn ? ' selected' : ''}`}
     onClick={props.switchEraser}
   />

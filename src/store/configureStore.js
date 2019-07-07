@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import undoable, { includeAction } from 'redux-undo';
 import { fromJS } from 'immutable';
-import reducer from '../store/reducers/reducer';
+import reducer from './reducers/reducer';
 import {
   CHANGE_DIMENSIONS,
   APPLY_PENCIL,
@@ -13,7 +13,7 @@ import {
   SET_DRAWING,
   SET_CELL_SIZE,
   SET_RESET_GRID
-} from '../store/actions/actionTypes';
+} from './actions/actionTypes';
 
 const createIncludedActions = () =>
   includeAction([

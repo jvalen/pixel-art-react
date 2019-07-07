@@ -5,6 +5,7 @@ import { EYEDROPPER } from '../store/reducers/drawingToolStates';
 
 const Eyedropper = props => (
   <button
+    type="button"
     className={`eyedropper${props.eyedropperOn ? ' selected' : ''}`}
     onClick={props.switchEyedropper}
   />

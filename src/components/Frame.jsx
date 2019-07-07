@@ -62,12 +62,14 @@ export default class Frame extends React.Component {
               activeFrameIndex={0}
             />
             <button
+              type="button"
               className="delete"
               onClick={event => {
                 this.deleteFrame(event);
               }}
             />
             <button
+              type="button"
               className="duplicate"
               onClick={event => {
                 this.duplicateFrame(event);

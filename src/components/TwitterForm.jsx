@@ -85,6 +85,7 @@ export default class TwitterForm extends React.Component {
           included
         </h3>
         <button
+          type="button"
           className="twitter-form__tweet"
           onClick={() => {
             this.tweetDrawing(this.props.tweetType);

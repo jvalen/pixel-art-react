@@ -17,7 +17,8 @@ class ColorPicker extends React.Component {
   handleClick() {
     this.props.switchColorPicker();
     if (!this.state.displayColorPicker) {
-      this.setState({ displayColorPicker: !this.state.displayColorPicker });
+      const { displayColorPicker } = this.state;
+      this.setState({ displayColorPicker: !displayColorPicker });
     }
   }
 
@@ -55,6 +56,7 @@ class ColorPicker extends React.Component {
     return (
       <div className="color-picker">
         <button
+          type="button"
           className={`color-picker__button${isSelected ? ' selected' : ''}`}
           onClick={this.handleClick}
         />

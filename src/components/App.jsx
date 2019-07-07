@@ -57,7 +57,8 @@ export default class App extends React.Component {
   }
 
   toggleHelp() {
-    this.setState({ helpOn: !this.state.helpOn });
+    const { helpOn } = this.state;
+    this.setState({ helpOn: !helpOn });
   }
 
   render() {
@@ -97,6 +98,7 @@ export default class App extends React.Component {
                   </div>
                   <div className="app__load-save-container">
                     <button
+                      type="button"
                       className="app__load-button"
                       onClick={() => {
                         this.changeModalType('load');
@@ -166,6 +168,7 @@ export default class App extends React.Component {
               <div className="app__mobile--container">
                 <div className="app__mobile--group">
                   <button
+                    type="button"
                     className="app__copycss-button"
                     onClick={() => {
                       this.changeModalType('copycss');
@@ -187,6 +190,7 @@ export default class App extends React.Component {
                       }
                     >
                       <button
+                        type="button"
                         className="app__twitter-button"
                         onClick={() => {
                           this.changeModalType('twitter');
@@ -201,6 +205,7 @@ export default class App extends React.Component {
                       }
                     >
                       <button
+                        type="button"
                         className="app__download-button"
                         onClick={() => {
                           this.changeModalType('download');
@@ -209,6 +214,7 @@ export default class App extends React.Component {
                     </div>
                     <div data-tooltip="Toggle help tooltips">
                       <button
+                        type="button"
                         className={`app__toggle-help-button
                           ${this.state.helpOn ? ' selected' : ''}`}
                         onClick={() => {
@@ -231,6 +237,7 @@ export default class App extends React.Component {
               <div className="app__mobile--container">
                 <div className="app__mobile--group">
                   <button
+                    type="button"
                     className="app__preview-button"
                     onClick={() => {
                       this.changeModalType('preview');

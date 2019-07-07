@@ -34,12 +34,14 @@ const CopyCSS = props => {
       {props.animationCode ? (
         <h2>
           Paste the following code anywhere in the CSS code and assign
-          <span> .pixel-animation</span> class to a HTML element
+          <span> .pixel-animation</span>
+          class to a HTML element
         </h2>
       ) : (
         <h2>
           Paste the following code anywhere in the CSS code and assign
-          <span> .pixelart-to-css</span> class to a HTML element
+          <span> .pixelart-to-css</span>
+          class to a HTML element
         </h2>
       )}
       <pre className="copy-css__string">{generateCSS()}</pre>

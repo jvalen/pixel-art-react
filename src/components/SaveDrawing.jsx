@@ -25,6 +25,7 @@ const SaveDrawing = props => {
   return (
     <div className="save-drawing">
       <button
+        type="button"
         onClick={() => {
           save();
         }}

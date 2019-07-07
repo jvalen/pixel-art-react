@@ -117,6 +117,7 @@ export default class LoadDrawing extends React.Component {
                   duration={1}
                 />
                 <button
+                  type="button"
                   className="drawing__delete"
                   onClick={event => {
                     this.removeFromStorage(i, event);
@@ -145,6 +146,7 @@ export default class LoadDrawing extends React.Component {
               defaultValue=""
             />
             <button
+              type="button"
               className="import__button"
               onClick={() => {
                 this.importProject();

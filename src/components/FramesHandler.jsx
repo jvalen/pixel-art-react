@@ -66,6 +66,7 @@ class FramesHandler extends React.Component {
     return (
       <div className="frames-handler">
         <button
+          type="button"
           className="frames-handler__add"
           onClick={() => {
             this.handleClick();

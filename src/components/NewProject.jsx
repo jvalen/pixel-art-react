@@ -11,6 +11,7 @@ const NewProject = props => {
   return (
     <div className="new-project">
       <button
+        type="button"
         onClick={() => {
           newProject();
         }}

@@ -20,7 +20,6 @@ import Root from '../components/Root';
 import {
   SHOW_SPINNER,
   CHANGE_DIMENSIONS,
-  DRAW_CELL,
   NEW_PROJECT,
   SET_DRAWING,
   SET_CELL_SIZE,
@@ -88,7 +87,6 @@ function handleRender(req, res) {
     undoable(reducer, {
       filter: includeAction([
         CHANGE_DIMENSIONS,
-        DRAW_CELL,
         SET_DRAWING,
         SET_CELL_SIZE,
         SET_RESET_GRID,
