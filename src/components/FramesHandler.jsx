@@ -15,6 +15,7 @@ class FramesHandler extends React.Component {
 
   onDragEnd(result) {
     const { destination, source } = result;
+    const { actions } = this.props;
 
     if (!destination) {
       return;
@@ -27,38 +28,41 @@ class FramesHandler extends React.Component {
       return;
     }
 
-    this.props.actions.reorderFrame(source.index, destination.index);
+    actions.reorderFrame(source.index, destination.index);
   }
 
   onScrollbarUpdate() {
-    if (this.state.newFrame) {
+    const { newFrame } = this.state;
+    if (newFrame) {
       this.setState({ newFrame: false });
       this.scrollbars.scrollToRight();
     }
   }
 
   getFrames() {
-    return this.props.list.map((frameData, index) => (
+    const { list, columns, rows, activeIndex, actions } = this.props;
+    return list.map((frameData, index) => (
       <Frame
         key={frameData.get('key')}
         dataId={index}
         frame={frameData}
-        columns={this.props.columns}
-        rows={this.props.rows}
-        active={this.props.activeIndex === index}
-        lastFrame={this.props.list.size - 1 === index}
+        columns={columns}
+        rows={rows}
+        active={activeIndex === index}
+        lastFrame={list.size - 1 === index}
         actions={{
-          changeActiveFrame: this.props.actions.changeActiveFrame,
-          deleteFrame: this.props.actions.deleteFrame,
-          duplicateFrame: this.props.actions.duplicateFrame,
-          changeFrameInterval: this.props.actions.changeFrameInterval
+          changeActiveFrame: actions.changeActiveFrame,
+          deleteFrame: actions.deleteFrame,
+          duplicateFrame: actions.duplicateFrame,
+          changeFrameInterval: actions.changeFrameInterval
         }}
       />
     ));
   }
 
   handleClick() {
-    this.props.actions.createNewFrame();
+    const { actions } = this.props;
+    actions.createNewFrame();
     this.setState({ newFrame: true });
   }
 

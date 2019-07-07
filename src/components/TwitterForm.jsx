@@ -14,12 +14,15 @@ export default class TwitterForm extends React.Component {
   }
 
   handleTextChange(event) {
+    const { maxChars } = this.props;
     const input = event.target.value;
-    this.setState({ charsLeft: this.props.maxChars - input.length });
+    this.setState({ charsLeft: maxChars - input.length });
   }
 
   tweetDrawing(type) {
-    if (this.state.charsLeft >= 0) {
+    const { charsLeft } = this.state;
+    const { actions } = this.props;
+    if (charsLeft >= 0) {
       const {
         frames,
         activeFrame,
@@ -40,7 +43,7 @@ export default class TwitterForm extends React.Component {
         animate: frames.size > 1
       };
       if (saveProjectToStorage(localStorage, drawingToSave)) {
-        this.props.actions.showSpinner();
+        actions.showSpinner();
         shareDrawing(
           {
             type,
@@ -53,15 +56,17 @@ export default class TwitterForm extends React.Component {
           },
           this.tweetText.value,
           'twitter',
-          this.props.actions.sendNotification
+          actions.sendNotification
         );
       } else {
-        this.props.actions.sendNotification('Sorry: There was an error :(');
+        actions.sendNotification('Sorry: There was an error :(');
       }
     }
   }
 
   render() {
+    const { initialText, charsLeft } = this.state;
+    const { tweetType } = this.props;
     return (
       <div className="twitter-form">
         <h2>You are about to share your awesome drawing on Twitter</h2>
@@ -72,13 +77,13 @@ export default class TwitterForm extends React.Component {
           onChange={event => {
             this.handleTextChange(event);
           }}
-          defaultValue={this.state.initialText}
+          defaultValue={initialText}
         />
         <div
           className={`twitter-form__count
-            ${this.state.charsLeft < 0 ? ' max-reached' : ''}`}
+            ${charsLeft < 0 ? ' max-reached' : ''}`}
         >
-          {this.state.charsLeft}
+          {charsLeft}
         </div>
         <h3>
           Please customize your message above, the drawing will be automatically
@@ -88,7 +93,7 @@ export default class TwitterForm extends React.Component {
           type="button"
           className="twitter-form__tweet"
           onClick={() => {
-            this.tweetDrawing(this.props.tweetType);
+            this.tweetDrawing(tweetType);
           }}
         >
           <span />

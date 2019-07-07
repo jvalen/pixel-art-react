@@ -1,17 +1,15 @@
 import React from 'react';
 import { getCssImageClassOutput, exportAnimationData } from '../utils/cssParse';
 
-const CopyCSS = props => {
+const CopyCSS = ({
+  frames,
+  columns,
+  cellSize,
+  activeFrameIndex,
+  animationCode,
+  duration
+}) => {
   const generateCSS = () => {
-    const {
-      frames,
-      columns,
-      cellSize,
-      activeFrameIndex,
-      animationCode,
-      duration
-    } = props;
-
     if (animationCode) {
       const cssAnimationString = exportAnimationData(
         frames,
@@ -31,7 +29,7 @@ const CopyCSS = props => {
 
   return (
     <div className="copy-css">
-      {props.animationCode ? (
+      {animationCode ? (
         <h2>
           Paste the following code anywhere in the CSS code and assign
           <span> .pixel-animation</span>

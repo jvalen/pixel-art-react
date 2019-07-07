@@ -15,16 +15,18 @@ class ColorPicker extends React.Component {
   }
 
   handleClick() {
-    this.props.switchColorPicker();
-    if (!this.state.displayColorPicker) {
-      const { displayColorPicker } = this.state;
+    const { switchColorPicker } = this.props;
+    const { displayColorPicker } = this.state;
+    switchColorPicker();
+    if (!displayColorPicker) {
       this.setState({ displayColorPicker: !displayColorPicker });
     }
   }
 
   handleClose() {
+    const { setPencilTool } = this.props;
     this.setState({ displayColorPicker: false });
-    this.props.setPencilTool();
+    setPencilTool();
   }
 
   render() {
@@ -48,9 +50,10 @@ class ColorPicker extends React.Component {
         left: 0
       }
     };
-    const { props } = this;
+    const { props, state } = this;
     const { colorPickerOn, paletteColor } = props;
-    const isSelected = colorPickerOn && this.state.displayColorPicker;
+    const { displayColorPicker } = state;
+    const isSelected = colorPickerOn && displayColorPicker;
     const initialPickerColor = paletteColor || '#ffffff';
 
     return (
@@ -61,7 +64,7 @@ class ColorPicker extends React.Component {
           onClick={this.handleClick}
         />
         <div style={styles.picker}>
-          {this.state.displayColorPicker ? (
+          {displayColorPicker ? (
             <div style={styles.popover} is="popover">
               <div
                 style={styles.cover}

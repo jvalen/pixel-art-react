@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const SimpleSpinner = props => (
-  <div className={`simple-spinner${props.loading ? ' display' : ''}`}>
+const SimpleSpinner = ({ loading }) => (
+  <div className={`simple-spinner${loading ? ' display' : ''}`}>
     <div className="circle" />
   </div>
 );

@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { switchTool } from '../store/actions/actionCreators';
 import { ERASER } from '../store/reducers/drawingToolStates';
 
-const Eraser = props => (
+const Eraser = ({ eraserOn, switchEraser }) => (
   <button
     type="button"
-    className={`eraser${props.eraserOn ? ' selected' : ''}`}
-    onClick={props.switchEraser}
+    className={`eraser${eraserOn ? ' selected' : ''}`}
+    onClick={switchEraser}
   />
 );
 

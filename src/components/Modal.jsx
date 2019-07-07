@@ -68,6 +68,7 @@ class Modal extends React.Component {
   }
 
   getModalContent(props) {
+    const { previewType, loadType } = this.state;
     const options = this.constructor.generateRadioOptions(props);
     let content;
     const radioOptions =
@@ -75,11 +76,11 @@ class Modal extends React.Component {
         <div className="modal__preview">
           <RadioSelector
             name="preview-type"
-            selected={this.state.previewType}
+            selected={previewType}
             change={this.changeRadioType}
             options={options}
           />
-          {this.state.previewType !== 'spritesheet' ? (
+          {previewType !== 'spritesheet' ? (
             <div className="modal__preview--wrapper">
               <Preview
                 key="0"
@@ -89,7 +90,7 @@ class Modal extends React.Component {
                 cellSize={props.type === 'preview' ? props.cellSize : 5}
                 duration={props.duration}
                 activeFrameIndex={props.activeFrameIndex}
-                animate={this.state.previewType === 'animation'}
+                animate={previewType === 'animation'}
               />
             </div>
           ) : null}
@@ -98,7 +99,7 @@ class Modal extends React.Component {
         <div className="modal__load">
           <RadioSelector
             name="load-type"
-            selected={this.state.loadType}
+            selected={loadType}
             change={this.changeRadioType}
             options={options}
           />
@@ -109,7 +110,7 @@ class Modal extends React.Component {
       case 'load':
         content = (
           <LoadDrawing
-            loadType={this.state.loadType}
+            loadType={loadType}
             close={props.close}
             open={props.open}
             frames={props.frames}
@@ -132,7 +133,7 @@ class Modal extends React.Component {
             rows={props.rows}
             cellSize={props.cellSize}
             activeFrameIndex={props.activeFrameIndex}
-            animationCode={this.state.previewType !== 'single'}
+            animationCode={previewType !== 'single'}
             duration={props.duration}
           />
         );
@@ -146,7 +147,7 @@ class Modal extends React.Component {
             rows={props.rows}
             cellSize={props.cellSize}
             duration={props.duration}
-            downloadType={this.state.previewType}
+            downloadType={previewType}
             actions={{ sendNotification: props.actions.sendNotification }}
           />
         );
@@ -162,7 +163,7 @@ class Modal extends React.Component {
             cellSize={props.cellSize}
             duration={props.duration}
             paletteGridData={props.paletteGridData}
-            tweetType={this.state.previewType}
+            tweetType={previewType}
             actions={{
               showSpinner: props.actions.showSpinner,
               sendNotification: props.actions.sendNotification
@@ -203,6 +204,7 @@ class Modal extends React.Component {
   }
 
   render() {
+    const { isOpen, type, close } = this.props;
     const styles = {
       modal: {
         top: '50%',
@@ -218,12 +220,12 @@ class Modal extends React.Component {
 
     return (
       <ModalReact
-        isOpen={this.props.isOpen}
+        isOpen={isOpen}
         onRequestClose={() => {
-          this.props.close();
+          close();
         }}
         style={styles.modal}
-        contentLabel={`Dialog ${this.props.type || ''}`}
+        contentLabel={`Dialog ${type || ''}`}
       >
         {this.getModalContent(this.props)}
       </ModalReact>

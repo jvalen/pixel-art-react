@@ -3,7 +3,8 @@ import PixelGrid from './PixelGrid';
 
 export default class GridWrapper extends React.Component {
   shouldComponentUpdate(newProps) {
-    return newProps.cells !== this.props.cells;
+    const { cells } = this.props;
+    return newProps.cells !== cells;
   }
 
   render() {

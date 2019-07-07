@@ -5,43 +5,41 @@ import Preview from './Preview';
 
 export default class Frame extends React.Component {
   handleClick() {
-    this.props.actions.changeActiveFrame(this.props.dataId);
+    const { actions, dataId } = this.props;
+    actions.changeActiveFrame(dataId);
   }
 
   deleteFrame(e) {
+    const { active, actions, dataId } = this.props;
     e.stopPropagation();
-    if (this.props.active) {
-      this.props.actions.deleteFrame(this.props.dataId);
+    if (active) {
+      actions.deleteFrame(dataId);
     }
   }
 
   duplicateFrame(e) {
+    const { active, actions, dataId } = this.props;
     e.stopPropagation();
-    if (this.props.active) {
-      this.props.actions.duplicateFrame(this.props.dataId);
+    if (active) {
+      actions.duplicateFrame(dataId);
     }
   }
 
   changeInterval(e) {
+    const { active, actions, dataId } = this.props;
     e.stopPropagation();
-    if (this.props.active) {
-      this.props.actions.changeFrameInterval(
-        this.props.dataId,
-        this.percentage.value
-      );
+    if (active) {
+      actions.changeFrameInterval(dataId, this.percentage.value);
     }
   }
 
   render() {
+    const { active, dataId, frame, lastFrame, columns, rows } = this.props;
     return (
-      <Draggable
-        key={this.props.dataId}
-        draggableId={this.props.dataId}
-        index={this.props.dataId}
-      >
+      <Draggable key={dataId} draggableId={dataId} index={dataId}>
         {provided => (
           <div
-            className={`frame${this.props.active ? ' active' : ''}`}
+            className={`frame${active ? ' active' : ''}`}
             onClick={() => {
               this.handleClick();
             }}
@@ -55,9 +53,9 @@ export default class Frame extends React.Component {
             ref={provided.innerRef}
           >
             <Preview
-              frames={List([this.props.frame])}
-              columns={this.props.columns}
-              rows={this.props.rows}
+              frames={List([frame])}
+              columns={columns}
+              rows={rows}
               cellSize={2}
               activeFrameIndex={0}
             />
@@ -77,7 +75,7 @@ export default class Frame extends React.Component {
             />
             <input
               type="number"
-              value={this.props.frame.get('interval')}
+              value={frame.get('interval')}
               onChange={event => {
                 this.changeInterval(event);
               }}
@@ -85,7 +83,7 @@ export default class Frame extends React.Component {
               ref={c => {
                 this.percentage = c;
               }}
-              disabled={this.props.lastFrame || !this.props.active}
+              disabled={lastFrame || !active}
             />
           </div>
         )}

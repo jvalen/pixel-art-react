@@ -8,8 +8,8 @@ import Animation from './Animation';
 
 const Preview = props => {
   const generatePreview = () => {
-    const { activeFrameIndex, duration } = props;
-    const { frames, columns, cellSize, animate } = props.storedData || props;
+    const { activeFrameIndex, duration, storedData } = props;
+    const { frames, columns, cellSize, animate } = storedData || props;
     const animation = frames.size > 1 && animate;
     let animationData;
     let cssString;
@@ -47,7 +47,8 @@ const Preview = props => {
     );
   };
 
-  const { columns, rows, cellSize } = props.storedData || props;
+  const { storedData } = props;
+  const { columns, rows, cellSize } = storedData || props;
   const style = {
     width: columns * cellSize,
     height: rows * cellSize

@@ -34,7 +34,8 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    initialSetup(this.props.dispatch, localStorage);
+    const { dispatch } = this.props;
+    initialSetup(dispatch, localStorage);
   }
 
   changeModalType(type) {
@@ -62,6 +63,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { helpOn, showCookiesBanner, modalType, modalOpen } = this.state;
     return (
       <div
         className="app__main"
@@ -78,8 +80,8 @@ export default class App extends React.Component {
         <div
           className="app__frames-container"
           data-tooltip={
-            this.state.helpOn
-              ? `Create an awesome animation secuence.
+            helpOn
+              ? `Create an awesome animation sequence.
               You can modify the duration of each frame, changing its own value.
               The number indicates where the frame ends in a range from 0 to 100.
               `
@@ -93,7 +95,7 @@ export default class App extends React.Component {
             <div className="app__left-side">
               <div className="app__mobile--container">
                 <div className="app__mobile--group">
-                  <div data-tooltip={this.state.helpOn ? 'New project' : null}>
+                  <div data-tooltip={helpOn ? 'New project' : null}>
                     <NewProjectContainer />
                   </div>
                   <div className="app__load-save-container">
@@ -104,46 +106,32 @@ export default class App extends React.Component {
                         this.changeModalType('load');
                       }}
                       data-tooltip={
-                        this.state.helpOn
-                          ? 'Load projects you stored before'
-                          : null
+                        helpOn ? 'Load projects you stored before' : null
                       }
                     >
                       LOAD
                     </button>
-                    <div
-                      data-tooltip={
-                        this.state.helpOn ? 'Save your project' : null
-                      }
-                    >
+                    <div data-tooltip={helpOn ? 'Save your project' : null}>
                       <SaveDrawingContainer />
                     </div>
                   </div>
-                  <div
-                    data-tooltip={
-                      this.state.helpOn ? 'Undo Redo actions' : null
-                    }
-                  >
+                  <div data-tooltip={helpOn ? 'Undo Redo actions' : null}>
                     <UndoRedoContainer />
                   </div>
                   <div className="app__tools-wrapper grid-2">
-                    <div
-                      data-tooltip={this.state.helpOn ? 'Remove colors' : null}
-                    >
+                    <div data-tooltip={helpOn ? 'Remove colors' : null}>
                       <EraserContainer />
                     </div>
                     <div
                       data-tooltip={
-                        this.state.helpOn
-                          ? 'Sample a color from your drawing'
-                          : null
+                        helpOn ? 'Sample a color from your drawing' : null
                       }
                     >
                       <EyedropperContainer />
                     </div>
                     <div
                       data-tooltip={
-                        this.state.helpOn
+                        helpOn
                           ? 'It fills an area of the current frame based on color similarity'
                           : null
                       }
@@ -152,7 +140,7 @@ export default class App extends React.Component {
                     </div>
                     <div
                       data-tooltip={
-                        this.state.helpOn
+                        helpOn
                           ? 'Choose a new color that is not in your palette'
                           : null
                       }
@@ -174,7 +162,7 @@ export default class App extends React.Component {
                       this.changeModalType('copycss');
                     }}
                     data-tooltip={
-                      this.state.helpOn ? 'Check your CSS generated code' : null
+                      helpOn ? 'Check your CSS generated code' : null
                     }
                   >
                     css
@@ -184,7 +172,7 @@ export default class App extends React.Component {
                   <div className="app__social-container">
                     <div
                       data-tooltip={
-                        this.state.helpOn
+                        helpOn
                           ? 'Tweet your creation in different formats'
                           : null
                       }
@@ -199,7 +187,7 @@ export default class App extends React.Component {
                     </div>
                     <div
                       data-tooltip={
-                        this.state.helpOn
+                        helpOn
                           ? 'Download your creation in different formats'
                           : null
                       }
@@ -216,7 +204,7 @@ export default class App extends React.Component {
                       <button
                         type="button"
                         className={`app__toggle-help-button
-                          ${this.state.helpOn ? ' selected' : ''}`}
+                          ${helpOn ? ' selected' : ''}`}
                         onClick={() => {
                           this.toggleHelp();
                         }}
@@ -243,39 +231,29 @@ export default class App extends React.Component {
                       this.changeModalType('preview');
                     }}
                     data-tooltip={
-                      this.state.helpOn
-                        ? 'Show a preview of your project'
-                        : null
+                      helpOn ? 'Show a preview of your project' : null
                     }
                   >
                     PREVIEW
                   </button>
                   <div
-                    data-tooltip={
-                      this.state.helpOn ? 'Reset the selected frame' : null
-                    }
+                    data-tooltip={helpOn ? 'Reset the selected frame' : null}
                   >
                     <ResetContainer />
                   </div>
                   <div
-                    data-tooltip={
-                      this.state.helpOn ? 'Number of columns and rows' : null
-                    }
+                    data-tooltip={helpOn ? 'Number of columns and rows' : null}
                   >
                     <DimensionsContainer />
                   </div>
                 </div>
                 <div className="app__mobile--group">
-                  <div
-                    data-tooltip={
-                      this.state.helpOn ? 'Size of one tile in px' : null
-                    }
-                  >
+                  <div data-tooltip={helpOn ? 'Size of one tile in px' : null}>
                     <CellSizeContainer />
                   </div>
                   <div
                     data-tooltip={
-                      this.state.helpOn ? 'Animation duration in seconds' : null
+                      helpOn ? 'Animation duration in seconds' : null
                     }
                   >
                     <DurationContainer />
@@ -288,7 +266,7 @@ export default class App extends React.Component {
         <div className="css-container">
           <CssDisplayContainer />
         </div>
-        {this.state.showCookiesBanner ? (
+        {showCookiesBanner ? (
           <CookieBanner
             disableStyle
             message="
@@ -306,13 +284,13 @@ export default class App extends React.Component {
           />
         ) : null}
         <ModalContainer
-          type={this.state.modalType}
-          isOpen={this.state.modalOpen}
+          type={modalType}
+          isOpen={modalOpen}
           close={() => {
             this.closeModal();
           }}
           open={() => {
-            this.changeModalType(this.state.modalType);
+            this.changeModalType(modalType);
           }}
         />
       </div>

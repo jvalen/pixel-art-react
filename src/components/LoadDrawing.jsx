@@ -17,13 +17,14 @@ const browserStorage =
 
 export default class LoadDrawing extends React.Component {
   getExportCode() {
+    const { frames, paletteGridData, cellSize, columns, rows } = this.props;
     const projectData = {
-      frames: this.props.frames,
-      paletteGridData: this.props.paletteGridData,
-      cellSize: this.props.cellSize,
-      columns: this.props.columns,
-      rows: this.props.rows,
-      animate: this.props.frames.size > 1
+      frames,
+      paletteGridData,
+      cellSize,
+      columns,
+      rows,
+      animate: frames.size > 1
     };
     return generateExportString(projectData);
   }
@@ -32,6 +33,7 @@ export default class LoadDrawing extends React.Component {
     const importedProject = exportedStringToProjectData(
       this.importProjectData.value
     );
+    const { actions, close } = this.props;
 
     if (importedProject) {
       const {
@@ -42,43 +44,37 @@ export default class LoadDrawing extends React.Component {
         cellSize
       } = importedProject;
 
-      this.props.actions.setDrawing(
-        frames,
-        paletteGridData,
-        cellSize,
-        columns,
-        rows
-      );
-      this.props.close();
-      this.props.actions.sendNotification('Project successfully imported');
+      actions.setDrawing(frames, paletteGridData, cellSize, columns, rows);
+      close();
+      actions.sendNotification('Project successfully imported');
     } else {
-      this.props.actions.sendNotification(
-        "Sorry, the project couldn't be imported"
-      );
+      actions.sendNotification("Sorry, the project couldn't be imported");
     }
   }
 
   removeFromStorage(key, e) {
+    const { actions, open, close } = this.props;
     e.stopPropagation();
     if (browserStorage) {
       const removed = removeProjectFromStorage(browserStorage, key);
       if (removed) {
-        this.props.actions.sendNotification('Drawing deleted');
-        this.props.close();
-        this.props.open();
+        actions.sendNotification('Drawing deleted');
+        close();
+        open();
       }
     }
   }
 
   drawingClick(data) {
-    this.props.actions.setDrawing(
+    const { actions, close } = this.props;
+    actions.setDrawing(
       data.frames,
       data.paletteGridData,
       data.cellSize,
       data.columns,
       data.rows
     );
-    this.props.close();
+    close();
   }
 
   giveMeDrawings() {
@@ -190,6 +186,7 @@ export default class LoadDrawing extends React.Component {
   }
 
   render() {
-    return this.giveMeOptions(this.props.loadType);
+    const { loadType } = this.props;
+    return this.giveMeOptions(loadType);
   }
 }

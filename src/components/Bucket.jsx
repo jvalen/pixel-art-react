@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { switchTool } from '../store/actions/actionCreators';
 import { BUCKET } from '../store/reducers/drawingToolStates';
 
-const Bucket = props => (
+const Bucket = ({ bucketOn, switchBucket }) => (
   <button
     type="button"
-    className={`bucket${props.bucketOn ? ' selected' : ''}`}
-    onClick={props.switchBucket}
+    className={`bucket${bucketOn ? ' selected' : ''}`}
+    onClick={switchBucket}
   />
 );
 

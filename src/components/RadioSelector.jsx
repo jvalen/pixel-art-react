@@ -1,18 +1,18 @@
 import React from 'react';
 
-const RadioSelector = props => {
-  const options = ops =>
+const RadioSelector = ({ name, selected, legend, options, change }) => {
+  const availableOptions = ops =>
     ops.map(item => (
-      <label htmlFor={`${props.name}-${item.label}`} key={item.id}>
+      <label htmlFor={`${name}-${item.label}`} key={item.id}>
         <input
           type="radio"
           value={item.value}
           name={item.label}
-          id={`${props.name}-${item.label}`}
+          id={`${name}-${item.label}`}
           onChange={() => {
-            props.change(item.value, props.name);
+            change(item.value, name);
           }}
-          checked={props.selected === item.value}
+          checked={selected === item.value}
         />
         <span>{item.label}</span>
       </label>
@@ -20,8 +20,8 @@ const RadioSelector = props => {
 
   return (
     <fieldset className="radio-selector">
-      {props.legend ? <legend>{props.legend}</legend> : null}
-      {options(props.options)}
+      {legend ? <legend>{legend}</legend> : null}
+      {availableOptions(options)}
     </fieldset>
   );
 };

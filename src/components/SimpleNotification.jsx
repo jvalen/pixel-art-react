@@ -4,14 +4,20 @@ import { bindActionCreators } from 'redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import * as actionCreators from '../store/actions/actionCreators';
 
-const SimpleNotification = props => {
+const SimpleNotification = ({
+  duration,
+  fadeInTime,
+  fadeOutTime,
+  notifications,
+  actions
+}) => {
   const removeNotifications = () => {
     setTimeout(() => {
-      props.actions.sendNotification('');
-    }, props.duration);
+      actions.sendNotification('');
+    }, duration);
   };
-  const timeout = { enter: props.fadeInTime, exit: props.fadeOutTime };
-  const notifications = props.notifications.map(item => (
+  const timeout = { enter: fadeInTime, exit: fadeOutTime };
+  const notificationList = notifications.map(item => (
     <CSSTransition
       key={item.id}
       timeout={timeout}
@@ -23,11 +29,11 @@ const SimpleNotification = props => {
     </CSSTransition>
   ));
 
-  if (notifications.size > 0) {
+  if (notificationList.size > 0) {
     removeNotifications();
   }
 
-  return <TransitionGroup>{notifications}</TransitionGroup>;
+  return <TransitionGroup>{notificationList}</TransitionGroup>;
 };
 
 const mapStateToProps = state => ({

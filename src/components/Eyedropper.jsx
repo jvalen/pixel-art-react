@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { switchTool } from '../store/actions/actionCreators';
 import { EYEDROPPER } from '../store/reducers/drawingToolStates';
 
-const Eyedropper = props => (
+const Eyedropper = ({ eyedropperOn, switchEyedropper }) => (
   <button
     type="button"
-    className={`eyedropper${props.eyedropperOn ? ' selected' : ''}`}
-    onClick={props.switchEyedropper}
+    className={`eyedropper${eyedropperOn ? ' selected' : ''}`}
+    onClick={switchEyedropper}
   />
 );
 

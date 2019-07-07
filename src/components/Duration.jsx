@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../store/actions/actionCreators';
 
-const Duration = props => {
+const Duration = ({ actions, duration }) => {
   const handleChange = event => {
-    props.actions.setDuration(event.target.value);
+    actions.setDuration(event.target.value);
   };
   return (
     <div className="duration">
@@ -13,7 +13,7 @@ const Duration = props => {
         Duration
         <input
           type="number"
-          value={props.duration}
+          value={duration}
           onChange={event => {
             handleChange(event);
           }}

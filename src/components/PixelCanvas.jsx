@@ -17,14 +17,16 @@ class PixelCanvas extends React.Component {
   }
 
   componentDidMount() {
-    this.props.updateGridBoundaries();
-    window.addEventListener('resize', this.props.updateGridBoundaries);
-    window.addEventListener('scroll', this.props.updateGridBoundaries);
+    const { updateGridBoundariesThrottle } = this.props;
+    updateGridBoundariesThrottle();
+    window.addEventListener('resize', updateGridBoundariesThrottle);
+    window.addEventListener('scroll', updateGridBoundariesThrottle);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.props.updateGridBoundaries);
-    window.removeEventListener('scroll', this.props.updateGridBoundaries);
+    const { updateGridBoundariesThrottle } = this.props;
+    window.removeEventListener('resize', updateGridBoundariesThrottle);
+    window.removeEventListener('scroll', updateGridBoundariesThrottle);
   }
 
   render() {
@@ -73,7 +75,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   cellAction: cellProps => dispatch(cellAction(cellProps)),
-  updateGridBoundaries: throttle(() => {
+  updateGridBoundariesThrottle: throttle(() => {
     const gridElement = document.getElementsByClassName(gridContainerClass)[0];
     dispatch(updateGridBoundaries(gridElement));
   }, 500)
