@@ -24,10 +24,15 @@ module.exports = {
         ]
       },
       {
-        test:   /\.css$/,
+        test:   /\.css$/i,
         use: [
           'style-loader',
-          'css-loader?importLoaders=1',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader'
         ]
       },

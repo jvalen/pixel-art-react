@@ -1,13 +1,9 @@
-module.exports = () => ({  
-  plugins: {
-    'postcss-import': {},
-    'precss': {},
-    'autoprefixer': {
-      browsers: ['last 2 versions', 'IE > 8']
-    },
-    'lost': {},
-    'postcss-reporter': {
-      clearMessages: true
-    }
-  }
-})
+module.exports = {
+  plugins: [
+    require('autoprefixer'),
+    require('postcss-import'),
+    require('precss'),
+    require('lost'),
+    require('postcss-reporter'),
+  ]
+}
