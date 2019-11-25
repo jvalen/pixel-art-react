@@ -9,7 +9,6 @@ import LoadDrawing from './LoadDrawing';
 import Preview from './Preview';
 import CopyCSS from './CopyCSS';
 import DownloadDrawing from './DownloadDrawing';
-import TwitterForm from './TwitterForm';
 
 class Modal extends React.Component {
   static generateRadioOptions(props) {
@@ -152,25 +151,6 @@ class Modal extends React.Component {
           />
         );
         break;
-      case 'twitter':
-        content = (
-          <TwitterForm
-            maxChars="113"
-            frames={props.frames}
-            activeFrame={props.activeFrame}
-            columns={props.columns}
-            rows={props.rows}
-            cellSize={props.cellSize}
-            duration={props.duration}
-            paletteGridData={props.paletteGridData}
-            tweetType={previewType}
-            actions={{
-              showSpinner: props.actions.showSpinner,
-              sendNotification: props.actions.sendNotification
-            }}
-          />
-        );
-        break;
       default:
     }
 
@@ -252,8 +232,5 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actionCreators, dispatch)
 });
 
-const ModalContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Modal);
+const ModalContainer = connect(mapStateToProps, mapDispatchToProps)(Modal);
 export default ModalContainer;

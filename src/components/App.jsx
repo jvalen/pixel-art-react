@@ -173,21 +173,6 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         helpOn
-                          ? 'Tweet your creation in different formats'
-                          : null
-                      }
-                    >
-                      <button
-                        type="button"
-                        className="app__twitter-button"
-                        onClick={() => {
-                          this.changeModalType('twitter');
-                        }}
-                      />
-                    </div>
-                    <div
-                      data-tooltip={
-                        helpOn
                           ? 'Download your creation in different formats'
                           : null
                       }

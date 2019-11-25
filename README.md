@@ -18,7 +18,7 @@
 
 Combining the power of both **box-shadow** and **keyframes** CSS properties, you will get CSS code ready to use in your site.
 
-Furthermore, you can download or share your work in different formats such as a static image, animated GIF or sprite like image.
+Furthermore, you can download your work in different formats such as a static image, animated GIF or sprite like image.
 
 :pencil2: [Try it out](https://www.pixelartcss.com/)
 
