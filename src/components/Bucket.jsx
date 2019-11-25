@@ -6,6 +6,7 @@ import { BUCKET } from '../store/reducers/drawingToolStates';
 const Bucket = ({ bucketOn, switchBucket }) => (
   <button
     type="button"
+    aria-label="Paint Bucket Tool"
     className={`bucket${bucketOn ? ' selected' : ''}`}
     onClick={switchBucket}
   />
@@ -20,8 +21,5 @@ const mapDispatchToProps = dispatch => ({
   switchBucket: () => dispatch(switchBucketAction)
 });
 
-const BucketContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Bucket);
+const BucketContainer = connect(mapStateToProps, mapDispatchToProps)(Bucket);
 export default BucketContainer;

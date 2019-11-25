@@ -6,6 +6,7 @@ import { EYEDROPPER } from '../store/reducers/drawingToolStates';
 const Eyedropper = ({ eyedropperOn, switchEyedropper }) => (
   <button
     type="button"
+    aria-label="Eyedropper Tool"
     className={`eyedropper${eyedropperOn ? ' selected' : ''}`}
     onClick={switchEyedropper}
   />

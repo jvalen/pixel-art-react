@@ -61,6 +61,7 @@ export default class Frame extends React.Component {
             />
             <button
               type="button"
+              aria-label="Delete Frame"
               className="delete"
               onClick={event => {
                 this.deleteFrame(event);
@@ -68,6 +69,7 @@ export default class Frame extends React.Component {
             />
             <button
               type="button"
+              aria-label="Duplicate Frame"
               className="duplicate"
               onClick={event => {
                 this.duplicateFrame(event);

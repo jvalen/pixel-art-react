@@ -179,6 +179,7 @@ export default class App extends React.Component {
                     >
                       <button
                         type="button"
+                        aria-label="Download"
                         className="app__download-button"
                         onClick={() => {
                           this.changeModalType('download');
@@ -188,6 +189,7 @@ export default class App extends React.Component {
                     <div data-tooltip="Toggle help tooltips">
                       <button
                         type="button"
+                        aria-label="Help"
                         className={`app__toggle-help-button
                           ${helpOn ? ' selected' : ''}`}
                         onClick={() => {

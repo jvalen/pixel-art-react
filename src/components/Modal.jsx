@@ -60,9 +60,6 @@ class Modal extends React.Component {
       loadType: 'storage'
     };
     this.changeRadioType = this.changeRadioType.bind(this);
-  }
-
-  componentWillMount() {
     ModalReact.setAppElement('body');
   }
 

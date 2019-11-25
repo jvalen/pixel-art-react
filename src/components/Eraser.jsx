@@ -6,6 +6,7 @@ import { ERASER } from '../store/reducers/drawingToolStates';
 const Eraser = ({ eraserOn, switchEraser }) => (
   <button
     type="button"
+    aria-label="Eraser Tool"
     className={`eraser${eraserOn ? ' selected' : ''}`}
     onClick={switchEraser}
   />
@@ -20,8 +21,5 @@ const mapDispatchToProps = dispatch => ({
   switchEraser: () => dispatch(switchEraserAction)
 });
 
-const EraserContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Eraser);
+const EraserContainer = connect(mapStateToProps, mapDispatchToProps)(Eraser);
 export default EraserContainer;

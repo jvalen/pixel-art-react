@@ -64,6 +64,7 @@ const ColorPickerContainer = React.memo(() => {
     <div className="color-picker">
       <button
         type="button"
+        aria-label="Color Picker Tool"
         className={`color-picker__button${isSelected ? ' selected' : ''}`}
         onClick={handleClick}
       />

@@ -21,6 +21,7 @@ const PaletteColor = props => {
   return (
     <button
       type="button"
+      aria-label="Color Palette"
       className={`palette-color
         ${selected ? 'selected' : ''}`}
       style={styles}

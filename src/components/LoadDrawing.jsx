@@ -114,6 +114,7 @@ export default class LoadDrawing extends React.Component {
                 />
                 <button
                   type="button"
+                  aria-label="Remove stored project"
                   className="drawing__delete"
                   onClick={event => {
                     this.removeFromStorage(i, event);
