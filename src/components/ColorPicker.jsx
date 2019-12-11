@@ -37,7 +37,7 @@ const ColorPickerContainer = React.memo(() => {
     setPencilTool();
   };
 
-  const onPickerChange = color => dispatch(setCustomColor(color.hex));
+  const onPickerChange = color => dispatch(setCustomColor(color.rgb));
 
   // Necessary inline styles for react-color component
   const styles = {
