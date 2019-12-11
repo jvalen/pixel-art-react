@@ -7,16 +7,16 @@ import {
 } from '../src/store/actions/actionTypes';
 import * as actions from '../src/store/actions/actionCreators';
 
-const CELL_COLOR = '#FFFFFF';
+const CELL_COLOR = 'rgba(255, 255, 255, 1)';
 const GRID_DOES_NOT_INCLUDE_CELL_COLOR = List([
-  Map({ color: '#DDDDDD' }),
-  Map({ color: '#AAAAAA' }),
-  Map({ color: '#555555' })
+  Map({ color: 'rgba(221, 221, 221, 1)' }),
+  Map({ color: 'rgba(170, 170, 170, 1)' }),
+  Map({ color: 'rgba(85, 85, 85, 1)' })
 ]);
 const GRID_INCLUDES_CELL_COLOR = List([
-  Map({ color: '#DDDDDD' }),
+  Map({ color: 'rgba(221, 221, 221, 1)' }),
   Map({ color: CELL_COLOR }),
-  Map({ color: '#555555' })
+  Map({ color: 'rgba(85, 85, 85, 1)' })
 ]);
 const grid = GRID_DOES_NOT_INCLUDE_CELL_COLOR;
 
@@ -25,10 +25,10 @@ describe('reducer: SET_INITIAL_STATE', () => {
     const nextState = reducer(undefined, actions.setInitialState({}));
     const nextGrid = nextState.get('grid');
 
-    expect(nextGrid.getIn([0, 'color'])).toEqual('#000000');
-    expect(nextGrid.getIn([23, 'color'])).toEqual('#ffffff');
-    expect(nextGrid.getIn([24, 'color'])).toEqual('#383535');
-    expect(nextGrid.getIn([29, 'color'])).toEqual('#383530');
+    expect(nextGrid.getIn([0, 'color'])).toEqual('rgba(0, 0, 0, 1)');
+    expect(nextGrid.getIn([23, 'color'])).toEqual('rgba(255, 255, 255, 1)');
+    expect(nextGrid.getIn([24, 'color'])).toEqual('rgba(56, 53, 53, 1)');
+    expect(nextGrid.getIn([29, 'color'])).toEqual('rgba(56, 53, 53, 1)');
   });
 
   it('palette grid should be initialized', () => {
@@ -43,8 +43,8 @@ describe('reducer: NEW_PROJECT', () => {
     const nextState = reducer(undefined, actions.newProject());
     const nextGrid = nextState.get('grid');
 
-    expect(nextGrid.getIn([10, 'color'])).toEqual('#4caf50');
-    expect(nextGrid.getIn([20, 'color'])).toEqual('#9e9e9e');
+    expect(nextGrid.getIn([10, 'color'])).toEqual('rgba(76, 175, 80, 1)');
+    expect(nextGrid.getIn([20, 'color'])).toEqual('rgba(158, 158, 158, 1)');
   });
 
   it('palette grid should be initialized', () => {
@@ -186,7 +186,13 @@ describe('reducer: SELECT_PALETTE_COLOR', () => {
 });
 
 describe('reducer: SET_CUSTOM_COLOR', () => {
-  const customColor = '#654321';
+  const rgbColorValues = {
+    r: 101,
+    g: 67,
+    b: 33,
+    a: 1
+  };
+  const customColor = `rgba(${rgbColorValues.r},${rgbColorValues.g},${rgbColorValues.b},${rgbColorValues.a})`;
   let state;
   let nextState;
   describe('palette color is not selected', () => {
@@ -196,7 +202,7 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
         position: -1
       });
 
-      nextState = reducer(state, actions.setCustomColor(customColor));
+      nextState = reducer(state, actions.setCustomColor(rgbColorValues));
     });
 
     it('should update the last cell of grid', () => {
@@ -218,7 +224,7 @@ describe('reducer: SET_CUSTOM_COLOR', () => {
         position
       });
 
-      nextState = reducer(state, actions.setCustomColor(customColor));
+      nextState = reducer(state, actions.setCustomColor(rgbColorValues));
 
       expect(nextState.getIn(['grid', position, 'color'])).toEqual(customColor);
     });

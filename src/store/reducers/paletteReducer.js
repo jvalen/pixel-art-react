@@ -9,6 +9,11 @@ const getPositionFirstMatchInPalette = (grid, color) =>
 const isColorInPalette = (grid, color) =>
   getPositionFirstMatchInPalette(grid, color) !== -1;
 
+const parseColorToString = colorData =>
+  typeof colorData === 'string'
+    ? colorData
+    : `rgba(${colorData.r},${colorData.g},${colorData.b},${colorData.a})`;
+
 const disableColorWhenEraser = (palette, action) => {
   if (action.tool === 'ERASER') {
     return palette.set('position', -1);
@@ -20,43 +25,43 @@ const addColorToLastGridCell = (palette, newColor) => {
   const grid = palette.get('grid');
   const lastPosition = grid.size - 1;
   return palette.merge({
-    grid: grid.setIn([lastPosition, 'color'], newColor),
+    grid: grid.setIn([lastPosition, 'color'], parseColorToString(newColor)),
     position: lastPosition
   });
 };
 
 const createPaletteGrid = () =>
   List([
-    '#000000',
-    '#ff0000',
-    '#e91e63',
-    '#9c27b0',
-    '#673ab7',
-    '#3f51b5',
-    '#2196f3',
-    '#03a9f4',
-    '#00bcd4',
-    '#009688',
-    '#4caf50',
-    '#8bc34a',
-    '#cddc39',
-    '#9ee07a',
-    '#ffeb3b',
-    '#ffc107',
-    '#ff9800',
-    '#ffcdd2',
-    '#ff5722',
-    '#795548',
-    '#9e9e9e',
-    '#607d8b',
-    '#303f46',
-    '#ffffff',
-    '#383535',
-    '#383534',
-    '#383533',
-    '#383532',
-    '#383531',
-    '#383530'
+    'rgba(0, 0, 0, 1)',
+    'rgba(255, 0, 0, 1)',
+    'rgba(233, 30, 99, 1)',
+    'rgba(156, 39, 176, 1)',
+    'rgba(103, 58, 183, 1)',
+    'rgba(63, 81, 181, 1)',
+    'rgba(33, 150, 243, 1)',
+    'rgba(3, 169, 244, 1)',
+    'rgba(0, 188, 212, 1)',
+    'rgba(0, 150, 136, 1)',
+    'rgba(76, 175, 80, 1)',
+    'rgba(139, 195, 74, 1)',
+    'rgba(205, 220, 57, 1)',
+    'rgba(158, 224, 122, 1)',
+    'rgba(255, 235, 59, 1)',
+    'rgba(255, 193, 7, 1)',
+    'rgba(255, 152, 0, 1)',
+    'rgba(255, 205, 210, 1)',
+    'rgba(255, 87, 34, 1)',
+    'rgba(121, 85, 72, 1)',
+    'rgba(158, 158, 158, 1)',
+    'rgba(96, 125, 139, 1)',
+    'rgba(48, 63, 70, 1)',
+    'rgba(255, 255, 255, 1)',
+    'rgba(56, 53, 53, 1)',
+    'rgba(56, 53, 53, 1)',
+    'rgba(56, 53, 53, 1)',
+    'rgba(56, 53, 53, 1)',
+    'rgba(56, 53, 53, 1)',
+    'rgba(56, 53, 53, 1)'
   ]).map(color => Map({ color, id: shortid.generate() }));
 
 const isColorSelected = palette => palette.get('position') !== -1;
@@ -98,7 +103,11 @@ const setCustomColor = (palette, { customColor }) => {
   if (!isColorSelected(palette)) {
     return addColorToLastGridCell(palette, customColor);
   }
-  return palette.setIn(['grid', palette.get('position'), 'color'], customColor);
+  const customColorRgba = parseColorToString(customColor);
+  return palette.setIn(
+    ['grid', palette.get('position'), 'color'],
+    customColorRgba
+  );
 };
 
 const setPalette = (palette, action) =>
