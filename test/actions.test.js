@@ -32,16 +32,18 @@ describe('actions', () => {
   it('should create an action to set the custom color', () => {
     const expectedAction = {
       type: types.SET_CUSTOM_COLOR,
-      customColor: '#F0F0F0'
+      customColor: 'rgba(240, 240, 240, 1)'
     };
-    expect(actions.setCustomColor('#F0F0F0')).toEqual(expectedAction);
+    expect(actions.setCustomColor('rgba(240, 240, 240, 1)')).toEqual(
+      expectedAction
+    );
   });
 
   it('should create APPLY_PENCIL when drawing tool is the pencil', () => {
     const drawingTool = PENCIL;
     const id = 0;
-    const color = '#f3f3f3';
-    const paletteColor = '#a2a2a2';
+    const color = 'rgba(243, 243, 243, 1)';
+    const paletteColor = 'rgba(162, 162, 162, 1)';
     expect(
       actions.cellAction({
         drawingTool,
@@ -60,8 +62,8 @@ describe('actions', () => {
   it('should create APPLY_ERASER when drawing tool is the eraser', () => {
     const drawingTool = ERASER;
     const id = 0;
-    const color = '#f3f3f3';
-    const paletteColor = '#a2a2a2';
+    const color = 'rgba(243, 243, 243, 1)';
+    const paletteColor = 'rgba(162, 162, 162, 1)';
     expect(
       actions.cellAction({
         drawingTool,

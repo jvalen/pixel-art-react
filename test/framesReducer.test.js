@@ -3,20 +3,20 @@ import reducer from '../src/store/reducers/framesReducer';
 import * as actions from '../src/store/actions/actionCreators';
 
 const firstGridMock = [
-  '#111111',
-  '#111111',
-  '#222222',
-  '#222222',
-  '#222222',
-  '#333333'
+  'rgba(17, 17, 17, 1)',
+  'rgba(17, 17, 17, 1)',
+  'rgba(34, 34, 34, 1)',
+  'rgba(34, 34, 34, 1)',
+  'rgba(34, 34, 34, 1)',
+  'rgba(51, 51, 51, 1)'
 ];
 const secondGridMock = [
-  '#ffffff',
-  '#eeeeee',
-  '#eeeeee',
-  '#eeeeee',
-  '#eeeeee',
-  '#dddddd'
+  'rgba(255, 255, 255, 1)',
+  'rgba(238, 238, 238, 1)',
+  'rgba(238, 238, 238, 1)',
+  'rgba(238, 238, 238, 1)',
+  'rgba(238, 238, 238, 1)',
+  'rgba(221, 221, 221, 1)'
 ];
 const framesMock = () =>
   Map({

@@ -8,12 +8,12 @@ import {
 import * as actions from '../src/store/actions/actionCreators';
 
 const firstGridMock = [
-  '#111111',
-  '#111111',
-  '#222222',
-  '#222222',
-  '#222222',
-  '#333333'
+  'rgba(17, 17, 17, 1)',
+  'rgba(17, 17, 17, 1)',
+  'rgba(34, 34, 34, 1)',
+  'rgba(34, 34, 34, 1)',
+  'rgba(34, 34, 34, 1)',
+  'rgba(51, 51, 51, 1)'
 ];
 const framesMock = () =>
   Map({
@@ -28,7 +28,7 @@ const framesMock = () =>
   });
 
 describe('framesReducer: APPLY_PENCIL', () => {
-  const paletteColor = '#444444';
+  const paletteColor = 'rgba(68, 68, 68, 1)';
   const type = APPLY_PENCIL;
 
   it('draws cell with the palette color', () => {
@@ -40,12 +40,12 @@ describe('framesReducer: APPLY_PENCIL', () => {
     });
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111',
+      'rgba(17, 17, 17, 1)',
       paletteColor,
-      '#222222',
-      '#222222',
-      '#222222',
-      '#333333'
+      'rgba(34, 34, 34, 1)',
+      'rgba(34, 34, 34, 1)',
+      'rgba(34, 34, 34, 1)',
+      'rgba(51, 51, 51, 1)'
     ]);
   });
 });
@@ -61,18 +61,18 @@ describe('framesReducer: APPLY_ERASER', () => {
     });
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111',
-      '#111111',
-      '#222222',
+      'rgba(17, 17, 17, 1)',
+      'rgba(17, 17, 17, 1)',
+      'rgba(34, 34, 34, 1)',
       '',
-      '#222222',
-      '#333333'
+      'rgba(34, 34, 34, 1)',
+      'rgba(51, 51, 51, 1)'
     ]);
   });
 });
 
 describe('framesReducer: APPLY_BUCKET', () => {
-  const paletteColor = '#444444';
+  const paletteColor = 'rgba(68, 68, 68, 1)';
   const type = APPLY_BUCKET;
   const columns = 2;
   const rows = 3;
@@ -90,10 +90,10 @@ describe('framesReducer: APPLY_BUCKET', () => {
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
       paletteColor,
       paletteColor,
-      '#222222',
-      '#222222',
-      '#222222',
-      '#333333'
+      'rgba(34, 34, 34, 1)',
+      'rgba(34, 34, 34, 1)',
+      'rgba(34, 34, 34, 1)',
+      'rgba(51, 51, 51, 1)'
     ]);
   });
 
@@ -108,12 +108,12 @@ describe('framesReducer: APPLY_BUCKET', () => {
     });
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111',
-      '#111111',
+      'rgba(17, 17, 17, 1)',
+      'rgba(17, 17, 17, 1)',
       paletteColor,
       paletteColor,
       paletteColor,
-      '#333333'
+      'rgba(51, 51, 51, 1)'
     ]);
   });
 
@@ -128,11 +128,11 @@ describe('framesReducer: APPLY_BUCKET', () => {
     });
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual([
-      '#111111',
-      '#111111',
-      '#222222',
-      '#222222',
-      '#222222',
+      'rgba(17, 17, 17, 1)',
+      'rgba(17, 17, 17, 1)',
+      'rgba(34, 34, 34, 1)',
+      'rgba(34, 34, 34, 1)',
+      'rgba(34, 34, 34, 1)',
       paletteColor
     ]);
   });
