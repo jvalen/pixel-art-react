@@ -21,7 +21,7 @@ const ColorPickerContainer = React.memo(() => {
   const setPencilToolAction = switchTool(PENCIL);
 
   const isSelected = colorPickerOn && displayColorPicker;
-  const initialPickerColor = paletteColor || '#ffffff';
+  const initialPickerColor = paletteColor || 'rgba(255, 255, 255, 1)';
 
   const handleClick = () => {
     const switchColorPicker = () => dispatch(switchColorPickerAction);

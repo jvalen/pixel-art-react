@@ -1,6 +1,6 @@
 import * as types from '../actions/actionTypes';
 
-export const GRID_INITIAL_COLOR = '#313131';
+export const GRID_INITIAL_COLOR = 'rgba(49, 49, 49, 1)';
 
 const updateFrameProp = prop => propReducer => (frames, action) => {
   const activeIndex = frames.get('activeIndex');
