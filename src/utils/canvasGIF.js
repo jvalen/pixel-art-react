@@ -103,6 +103,7 @@ function renderFrames(settings, sendNotification) {
 
   switch (type) {
     case 'single':
+    case 'spritesheet':
       renderImageToCanvas(
         type,
         {
@@ -122,26 +123,6 @@ function renderFrames(settings, sendNotification) {
         saveAs(blob, `${randomName()}.png`);
         sendNotification('Downloading...');
       });
-      break;
-    case 'spritesheet':
-      gif.addFrame(
-        renderImageToCanvas(
-          type,
-          {
-            canvas,
-            canvasHeight,
-            canvasWidth
-          },
-          {
-            frame: activeFrame,
-            frameHeight,
-            frameWidth,
-            cellSize
-          },
-          frames
-        )
-      );
-      gif.finish();
       break;
     default: {
       let previousInterval = 0;
