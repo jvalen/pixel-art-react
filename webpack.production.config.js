@@ -6,8 +6,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const config = {
   mode: "production",
   entry: [
+    './src/utils/polyfills.js',
     './src/index.jsx',
-    'whatwg-fetch'
   ],
   plugins: [
     new CopyWebpackPlugin([

@@ -6,8 +6,8 @@ module.exports = {
   mode: "development",
   devtool: 'cheap-module-source-map',            
   entry: [
+    './src/utils/polyfills.js',
     './src/index.jsx',
-    'whatwg-fetch'
   ],
   output: {
     path: path.join(__dirname, '/build'),

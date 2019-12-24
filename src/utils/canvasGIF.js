@@ -1,5 +1,6 @@
 import GIFEncoder from 'gif-encoder';
 import blobStream from 'blob-stream';
+import { saveAs } from 'file-saver';
 
 function randomName() {
   return Math.random()
@@ -102,6 +103,26 @@ function renderFrames(settings, sendNotification) {
 
   switch (type) {
     case 'single':
+      renderImageToCanvas(
+        type,
+        {
+          canvas,
+          canvasHeight,
+          canvasWidth
+        },
+        {
+          frame: activeFrame,
+          frameHeight,
+          frameWidth,
+          cellSize
+        },
+        frames
+      );
+      canvas.toBlob(function(blob) {
+        saveAs(blob, `${randomName()}.png`);
+        sendNotification('Downloading...');
+      });
+      break;
     case 'spritesheet':
       gif.addFrame(
         renderImageToCanvas(
@@ -120,6 +141,7 @@ function renderFrames(settings, sendNotification) {
           frames
         )
       );
+      gif.finish();
       break;
     default: {
       let previousInterval = 0;
@@ -151,9 +173,9 @@ function renderFrames(settings, sendNotification) {
           )
         );
       });
+      gif.finish();
     }
   }
-  gif.finish();
 }
 
 export default renderFrames;
