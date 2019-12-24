@@ -2,21 +2,19 @@ import React from 'react';
 import renderCanvasGIF from '../utils/canvasGIF';
 
 const DownloadDrawing = props => {
+  const DOWNLOAD_MESSAGE = 'Downloading...';
   const download = type => {
     const { frames, activeFrame, columns, rows, cellSize, duration } = props;
-
-    renderCanvasGIF(
-      {
-        type,
-        frames,
-        activeFrame,
-        columns,
-        rows,
-        cellSize,
-        duration
-      },
-      props.actions.sendNotification
-    );
+    props.actions.sendNotification(DOWNLOAD_MESSAGE);
+    renderCanvasGIF({
+      type,
+      frames,
+      activeFrame,
+      columns,
+      rows,
+      cellSize,
+      duration
+    });
   };
 
   return (

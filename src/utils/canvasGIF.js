@@ -62,7 +62,11 @@ function renderImageToCanvas(type, canvasInfo, currentFrameInfo, frames) {
   return ctx.getImageData(0, 0, canvasWidth, canvasHeight).data;
 }
 
-function renderFrames(settings, sendNotification) {
+const saveCanvasToDisk = (blob, fileExtension) => {
+  saveAs(blob, `${randomName()}.${fileExtension}`);
+};
+
+function renderFrames(settings) {
   const {
     type,
     frames,
@@ -83,18 +87,7 @@ function renderFrames(settings, sendNotification) {
   const canvas = document.createElement('canvas');
   const gif = new GIFEncoder(canvasWidth, canvasHeight);
   gif.pipe(blobStream()).on('finish', function() {
-    const blobURL = this.toBlobURL();
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    a.href = blobURL;
-    a.setAttribute('download', `${randomName()}.gif`);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => {
-      window.URL.revokeObjectURL(blobURL);
-      sendNotification('Downloading...');
-    }, 100);
+    saveCanvasToDisk(this.toBlob(), 'gif');
   });
 
   gif.setRepeat(0); // loop indefinitely
@@ -120,8 +113,7 @@ function renderFrames(settings, sendNotification) {
         frames
       );
       canvas.toBlob(function(blob) {
-        saveAs(blob, `${randomName()}.png`);
-        sendNotification('Downloading...');
+        saveCanvasToDisk(blob, 'png');
       });
       break;
     default: {
