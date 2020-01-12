@@ -23,4 +23,8 @@
   &.copy {
     cursor: copy;
   }
+
+  &.all-scroll {
+    cursor: all-scroll;
+  }
 }

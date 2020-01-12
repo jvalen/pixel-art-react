@@ -88,3 +88,7 @@
 @define-extend bucket {
   content: '\61';
 }
+
+@define-extend pan {
+  content: '\65';
+}

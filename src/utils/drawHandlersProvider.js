@@ -30,27 +30,100 @@ const drawHandlersProvider = rootComponent => ({
   drawHandlersFactory(gridComponent) {
     return {
       onMouseDown(id, ev) {
-        const { props } = gridComponent;
-        const actionProps = getCellActionProps(props, id);
         ev.preventDefault();
-        if (!rootComponent.state.dragging) props.cellAction(actionProps);
-        rootComponent.setState({
-          dragging: true
-        });
+        const { props } = gridComponent;
+        if (props.drawingTool !== 'PAN') {
+          const actionProps = getCellActionProps(props, id);
+          if (!rootComponent.state.dragging) props.cellAction(actionProps);
+          rootComponent.setState({
+            dragging: true
+          });
+        }
       },
       onMouseOver(id, ev) {
-        const { props } = gridComponent;
-        const actionProps = getCellActionProps(props, id);
         ev.preventDefault();
-        if (rootComponent.state.dragging) props.cellAction(actionProps);
+        const { props } = gridComponent;
+        if (props.drawingTool !== 'PAN') {
+          const actionProps = getCellActionProps(props, id);
+          if (rootComponent.state.dragging) props.cellAction(actionProps);
+        }
       },
       onTouchMove(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        const id = fromEventToId(ev, props);
-        const actionProps = getCellActionProps(props, id);
-        if (id !== null && rootComponent.state.dragging)
-          props.cellAction(actionProps);
+        if (props.drawingTool !== 'PAN') {
+          const id = fromEventToId(ev, props);
+          const actionProps = getCellActionProps(props, id);
+          if (id !== null && rootComponent.state.dragging) {
+            props.cellAction(actionProps);
+          }
+        }
+      },
+      onPanTouchMove(ev) {
+        ev.preventDefault();
+        const { props } = gridComponent;
+        if (props.drawingTool === 'PAN') {
+          const { draggingCoord } = rootComponent.state;
+          const { dragging } = rootComponent.state;
+          const touch = ev.touches[0];
+          const { pageX, pageY } = touch;
+          const xDiff = draggingCoord ? pageX - draggingCoord.clientX : 0;
+          const yDiff = draggingCoord ? pageY - draggingCoord.clientY : 0;
+          const cellWidth = ev.target.clientWidth;
+          if (
+            dragging &&
+            (Math.abs(xDiff) > cellWidth || Math.abs(yDiff) > cellWidth)
+          ) {
+            rootComponent.setState({
+              draggingCoord: { clientX: pageX, clientY: pageY }
+            });
+            props.applyPan({ xDiff, yDiff, cellWidth });
+          }
+        }
+      },
+      onPanMouseOver(ev) {
+        ev.preventDefault();
+        const { props } = gridComponent;
+        if (props.drawingTool === 'PAN') {
+          const { draggingCoord } = rootComponent.state;
+          const { dragging } = rootComponent.state;
+          const { clientX, clientY } = ev;
+          const xDiff = draggingCoord ? clientX - draggingCoord.clientX : 0;
+          const yDiff = draggingCoord ? clientY - draggingCoord.clientY : 0;
+          const cellWidth = ev.target.clientWidth;
+          if (
+            dragging &&
+            (Math.abs(xDiff) > cellWidth || Math.abs(yDiff) > cellWidth)
+          ) {
+            rootComponent.setState({
+              draggingCoord: { clientX, clientY }
+            });
+            props.applyPan({ xDiff, yDiff, cellWidth });
+          }
+        }
+      },
+      onPanMouseDown(ev) {
+        ev.preventDefault();
+        const { props } = gridComponent;
+        if (props.drawingTool === 'PAN') {
+          const { clientX, clientY } = ev;
+          rootComponent.setState({
+            dragging: true,
+            draggingCoord: { clientX, clientY }
+          });
+        }
+      },
+      onPanTouchStart(ev) {
+        ev.preventDefault();
+        const { props } = gridComponent;
+        if (props.drawingTool === 'PAN') {
+          const touch = ev.touches[0];
+          const { pageX, pageY } = touch;
+          rootComponent.setState({
+            dragging: true,
+            draggingCoord: { clientX: pageX, clientY: pageY }
+          });
+        }
       }
     };
   }

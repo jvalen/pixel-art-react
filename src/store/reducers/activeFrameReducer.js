@@ -94,6 +94,103 @@ const applyPencilToGrid = (pixelGrid, { paletteColor, id }) =>
 
 const applyBucket = updateGrid(applyBucketToGrid);
 
+const shiftPixelsDown = (grid, columnCount) =>
+  grid.withMutations(mutableGrid => {
+    for (let i = 0; i < columnCount; i++) {
+      const lastValue = mutableGrid.last();
+      mutableGrid.pop().unshift(lastValue);
+    }
+  });
+
+const shiftPixelsUp = (grid, columnCount) =>
+  grid.withMutations(mutableGrid => {
+    for (let i = 0; i < columnCount; i++) {
+      const firstValue = mutableGrid.first();
+      mutableGrid.shift().push(firstValue);
+    }
+  });
+
+const getGridColumnIndexes = (columnId, columnCount, cellCount) => {
+  let i = 0;
+  const indexes = [];
+  while (i < cellCount) {
+    if (i % columnCount === columnId) {
+      indexes.push(i);
+      i += columnCount;
+    } else {
+      i += 1;
+    }
+  }
+  return indexes;
+};
+
+const shiftPixelsLeft = (grid, columnCount) => {
+  const indexArray = getGridColumnIndexes(0, columnCount, grid.size);
+  let tempGrid = grid;
+  for (const cellIndex of indexArray) {
+    const valueToMove = tempGrid.get(cellIndex);
+    const target = cellIndex + columnCount;
+    tempGrid = tempGrid.insert(target, valueToMove);
+    tempGrid = tempGrid.delete(cellIndex);
+  }
+  return tempGrid;
+};
+
+const shiftPixelsRight = (grid, columnCount) => {
+  const indexArray = getGridColumnIndexes(
+    columnCount - 1,
+    columnCount,
+    grid.size
+  );
+  let tempGrid = grid;
+  for (const cellIndex of indexArray) {
+    const valueToMove = tempGrid.get(cellIndex);
+    const target = cellIndex - columnCount + 1;
+    tempGrid = tempGrid.insert(target < 0 ? 1 : target, valueToMove);
+    tempGrid = tempGrid.delete(cellIndex + 1);
+  }
+  return tempGrid;
+};
+
+const applyPan = (frames, action) => {
+  const { xDiff, yDiff, cellWidth } = action.panDiff;
+  const x = xDiff / cellWidth;
+  const y = yDiff / cellWidth;
+  const xDirection = x < 0 ? 'LEFT' : 'RIGHT';
+  const yDirection = y < 0 ? 'UP' : 'DOWN';
+  const horizontal = Math.abs(x) > 1 ? xDirection : '';
+  const vertical = Math.abs(y) > 1 ? yDirection : '';
+  const activeIndex = frames.get('activeIndex');
+  const currentFrame = frames
+    .get('list')
+    .get(activeIndex)
+    .get('grid');
+
+  const columnCount = frames.get('columns');
+  let frameShifted = currentFrame;
+
+  switch (horizontal) {
+    case 'LEFT':
+      frameShifted = shiftPixelsLeft(currentFrame, columnCount);
+      break;
+    case 'RIGHT':
+      frameShifted = shiftPixelsRight(currentFrame, columnCount);
+      break;
+    default:
+  }
+
+  switch (vertical) {
+    case 'UP':
+      frameShifted = shiftPixelsUp(frameShifted, columnCount);
+      break;
+    case 'DOWN':
+      frameShifted = shiftPixelsDown(frameShifted, columnCount);
+      break;
+    default:
+  }
+  return frames.setIn(['list', activeIndex, 'grid'], frameShifted);
+};
+
 const applyPencil = updateGrid(applyPencilToGrid);
 
 const applyEraser = updateGrid((pixelGrid, { id }) =>
@@ -114,6 +211,8 @@ export default function(frames, action) {
       return applyEraser(frames, action);
     case types.APPLY_BUCKET:
       return applyBucket(frames, action);
+    case types.PAN_DRAWING:
+      return applyPan(frames, action);
     case types.SET_RESET_GRID:
       return resetGrid(frames);
     case types.CHANGE_FRAME_INTERVAL:

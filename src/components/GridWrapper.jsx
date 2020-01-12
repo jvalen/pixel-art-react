@@ -7,14 +7,50 @@ export default class GridWrapper extends React.Component {
     return newProps.cells !== cells;
   }
 
+  onMouseOver(ev) {
+    const { activeTool, drawHandlers } = this.props;
+    if (activeTool === 'PAN') {
+      drawHandlers.onPanMouseOver(ev);
+    }
+  }
+
+  onMouseDown(ev) {
+    const { activeTool, drawHandlers } = this.props;
+    if (activeTool === 'PAN') {
+      drawHandlers.onPanMouseDown(ev);
+    }
+  }
+
+  onTouchStart(ev) {
+    const { activeTool, drawHandlers } = this.props;
+    if (activeTool === 'PAN') {
+      drawHandlers.onPanTouchStart(ev);
+    }
+  }
+
+  onTouchMove(ev) {
+    const { activeTool, drawHandlers } = this.props;
+    if (activeTool === 'PAN') {
+      drawHandlers.onPanTouchMove(ev);
+    }
+  }
+
   render() {
     const { props } = this;
     return (
-      <PixelGrid
-        cells={props.cells}
-        drawHandlers={props.drawHandlers}
-        classes={props.classes}
-      />
+      <div
+        onMouseOver={ev => this.onMouseOver(ev)}
+        onFocus={ev => this.onMouseOver(ev)}
+        onMouseDown={ev => this.onMouseDown(ev)}
+        onTouchStart={ev => this.onTouchStart(ev)}
+        onTouchMove={ev => this.onTouchMove(ev)}
+      >
+        <PixelGrid
+          cells={props.cells}
+          drawHandlers={props.drawHandlers}
+          classes={props.classes}
+        />
+      </div>
     );
   }
 }

@@ -14,6 +14,7 @@ export const APPLY_PENCIL = `APPLY_${PENCIL}`;
 export const APPLY_ERASER = `APPLY_${ERASER}`;
 export const APPLY_BUCKET = `APPLY_${BUCKET}`;
 export const APPLY_EYEDROPPER = `APPLY_${EYEDROPPER}`;
+export const PAN_DRAWING = 'PAN_DRAWING';
 export const SET_DRAWING = 'SET_DRAWING';
 export const END_DRAG = 'END_DRAG';
 export const SWITCH_TOOL = 'SWITCH_TOOL';

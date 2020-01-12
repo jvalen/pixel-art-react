@@ -9,6 +9,7 @@ import CssDisplayContainer from './CssDisplay';
 import DurationContainer from './Duration';
 import EraserContainer from './Eraser';
 import BucketContainer from './Bucket';
+import PanContainer from './Pan';
 import EyedropperContainer from './Eyedropper';
 import FramesHandlerContainer from './FramesHandler';
 import PaletteGridContainer from './PaletteGrid';
@@ -137,6 +138,13 @@ export default class App extends React.Component {
                       }
                     >
                       <BucketContainer />
+                    </div>
+                    <div
+                      data-tooltip={
+                        helpOn ? 'Move your drawing around the canvas' : null
+                      }
+                    >
+                      <PanContainer />
                     </div>
                     <div
                       data-tooltip={

@@ -1,0 +1,7 @@
+.pan {
+  @mixin icon pan;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

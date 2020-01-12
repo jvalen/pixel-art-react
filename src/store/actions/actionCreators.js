@@ -55,6 +55,13 @@ export function cellAction({
   };
 }
 
+export function panDrawing({ xDiff, yDiff, cellWidth }) {
+  return {
+    type: 'PAN_DRAWING',
+    panDiff: { xDiff, yDiff, cellWidth }
+  };
+}
+
 export function setDrawing(frames, paletteGridData, cellSize, columns, rows) {
   return {
     type: types.SET_DRAWING,
