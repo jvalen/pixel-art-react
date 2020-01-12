@@ -38,7 +38,7 @@
 }
 
 @define-extend eyedropper {
-  content: '\62';
+  content: '\63';
 }
 
 @define-extend paint-brush {
@@ -50,45 +50,45 @@
 }
 
 @define-extend trash-o {
-  content: '\68';
-}
-
-@define-extend files-o {
   content: '\69';
 }
 
-@define-extend download {
-  content: '\66';
-}
-
-@define-extend twitter {
-  content: '\65';
-}
-
-@define-extend undo {
-  content: '\63';
-}
-
-@define-extend repeat {
-  content: '\64';
-}
-
-@define-extend columns {
-  content: '\6b';
-}
-
-@define-extend rows {
+@define-extend files-o {
   content: '\6a';
 }
 
-@define-extend help {
+@define-extend download {
   content: '\67';
 }
 
-@define-extend bucket {
+@define-extend twitter {
+  content: '\66';
+}
+
+@define-extend undo {
+  content: '\64';
+}
+
+@define-extend repeat {
+  content: '\65';
+}
+
+@define-extend columns {
   content: '\61';
 }
 
+@define-extend rows {
+  content: '\6b';
+}
+
+@define-extend help {
+  content: '\68';
+}
+
+@define-extend bucket {
+  content: '\62';
+}
+
 @define-extend pan {
-  content: '\65';
+  content: '\6e';
 }
