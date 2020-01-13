@@ -1,6 +1,7 @@
 import {
   PENCIL,
   BUCKET,
+  MOVE,
   ERASER,
   EYEDROPPER,
   COLOR_PICKER
@@ -54,6 +55,13 @@ describe('drawing tool reducer: SELECT_PALETTE_COLOR', () => {
 
   it('should keep the same state when state is BUCKET', () => {
     const state = BUCKET;
+    const nextState = reducer(state, actions.selectPaletteColor());
+
+    expect(nextState).toEqual(state);
+  });
+
+  it('should keep the same state when state is MOVE', () => {
+    const state = MOVE;
     const nextState = reducer(state, actions.selectPaletteColor());
 
     expect(nextState).toEqual(state);

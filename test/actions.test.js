@@ -122,6 +122,12 @@ describe('actions', () => {
     expect(actions.switchTool(tool)).toEqual({ type, tool });
   });
 
+  it('should create an action to set the move tool', () => {
+    const type = types.SWITCH_TOOL;
+    const tool = 'MOVE';
+    expect(actions.switchTool(tool)).toEqual({ type, tool });
+  });
+
   it('should create an action to set the cell size', () => {
     const expectedAction = {
       type: types.SET_CELL_SIZE,
