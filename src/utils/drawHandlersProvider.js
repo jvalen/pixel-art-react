@@ -32,7 +32,7 @@ const drawHandlersProvider = rootComponent => ({
       onMouseDown(id, ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        if (props.drawingTool !== 'PAN') {
+        if (props.drawingTool !== 'MOVE') {
           const actionProps = getCellActionProps(props, id);
           if (!rootComponent.state.dragging) props.cellAction(actionProps);
           rootComponent.setState({
@@ -43,7 +43,7 @@ const drawHandlersProvider = rootComponent => ({
       onMouseOver(id, ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        if (props.drawingTool !== 'PAN') {
+        if (props.drawingTool !== 'MOVE') {
           const actionProps = getCellActionProps(props, id);
           if (rootComponent.state.dragging) props.cellAction(actionProps);
         }
@@ -51,7 +51,7 @@ const drawHandlersProvider = rootComponent => ({
       onTouchMove(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        if (props.drawingTool !== 'PAN') {
+        if (props.drawingTool !== 'MOVE') {
           const id = fromEventToId(ev, props);
           const actionProps = getCellActionProps(props, id);
           if (id !== null && rootComponent.state.dragging) {
@@ -59,10 +59,10 @@ const drawHandlersProvider = rootComponent => ({
           }
         }
       },
-      onPanTouchMove(ev) {
+      onMoveTouchMove(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        if (props.drawingTool === 'PAN') {
+        if (props.drawingTool === 'MOVE') {
           const { draggingCoord } = rootComponent.state;
           const { dragging } = rootComponent.state;
           const touch = ev.touches[0];
@@ -77,14 +77,14 @@ const drawHandlersProvider = rootComponent => ({
             rootComponent.setState({
               draggingCoord: { clientX: pageX, clientY: pageY }
             });
-            props.applyPan({ xDiff, yDiff, cellWidth });
+            props.applyMove({ xDiff, yDiff, cellWidth });
           }
         }
       },
-      onPanMouseOver(ev) {
+      onMoveMouseOver(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        if (props.drawingTool === 'PAN') {
+        if (props.drawingTool === 'MOVE') {
           const { draggingCoord } = rootComponent.state;
           const { dragging } = rootComponent.state;
           const { clientX, clientY } = ev;
@@ -98,14 +98,14 @@ const drawHandlersProvider = rootComponent => ({
             rootComponent.setState({
               draggingCoord: { clientX, clientY }
             });
-            props.applyPan({ xDiff, yDiff, cellWidth });
+            props.applyMove({ xDiff, yDiff, cellWidth });
           }
         }
       },
-      onPanMouseDown(ev) {
+      onMoveMouseDown(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        if (props.drawingTool === 'PAN') {
+        if (props.drawingTool === 'MOVE') {
           const { clientX, clientY } = ev;
           rootComponent.setState({
             dragging: true,
@@ -113,10 +113,10 @@ const drawHandlersProvider = rootComponent => ({
           });
         }
       },
-      onPanTouchStart(ev) {
+      onMoveTouchStart(ev) {
         ev.preventDefault();
         const { props } = gridComponent;
-        if (props.drawingTool === 'PAN') {
+        if (props.drawingTool === 'MOVE') {
           const touch = ev.touches[0];
           const { pageX, pageY } = touch;
           rootComponent.setState({

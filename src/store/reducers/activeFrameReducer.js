@@ -152,8 +152,8 @@ const shiftPixelsRight = (grid, columnCount) => {
   return tempGrid;
 };
 
-const applyPan = (frames, action) => {
-  const { xDiff, yDiff, cellWidth } = action.panDiff;
+const applyMove = (frames, action) => {
+  const { xDiff, yDiff, cellWidth } = action.moveDiff;
   const x = xDiff / cellWidth;
   const y = yDiff / cellWidth;
   const xDirection = x < 0 ? 'LEFT' : 'RIGHT';
@@ -211,8 +211,8 @@ export default function(frames, action) {
       return applyEraser(frames, action);
     case types.APPLY_BUCKET:
       return applyBucket(frames, action);
-    case types.PAN_DRAWING:
-      return applyPan(frames, action);
+    case types.MOVE_DRAWING:
+      return applyMove(frames, action);
     case types.SET_RESET_GRID:
       return resetGrid(frames);
     case types.CHANGE_FRAME_INTERVAL:

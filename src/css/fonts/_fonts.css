@@ -89,6 +89,6 @@
   content: '\62';
 }
 
-@define-extend pan {
+@define-extend move {
   content: '\6e';
 }

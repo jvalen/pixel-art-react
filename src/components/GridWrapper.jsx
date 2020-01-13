@@ -9,29 +9,29 @@ export default class GridWrapper extends React.Component {
 
   onMouseOver(ev) {
     const { activeTool, drawHandlers } = this.props;
-    if (activeTool === 'PAN') {
-      drawHandlers.onPanMouseOver(ev);
+    if (activeTool === 'MOVE') {
+      drawHandlers.onMoveMouseOver(ev);
     }
   }
 
   onMouseDown(ev) {
     const { activeTool, drawHandlers } = this.props;
-    if (activeTool === 'PAN') {
-      drawHandlers.onPanMouseDown(ev);
+    if (activeTool === 'MOVE') {
+      drawHandlers.onMoveMouseDown(ev);
     }
   }
 
   onTouchStart(ev) {
     const { activeTool, drawHandlers } = this.props;
-    if (activeTool === 'PAN') {
-      drawHandlers.onPanTouchStart(ev);
+    if (activeTool === 'MOVE') {
+      drawHandlers.onMoveTouchStart(ev);
     }
   }
 
   onTouchMove(ev) {
     const { activeTool, drawHandlers } = this.props;
-    if (activeTool === 'PAN') {
-      drawHandlers.onPanTouchMove(ev);
+    if (activeTool === 'MOVE') {
+      drawHandlers.onMoveTouchMove(ev);
     }
   }
 

@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import {
   cellAction,
   updateGridBoundaries,
-  panDrawing
+  moveDrawing
 } from '../store/actions/actionCreators';
 import GridWrapper from './GridWrapper';
 import throttle from '../utils/throttle';
-import { ERASER, EYEDROPPER, PAN } from '../store/reducers/drawingToolStates';
+import { ERASER, EYEDROPPER, MOVE } from '../store/reducers/drawingToolStates';
 
 const gridContainerClass = 'grid-container';
 
@@ -43,7 +43,7 @@ class PixelCanvas extends React.Component {
       gridExtraClass = 'context-menu';
     } else if (props.eyedropperOn) {
       gridExtraClass = 'copy';
-    } else if (props.panOn) {
+    } else if (props.moveOn) {
       gridExtraClass = 'all-scroll';
     }
 
@@ -73,7 +73,7 @@ const mapStateToProps = state => {
     paletteColor: palette.getIn(['grid', paletteCellPosition, 'color']),
     eyedropperOn: drawingTool === EYEDROPPER,
     eraserOn: drawingTool === ERASER,
-    panOn: drawingTool === PAN,
+    moveOn: drawingTool === MOVE,
     gridBoundaries: state.present.get('gridBoundaries')
   };
 };
@@ -84,7 +84,7 @@ const mapDispatchToProps = dispatch => ({
     const gridElement = document.getElementsByClassName(gridContainerClass)[0];
     dispatch(updateGridBoundaries(gridElement));
   }, 500),
-  applyPan: panDiff => dispatch(panDrawing(panDiff))
+  applyMove: moveDiff => dispatch(moveDrawing(moveDiff))
 });
 
 const PixelCanvasContainer = connect(

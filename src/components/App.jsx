@@ -9,7 +9,7 @@ import CssDisplayContainer from './CssDisplay';
 import DurationContainer from './Duration';
 import EraserContainer from './Eraser';
 import BucketContainer from './Bucket';
-import PanContainer from './Pan';
+import MoveContainer from './Move';
 import EyedropperContainer from './Eyedropper';
 import FramesHandlerContainer from './FramesHandler';
 import PaletteGridContainer from './PaletteGrid';
@@ -119,17 +119,7 @@ export default class App extends React.Component {
                   <div data-tooltip={helpOn ? 'Undo Redo actions' : null}>
                     <UndoRedoContainer />
                   </div>
-                  <div className="app__tools-wrapper grid-2">
-                    <div data-tooltip={helpOn ? 'Remove colors' : null}>
-                      <EraserContainer />
-                    </div>
-                    <div
-                      data-tooltip={
-                        helpOn ? 'Sample a color from your drawing' : null
-                      }
-                    >
-                      <EyedropperContainer />
-                    </div>
+                  <div className="app__tools-wrapper grid-3">
                     <div
                       data-tooltip={
                         helpOn
@@ -141,10 +131,10 @@ export default class App extends React.Component {
                     </div>
                     <div
                       data-tooltip={
-                        helpOn ? 'Move your drawing around the canvas' : null
+                        helpOn ? 'Sample a color from your drawing' : null
                       }
                     >
-                      <PanContainer />
+                      <EyedropperContainer />
                     </div>
                     <div
                       data-tooltip={
@@ -154,6 +144,16 @@ export default class App extends React.Component {
                       }
                     >
                       <ColorPickerContainer />
+                    </div>
+                    <div data-tooltip={helpOn ? 'Remove colors' : null}>
+                      <EraserContainer />
+                    </div>
+                    <div
+                      data-tooltip={
+                        helpOn ? 'Move your drawing around the canvas' : null
+                      }
+                    >
+                      <MoveContainer />
                     </div>
                   </div>
                 </div>

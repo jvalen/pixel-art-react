@@ -55,10 +55,10 @@ export function cellAction({
   };
 }
 
-export function panDrawing({ xDiff, yDiff, cellWidth }) {
+export function moveDrawing({ xDiff, yDiff, cellWidth }) {
   return {
-    type: 'PAN_DRAWING',
-    panDiff: { xDiff, yDiff, cellWidth }
+    type: 'MOVE_DRAWING',
+    moveDiff: { xDiff, yDiff, cellWidth }
   };
 }
 

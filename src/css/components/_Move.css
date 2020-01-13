@@ -1,5 +1,5 @@
-.pan {
-  @mixin icon pan;
+.move {
+  @mixin icon move;
 
   &:hover {
     cursor: pointer;
