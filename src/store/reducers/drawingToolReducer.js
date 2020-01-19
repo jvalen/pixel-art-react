@@ -1,5 +1,5 @@
 import * as types from '../actions/actionTypes';
-import { PENCIL, ERASER, EYEDROPPER } from './drawingToolStates';
+import { PENCIL, ERASER, EYEDROPPER, MOVE } from './drawingToolStates';
 
 const switchTool = (drawingTool = PENCIL, tool) => {
   if (drawingTool === tool) {
@@ -22,7 +22,7 @@ export default function drawingToolReducer(drawingTool = PENCIL, action) {
     case types.APPLY_EYEDROPPER:
       return PENCIL;
     case types.SELECT_PALETTE_COLOR:
-      return [EYEDROPPER, ERASER].reduce(disableTool, drawingTool);
+      return [EYEDROPPER, ERASER, MOVE].reduce(disableTool, drawingTool);
     case types.SWITCH_TOOL:
       return switchTool(drawingTool, action.tool);
     default:

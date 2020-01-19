@@ -14,8 +14,8 @@ const parseColorToString = colorData =>
     ? colorData
     : `rgba(${colorData.r},${colorData.g},${colorData.b},${colorData.a})`;
 
-const disableColorWhenEraser = (palette, action) => {
-  if (action.tool === 'ERASER') {
+const disableColor = (palette, action) => {
+  if (action.tool === 'ERASER' || action.tool === 'MOVE') {
     return palette.set('position', -1);
   }
   return palette;
@@ -128,7 +128,7 @@ export default function paletteReducer(palette = createPalette(), action) {
     case types.SET_CUSTOM_COLOR:
       return setCustomColor(palette, action);
     case types.SWITCH_TOOL:
-      return disableColorWhenEraser(palette, action);
+      return disableColor(palette, action);
     case types.SET_DRAWING:
       return setPalette(palette, action);
     default:

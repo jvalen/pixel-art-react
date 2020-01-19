@@ -64,7 +64,7 @@ describe('drawing tool reducer: SELECT_PALETTE_COLOR', () => {
     const state = MOVE;
     const nextState = reducer(state, actions.selectPaletteColor());
 
-    expect(nextState).toEqual(state);
+    expect(nextState).toEqual(PENCIL);
   });
 
   it('should keep the same state when state is PENCIL', () => {
