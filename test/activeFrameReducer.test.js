@@ -35,7 +35,7 @@ describe('framesReducer: APPLY_PENCIL', () => {
   const paletteColor = 'rgba(68, 68, 68, 1)';
   const type = APPLY_PENCIL;
 
-  it('draws cell with the palette color', () => {
+  it('should draw a cell with the selected palette color', () => {
     const state = framesMock(gridMock);
     const nextState = reducer(state, {
       type,
@@ -60,7 +60,7 @@ describe('framesReducer: APPLY_PENCIL', () => {
 describe('framesReducer: APPLY_ERASER', () => {
   const type = APPLY_ERASER;
 
-  it('draws cell with the palette color', () => {
+  it('should remove remove a cell color', () => {
     const state = framesMock(gridMock);
     const nextState = reducer(state, {
       type,
@@ -87,7 +87,7 @@ describe('framesReducer: APPLY_BUCKET', () => {
   const columns = 2;
   const rows = 3;
 
-  it('drawing color area with two cells', () => {
+  it('should fill a color area of two cells', () => {
     const state = framesMock(gridMock);
     const nextState = reducer(state, {
       type,
@@ -110,7 +110,7 @@ describe('framesReducer: APPLY_BUCKET', () => {
     ]);
   });
 
-  it('drawing color area with three cells', () => {
+  it('should fill a color area of three cells', () => {
     const state = framesMock(gridMock);
     const nextState = reducer(state, {
       type,
@@ -133,7 +133,7 @@ describe('framesReducer: APPLY_BUCKET', () => {
     ]);
   });
 
-  it('drawing color area with one cell', () => {
+  it('should fill a color area of one cell', () => {
     const state = framesMock(gridMock);
     const nextState = reducer(state, {
       type,
@@ -158,7 +158,7 @@ describe('framesReducer: APPLY_BUCKET', () => {
 });
 
 describe('framesReducer: SET_RESET_GRID', () => {
-  it('resets the grid', () => {
+  it('should reset the grid', () => {
     const state = framesMock(gridMock);
     const nextState = reducer(state, actions.resetGrid());
 
@@ -177,7 +177,7 @@ describe('framesReducer: SET_RESET_GRID', () => {
 });
 
 describe('framesReducer: CHANGE_FRAME_INTERVAL', () => {
-  it('changes the interval of frame', () => {
+  it('should change the interval of a frame', () => {
     const activeIndex = 1;
     const interval = 70;
     const state = Map({
@@ -211,7 +211,7 @@ describe('framesReducer: MOVE_DRAWING', () => {
     state = framesMock(grid);
     type = MOVE_DRAWING;
   });
-  it('moves left the current frame drawing', () => {
+  it('should move left the current frame drawing', () => {
     const nextState = reducer(state, {
       type,
       moveDiff: { xDiff: -2, yDiff: 0, cellWidth: 1 }
@@ -230,7 +230,7 @@ describe('framesReducer: MOVE_DRAWING', () => {
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual(shiftedGrid);
   });
-  it('moves right the current frame drawing', () => {
+  it('should move right the current frame drawing', () => {
     const nextState = reducer(state, {
       type,
       moveDiff: { xDiff: 2, yDiff: 0, cellWidth: 1 }
@@ -249,7 +249,7 @@ describe('framesReducer: MOVE_DRAWING', () => {
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual(shiftedGrid);
   });
-  it('moves up the current frame drawing', () => {
+  it('should move up the current frame drawing', () => {
     const nextState = reducer(state, {
       type,
       moveDiff: { xDiff: 0, yDiff: -2, cellWidth: 1 }
@@ -268,7 +268,7 @@ describe('framesReducer: MOVE_DRAWING', () => {
 
     expect(nextState.getIn(['list', 0, 'grid']).toJS()).toEqual(shiftedGrid);
   });
-  it('moves down the current frame drawing', () => {
+  it('should move down the current frame drawing', () => {
     const nextState = reducer(state, {
       type,
       moveDiff: { xDiff: 0, yDiff: 2, cellWidth: 1 }
