@@ -18,7 +18,8 @@ class Modal extends React.Component {
       options = [
         {
           value: 'single',
-          label: 'single',
+          description: 'single',
+          labelFor: 'single',
           id: 3
         }
       ];
@@ -26,10 +27,12 @@ class Modal extends React.Component {
       if (props.frames.size > 1) {
         const spritesheetSupport =
           props.type === 'download' || props.type === 'twitter';
+        const animationOptionLabel = spritesheetSupport ? 'GIF' : 'animation';
 
         const animationOption = {
           value: 'animation',
-          label: spritesheetSupport ? 'GIF' : 'animation',
+          description: animationOptionLabel,
+          labelFor: animationOptionLabel,
           id: 4
         };
         options.push(animationOption);
@@ -37,16 +40,38 @@ class Modal extends React.Component {
         if (spritesheetSupport) {
           options.push({
             value: 'spritesheet',
-            label: 'spritesheet',
+            description: 'spritesheet',
+            labelFor: 'spritesheet',
             id: 5
           });
         }
       }
     } else {
       options = [
-        { value: 'storage', label: 'Stored', id: 0 },
-        { value: 'import', label: 'Import', id: 1 },
-        { value: 'export', label: 'Export', id: 2 }
+        {
+          value: 'storage',
+          description: 'Stored',
+          labelFor: 'stored',
+          id: 0
+        },
+        {
+          value: 'import',
+          description: 'Import Project',
+          labelFor: 'import',
+          id: 1
+        },
+        {
+          value: 'export',
+          description: 'Export Project',
+          labelFor: 'export',
+          id: 2
+        },
+        {
+          value: 'extractData',
+          description: 'Useful Data',
+          labelFor: 'useful-data',
+          id: 3
+        }
       ];
     }
 

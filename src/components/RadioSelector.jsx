@@ -3,18 +3,18 @@ import React from 'react';
 const RadioSelector = ({ name, selected, legend, options, change }) => {
   const availableOptions = ops =>
     ops.map(item => (
-      <label htmlFor={`${name}-${item.label}`} key={item.id}>
+      <label htmlFor={`${name}-${item.labelFor}`} key={item.id}>
         <input
           type="radio"
           value={item.value}
-          name={item.label}
-          id={`${name}-${item.label}`}
+          name={item.labelFor}
+          id={`${name}-${item.labelFor}`}
           onChange={() => {
             change(item.value, name);
           }}
           checked={selected === item.value}
         />
-        <span>{item.label}</span>
+        <span>{item.description}</span>
       </label>
     ));
 
