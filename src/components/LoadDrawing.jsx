@@ -1,6 +1,7 @@
 import React from 'react';
 import { fromJS } from 'immutable';
 import Preview from './Preview';
+import UsefulData from './UsefulData';
 import {
   getDataFromStorage,
   removeProjectFromStorage,
@@ -134,7 +135,13 @@ export default class LoadDrawing extends React.Component {
       case 'import': {
         return (
           <div className="load-drawing">
-            <h2>Paste a previously exported code</h2>
+            <h2>Import your - Pixel Art CSS - project</h2>
+            <p>
+              Please, paste a previously exported code and click on the button
+              &nbsp;
+              <b>IMPORT</b>
+              &nbsp;
+            </p>
             <textarea
               className="load-drawing__import"
               ref={c => {
@@ -157,14 +164,31 @@ export default class LoadDrawing extends React.Component {
       case 'export': {
         return (
           <div className="load-drawing">
-            <h2>
-              Select and copy the following code. Keep it save in a text file
-            </h2>
+            <h2>Export your - Pixel Art CSS - project</h2>
+            <p>
+              Please save the following text if you wish to import your project
+              in the future using the &nbsp;
+              <b>Import Project</b>
+              &nbsp; button.
+            </p>
+            <p>
+              In the main page you can save your project by clicking on the
+              &nbsp;
+              <b>SAVE</b>
+              &nbsp; button, it will keep your work in your browser&apos;s local
+              storage. However, if you prefer not to use local storage or you
+              just want to keep your project safe somewhere else, this might be
+              a good option.
+            </p>
             <pre className="load-drawing__export">
               {`\n${this.getExportCode()}\n\n`}
             </pre>
           </div>
         );
+      }
+      case 'extractData': {
+        const { frames, columns } = this.props;
+        return <UsefulData frames={frames} columns={columns} />;
       }
       default: {
         const drawings = this.giveMeDrawings();
