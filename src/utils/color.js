@@ -20,6 +20,26 @@ const getRgbHexValues = color => {
   return match ? { r: match[0], g: match[1], b: match[2] } : {};
 };
 
+const isRgba = color => color.includes('rgba');
+const padHexValue = value => (value.length === 1 ? `0${value}` : value);
+const normalizeHexValue = value =>
+  padHexValue(parseInt(value, 10).toString(16));
+
+const parseRgbaToHex = colorCode => {
+  const rgbaValues = getRgbaValues(colorCode);
+  return `${normalizeHexValue(rgbaValues.r)}${normalizeHexValue(
+    rgbaValues.g
+  )}${normalizeHexValue(rgbaValues.b)}`;
+};
+
+const parseHexToRgba = colorCode => {
+  const hexValues = getRgbHexValues(colorCode);
+  return `rgba(${parseInt(hexValues.r, 16)},${parseInt(
+    hexValues.g,
+    16
+  )},${parseInt(hexValues.b, 16)},1)`;
+};
+
 /*
  *  Format pixel color output
  *  @param {string} The pixel color
@@ -30,21 +50,6 @@ const getRgbHexValues = color => {
  *  @return {string} The pixel color formatted
  */
 const formatPixelColorOutput = (color, formatId) => {
-  const isRgba = () => color.includes('rgba');
-  const parseRgbaToHex = colorCode => {
-    const rgbaValues = getRgbaValues(colorCode);
-    return `${rgbaValues.r.toString(16)}${rgbaValues.g.toString(
-      16
-    )}${rgbaValues.b.toString(16)}`;
-  };
-  const parseHexToRgba = colorCode => {
-    const hexValues = getRgbHexValues(colorCode);
-    return `rgba(${parseInt(hexValues.r, 16)},${parseInt(
-      hexValues.g,
-      16
-    )},${parseInt(hexValues.b, 16)},1)`;
-  };
-
   const normalizeColor = colorCode => {
     if (isRgba(colorCode)) {
       return parseRgbaToHex(colorCode);

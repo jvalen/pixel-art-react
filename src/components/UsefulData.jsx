@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import RadioSelector from './RadioSelector';
+import Checkbox from './Checkbox';
 import generateFramesOutput from '../utils/outputParse';
 
 const UsefulData = props => {
   const [colorFormatId, setColorFormat] = useState(0);
+  const [checkboxOddState, setCheckboxOdd] = useState(false);
+  const [checkboxEvenState, setCheckboxEven] = useState(false);
   const { frames, columns } = props;
   const colorFormatOptions = [
     { value: 0, description: '#000000', labelFor: 'c-format-hcss', id: 0 },
@@ -13,23 +16,26 @@ const UsefulData = props => {
   const changeColorFormat = value => {
     setColorFormat(value);
   };
-  const generateUsefulDataOutput = formatId =>
+  const generateUsefulDataOutput = (
+    formatId,
+    reverseOddRows,
+    reverseEvenRows
+  ) =>
     generateFramesOutput({
       frames,
       columns,
       options: {
         colorFormat: formatId,
-        invertOdd: false,
-        invertEven: false
+        reverseOdd: reverseOddRows,
+        reverseEven: reverseEvenRows
       }
     });
   return (
-    <div className="load-drawing">
+    <div className="load-drawing useful-data">
       <h2>Get additional data from your project</h2>
-      <h5>1. Each frame hexadecimal values</h5>
       <p>
-        Here you have each pixel grid by frame in hex values. This could be
-        handy for your C/Arduino projects.
+        Here you will find every pixel color values by frame. You can modify the
+        output with the following options:
       </p>
       <h5>Pixel color format</h5>
       <RadioSelector
@@ -38,8 +44,34 @@ const UsefulData = props => {
         change={changeColorFormat}
         options={colorFormatOptions}
       />
+      <h5>Change the order of the rows</h5>
+      <fieldset className="useful-data__rows">
+        <Checkbox
+          name="oddRows"
+          labelFor="oddRows"
+          description="Reverse Odd Rows"
+          checked={checkboxOddState}
+          onChange={() => {
+            setCheckboxOdd(!checkboxOddState);
+          }}
+        />
+        <Checkbox
+          name="evenRows"
+          labelFor="evenRows"
+          description="Reverse Even Rows"
+          checked={checkboxEvenState}
+          onChange={() => {
+            setCheckboxEven(!checkboxEvenState);
+          }}
+        />
+      </fieldset>
+
       <pre className="load-drawing__export">
-        {`\n${generateUsefulDataOutput(colorFormatId)}\n\n`}
+        {`\n${generateUsefulDataOutput(
+          colorFormatId,
+          checkboxOddState,
+          checkboxEvenState
+        )}\n\n`}
       </pre>
     </div>
   );

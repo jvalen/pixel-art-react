@@ -56,13 +56,13 @@ class Modal extends React.Component {
         },
         {
           value: 'import',
-          description: 'Import Project',
+          description: 'Import',
           labelFor: 'import',
           id: 1
         },
         {
           value: 'export',
-          description: 'Export Project',
+          description: 'Export',
           labelFor: 'export',
           id: 2
         },

@@ -1,0 +1,11 @@
+.useful-data {
+  text-align: center;
+  .useful-data__rows {
+    border: none;
+    background-color: $color-alto;
+    padding: 1em 0;
+    .checkbox {
+      padding: 0.8em 0;
+    }
+  }
+}

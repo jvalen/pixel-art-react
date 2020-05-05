@@ -1,0 +1,30 @@
+.checkbox {
+  border: none;
+  text-align: center;
+  margin: 0 auto;
+  padding: 1em 0;
+
+  label {
+    span {
+      padding: 0.6em 1em;
+      transition: all 0.3s;
+    }
+
+    input {
+      display: none;
+
+      &:checked + span {
+        color: white;
+        background-color: black;
+      }
+
+      &:not(:checked) + span {
+        &:hover {
+          box-shadow: 0 0 0 2px $color-scorpion inset;
+        }
+      }
+    }
+
+    margin: 0 0.5em;
+  }
+}

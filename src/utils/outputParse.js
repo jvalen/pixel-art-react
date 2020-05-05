@@ -17,8 +17,8 @@ const formatFrameOutput = (array, columns, options) => {
   const arrayByRow = arrayChunks(array, columns);
   const arrayRowsReversed = arrayByRow.map((row, index) => {
     if (
-      (isEven(index) && options.invertEven) ||
-      (!isEven(index) && options.invertOdd)
+      (isEven(index + 1) && options.reverseEven) ||
+      (!isEven(index + 1) && options.reverseOdd)
     ) {
       return row.reverse();
     }
