@@ -12,10 +12,17 @@ const arrayChunks = (array, chunkSize) =>
     .map((_, index) => index * chunkSize)
     .map(begin => array.slice(begin, begin + chunkSize));
 
-const formatFrameOutput = (array, columns, options) => {
+/*
+ *  formatFrameOutput
+ *  @param {array} The frame, an array of color values
+ *  @param {number} The columns count
+ *  @param {object} It contains different options to format the output
+ *  @return {string} The formatted output of the passed frame
+ */
+const formatFrameOutput = (frame, columns, options) => {
   const isEven = number => number % 2 === 0;
-  const arrayByRow = arrayChunks(array, columns);
-  const arrayRowsReversed = arrayByRow.map((row, index) => {
+  let frameRows = arrayChunks(frame, columns);
+  frameRows = frameRows.map((row, index) => {
     if (
       (isEven(index + 1) && options.reverseEven) ||
       (!isEven(index + 1) && options.reverseOdd)
@@ -24,10 +31,10 @@ const formatFrameOutput = (array, columns, options) => {
     }
     return row;
   });
-  const arrayFormatted = arrayRowsReversed.flat();
+  const frameFormatted = frameRows.flat();
 
-  const lastPixelPos = arrayFormatted.length;
-  return arrayFormatted.reduce((acc, pixel, index) => {
+  const lastPixelPos = frameFormatted.length;
+  return frameFormatted.reduce((acc, pixel, index) => {
     const pixelFormatted = formatPixelColorOutput(pixel, options.colorFormat);
     return `${acc} ${pixelFormatted}${index + 1 === lastPixelPos ? '' : ','}${
       (index + 1) % columns ? '' : '\n'
@@ -35,6 +42,11 @@ const formatFrameOutput = (array, columns, options) => {
   }, '');
 };
 
+/*
+ *  generateFramesOutput
+ *  @param {object} It contains all frames data, the columns count and different options to format the output
+ *  @return {string} The formatted output of all the frames
+ */
 const generateFramesOutput = ({ frames, columns, options }) =>
   frames
     .toJS()

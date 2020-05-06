@@ -34,18 +34,19 @@ const UsefulData = props => {
     <div className="load-drawing useful-data">
       <h2>Get additional data from your project</h2>
       <p>
-        Here you will find every pixel color values by frame. You can modify the
-        output with the following options:
+        Here you will find every pixel color values grouped by frame. You can
+        modify the output with the following options:
       </p>
-      <h5>Pixel color format</h5>
-      <RadioSelector
-        name="pixel-format"
-        selected={colorFormatId}
-        change={changeColorFormat}
-        options={colorFormatOptions}
-      />
-      <h5>Change the order of the rows</h5>
       <fieldset className="useful-data__rows">
+        <h5>Pixel color format</h5>
+        <RadioSelector
+          name="pixel-format"
+          selected={colorFormatId}
+          change={changeColorFormat}
+          options={colorFormatOptions}
+        />
+        <h5>Change the order of the rows</h5>
+
         <Checkbox
           name="oddRows"
           labelFor="oddRows"
