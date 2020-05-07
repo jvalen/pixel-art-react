@@ -1,12 +1,20 @@
 .modal {
-  button.close {
-    @mixin button blue;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow-x: hidden;
+  .modal__header {
+    text-align: right;
+    button.close {
+      @mixin button blue;
+      padding: 0.4em 0.7em 0.3em 0.8em;
+    }
   }
-
+  .modal__body {
+    overflow: auto;
+  }
   .modal__preview,
   .modal__load {
-    margin: 2em 0 1em;
-
     .modal__preview--wrapper {
       margin: 1em auto;
       display: table;

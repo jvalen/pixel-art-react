@@ -178,17 +178,19 @@ class Modal extends React.Component {
 
     return (
       <div className="modal">
-        <button
-          type="button"
-          className="close"
-          onClick={() => {
-            props.close();
-          }}
-        >
-          CLOSE
-        </button>
+        <div className="modal__header">
+          <button
+            type="button"
+            className="close"
+            onClick={() => {
+              props.close();
+            }}
+          >
+            x
+          </button>
+        </div>
         {radioOptions}
-        {content}
+        <div className="modal__body">{content}</div>
       </div>
     );
   }
@@ -208,15 +210,9 @@ class Modal extends React.Component {
   render() {
     const { isOpen, type, close } = this.props;
     const styles = {
-      modal: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        textAlign: 'center',
-        border: '4px solid #C5C5C5'
+      content: {
+        overflow: 'hidden',
+        display: 'flex'
       }
     };
 
@@ -226,7 +222,7 @@ class Modal extends React.Component {
         onRequestClose={() => {
           close();
         }}
-        style={styles.modal}
+        style={styles}
         contentLabel={`Dialog ${type || ''}`}
       >
         {this.getModalContent(this.props)}

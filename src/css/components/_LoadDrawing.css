@@ -1,15 +1,19 @@
 .load-drawing {
+  text-align: center;
   h2 {
     padding: 2em 0 0;
     margin-bottom: 0;
     font-size: 1em;
-    display: block;
     text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    min-width: auto;
   }
 
   .load-drawing__container {
-    max-height: 400;
-    overflow-x: hidden;
+    overflow: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -25,7 +29,7 @@
       border: 3px solid black;
       cursor: pointer;
       flex: 1 1 25%;
-      min-height: 200;
+      min-height: 200px;
       margin: 1em;
       padding: 0.5em 0;
 
@@ -60,10 +64,11 @@
 
   .load-drawing__import {
     font-family: $font-monospace;
-    width: 100%;
+    display: block;
+    width: 90%;
     resize: none;
-    height: 25em;
-    margin: 1em 0 0;
+    height: 6em;
+    margin: 0 auto;
     padding: 0.5em;
     background-color: $color-mineShaft;
     color: $color-silver;
