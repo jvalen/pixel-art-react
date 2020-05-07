@@ -55,7 +55,9 @@
   }
 
   .load-drawing__export {
-    overflow-y: scroll;
+    overflow-x: scroll;
+    width: 90%;
+    margin: 0 auto;
     background-color: $color-mineShaft;
     color: $color-silver;
     padding: 0.5em;

@@ -67,7 +67,7 @@ const UsefulData = props => {
         />
       </fieldset>
 
-      <pre className="load-drawing__export">
+      <pre className="useful-data__export">
         {`\n${generateUsefulDataOutput(
           colorFormatId,
           checkboxOddState,

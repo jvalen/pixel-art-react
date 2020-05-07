@@ -8,4 +8,13 @@
       padding: 0.8em 0;
     }
   }
+  .useful-data__export {
+    overflow-x: scroll;
+    margin: 0 auto;
+    background-color: $color-mineShaft;
+    color: $color-silver;
+    padding: 0.5em;
+    text-align: left;
+    margin-top: 1em;
+  }
 }
