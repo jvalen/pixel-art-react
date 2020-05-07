@@ -135,7 +135,7 @@ export default class LoadDrawing extends React.Component {
       case 'import': {
         return (
           <div className="load-drawing">
-            <h2>Import your - Pixel Art CSS - project</h2>
+            <h2>Import your project</h2>
             <p>
               Please, paste a previously exported code and click on the button
               &nbsp;
@@ -164,7 +164,7 @@ export default class LoadDrawing extends React.Component {
       case 'export': {
         return (
           <div className="load-drawing">
-            <h2>Export your - Pixel Art CSS - project</h2>
+            <h2>Export your project</h2>
             <p>
               Please save the following text if you wish to import your project
               in the future using the &nbsp;
