@@ -28,10 +28,9 @@
       position: relative;
       border: 3px solid black;
       cursor: pointer;
-      flex: 1 1 25%;
-      min-height: 200px;
-      margin: 1em;
-      padding: 0.5em 0;
+      flex: 0 1 auto;
+      margin: 0.5em;
+      padding-right: 2em;
 
       .drawing__delete {
         @mixin icon trash-o;

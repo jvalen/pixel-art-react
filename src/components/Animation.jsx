@@ -6,7 +6,9 @@ const Animation = radium(props => {
   const style = {
     position: 'absolute',
     animation: `x ${props.duration}s infinite`,
-    animationName: pulseKeyframes
+    animationName: pulseKeyframes,
+    left: '-5px',
+    top: '-5px'
   };
   return <div className="animation-container" style={style} />;
 });

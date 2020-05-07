@@ -17,7 +17,10 @@ const Preview = props => {
     const styles = {
       previewWrapper: {
         height: cellSize,
-        width: cellSize
+        width: cellSize,
+        position: 'absolute',
+        top: '-5px',
+        left: '-5px'
       }
     };
 
