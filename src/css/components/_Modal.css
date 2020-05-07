@@ -19,7 +19,10 @@
       margin: 1em auto;
       display: table;
     }
+  }
 
+  .modal__load,
+  .modal__body {
     fieldset {
       padding: 1em 0;
 
