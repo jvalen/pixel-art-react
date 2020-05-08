@@ -23,6 +23,7 @@
   }
 
   .modal__load,
+  .modal__preview,
   .modal__body {
     fieldset {
       padding: 1em 0;

@@ -92,40 +92,36 @@ class Modal extends React.Component {
     const { previewType, loadType } = this.state;
     const options = this.constructor.generateRadioOptions(props);
     let content;
-    const radioOptions =
-      props.type !== 'load' ? (
-        <div className="modal__preview">
-          <RadioSelector
-            name="preview-type"
-            selected={previewType}
-            change={this.changeRadioType}
-            options={options}
-          />
-          {previewType !== 'spritesheet' ? (
-            <div className="modal__preview--wrapper">
-              <Preview
-                key="0"
-                frames={props.frames}
-                columns={props.columns}
-                rows={props.rows}
-                cellSize={props.type === 'preview' ? props.cellSize : 5}
-                duration={props.duration}
-                activeFrameIndex={props.activeFrameIndex}
-                animate={previewType === 'animation'}
-              />
-            </div>
-          ) : null}
-        </div>
-      ) : (
-        <div className="modal__load">
-          <RadioSelector
-            name="load-type"
-            selected={loadType}
-            change={this.changeRadioType}
-            options={options}
-          />
-        </div>
-      );
+    const previewBlock = (
+      <>
+        {previewType !== 'spritesheet' ? (
+          <div className="modal__preview--wrapper">
+            <Preview
+              key="0"
+              frames={props.frames}
+              columns={props.columns}
+              rows={props.rows}
+              cellSize={props.type === 'preview' ? props.cellSize : 5}
+              duration={props.duration}
+              activeFrameIndex={props.activeFrameIndex}
+              animate={previewType === 'animation'}
+            />
+          </div>
+        ) : null}
+      </>
+    );
+    const isLoadModal = props.type === 'load';
+    const radioType = isLoadModal ? 'load' : 'preview';
+    const radioOptions = (
+      <div className={`modal__${radioType}`}>
+        <RadioSelector
+          name={`${radioType}-type`}
+          selected={isLoadModal ? loadType : previewType}
+          change={this.changeRadioType}
+          options={options}
+        />
+      </div>
+    );
 
     switch (props.type) {
       case 'load':
@@ -148,32 +144,40 @@ class Modal extends React.Component {
         break;
       case 'copycss':
         content = (
-          <CopyCSS
-            frames={props.frames}
-            columns={props.columns}
-            rows={props.rows}
-            cellSize={props.cellSize}
-            activeFrameIndex={props.activeFrameIndex}
-            animationCode={previewType !== 'single'}
-            duration={props.duration}
-          />
+          <>
+            {previewBlock}
+            <CopyCSS
+              frames={props.frames}
+              columns={props.columns}
+              rows={props.rows}
+              cellSize={props.cellSize}
+              activeFrameIndex={props.activeFrameIndex}
+              animationCode={previewType !== 'single'}
+              duration={props.duration}
+            />
+          </>
         );
         break;
       case 'download':
         content = (
-          <DownloadDrawing
-            frames={props.frames}
-            activeFrame={props.activeFrame}
-            columns={props.columns}
-            rows={props.rows}
-            cellSize={props.cellSize}
-            duration={props.duration}
-            downloadType={previewType}
-            actions={{ sendNotification: props.actions.sendNotification }}
-          />
+          <>
+            {previewBlock}
+            <DownloadDrawing
+              frames={props.frames}
+              activeFrame={props.activeFrame}
+              columns={props.columns}
+              rows={props.rows}
+              cellSize={props.cellSize}
+              duration={props.duration}
+              downloadType={previewType}
+              actions={{ sendNotification: props.actions.sendNotification }}
+            />
+          </>
         );
         break;
       default:
+        content = <>{previewBlock}</>;
+        break;
     }
 
     return (

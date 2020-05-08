@@ -55,7 +55,8 @@ const Preview = props => {
   const style = {
     width: columns * cellSize,
     height: rows * cellSize,
-    position: 'relative'
+    position: 'relative',
+    margin: '0 auto'
   };
 
   return (

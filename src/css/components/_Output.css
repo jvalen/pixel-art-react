@@ -1,4 +1,5 @@
 .output {
+  text-align: center;
   button.copy-to-clipboard {
     @mixin button brown;
     padding: 0.3em 0.6em 0.1em 0.7em;
