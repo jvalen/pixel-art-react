@@ -83,6 +83,7 @@ const UsefulData = props => {
           textButton: 'Copy',
           successMessage: 'Copied!'
         }}
+        preFormatted="true"
         outputText={`\n${generateUsefulDataOutput(
           colorFormatId,
           checkboxOddState,

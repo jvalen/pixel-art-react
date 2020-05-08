@@ -7,7 +7,7 @@
   }
   .output__text {
     font-family: $font-monospace;
-    overflow-x: hidden;
+    overflow-x: auto;
     margin: 1em auto;
     background-color: $color-mineShaft;
     color: $color-silver;
@@ -17,5 +17,8 @@
     width: 100%;
     resize: none;
     height: 20em;
+  }
+  .output__pre {
+    white-space: pre;
   }
 }

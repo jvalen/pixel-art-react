@@ -1,6 +1,11 @@
 import React, { useRef, useState } from 'react';
 
-const Output = ({ copyClipboardData = {}, readOnly = true, outputText }) => {
+const Output = ({
+  copyClipboardData = {},
+  readOnly = true,
+  outputText,
+  preFormatted = false
+}) => {
   const { showButton, textButton, successMessage } = copyClipboardData;
   const [copySuccess, setCopySuccess] = useState('');
   const textAreaRef = useRef(null);
@@ -25,7 +30,7 @@ const Output = ({ copyClipboardData = {}, readOnly = true, outputText }) => {
         </div>
       )}
       <textarea
-        className="output__text"
+        className={`output__text ${preFormatted ? 'output__pre' : ''}`}
         ref={textAreaRef}
         readOnly={readOnly}
         value={outputText}

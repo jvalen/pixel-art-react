@@ -11,6 +11,9 @@
       padding: 0.4em 0.7em 0.3em 0.8em;
     }
   }
+  .preview {
+    margin: 0 auto;
+  }
   .modal__body {
     overflow: auto;
   }
