@@ -84,7 +84,9 @@ class Modal extends React.Component {
       previewType: 'single',
       loadType: 'storage'
     };
+    this.modalBodyRef = React.createRef();
     this.changeRadioType = this.changeRadioType.bind(this);
+    this.scrollTop = () => this.modalBodyRef.current.scrollTo(0, 0);
     ModalReact.setAppElement('body');
   }
 
@@ -194,13 +196,16 @@ class Modal extends React.Component {
           </button>
         </div>
         {radioOptions}
-        <div className="modal__body">{content}</div>
+        <div className="modal__body" ref={this.modalBodyRef}>
+          {content}
+        </div>
       </div>
     );
   }
 
   changeRadioType(value, type) {
     const newState = {};
+    this.scrollTop();
     switch (type) {
       case 'load-type':
         newState.loadType = value;
