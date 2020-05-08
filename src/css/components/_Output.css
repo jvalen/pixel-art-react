@@ -1,19 +1,10 @@
-.useful-data {
-  text-align: center;
-  .useful-data__rows {
-    border: none;
-    background-color: $color-alto;
-    padding: 1em 0;
-    .checkbox {
-      padding: 0.8em 0;
-    }
-  }
+.output {
   button.copy-to-clipboard {
-    @mixin button blue;
+    @mixin button brown;
     padding: 0.3em 0.6em 0.1em 0.7em;
     margin-top: 0.5em;
   }
-  .useful-data__export {
+  .output__text {
     font-family: $font-monospace;
     overflow-x: hidden;
     margin: 1em auto;
@@ -25,5 +16,8 @@
     width: 100%;
     resize: none;
     height: 20em;
+  }
+  .output__successMessage {
+    padding: 0 1em;
   }
 }

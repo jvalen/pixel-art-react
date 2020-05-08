@@ -1,6 +1,7 @@
 import React from 'react';
 import { fromJS } from 'immutable';
 import Preview from './Preview';
+import Output from './Output';
 import UsefulData from './UsefulData';
 import {
   getDataFromStorage,
@@ -180,9 +181,14 @@ export default class LoadDrawing extends React.Component {
               just want to keep your project safe somewhere else, this might be
               a good option.
             </p>
-            <pre className="load-drawing__export">
-              {`\n${this.getExportCode()}\n\n`}
-            </pre>
+            <Output
+              copyClipboardData={{
+                showButton: true,
+                textButton: 'Copy',
+                successMessage: 'Copied!'
+              }}
+              outputText={`\n${this.getExportCode()}\n\n`}
+            />
           </div>
         );
       }

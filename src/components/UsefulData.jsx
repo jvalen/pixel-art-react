@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RadioSelector from './RadioSelector';
 import Checkbox from './Checkbox';
+import Output from './Output';
 import generateFramesOutput from '../utils/outputParse';
 
 const UsefulData = props => {
@@ -9,9 +10,19 @@ const UsefulData = props => {
   const [checkboxEvenState, setCheckboxEven] = useState(false);
   const { frames, columns } = props;
   const colorFormatOptions = [
-    { value: 0, description: '#000000', labelFor: 'c-format-hcss', id: 0 },
+    {
+      value: 0,
+      description: '#000000',
+      labelFor: 'c-format-hcss',
+      id: 0
+    },
     { value: 1, description: '0x000000', labelFor: 'c-format-hx', id: 1 },
-    { value: 2, description: 'rgba(0,0,0,1)', labelFor: 'c-format-rgba', id: 2 }
+    {
+      value: 2,
+      description: 'rgba(0,0,0,1)',
+      labelFor: 'c-format-rgba',
+      id: 2
+    }
   ];
   const changeColorFormat = value => {
     setColorFormat(value);
@@ -66,14 +77,18 @@ const UsefulData = props => {
           }}
         />
       </fieldset>
-
-      <pre className="useful-data__export">
-        {`\n${generateUsefulDataOutput(
+      <Output
+        copyClipboardData={{
+          showButton: true,
+          textButton: 'Copy',
+          successMessage: 'Copied!'
+        }}
+        outputText={`\n${generateUsefulDataOutput(
           colorFormatId,
           checkboxOddState,
           checkboxEvenState
         )}\n\n`}
-      </pre>
+      />
     </div>
   );
 };
