@@ -2,7 +2,7 @@
   button.copy-to-clipboard {
     @mixin button brown;
     padding: 0.3em 0.6em 0.1em 0.7em;
-    margin-top: 0.5em;
+    margin: 0.5em 0.5em 0;
   }
   .output__text {
     font-family: $font-monospace;
@@ -16,8 +16,5 @@
     width: 100%;
     resize: none;
     height: 20em;
-  }
-  .output__successMessage {
-    padding: 0 1em;
   }
 }

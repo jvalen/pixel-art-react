@@ -21,7 +21,7 @@ const Output = ({ copyClipboardData = {}, readOnly = true, outputText }) => {
           >
             {textButton || 'Copy'}
           </button>
-          <span className="output__successMessage">{copySuccess}</span>
+          <span>{copySuccess}</span>
         </div>
       )}
       <textarea

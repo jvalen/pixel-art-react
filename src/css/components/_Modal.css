@@ -5,6 +5,7 @@
   overflow-x: hidden;
   .modal__header {
     text-align: right;
+    padding-bottom: 1em;
     button.close {
       @mixin button blue;
       padding: 0.4em 0.7em 0.3em 0.8em;
