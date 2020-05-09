@@ -187,7 +187,7 @@ export default class LoadDrawing extends React.Component {
                 textButton: 'Copy',
                 successMessage: 'Copied!'
               }}
-              outputText={`\n${this.getExportCode()}\n\n`}
+              outputText={`${this.getExportCode()}\n\n`}
             />
           </div>
         );

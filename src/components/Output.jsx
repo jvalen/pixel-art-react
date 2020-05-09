@@ -18,7 +18,7 @@ const Output = ({
   return (
     <div className="output">
       {showButton && document.queryCommandSupported('copy') && (
-        <div>
+        <div className="copy-to-clipboard__container">
           <button
             className="copy-to-clipboard"
             type="button"
@@ -26,7 +26,7 @@ const Output = ({
           >
             {textButton || 'Copy'}
           </button>
-          <span>{copySuccess}</span>
+          <span className={copySuccess ? 'show' : ''}>{copySuccess}</span>
         </div>
       )}
       <textarea

@@ -48,48 +48,55 @@ const UsefulData = props => {
         Here you will find every pixel color values grouped by frame. You can
         modify the output with the following options:
       </p>
-      <fieldset className="useful-data__rows">
-        <h5>Pixel color format</h5>
-        <RadioSelector
-          name="pixel-format"
-          selected={colorFormatId}
-          change={changeColorFormat}
-          options={colorFormatOptions}
-        />
-        <h5>Change the order of the rows</h5>
-
-        <Checkbox
-          name="oddRows"
-          labelFor="oddRows"
-          description="Reverse Odd Rows"
-          checked={checkboxOddState}
-          onChange={() => {
-            setCheckboxOdd(!checkboxOddState);
-          }}
-        />
-        <Checkbox
-          name="evenRows"
-          labelFor="evenRows"
-          description="Reverse Even Rows"
-          checked={checkboxEvenState}
-          onChange={() => {
-            setCheckboxEven(!checkboxEvenState);
-          }}
-        />
-      </fieldset>
-      <Output
-        copyClipboardData={{
-          showButton: true,
-          textButton: 'Copy',
-          successMessage: 'Copied!'
-        }}
-        preFormatted="true"
-        outputText={`\n${generateUsefulDataOutput(
-          colorFormatId,
-          checkboxOddState,
-          checkboxEvenState
-        )}\n\n`}
-      />
+      <div className="useful-data__options">
+        <fieldset className="useful-data__rows">
+          <div className="useful-data__pixel-format">
+            <h5>Pixel color format</h5>
+            <RadioSelector
+              name="pixel-format"
+              selected={colorFormatId}
+              change={changeColorFormat}
+              options={colorFormatOptions}
+            />
+          </div>
+          <div className="useful-data__reverse-rows">
+            <h5>Change the order of the rows</h5>
+            <Checkbox
+              name="oddRows"
+              labelFor="oddRows"
+              description="Reverse Odd Rows"
+              checked={checkboxOddState}
+              onChange={() => {
+                setCheckboxOdd(!checkboxOddState);
+              }}
+            />
+            <Checkbox
+              name="evenRows"
+              labelFor="evenRows"
+              description="Reverse Even Rows"
+              checked={checkboxEvenState}
+              onChange={() => {
+                setCheckboxEven(!checkboxEvenState);
+              }}
+            />
+          </div>
+        </fieldset>
+        <div className="useful-data__output">
+          <Output
+            copyClipboardData={{
+              showButton: true,
+              textButton: 'Copy',
+              successMessage: 'Copied!'
+            }}
+            preFormatted="true"
+            outputText={`${generateUsefulDataOutput(
+              colorFormatId,
+              checkboxOddState,
+              checkboxEvenState
+            )}\n\n`}
+          />
+        </div>
+      </div>
     </div>
   );
 };

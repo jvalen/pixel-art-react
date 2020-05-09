@@ -5,13 +5,8 @@
     background-color: $color-alto;
     padding: 1em 0;
     .checkbox {
-      padding: 0.8em 0;
+      padding: 0.4em 0;
     }
-  }
-  button.copy-to-clipboard {
-    @mixin button blue;
-    padding: 0.3em 0.6em 0.1em 0.7em;
-    margin-top: 0.5em;
   }
   .useful-data__export {
     font-family: $font-monospace;
@@ -25,5 +20,39 @@
     width: 100%;
     resize: none;
     height: 20em;
+  }
+  .useful-data__options {
+    lost-utility: clearfix;
+    fieldset.useful-data__rows,
+    .useful-data__output {
+      lost-column: 1/2 0 0;
+    }
+    fieldset.useful-data__rows {
+      lost-utility: clearfix;
+      margin: 0;
+      height: 20em;
+      .useful-data__pixel-format,
+      .useful-data__reverse-rows {
+        lost-column: 1/2 0 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .useful-data {
+    .useful-data__options {
+      fieldset.useful-data__rows,
+      .useful-data__output {
+        lost-column: 1/1;
+      }
+      fieldset.useful-data__rows {
+        height: auto;
+        .useful-data__pixel-format,
+        .useful-data__reverse-rows {
+          lost-column: 1/1;
+        }
+      }
+    }
   }
 }
