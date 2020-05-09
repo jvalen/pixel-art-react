@@ -57,29 +57,38 @@ const parseRgbaToHex = colorCode => {
 /*
  *  parseHexToRgba
  *  @param {string} The color value in hex: 000000
+ *  @param {number} The color's opacity: int value from 0 to 1
  *  @return {string} Returns the rbga value like rgba(0,0,0,1) always with the opacity set to 1
  */
-const parseHexToRgba = colorCode => {
+const parseHexToRgba = (colorCode, opacity) => {
   const hexValues = getRgbHexValues(colorCode);
   return `rgba(${parseInt(hexValues.r, 16)},${parseInt(
     hexValues.g,
     16
-  )},${parseInt(hexValues.b, 16)},1)`;
+  )},${parseInt(hexValues.b, 16)},${opacity})`;
 };
 
 /*
  *  normalizeColor
- *  @param {string} The color value, it could be in the following formats:  '', and rgba(0,0,0,1) or #000000
+ *  @param {string} The color value, it could be in the following formats:  '', rgba(0,0,0,1) or #000000
  *  @return {string} Returns just the hex value with 6 digits
  */
 const normalizeColor = colorCode => {
-  if (isRgba(colorCode)) {
-    return parseRgbaToHex(colorCode);
+  const defaultValue = '000000';
+  const normalized = {
+    color:
+      typeof colorCode === 'string' && colorCode ? colorCode : defaultValue,
+    opacity: 1
+  };
+  if (isRgba(normalized.color)) {
+    const rgbaValues = getRgbaValues(normalized.color);
+    normalized.color = parseRgbaToHex(normalized.color);
+    normalized.opacity = rgbaValues.a;
   }
-  if (colorCode !== '') {
-    return colorCode.replace('#', '');
+  if (normalized.color !== defaultValue) {
+    normalized.color = normalized.color.replace('#', '');
   }
-  return '000000';
+  return normalized;
 };
 
 /*
@@ -92,18 +101,15 @@ const normalizeColor = colorCode => {
  *  @return {string} The pixel color formatted
  */
 const formatPixelColorOutput = (color, formatId) => {
-  let colorFormatted = normalizeColor(color);
+  const colorFormatted = normalizeColor(color);
 
   switch (formatId) {
     case 0:
     case 1:
-      colorFormatted = `${formatId === 0 ? '#' : '0x'}${colorFormatted}`;
-      break;
+      return `${formatId === 0 ? '#' : '0x'}${colorFormatted.color}`;
     default:
-      colorFormatted = isRgba(color) ? color : parseHexToRgba(colorFormatted);
-      break;
+      return parseHexToRgba(colorFormatted.color, colorFormatted.opacity);
   }
-  return colorFormatted;
 };
 
 export default formatPixelColorOutput;
