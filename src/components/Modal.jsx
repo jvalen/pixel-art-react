@@ -2,6 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ModalReact from 'react-modal';
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks
+} from 'body-scroll-lock';
 import * as actionCreators from '../store/actions/actionCreators';
 
 import RadioSelector from './RadioSelector';
@@ -85,9 +90,19 @@ class Modal extends React.Component {
       loadType: 'storage'
     };
     this.modalBodyRef = React.createRef();
+    this.modalContainerRef = React.createRef();
+    this.showModal = () => disableBodyScroll(this.modalContainerRef.current);
+    this.closeModal = () => {
+      enableBodyScroll(this.modalContainerRef.current);
+      props.close();
+    };
     this.changeRadioType = this.changeRadioType.bind(this);
     this.scrollTop = () => this.modalBodyRef.current.scrollTo(0, 0);
     ModalReact.setAppElement('body');
+  }
+
+  componentWillUnmount() {
+    clearAllBodyScrollLocks();
   }
 
   getModalContent(props) {
@@ -130,7 +145,7 @@ class Modal extends React.Component {
         content = (
           <LoadDrawing
             loadType={loadType}
-            close={props.close}
+            close={this.closeModal}
             open={props.open}
             frames={props.frames}
             columns={props.columns}
@@ -185,13 +200,7 @@ class Modal extends React.Component {
     return (
       <div className="modal">
         <div className="modal__header">
-          <button
-            type="button"
-            className="close"
-            onClick={() => {
-              props.close();
-            }}
-          >
+          <button type="button" className="close" onClick={this.closeModal}>
             x
           </button>
         </div>
@@ -217,7 +226,7 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { isOpen, type, close } = this.props;
+    const { isOpen, type } = this.props;
     const styles = {
       content: {
         overflow: 'hidden',
@@ -228,9 +237,9 @@ class Modal extends React.Component {
     return (
       <ModalReact
         isOpen={isOpen}
-        onRequestClose={() => {
-          close();
-        }}
+        onRequestClose={this.closeModal}
+        onAfterOpen={this.showModal}
+        ref={this.modalContainerRef}
         style={styles}
         contentLabel={`Dialog ${type || ''}`}
       >

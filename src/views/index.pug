@@ -23,19 +23,20 @@ html
         ga('create', '!{googleAnalyticsId}', 'auto');
         ga('send', 'pageview');
   body
-  header
-    .col-2-3
-      h1 PIXEL ART TO CSS
-    .header__credits.col-1-3
-      div
-        h2
-          | by
-          a(target='_blank', href='http://www.jvalen.com/') JVALEN
-        iframe(
-          src='https://ghbtns.com/github-btn.html?user=jvalen&repo=pixel-art-react&type=star&count=true',
-          frameborder='0' scrolling='0' width='100px' height='20px'
-        )
-  script.
-      window.__INITIAL_STATE__ = !{initialState}
-  div(id='app') !{reactOutput}
-  script(src='bundle.js')
+    div(class='app-container')
+      header
+        .col-2-3
+          h1 PIXEL ART TO CSS
+        .header__credits.col-1-3
+          div
+            h2
+              | by
+              a(target='_blank', href='http://www.jvalen.com/') JVALEN
+            iframe(
+              src='https://ghbtns.com/github-btn.html?user=jvalen&repo=pixel-art-react&type=star&count=true',
+              frameborder='0' scrolling='0' width='100px' height='20px'
+            )
+      script.
+          window.__INITIAL_STATE__ = !{initialState}
+      div(id='app') !{reactOutput}
+    script(src='bundle.js')

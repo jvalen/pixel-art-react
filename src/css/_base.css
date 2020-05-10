@@ -1,7 +1,7 @@
 html {
   box-sizing: border-box;
   background-color: $color-scorpion;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 *,
@@ -12,11 +12,19 @@ html {
 
 html,
 body {
+  position: relative;
+  font-family: $font-pixel;
+}
+
+body {
+  overflow: auto;
+}
+
+.app-container {
   height: 100%;
   width: 90%;
   margin: 0 auto;
   padding: 0;
-  font-family: $font-pixel;
 }
 
 h1 {
