@@ -21,6 +21,7 @@ const arrayChunks = (array, chunkSize) =>
  */
 const formatFrameOutput = (frame, columns, options) => {
   const isEven = number => number % 2 === 0;
+  const flattened = arr => [].concat(...arr);
   let frameRows = arrayChunks(frame, columns);
   frameRows = frameRows.map((row, index) => {
     if (
@@ -31,7 +32,7 @@ const formatFrameOutput = (frame, columns, options) => {
     }
     return row;
   });
-  const frameFormatted = frameRows.flat();
+  const frameFormatted = flattened(frameRows);
 
   const lastPixelPos = frameFormatted.length;
   return frameFormatted.reduce((acc, pixel, index) => {
