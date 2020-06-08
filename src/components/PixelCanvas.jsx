@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
   cellAction,
   updateGridBoundaries,
-  moveDrawing
+  moveDrawing,
+  changeHoveredCell
 } from '../store/actions/actionCreators';
 import GridWrapper from './GridWrapper';
 import throttle from '../utils/throttle';
@@ -15,6 +16,7 @@ class PixelCanvas extends React.Component {
   constructor(props) {
     super(props);
     this.drawHandlers = props.drawHandlersFactory(this);
+    this.hoveredCell = props.hoveredCell;
   }
 
   componentDidMount() {
@@ -37,7 +39,6 @@ class PixelCanvas extends React.Component {
       width: 100 / props.columns,
       color
     }));
-
     let gridExtraClass = 'cell';
     if (props.eraserOn) {
       gridExtraClass = 'context-menu';
@@ -53,6 +54,8 @@ class PixelCanvas extends React.Component {
         classes={`${gridContainerClass} ${gridExtraClass}`}
         drawHandlers={this.drawHandlers}
         activeTool={props.drawingTool}
+        nbrColumns={props.columns}
+        hoveredCell={this.hoveredCell}
       />
     );
   }
@@ -69,6 +72,7 @@ const mapStateToProps = state => {
     grid: frames.getIn(['list', activeFrameIndex, 'grid']),
     columns: frames.get('columns'),
     rows: frames.get('rows'),
+    hoveredIndex: frames.get('hoveredIndex'),
     drawingTool,
     paletteColor: palette.getIn(['grid', paletteCellPosition, 'color']),
     eyedropperOn: drawingTool === EYEDROPPER,
@@ -84,7 +88,8 @@ const mapDispatchToProps = dispatch => ({
     const gridElement = document.getElementsByClassName(gridContainerClass)[0];
     dispatch(updateGridBoundaries(gridElement));
   }, 500),
-  applyMove: moveDiff => dispatch(moveDrawing(moveDiff))
+  applyMove: moveDiff => dispatch(moveDrawing(moveDiff)),
+  hoveredCell: cellPosition => dispatch(changeHoveredCell(cellPosition))
 });
 
 const PixelCanvasContainer = connect(

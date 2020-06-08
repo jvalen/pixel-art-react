@@ -62,14 +62,22 @@ export function moveDrawing({ xDiff, yDiff, cellWidth }) {
   };
 }
 
-export function setDrawing(frames, paletteGridData, cellSize, columns, rows) {
+export function setDrawing(
+  frames,
+  paletteGridData,
+  cellSize,
+  columns,
+  rows,
+  hoveredIndex
+) {
   return {
     type: types.SET_DRAWING,
     frames,
     paletteGridData,
     cellSize,
     columns,
-    rows
+    rows,
+    hoveredIndex
   };
 }
 
@@ -170,6 +178,13 @@ export function changeFrameInterval(interval) {
 export function newProject() {
   return {
     type: types.NEW_PROJECT
+  };
+}
+// new
+export function changeHoveredCell(cell) {
+  return {
+    type: types.CHANGE_HOVERED_CELL,
+    cell
   };
 }
 

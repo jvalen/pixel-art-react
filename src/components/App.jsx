@@ -18,6 +18,8 @@ import SaveDrawingContainer from './SaveDrawing';
 import NewProjectContainer from './NewProject';
 import SimpleNotificationContainer from './SimpleNotification';
 import SimpleSpinnerContainer from './SimpleSpinner';
+// new
+import CellsInfo from './CellsInfo';
 import UndoRedoContainer from './UndoRedo';
 import initialSetup from '../utils/startup';
 import drawHandlersProvider from '../utils/drawHandlersProvider';
@@ -214,6 +216,7 @@ export default class App extends React.Component {
             <PixelCanvasContainer
               drawHandlersFactory={this.drawHandlersFactory}
             />
+            <CellsInfo />
           </div>
           <div className="right col-1-4">
             <div className="app__right-side">
