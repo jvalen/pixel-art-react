@@ -5,8 +5,14 @@ const CellsInfo = props => {
   const { columns, rows, hoveredIndex } = props;
   return (
     <div className="cellinfo">
-      X :{hoveredIndex ? hoveredIndex.get('x') : '?'}/{columns}, Y :
-      {hoveredIndex ? hoveredIndex.get('y') : '?'}/{rows}
+      X :
+      {hoveredIndex ? hoveredIndex.get('x') : '?'}
+      /
+      {columns}
+      , Y :
+      {hoveredIndex ? hoveredIndex.get('y') : '?'}
+      /
+      {rows}
     </div>
   );
 };
