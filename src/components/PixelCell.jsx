@@ -29,9 +29,7 @@ export default class PixelCell extends React.Component {
     return (
       <div
         onMouseDown={ev => onMouseDown(id, ev)}
-        onMouseOver={ev =>
-          hoveredCell(onCellMouseOver(onMouseOver, id, ev, nbrColumns))
-        }
+        onMouseOver={ev => hoveredCell(onCellMouseOver(onMouseOver, id, ev, nbrColumns))}
         onFocus={ev => onMouseOver(id, ev)}
         onTouchStart={ev => onMouseDown(id, ev)}
         style={styles}
