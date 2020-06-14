@@ -48,6 +48,12 @@ const drawHandlersProvider = rootComponent => ({
           if (rootComponent.state.dragging) props.cellAction(actionProps);
         }
       },
+      onCellMouseOver(fn, id, ev, nbrCols) {
+        fn(id, ev);
+        const y = Math.trunc(Math.abs(id / nbrCols));
+        const x = id - nbrCols * y;
+        return { x: x + 1, y: y + 1 };
+      },
       onTouchMove(ev) {
         ev.preventDefault();
         const { props } = gridComponent;

@@ -348,3 +348,17 @@ describe('framesReducer: CHANGE_ACTIVE_FRAME', () => {
     expect(nextState.get('activeIndex')).toEqual(frameIndex);
   });
 });
+
+describe('framesReducer: CHANGE_HOVERED_CELL', () => {
+  it('change the position of the hovered cell', () => {
+    const exepectedPosition = { x: 2, y: 3 };
+
+    const state = Map({
+      frames: Map({ hoveredIndex: { x: 16, y: 10 } })
+    });
+
+    const nextState = reducer(state, actions.changeHoveredCell({ x: 2, y: 3 }));
+    expect(nextState.get('hoveredIndex').get('x')).toEqual(exepectedPosition.x);
+    expect(nextState.get('hoveredIndex').get('y')).toEqual(exepectedPosition.y);
+  });
+});

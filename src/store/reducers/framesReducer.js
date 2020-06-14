@@ -83,11 +83,13 @@ const initFrames = (action = {}) => {
   const columns = parseInt(options.columns, 10) || 20;
   const rows = parseInt(options.rows, 10) || 20;
   const list = resetIntervals(List([create(columns * rows)]));
+  const hoveredIndex = undefined;
   return Map({
     list,
     columns,
     rows,
-    activeIndex: 0
+    activeIndex: 0,
+    hoveredIndex
   });
 };
 
@@ -172,15 +174,20 @@ const changeDimensions = (frames, { gridProperty, increment }) => {
 };
 
 const setFrames = (frames, action) => {
-  const { columns, rows } = action;
+  const { columns, rows, hoveredIndex } = action;
   const frameList = action.frames;
   return fromJS({
     list: frameList,
     columns,
     rows,
-    activeIndex: 0
+    activeIndex: 0,
+    hoveredIndex
   });
 };
+
+// new
+const changeHoveredCell = (frames, cell) =>
+  frames.merge({ hoveredIndex: cell });
 
 export default function(frames = initFrames(), action) {
   switch (action.type) {
@@ -201,6 +208,8 @@ export default function(frames = initFrames(), action) {
       return duplicateFrame(frames, action);
     case types.CHANGE_DIMENSIONS:
       return changeDimensions(frames, action);
+    case types.CHANGE_HOVERED_CELL:
+      return changeHoveredCell(frames, action.cell);
     default:
       return frames;
   }

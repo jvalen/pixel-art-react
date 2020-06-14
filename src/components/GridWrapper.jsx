@@ -49,6 +49,8 @@ export default class GridWrapper extends React.Component {
           cells={props.cells}
           drawHandlers={props.drawHandlers}
           classes={props.classes}
+          nbrColumns={props.nbrColumns}
+          hoveredCell={props.hoveredCell}
         />
       </div>
     );
