@@ -2,24 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const CellsInfo = props => {
-  const { columns, rows, hoveredIndex } = props;
+  const { hoveredIndex } = props;
+  const xPos = hoveredIndex ? hoveredIndex.get('x') : '0';
+  const yPos = hoveredIndex ? hoveredIndex.get('y') : '0';
   return (
-    <div className="cellinfo">
-      X :
-      {hoveredIndex ? hoveredIndex.get('x') : '?'}
-      /
-      {columns}
-      , Y :
-      {hoveredIndex ? hoveredIndex.get('y') : '?'}
-      /
-      {rows}
-    </div>
+    <>{hoveredIndex && <div className="cellinfo">{`${xPos}, ${yPos}`}</div>}</>
   );
 };
 
 const mapStateToProps = state => ({
-  columns: state.present.getIn(['frames', 'columns']),
-  rows: state.present.getIn(['frames', 'rows']),
   hoveredIndex: state.present.getIn(['frames', 'hoveredIndex'])
 });
 

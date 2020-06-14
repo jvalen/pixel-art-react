@@ -185,7 +185,6 @@ const setFrames = (frames, action) => {
   });
 };
 
-// new
 const changeHoveredCell = (frames, cell) =>
   frames.merge({ hoveredIndex: cell });
 

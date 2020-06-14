@@ -228,7 +228,7 @@ describe('actions', () => {
     };
     expect(actions.newProject()).toEqual(expectedAction);
   });
-  // new
+
   it('should create an action to change the hover cell position', () => {
     const expectedAction = {
       type: types.CHANGE_HOVERED_CELL,

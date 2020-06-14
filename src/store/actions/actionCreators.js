@@ -180,7 +180,7 @@ export function newProject() {
     type: types.NEW_PROJECT
   };
 }
-// new
+
 export function changeHoveredCell(cell) {
   return {
     type: types.CHANGE_HOVERED_CELL,

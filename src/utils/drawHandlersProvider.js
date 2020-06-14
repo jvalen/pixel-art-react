@@ -21,6 +21,12 @@ const getCellActionProps = (props, id) => ({
   ...props
 });
 
+const getCellCoordinates = (id, columnsCount) => {
+  const y = Math.trunc(Math.abs(id / columnsCount));
+  const x = id - columnsCount * y;
+  return { x: x + 1, y: y + 1 };
+};
+
 const drawHandlersProvider = rootComponent => ({
   onMouseUp() {
     rootComponent.setState({
@@ -43,16 +49,11 @@ const drawHandlersProvider = rootComponent => ({
       onMouseOver(id, ev) {
         ev.preventDefault();
         const { props } = gridComponent;
+        props.hoveredCell(getCellCoordinates(id, props.columns));
         if (props.drawingTool !== 'MOVE') {
           const actionProps = getCellActionProps(props, id);
           if (rootComponent.state.dragging) props.cellAction(actionProps);
         }
-      },
-      onCellMouseOver(fn, id, ev, nbrCols) {
-        fn(id, ev);
-        const y = Math.trunc(Math.abs(id / nbrCols));
-        const x = id - nbrCols * y;
-        return { x: x + 1, y: y + 1 };
       },
       onTouchMove(ev) {
         ev.preventDefault();
