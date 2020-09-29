@@ -4,7 +4,7 @@ import Preview from './Preview';
 
 const PreviewBox = props => {
   const [animate, setAnimate] = useState(false);
-  const [normalSize, setNormalSize] = useState(true);
+  const [isNormalSize, setNormalSize] = useState(true);
   const frames = useSelector(state => state.present.get('frames'));
   const duration = useSelector(state => state.present.get('duration'));
   const frameList = frames.get('list');
@@ -13,27 +13,11 @@ const PreviewBox = props => {
   const rows = frames.get('rows');
   const { helpOn, callback } = props;
   const animMessage = `${animate ? 'Pause' : 'Play'} the animation`;
-  const zoomMessage = `Zoom ${normalSize ? '0.5' : '1.5'}`;
+  const zoomMessage = `Zoom ${isNormalSize ? '0.5' : '1.5'}`;
   const animTooltip = helpOn ? animMessage : null;
   const zoomTooltip = helpOn ? zoomMessage : null;
-
-  const toggleScreen = e => {
-    const box = document.querySelector('.box-container');
-    const preview = document.querySelector('.preview-container');
-
-    if (normalSize) {
-      e.target.classList.remove('screen-normal');
-      e.target.classList.add('screen-full');
-      box.style.height = `${box.offsetHeight}px`;
-      preview.style.height = `${preview.offsetHeight}px`;
-    } else {
-      e.target.classList.remove('screen-full');
-      e.target.classList.add('screen-normal');
-      box.style.height = '';
-      preview.style.height = '';
-    }
-    setNormalSize(!normalSize);
-  };
+  const smPixelSize = 3;
+  const bgPixelSize = 6;
 
   return (
     <div className="box-container">
@@ -49,9 +33,11 @@ const PreviewBox = props => {
         <div data-tooltip={zoomTooltip}>
           <button
             type="button"
-            className="screen-normal"
+            className={isNormalSize ? 'screen-normal' : 'screen-full'}
             aria-label="Zoom button"
-            onClick={toggleScreen}
+            onClick={() => {
+              setNormalSize(!isNormalSize);
+            }}
           />
         </div>
         <div data-tooltip={helpOn ? 'Show a preview of your project' : null}>
@@ -68,7 +54,7 @@ const PreviewBox = props => {
           frames={frameList}
           columns={columns}
           rows={rows}
-          cellSize={normalSize ? 6 : 3}
+          cellSize={isNormalSize ? bgPixelSize : smPixelSize}
           duration={duration}
           activeFrameIndex={activeFrameIndex}
           animate={animate}
