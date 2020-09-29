@@ -1,0 +1,49 @@
+$size: 0.5rem;
+
+@define-mixin fl {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.box-container {
+  & .buttons {
+    @mixin fl;
+    margin-bottom: $size;
+  }
+
+  & .preview-container {
+    @mixin fl;
+    align-items: center;
+  }
+}
+
+@define-mixin icons $name {
+  @mixin icon $name;
+  @mixin generate-button $color-silver, $color-mineShaft, $color-doveGray;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-tundora;
+  }
+}
+
+.play {
+  @mixin icons play;
+}
+
+.pause {
+  @mixin icons pause;
+}
+
+.screen-full {
+  @mixin icons screen-full;
+}
+
+.screen-normal {
+  @mixin icons screen-normal;
+}
+
+.frames {
+  @mixin icons frames;
+}
