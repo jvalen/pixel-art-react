@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleRoot } from 'radium';
 import {
   generatePixelDrawCss,
   generateAnimationCSSData
@@ -8,7 +7,8 @@ import Animation from './Animation';
 
 const Preview = props => {
   const generatePreview = () => {
-    const { activeFrameIndex, duration, storedData } = props;
+    const { activeFrameIndex, duration, storedData, animationName } = props;
+    console.log(animationName);
     const { frames, columns, cellSize, animate } = storedData || props;
     const animation = frames.size > 1 && animate;
     let animationData;
@@ -42,9 +42,11 @@ const Preview = props => {
     return (
       <div style={animation ? null : styles.previewWrapper}>
         {animation ? (
-          <StyleRoot>
-            <Animation duration={duration} boxShadow={animationData} />
-          </StyleRoot>
+          <Animation
+            duration={duration}
+            boxShadow={animationData}
+            animationName={animationName}
+          />
         ) : null}
       </div>
     );
