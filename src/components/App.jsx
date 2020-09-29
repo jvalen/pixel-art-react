@@ -1,5 +1,6 @@
 import React from 'react';
 import CookieBanner from 'react-cookie-banner';
+import PreviewBox from './PreviewBox';
 import PixelCanvasContainer from './PixelCanvas';
 import CellSizeContainer from './CellSize';
 import ColorPickerContainer from './ColorPicker';
@@ -220,18 +221,12 @@ export default class App extends React.Component {
             <div className="app__right-side">
               <div className="app__mobile--container">
                 <div className="app__mobile--group">
-                  <button
-                    type="button"
-                    className="app__preview-button"
-                    onClick={() => {
+                  <PreviewBox
+                    helpOn={helpOn}
+                    callback={() => {
                       this.changeModalType('preview');
                     }}
-                    data-tooltip={
-                      helpOn ? 'Show a preview of your project' : null
-                    }
-                  >
-                    PREVIEW
-                  </button>
+                  />
                   <div
                     data-tooltip={helpOn ? 'Reset the selected frame' : null}
                   >

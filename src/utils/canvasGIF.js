@@ -1,13 +1,7 @@
 import GIFEncoder from 'gif-encoder';
 import blobStream from 'blob-stream';
 import { saveAs } from 'file-saver';
-
-function randomName() {
-  return Math.random()
-    .toString(36)
-    .replace(/[^a-z]+/g, '')
-    .substr(0, 8);
-}
+import randomString from './random';
 
 function fillCanvasWithFrame(canvas, frameInfo) {
   const { frame, cols, cellSize, frameHeight, frameIdx } = frameInfo;
@@ -63,7 +57,7 @@ function renderImageToCanvas(type, canvasInfo, currentFrameInfo, frames) {
 }
 
 const saveCanvasToDisk = (blob, fileExtension) => {
-  saveAs(blob, `${randomName()}.${fileExtension}`);
+  saveAs(blob, `${randomString()}.${fileExtension}`);
 };
 
 function renderFrames(settings) {

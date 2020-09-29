@@ -37,58 +37,63 @@
   }
 }
 
-@define-extend eyedropper {
-  content: '\63';
-}
-
-@define-extend paint-brush {
-  content: '\6d';
-}
-
-@define-extend eraser {
-  content: '\6c';
-}
-
-@define-extend trash-o {
-  content: '\69';
-}
-
-@define-extend files-o {
-  content: '\6a';
-}
-
-@define-extend download {
-  content: '\67';
-}
-
-@define-extend twitter {
-  content: '\66';
-}
-
-@define-extend undo {
-  content: '\64';
-}
-
-@define-extend repeat {
-  content: '\65';
-}
-
-@define-extend columns {
+@define-extend play {
   content: '\61';
 }
-
-@define-extend rows {
-  content: '\6b';
+@define-extend pause {
+  content: '\64';
 }
-
-@define-extend help {
-  content: '\68';
-}
-
-@define-extend bucket {
+@define-extend screen-full {
   content: '\62';
 }
-
-@define-extend move {
+@define-extend screen-normal {
+  content: '\63';
+}
+@define-extend frames {
+  content: '\65';
+}
+@define-extend bucket {
+  content: '\67';
+}
+@define-extend eyedropper {
+  content: '\68';
+}
+@define-extend undo {
+  content: '\69';
+}
+@define-extend repeat {
+  content: '\6a';
+}
+@define-extend twitter {
+  content: '\6b';
+}
+@define-extend download {
+  content: '\6c';
+}
+@define-extend help {
+  content: '\6d';
+}
+@define-extend trash-o {
   content: '\6e';
+}
+@define-extend files-o {
+  content: '\6f';
+}
+@define-extend eraser {
+  content: '\70';
+}
+@define-extend paint-brush {
+  content: '\71';
+}
+@define-extend move {
+  content: '\72';
+}
+@define-extend mirror {
+  content: '\73';
+}
+@define-extend columns {
+  content: '\74';
+}
+@define-extend rows {
+  content: '\75';
 }
