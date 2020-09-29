@@ -8,7 +8,6 @@ import Animation from './Animation';
 const Preview = props => {
   const generatePreview = () => {
     const { activeFrameIndex, duration, storedData, animationName } = props;
-    console.log(animationName);
     const { frames, columns, cellSize, animate } = storedData || props;
     const animation = frames.size > 1 && animate;
     let animationData;
@@ -45,7 +44,7 @@ const Preview = props => {
           <Animation
             duration={duration}
             boxShadow={animationData}
-            animationName={animationName}
+            name={animationName}
           />
         ) : null}
       </div>
