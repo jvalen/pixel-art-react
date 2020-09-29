@@ -58,6 +58,7 @@ const PreviewBox = props => {
           duration={duration}
           activeFrameIndex={activeFrameIndex}
           animate={animate}
+          animationName="wip-animation"
         />
       </div>
     </div>
