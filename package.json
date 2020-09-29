@@ -1,6 +1,6 @@
 {
   "name": "pixel-art-react",
-  "version": "3.8.1",
+  "version": "3.8.2",
   "description": "Draw and animate Pixel Art, then export the results to CSS or download them, powered by React",
   "author": "Javier Valencia Romero",
   "scripts": {
