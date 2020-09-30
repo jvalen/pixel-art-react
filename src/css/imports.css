@@ -9,6 +9,7 @@
 @import 'layout/_header.css';
 @import 'layout/_queries.css';
 @import 'layout/_banner.css';
+@import 'layout/_flex.css';
 @import 'input/_inputText.css';
 @import 'input/_button.css';
 @import 'components/_PixelGrid.css';

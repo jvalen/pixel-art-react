@@ -1,52 +1,39 @@
-$size: 0.5rem;
-
-@define-mixin fl {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-}
-
-.box-container {
+.preview-box {
   & .buttons {
-    @mixin fl;
-    margin-bottom: $size;
+    @mixin flex-row-center;
+    margin-bottom: 0.5rem;
   }
 
-  & .preview-container {
-    @mixin fl;
+  & .preview-box__container {
+    @mixin flex-row-center;
     background-color: $color-back-frames;
     padding: 0.8em 0 0.8em 0;
     margin: 0.8em 0;
     align-items: center;
   }
-}
 
-@define-mixin icons $name {
-  @mixin icon $name;
-  @mixin generate-button $color-silver, $color-mineShaft, $color-doveGray;
-
-  &:hover {
-    cursor: pointer;
-    background-color: $color-tundora;
+  .play {
+    @mixin button gray;
+    @mixin icon play;
   }
-}
 
-.play {
-  @mixin icons play;
-}
+  .pause {
+    @mixin button brown;
+    @mixin icon pause;
+  }
 
-.pause {
-  @mixin icons pause;
-}
+  .screen-full {
+    @mixin button gray;
+    @mixin icon screen-full;
+  }
 
-.screen-full {
-  @mixin icons screen-full;
-}
+  .screen-normal {
+    @mixin button gray;
+    @mixin icon screen-normal;
+  }
 
-.screen-normal {
-  @mixin icons screen-normal;
-}
-
-.frames {
-  @mixin icons frames;
+  .frames {
+    @mixin button gray;
+    @mixin icon frames;
+  }
 }

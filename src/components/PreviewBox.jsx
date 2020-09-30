@@ -20,7 +20,7 @@ const PreviewBox = props => {
   const bgPixelSize = 6;
 
   return (
-    <div className="box-container">
+    <div className="preview-box">
       <div className="buttons">
         <div data-tooltip={animTooltip}>
           <button
@@ -49,7 +49,7 @@ const PreviewBox = props => {
           />
         </div>
       </div>
-      <div className="preview-container">
+      <div className="preview-box__container">
         <Preview
           frames={frameList}
           columns={columns}
