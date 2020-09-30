@@ -10,7 +10,7 @@
 
   .frame-handler__list {
     display: flex;
-    background-color: rgba(51, 50, 50, 0.2);
+    background-color: $color-back-frames;
     padding: 0.2em;
 
     .list__container {

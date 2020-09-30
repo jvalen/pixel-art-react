@@ -14,6 +14,9 @@ $size: 0.5rem;
 
   & .preview-container {
     @mixin fl;
+    background-color: $color-back-frames;
+    padding: 0.8em 0 0.8em 0;
+    margin: 0.8em 0;
     align-items: center;
   }
 }

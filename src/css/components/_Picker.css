@@ -30,6 +30,7 @@
     &::before {
       display: inline-block;
       width: 1.5em;
+      text-align: left;
     }
   }
 
