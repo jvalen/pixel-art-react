@@ -3,6 +3,8 @@ $font-pixel: 'minecraftiaregular', 'Helvetica Neue Light', 'Helvetica Neue',
 $font-icons: 'WebFontIcons';
 $font-monospace: 'monospace';
 
+$max-width-container: 12em;
+
 $color-scorpion: #585858;
 $color-boulder: #757575;
 $color-dustyGray: #969696;

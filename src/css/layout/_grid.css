@@ -58,3 +58,12 @@
     lost-column: 1/2 2 0;
   }
 }
+
+.max-width-container {
+  max-width: $max-width-container;
+}
+
+.max-width-container-centered {
+  max-width: $max-width-container;
+  margin: 0 auto;
+}

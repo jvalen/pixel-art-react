@@ -96,7 +96,7 @@ export default class App extends React.Component {
         <div className="app__central-container">
           <div className="left col-1-4">
             <div className="app__left-side">
-              <div className="app__mobile--container">
+              <div className="app__mobile--container max-width-container">
                 <div className="app__mobile--group">
                   <div data-tooltip={helpOn ? 'New project' : null}>
                     <NewProjectContainer />
@@ -163,7 +163,7 @@ export default class App extends React.Component {
                   <PaletteGridContainer />
                 </div>
               </div>
-              <div className="app__mobile--container">
+              <div className="app__mobile--container max-width-container">
                 <div className="app__mobile--group">
                   <button
                     type="button"
@@ -229,16 +229,18 @@ export default class App extends React.Component {
                   />
                   <div
                     data-tooltip={helpOn ? 'Reset the selected frame' : null}
+                    className="max-width-container-centered {"
                   >
                     <ResetContainer />
                   </div>
                   <div
                     data-tooltip={helpOn ? 'Number of columns and rows' : null}
+                    className="max-width-container-centered {"
                   >
                     <DimensionsContainer />
                   </div>
                 </div>
-                <div className="app__mobile--group">
+                <div className="app__mobile--group max-width-container-centered {">
                   <div data-tooltip={helpOn ? 'Size of one tile in px' : null}>
                     <CellSizeContainer />
                   </div>

@@ -67,6 +67,8 @@
     .app__mobile--group {
       lost-column: 1/2;
     }
+
+    max-width: none;
   }
 
   .app__preview-button {
