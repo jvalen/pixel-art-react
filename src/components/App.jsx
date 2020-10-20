@@ -113,14 +113,18 @@ export default class App extends React.Component {
                       <SaveDrawingContainer />
                     </div>
                   </div>
-                  <div data-tooltip={helpOn ? 'Undo Redo actions' : null}>
+                  <div
+                    data-tooltip={
+                      helpOn ? 'Undo (CTRL+Z) Redo (CTRL+Y) actions' : null
+                    }
+                  >
                     <UndoRedoContainer />
                   </div>
                   <div className="app__tools-wrapper grid-3">
                     <div
                       data-tooltip={
                         helpOn
-                          ? 'It fills an area of the current frame based on color similarity'
+                          ? 'It fills an area of the current frame based on color similarity (B)'
                           : null
                       }
                     >
@@ -128,7 +132,7 @@ export default class App extends React.Component {
                     </div>
                     <div
                       data-tooltip={
-                        helpOn ? 'Sample a color from your drawing' : null
+                        helpOn ? 'Sample a color from your drawing (O)' : null
                       }
                     >
                       <EyedropperContainer />
@@ -136,18 +140,20 @@ export default class App extends React.Component {
                     <div
                       data-tooltip={
                         helpOn
-                          ? 'Choose a new color that is not in your palette'
+                          ? 'Choose a new color that is not in your palette (P)'
                           : null
                       }
                     >
                       <ColorPickerContainer />
                     </div>
-                    <div data-tooltip={helpOn ? 'Remove colors' : null}>
+                    <div data-tooltip={helpOn ? 'Remove colors (E)' : null}>
                       <EraserContainer />
                     </div>
                     <div
                       data-tooltip={
-                        helpOn ? 'Move your drawing around the canvas' : null
+                        helpOn
+                          ? 'Move your drawing around the canvas (M)'
+                          : null
                       }
                     >
                       <MoveContainer />

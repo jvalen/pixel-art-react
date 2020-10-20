@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Picker from 'react-color';
 import { switchTool, setCustomColor } from '../store/actions/actionCreators';
 import { COLOR_PICKER, PENCIL } from '../store/reducers/drawingToolStates';
 
 const ColorPickerContainer = React.memo(() => {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
-
   const colorPickerOn = useSelector(
     state => state.present.get('drawingTool') === COLOR_PICKER
   );
@@ -19,22 +17,14 @@ const ColorPickerContainer = React.memo(() => {
   const dispatch = useDispatch();
   const switchColorPickerAction = switchTool(COLOR_PICKER);
   const setPencilToolAction = switchTool(PENCIL);
-
-  const isSelected = colorPickerOn && displayColorPicker;
   const initialPickerColor = paletteColor || 'rgba(255, 255, 255, 1)';
 
   const handleClick = () => {
-    const switchColorPicker = () => dispatch(switchColorPickerAction);
-    switchColorPicker();
-    if (!displayColorPicker) {
-      setDisplayColorPicker(!displayColorPicker);
-    }
+    dispatch(switchColorPickerAction);
   };
 
   const handleClose = () => {
-    setDisplayColorPicker(false);
-    const setPencilTool = () => dispatch(setPencilToolAction);
-    setPencilTool();
+    dispatch(setPencilToolAction);
   };
 
   const onPickerChange = color => dispatch(setCustomColor(color.rgb));
@@ -65,11 +55,11 @@ const ColorPickerContainer = React.memo(() => {
       <button
         type="button"
         aria-label="Color Picker Tool"
-        className={`color-picker__button${isSelected ? ' selected' : ''}`}
+        className={`color-picker__button${colorPickerOn ? ' selected' : ''}`}
         onClick={handleClick}
       />
       <div style={styles.picker}>
-        {displayColorPicker ? (
+        {colorPickerOn ? (
           <div style={styles.popover} is="popover">
             <div
               style={styles.cover}
