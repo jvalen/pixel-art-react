@@ -6,6 +6,7 @@ import CellSizeContainer from './CellSize';
 import ColorPickerContainer from './ColorPicker';
 import ModalContainer from './Modal';
 import DimensionsContainer from './Dimensions';
+import KeyBindings from './KeyBindings';
 import CssDisplayContainer from './CssDisplay';
 import DurationContainer from './Duration';
 import EraserContainer from './Eraser';
@@ -67,6 +68,7 @@ export default class App extends React.Component {
         onTouchEnd={this.onMouseUp}
         onTouchCancel={this.onMouseUp}
       >
+        <KeyBindings />
         <SimpleSpinnerContainer />
         <SimpleNotificationContainer
           fadeInTime={1000}
