@@ -1,5 +1,5 @@
 import React from 'react';
-import CookieBanner from 'react-cookie-banner';
+import CookieConsent from 'react-cookie-consent';
 import PreviewBox from './PreviewBox';
 import PixelCanvasContainer from './PixelCanvas';
 import CellSizeContainer from './CellSize';
@@ -30,8 +30,7 @@ export default class App extends React.Component {
     this.state = {
       modalType: null,
       modalOpen: false,
-      helpOn: false,
-      showCookiesBanner: true
+      helpOn: false
     };
     Object.assign(this, drawHandlersProvider(this));
   }
@@ -54,19 +53,13 @@ export default class App extends React.Component {
     });
   }
 
-  hideCookiesBanner() {
-    this.setState({
-      showCookiesBanner: false
-    });
-  }
-
   toggleHelp() {
     const { helpOn } = this.state;
     this.setState({ helpOn: !helpOn });
   }
 
   render() {
-    const { helpOn, showCookiesBanner, modalType, modalOpen } = this.state;
+    const { helpOn, modalType, modalOpen } = this.state;
     return (
       <div
         className="app__main"
@@ -260,23 +253,34 @@ export default class App extends React.Component {
         <div className="css-container">
           <CssDisplayContainer />
         </div>
-        {showCookiesBanner ? (
-          <CookieBanner
-            disableStyle
-            message="
-              This website uses cookies. By continuing to use
-              this website you are giving consent to cookies
-              being used. Thank you. "
-            link={{
-              msg: '',
-              url: 'https://www.jvalen.com/pixelartcss/cookies.html',
-              target: '_blank'
-            }}
-            onAccept={() => this.hideCookiesBanner()}
-            cookie="user-has-accepted-cookies"
-            dismissOnScroll={false}
-          />
-        ) : null}
+        <CookieConsent
+          location="bottom"
+          buttonText="Got it!"
+          cookieName="pixelartcssCookiesAccepted"
+          style={{
+            background: '#313131',
+            fontSize: '14px',
+            textAlign: 'center'
+          }}
+          buttonStyle={{
+            background: '#bbbbbb',
+            color: '#4e503b',
+            fontSize: '13px'
+          }}
+          expires={150}
+        >
+          This website uses cookies. By continuing to use this website you are
+          giving consent to cookies being used. Thank you.
+          <a
+            href="https://www.jvalen.com/pixelartcss/cookies.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none', color: '#5786c1' }}
+          >
+            {' '}
+            Learn more
+          </a>
+        </CookieConsent>
         <ModalContainer
           type={modalType}
           isOpen={modalOpen}
