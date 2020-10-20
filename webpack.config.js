@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -56,6 +57,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
+    new CopyWebpackPlugin([      
+      { from: 'src/assets/bmac-icon.svg', to: 'bmac-icon.svg' }
+    ]),
   ],
   target: "web",
   stats: false

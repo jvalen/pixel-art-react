@@ -1,26 +1,54 @@
 header {
-  padding: 0 1.4em;
   color: $color-silver;
   lost-utility: clearfix;
+  margin: 1em 0;
 
-  .header__credits {
+  h1 {
+    margin: 0;
+  }
+
+  .header__social {
     text-align: right;
-    margin-top: 1em;
-    top: 1em;
-    position: relative;
 
-    a {
-      text-decoration: none;
-      color: $color-brandyRose;
-    }
+    .header__credits {
+      font-size: 12px;
+      margin-bottom: 0.2em;
 
-    h2 {
-      display: block;
-      font-size: 0.8em;
-      padding-right: 1.3em;
-      position: relative;
-      margin: 0;
-      top: 0;
+      a {
+        color: $color-silver;
+        text-decoration: none;
+      }
+
+      span {
+        color: $color-brandyRose;
+      }
+
+      h2 {
+        display: block;
+        font-size: 0.8em;
+        padding-right: 1.3em;
+        position: relative;
+        margin: 0;
+        top: 0;
+      }
+
+      &:hover {
+        img {
+          transform: scale(1.2);
+        }
+      }
     }
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  header {
+    .col-2-3,
+    .col-1-3 {
+      lost-column: 1/2;
+    }
+  }
+  h1 {
+    font-size: 1.5em;
   }
 }

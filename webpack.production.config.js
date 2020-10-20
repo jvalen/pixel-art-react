@@ -13,7 +13,8 @@ const config = {
     new CopyWebpackPlugin([
       { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
       { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
-      { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' }
+      { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' },
+      { from: 'src/assets/bmac-icon.svg', to: 'bmac-icon.svg' }
     ]),
     new ExtractTextPlugin({
       filename: "css/main.css"
