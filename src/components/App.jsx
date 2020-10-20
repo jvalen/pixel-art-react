@@ -259,7 +259,7 @@ export default class App extends React.Component {
           cookieName="pixelartcssCookiesAccepted"
           style={{
             background: '#313131',
-            fontSize: '14px',
+            fontSize: '13px',
             textAlign: 'center'
           }}
           buttonStyle={{
@@ -267,10 +267,14 @@ export default class App extends React.Component {
             color: '#4e503b',
             fontSize: '13px'
           }}
+          contentStyle={{
+            flex: '1 0 200px',
+            margin: '15px'
+          }}
           expires={150}
         >
-          This website uses cookies. By continuing to use this website you are
-          giving consent to cookies being used. Thank you.
+          By continuing to use this website you are giving consent to cookies
+          being used. Thank you.
           <a
             href="https://www.jvalen.com/pixelartcss/cookies.html"
             target="_blank"
