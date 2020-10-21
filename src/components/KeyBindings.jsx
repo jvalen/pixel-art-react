@@ -78,7 +78,7 @@ const KeyBindings = ({ onClick }) => {
     <button
       type="button"
       className="app__shortcuts-button"
-      aria-label="Active modal"
+      aria-label="Show keyboard shortcuts"
       onClick={onClick}
     />
   );
