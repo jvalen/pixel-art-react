@@ -34,18 +34,21 @@
   }
 
   .app__social-container {
-    lost-utility: clearfix;
-    margin: 1em 0;
-
-    > div {
-      lost-column: 1/2 0 0.5em;
-    }
-
     .app__download-button {
       @mixin button brown;
       @mixin icon download;
 
       width: 100%;
+      margin-top: 1em;
+    }
+  }
+
+  .app__help-container {
+    lost-utility: clearfix;
+    margin: 1em 0;
+
+    > div {
+      lost-column: 1/2 0 0.5em;
     }
 
     .app__toggle-help-button {
@@ -55,6 +58,13 @@
       &.selected {
         box-shadow: 0 0 0 2px $color-silver;
       }
+
+      width: 100%;
+    }
+
+    .app__shortcuts-button {
+      @mixin button darkblue;
+      @mixin icon help;
 
       width: 100%;
     }

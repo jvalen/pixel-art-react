@@ -14,6 +14,7 @@ import LoadDrawing from './LoadDrawing';
 import Preview from './Preview';
 import CopyCSS from './CopyCSS';
 import DownloadDrawing from './DownloadDrawing';
+import KeyBindingsLegend from './KeyBindingsLegend';
 
 class Modal extends React.Component {
   static generateRadioOptions(props) {
@@ -129,7 +130,7 @@ class Modal extends React.Component {
     );
     const isLoadModal = props.type === 'load';
     const radioType = isLoadModal ? 'load' : 'preview';
-    const radioOptions = (
+    let radioOptions = (
       <div className={`modal__${radioType}`}>
         <RadioSelector
           name={`${radioType}-type`}
@@ -191,6 +192,14 @@ class Modal extends React.Component {
             />
           </>
         );
+        break;
+      case 'keybindings':
+        content = (
+          <>
+            <KeyBindingsLegend />
+          </>
+        );
+        radioOptions = null;
         break;
       default:
         content = <>{previewBlock}</>;

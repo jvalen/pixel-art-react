@@ -68,7 +68,6 @@ export default class App extends React.Component {
         onTouchEnd={this.onMouseUp}
         onTouchCancel={this.onMouseUp}
       >
-        <KeyBindings />
         <SimpleSpinnerContainer />
         <SimpleNotificationContainer
           fadeInTime={1000}
@@ -197,16 +196,27 @@ export default class App extends React.Component {
                         }}
                       />
                     </div>
-                    <div data-tooltip="Toggle help tooltips">
-                      <button
-                        type="button"
-                        aria-label="Help"
-                        className={`app__toggle-help-button
+                    <div className="app__help-container">
+                      <div data-tooltip="Toggle help tooltips">
+                        <button
+                          type="button"
+                          aria-label="Help"
+                          className={`app__toggle-help-button
                           ${helpOn ? ' selected' : ''}`}
-                        onClick={() => {
-                          this.toggleHelp();
-                        }}
-                      />
+                          onClick={() => {
+                            this.toggleHelp();
+                          }}
+                        />
+                      </div>
+                      <div
+                        data-tooltip={helpOn ? 'Show keyboard shortcuts' : null}
+                      >
+                        <KeyBindings
+                          onClick={() => {
+                            this.changeModalType('keybindings');
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

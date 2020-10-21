@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import tinykeys from 'tinykeys';
 import {
@@ -15,7 +15,7 @@ import {
   COLOR_PICKER
 } from '../store/reducers/drawingToolStates';
 
-const KeyBindings = () => {
+const KeyBindings = ({ onClick }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     const keyCombinations = {
@@ -74,7 +74,14 @@ const KeyBindings = () => {
       unsubscribe();
     };
   });
-  return null;
+  return (
+    <button
+      type="button"
+      className="app__shortcuts-button"
+      aria-label="Active modal"
+      onClick={onClick}
+    />
+  );
 };
 
 export default KeyBindings;
