@@ -64,7 +64,7 @@
 
     .app__shortcuts-button {
       @mixin button darkblue;
-      @mixin icon help;
+      @mixin icon keybindings;
 
       width: 100%;
     }

@@ -15,7 +15,7 @@
   }
 
   .undo-redo__icon--redo {
-    @mixin icon repeat;
+    @mixin icon redo;
 
     display: block;
   }

@@ -33,7 +33,7 @@
       padding-right: 2em;
 
       .drawing__delete {
-        @mixin icon trash-o;
+        @mixin icon trash;
 
         position: absolute;
         font-size: 1.7em;

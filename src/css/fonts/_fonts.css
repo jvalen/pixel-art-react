@@ -37,63 +37,63 @@
   }
 }
 
-@define-extend play {
+@define-extend twitter {
   content: '\61';
 }
-@define-extend pause {
-  content: '\64';
-}
-@define-extend screen-full {
+@define-extend keybindings {
   content: '\62';
 }
-@define-extend screen-normal {
+@define-extend play {
   content: '\63';
 }
-@define-extend frames {
-  content: '\65';
-}
-@define-extend bucket {
-  content: '\67';
-}
-@define-extend eyedropper {
-  content: '\68';
-}
-@define-extend undo {
-  content: '\69';
-}
-@define-extend repeat {
-  content: '\6a';
-}
-@define-extend twitter {
-  content: '\6b';
-}
-@define-extend download {
-  content: '\6c';
-}
-@define-extend help {
-  content: '\6d';
-}
-@define-extend trash-o {
-  content: '\6e';
-}
-@define-extend files-o {
-  content: '\6f';
+@define-extend duplicate {
+  content: '\64';
 }
 @define-extend eraser {
-  content: '\70';
+  content: '\65';
+}
+@define-extend pause {
+  content: '\66';
+}
+@define-extend screen-full {
+  content: '\67';
 }
 @define-extend paint-brush {
-  content: '\71';
+  content: '\68';
 }
 @define-extend move {
-  content: '\72';
+  content: '\69';
 }
-@define-extend mirror {
-  content: '\73';
+@define-extend screen-normal {
+  content: '\6a';
+}
+@define-extend frames {
+  content: '\6b';
 }
 @define-extend columns {
-  content: '\74';
+  content: '\6c';
 }
 @define-extend rows {
-  content: '\75';
+  content: '\6d';
+}
+@define-extend bucket {
+  content: '\6e';
+}
+@define-extend eyedropper {
+  content: '\6f';
+}
+@define-extend undo {
+  content: '\70';
+}
+@define-extend redo {
+  content: '\71';
+}
+@define-extend download {
+  content: '\72';
+}
+@define-extend help {
+  content: '\73';
+}
+@define-extend trash {
+  content: '\74';
 }

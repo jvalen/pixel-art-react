@@ -113,9 +113,7 @@ export default class App extends React.Component {
                     </div>
                   </div>
                   <div
-                    data-tooltip={
-                      helpOn ? 'Undo (CTRL+Z) Redo (CTRL+Y) actions' : null
-                    }
+                    data-tooltip={helpOn ? 'Undo (CTRL+Z) Redo (CTRL+Y)' : null}
                   >
                     <UndoRedoContainer />
                   </div>
