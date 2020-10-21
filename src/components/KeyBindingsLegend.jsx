@@ -24,7 +24,6 @@ const Wrapper = style.div`
       padding: 1em 0;
       font-size: 0.8em;
     }
-}   
     `;
 
 const ShortcutList = style.div`
