@@ -184,7 +184,10 @@ describe('framesReducer: CHANGE_FRAME_INTERVAL', () => {
       list: List([Map({ interval: 50 }), Map({ interval: 100 })]),
       activeIndex
     });
-    const nextState = reducer(state, actions.changeFrameInterval(interval));
+    const nextState = reducer(
+      state,
+      actions.changeFrameInterval(activeIndex, interval)
+    );
 
     expect(nextState.getIn(['list', activeIndex, 'interval'])).toEqual(
       interval

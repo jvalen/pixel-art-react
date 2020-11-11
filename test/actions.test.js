@@ -214,12 +214,16 @@ describe('actions', () => {
   });
 
   it('should create an action to change the interval of a frame', () => {
+    const frameIndex = 0;
     const interval = 50;
     const expectedAction = {
       type: types.CHANGE_FRAME_INTERVAL,
+      frameIndex,
       interval
     };
-    expect(actions.changeFrameInterval(interval)).toEqual(expectedAction);
+    expect(actions.changeFrameInterval(frameIndex, interval)).toEqual(
+      expectedAction
+    );
   });
 
   it('should create an action to create a new project', () => {
