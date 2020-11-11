@@ -2,7 +2,14 @@ header {
   color: $color-silver;
   lost-utility: clearfix;
   margin: 1em 0;
-
+  a {
+    text-decoration: none;
+    &:visited,
+    &:hover,
+    &:active {
+      color: inherit;
+    }
+  }
   h1 {
     margin: 0;
   }
@@ -16,7 +23,6 @@ header {
 
       a {
         color: $color-silver;
-        text-decoration: none;
       }
 
       span {

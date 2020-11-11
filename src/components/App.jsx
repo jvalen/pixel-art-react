@@ -292,7 +292,7 @@ export default class App extends React.Component {
           By continuing to use this website you are giving consent to cookies
           being used. Thank you.
           <a
-            href="https://www.jvalen.com/pixelartcss/cookies.html"
+            href="/cookies"
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none', color: '#5786c1' }}

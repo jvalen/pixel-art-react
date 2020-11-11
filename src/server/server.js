@@ -64,7 +64,7 @@ app.use(
 /**
  * Redux helper functions
  */
-function handleRender(req, res) {
+function renderHome(req, res) {
   // Create a new Redux store instance
   const store = createStore(
     undoable(reducer, {
@@ -97,10 +97,22 @@ function handleRender(req, res) {
   });
 }
 
+function renderCookies(req, res) {
+  res.render('cookies.pug', {
+    googleAnalyticsId: configData.GOOGLE_ANALYTICS_ID
+  });
+}
+
 /**
  * Routes
  */
-app.get('/', handleRender);
+app.get('/', renderHome);
+app.get('/cookies', renderCookies);
+app.use(function(req, res) {
+  res.status(404).render('404.pug', {
+    googleAnalyticsId: configData.GOOGLE_ANALYTICS_ID
+  });
+});
 
 app.listen(process.env.PORT || PORTSERVER, () => {
   console.log(
