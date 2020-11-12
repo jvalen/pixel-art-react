@@ -294,7 +294,7 @@ export default class App extends React.Component {
           <a
             href="/cookies"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             style={{ textDecoration: 'none', color: '#5786c1' }}
           >
             {' '}
