@@ -13,6 +13,12 @@ class FramesHandler extends React.Component {
     this.onDragEnd = this.onDragEnd.bind(this);
   }
 
+  handleClick() {
+    const { actions } = this.props;
+    actions.createNewFrame();
+    this.setState({ newFrame: true });
+  }
+
   onDragEnd(result) {
     const { destination, source } = result;
     const { actions } = this.props;
@@ -58,12 +64,6 @@ class FramesHandler extends React.Component {
         }}
       />
     ));
-  }
-
-  handleClick() {
-    const { actions } = this.props;
-    actions.createNewFrame();
-    this.setState({ newFrame: true });
   }
 
   render() {
