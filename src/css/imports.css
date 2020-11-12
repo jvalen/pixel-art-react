@@ -11,8 +11,8 @@
 @import 'layout/_flex.css';
 @import 'input/_inputText.css';
 @import 'input/_button.css';
-@import 'routes/cookies.css';
-@import 'routes/notFound.css';
+@import 'views/_cookies.css';
+@import 'views/_notFound.css';
 @import 'components/_PixelGrid.css';
 @import 'components/_SimpleNotification.css';
 @import 'components/_SimpleSpinner.css';

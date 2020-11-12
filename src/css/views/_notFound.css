@@ -1,0 +1,157 @@
+.not-found {
+  text-align: center;
+  h2 {
+    font-size: 2.5em;
+    top: 0;
+    margin: 1em 0 1em 0;
+    display: block;
+    text-align: center;
+    padding: 0;
+    color: $color-brandyRose;
+  }
+  a {
+    color: #78b4ff;
+  }
+  .art-wrapper {
+    height: 100px;
+    width: 320px;
+    margin: 1em auto 9em;
+  }
+
+  .pixelart-notfound {
+    position: absolute;
+    animation: notfound 1s infinite;
+    -webkit-animation: notfound 1s infinite;
+    -moz-animation: notfound 1s infinite;
+    -o-animation: notfound 1s infinite;
+  }
+}
+
+@keyframes notfound {
+  0%,
+  25% {
+    box-shadow: 20px 40px 0 0 rgba(187, 187, 187, 1),
+      80px 40px 0 0 rgba(187, 187, 187, 1),
+      140px 40px 0 0 rgba(187, 187, 187, 1),
+      160px 40px 0 0 rgba(187, 187, 187, 1),
+      220px 40px 0 0 rgba(187, 187, 187, 1),
+      280px 40px 0 0 rgba(187, 187, 187, 1),
+      20px 60px 0 0 rgba(187, 187, 187, 1), 80px 60px 0 0 rgba(187, 187, 187, 1),
+      120px 60px 0 0 rgba(187, 187, 187, 1),
+      180px 60px 0 0 rgba(187, 187, 187, 1),
+      220px 60px 0 0 rgba(187, 187, 187, 1),
+      280px 60px 0 0 rgba(187, 187, 187, 1),
+      20px 80px 0 0 rgba(187, 187, 187, 1), 40px 80px 0 0 rgba(187, 187, 187, 1),
+      60px 80px 0 0 rgba(187, 187, 187, 1), 80px 80px 0 0 rgba(187, 187, 187, 1),
+      120px 80px 0 0 rgba(187, 187, 187, 1),
+      180px 80px 0 0 rgba(187, 187, 187, 1),
+      220px 80px 0 0 rgba(187, 187, 187, 1),
+      240px 80px 0 0 rgba(187, 187, 187, 1),
+      260px 80px 0 0 rgba(187, 187, 187, 1),
+      280px 80px 0 0 rgba(187, 187, 187, 1),
+      80px 100px 0 0 rgba(187, 187, 187, 1),
+      120px 100px 0 0 rgba(187, 187, 187, 1),
+      180px 100px 0 0 rgba(187, 187, 187, 1),
+      280px 100px 0 0 rgba(187, 187, 187, 1),
+      80px 120px 0 0 rgba(187, 187, 187, 1),
+      140px 120px 0 0 rgba(187, 187, 187, 1),
+      160px 120px 0 0 rgba(187, 187, 187, 1),
+      280px 120px 0 0 rgba(187, 187, 187, 1);
+    height: 20px;
+    width: 20px;
+  }
+  25.01%,
+  50% {
+    box-shadow: 20px 20px 0 0 rgba(187, 187, 187, 1),
+      80px 20px 0 0 rgba(187, 187, 187, 1), 20px 40px 0 0 rgba(187, 187, 187, 1),
+      80px 40px 0 0 rgba(187, 187, 187, 1),
+      140px 40px 0 0 rgba(187, 187, 187, 1),
+      160px 40px 0 0 rgba(187, 187, 187, 1),
+      220px 40px 0 0 rgba(187, 187, 187, 1),
+      280px 40px 0 0 rgba(187, 187, 187, 1),
+      20px 60px 0 0 rgba(187, 187, 187, 1), 40px 60px 0 0 rgba(187, 187, 187, 1),
+      60px 60px 0 0 rgba(187, 187, 187, 1), 80px 60px 0 0 rgba(187, 187, 187, 1),
+      120px 60px 0 0 rgba(187, 187, 187, 1),
+      180px 60px 0 0 rgba(187, 187, 187, 1),
+      220px 60px 0 0 rgba(187, 187, 187, 1),
+      280px 60px 0 0 rgba(187, 187, 187, 1),
+      80px 80px 0 0 rgba(187, 187, 187, 1),
+      120px 80px 0 0 rgba(187, 187, 187, 1),
+      180px 80px 0 0 rgba(187, 187, 187, 1),
+      220px 80px 0 0 rgba(187, 187, 187, 1),
+      240px 80px 0 0 rgba(187, 187, 187, 1),
+      260px 80px 0 0 rgba(187, 187, 187, 1),
+      280px 80px 0 0 rgba(187, 187, 187, 1),
+      80px 100px 0 0 rgba(187, 187, 187, 1),
+      120px 100px 0 0 rgba(187, 187, 187, 1),
+      180px 100px 0 0 rgba(187, 187, 187, 1),
+      280px 100px 0 0 rgba(187, 187, 187, 1),
+      140px 120px 0 0 rgba(187, 187, 187, 1),
+      160px 120px 0 0 rgba(187, 187, 187, 1),
+      280px 120px 0 0 rgba(187, 187, 187, 1);
+    height: 20px;
+    width: 20px;
+  }
+  50.01%,
+  75% {
+    box-shadow: 140px 20px 0 0 rgba(187, 187, 187, 1),
+      160px 20px 0 0 rgba(187, 187, 187, 1),
+      20px 40px 0 0 rgba(187, 187, 187, 1), 80px 40px 0 0 rgba(187, 187, 187, 1),
+      120px 40px 0 0 rgba(187, 187, 187, 1),
+      180px 40px 0 0 rgba(187, 187, 187, 1),
+      220px 40px 0 0 rgba(187, 187, 187, 1),
+      280px 40px 0 0 rgba(187, 187, 187, 1),
+      20px 60px 0 0 rgba(187, 187, 187, 1), 80px 60px 0 0 rgba(187, 187, 187, 1),
+      120px 60px 0 0 rgba(187, 187, 187, 1),
+      180px 60px 0 0 rgba(187, 187, 187, 1),
+      220px 60px 0 0 rgba(187, 187, 187, 1),
+      280px 60px 0 0 rgba(187, 187, 187, 1),
+      20px 80px 0 0 rgba(187, 187, 187, 1), 40px 80px 0 0 rgba(187, 187, 187, 1),
+      60px 80px 0 0 rgba(187, 187, 187, 1), 80px 80px 0 0 rgba(187, 187, 187, 1),
+      120px 80px 0 0 rgba(187, 187, 187, 1),
+      180px 80px 0 0 rgba(187, 187, 187, 1),
+      220px 80px 0 0 rgba(187, 187, 187, 1),
+      240px 80px 0 0 rgba(187, 187, 187, 1),
+      260px 80px 0 0 rgba(187, 187, 187, 1),
+      280px 80px 0 0 rgba(187, 187, 187, 1),
+      80px 100px 0 0 rgba(187, 187, 187, 1),
+      140px 100px 0 0 rgba(187, 187, 187, 1),
+      160px 100px 0 0 rgba(187, 187, 187, 1),
+      280px 100px 0 0 rgba(187, 187, 187, 1),
+      80px 120px 0 0 rgba(187, 187, 187, 1),
+      280px 120px 0 0 rgba(187, 187, 187, 1);
+    height: 20px;
+    width: 20px;
+  }
+  75.01%,
+  100% {
+    box-shadow: 220px 20px 0 0 rgba(187, 187, 187, 1),
+      280px 20px 0 0 rgba(187, 187, 187, 1),
+      20px 40px 0 0 rgba(187, 187, 187, 1), 80px 40px 0 0 rgba(187, 187, 187, 1),
+      140px 40px 0 0 rgba(187, 187, 187, 1),
+      160px 40px 0 0 rgba(187, 187, 187, 1),
+      220px 40px 0 0 rgba(187, 187, 187, 1),
+      280px 40px 0 0 rgba(187, 187, 187, 1),
+      20px 60px 0 0 rgba(187, 187, 187, 1), 80px 60px 0 0 rgba(187, 187, 187, 1),
+      120px 60px 0 0 rgba(187, 187, 187, 1),
+      180px 60px 0 0 rgba(187, 187, 187, 1),
+      220px 60px 0 0 rgba(187, 187, 187, 1),
+      240px 60px 0 0 rgba(187, 187, 187, 1),
+      260px 60px 0 0 rgba(187, 187, 187, 1),
+      280px 60px 0 0 rgba(187, 187, 187, 1),
+      20px 80px 0 0 rgba(187, 187, 187, 1), 40px 80px 0 0 rgba(187, 187, 187, 1),
+      60px 80px 0 0 rgba(187, 187, 187, 1), 80px 80px 0 0 rgba(187, 187, 187, 1),
+      120px 80px 0 0 rgba(187, 187, 187, 1),
+      180px 80px 0 0 rgba(187, 187, 187, 1),
+      280px 80px 0 0 rgba(187, 187, 187, 1),
+      80px 100px 0 0 rgba(187, 187, 187, 1),
+      120px 100px 0 0 rgba(187, 187, 187, 1),
+      180px 100px 0 0 rgba(187, 187, 187, 1),
+      280px 100px 0 0 rgba(187, 187, 187, 1),
+      80px 120px 0 0 rgba(187, 187, 187, 1),
+      140px 120px 0 0 rgba(187, 187, 187, 1),
+      160px 120px 0 0 rgba(187, 187, 187, 1);
+    height: 20px;
+    width: 20px;
+  }
+}

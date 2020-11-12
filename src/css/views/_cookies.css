@@ -1,0 +1,129 @@
+.cookies-disclaimer {
+  padding: 2em;
+  text-align: left;
+  color: $color-silver;
+  width: 50%;
+  margin: 0 auto;
+  h2 {
+    font-size: 2.5em;
+    top: 0;
+    margin: 1em 0 1.5em 0;
+    display: block;
+    text-align: center;
+    padding: 0;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+  a {
+    text-decoration: none;
+    color: #78b4ff;
+  }
+  li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content: '•';
+    font-size: 100%;
+    padding-right: 10px;
+  }
+  .art-wrapper {
+    height: 100px;
+    width: 100px;
+    margin: 1em auto;
+  }
+  .pixelart-cookie {
+    box-shadow: 40px 10px 0 #ac7d40, 50px 10px 0 #ac7d40, 60px 10px 0 #332413,
+      70px 10px 0 #eea64b, 30px 20px 0 #ac7d40, 40px 20px 0 #eea64b,
+      50px 20px 0 #eea64b, 60px 20px 0 #eea64b, 70px 20px 0 #eea64b,
+      80px 20px 0 #ac7d40, 20px 30px 0 #ac7d40, 30px 30px 0 #332413,
+      40px 30px 0 #eea64b, 50px 30px 0 #eea64b, 60px 30px 0 #eea64b,
+      70px 30px 0 #332413, 80px 30px 0 #332413, 90px 30px 0 #eea64b,
+      20px 40px 0 #eea64b, 30px 40px 0 #eea64b, 40px 40px 0 #eea64b,
+      50px 40px 0 #332413, 60px 40px 0 #eea64b, 70px 40px 0 #332413,
+      80px 40px 0 #332413, 90px 40px 0 #eea64b, 10px 50px 0 #ac7d40,
+      20px 50px 0 #332413, 30px 50px 0 #eea64b, 40px 50px 0 #eea64b,
+      50px 50px 0 #eea64b, 60px 50px 0 #eea64b, 70px 50px 0 #eea64b,
+      80px 50px 0 #eea64b, 90px 50px 0 #eea64b, 100px 50px 0 #ac7d40,
+      10px 60px 0 #ac7d40, 20px 60px 0 #eea64b, 30px 60px 0 #eea64b,
+      40px 60px 0 #332413, 50px 60px 0 #eea64b, 60px 60px 0 #eea64b,
+      70px 60px 0 #eea64b, 80px 60px 0 #eea64b, 90px 60px 0 #332413,
+      100px 60px 0 #ac7d40, 10px 70px 0 #9a4719, 20px 70px 0 #332413,
+      30px 70px 0 #eea64b, 40px 70px 0 #eea64b, 50px 70px 0 #eea64b,
+      60px 70px 0 #332413, 70px 70px 0 #eea64b, 80px 70px 0 #dc9736,
+      90px 70px 0 #dc9736, 100px 70px 0 #9a4719, 20px 80px 0 #9a4719,
+      30px 80px 0 #dc9736, 40px 80px 0 #dc9736, 50px 80px 0 #dc9736,
+      60px 80px 0 #dc9736, 70px 80px 0 #dc9736, 80px 80px 0 #dc9736,
+      90px 80px 0 #9a4719, 30px 90px 0 #9a4719, 40px 90px 0 #dc9736,
+      50px 90px 0 #dc9736, 60px 90px 0 #dc9736, 70px 90px 0 #332413,
+      80px 90px 0 #9a4719, 40px 100px 0 #9a4719, 50px 100px 0 #9a4719,
+      60px 100px 0 #9a4719, 70px 100px 0 #9a4719;
+    -webkit-box-shadow: 40px 10px 0 #ac7d40, 50px 10px 0 #ac7d40,
+      60px 10px 0 #332413, 70px 10px 0 #eea64b, 30px 20px 0 #ac7d40,
+      40px 20px 0 #eea64b, 50px 20px 0 #eea64b, 60px 20px 0 #eea64b,
+      70px 20px 0 #eea64b, 80px 20px 0 #ac7d40, 20px 30px 0 #ac7d40,
+      30px 30px 0 #332413, 40px 30px 0 #eea64b, 50px 30px 0 #eea64b,
+      60px 30px 0 #eea64b, 70px 30px 0 #332413, 80px 30px 0 #332413,
+      90px 30px 0 #eea64b, 20px 40px 0 #eea64b, 30px 40px 0 #eea64b,
+      40px 40px 0 #eea64b, 50px 40px 0 #332413, 60px 40px 0 #eea64b,
+      70px 40px 0 #332413, 80px 40px 0 #332413, 90px 40px 0 #eea64b,
+      10px 50px 0 #ac7d40, 20px 50px 0 #332413, 30px 50px 0 #eea64b,
+      40px 50px 0 #eea64b, 50px 50px 0 #eea64b, 60px 50px 0 #eea64b,
+      70px 50px 0 #eea64b, 80px 50px 0 #eea64b, 90px 50px 0 #eea64b,
+      100px 50px 0 #ac7d40, 10px 60px 0 #ac7d40, 20px 60px 0 #eea64b,
+      30px 60px 0 #eea64b, 40px 60px 0 #332413, 50px 60px 0 #eea64b,
+      60px 60px 0 #eea64b, 70px 60px 0 #eea64b, 80px 60px 0 #eea64b,
+      90px 60px 0 #332413, 100px 60px 0 #ac7d40, 10px 70px 0 #9a4719,
+      20px 70px 0 #332413, 30px 70px 0 #eea64b, 40px 70px 0 #eea64b,
+      50px 70px 0 #eea64b, 60px 70px 0 #332413, 70px 70px 0 #eea64b,
+      80px 70px 0 #dc9736, 90px 70px 0 #dc9736, 100px 70px 0 #9a4719,
+      20px 80px 0 #9a4719, 30px 80px 0 #dc9736, 40px 80px 0 #dc9736,
+      50px 80px 0 #dc9736, 60px 80px 0 #dc9736, 70px 80px 0 #dc9736,
+      80px 80px 0 #dc9736, 90px 80px 0 #9a4719, 30px 90px 0 #9a4719,
+      40px 90px 0 #dc9736, 50px 90px 0 #dc9736, 60px 90px 0 #dc9736,
+      70px 90px 0 #332413, 80px 90px 0 #9a4719, 40px 100px 0 #9a4719,
+      50px 100px 0 #9a4719, 60px 100px 0 #9a4719, 70px 100px 0 #9a4719;
+    -moz-box-shadow: 40px 10px 0 #ac7d40, 50px 10px 0 #ac7d40,
+      60px 10px 0 #332413, 70px 10px 0 #eea64b, 30px 20px 0 #ac7d40,
+      40px 20px 0 #eea64b, 50px 20px 0 #eea64b, 60px 20px 0 #eea64b,
+      70px 20px 0 #eea64b, 80px 20px 0 #ac7d40, 20px 30px 0 #ac7d40,
+      30px 30px 0 #332413, 40px 30px 0 #eea64b, 50px 30px 0 #eea64b,
+      60px 30px 0 #eea64b, 70px 30px 0 #332413, 80px 30px 0 #332413,
+      90px 30px 0 #eea64b, 20px 40px 0 #eea64b, 30px 40px 0 #eea64b,
+      40px 40px 0 #eea64b, 50px 40px 0 #332413, 60px 40px 0 #eea64b,
+      70px 40px 0 #332413, 80px 40px 0 #332413, 90px 40px 0 #eea64b,
+      10px 50px 0 #ac7d40, 20px 50px 0 #332413, 30px 50px 0 #eea64b,
+      40px 50px 0 #eea64b, 50px 50px 0 #eea64b, 60px 50px 0 #eea64b,
+      70px 50px 0 #eea64b, 80px 50px 0 #eea64b, 90px 50px 0 #eea64b,
+      100px 50px 0 #ac7d40, 10px 60px 0 #ac7d40, 20px 60px 0 #eea64b,
+      30px 60px 0 #eea64b, 40px 60px 0 #332413, 50px 60px 0 #eea64b,
+      60px 60px 0 #eea64b, 70px 60px 0 #eea64b, 80px 60px 0 #eea64b,
+      90px 60px 0 #332413, 100px 60px 0 #ac7d40, 10px 70px 0 #9a4719,
+      20px 70px 0 #332413, 30px 70px 0 #eea64b, 40px 70px 0 #eea64b,
+      50px 70px 0 #eea64b, 60px 70px 0 #332413, 70px 70px 0 #eea64b,
+      80px 70px 0 #dc9736, 90px 70px 0 #dc9736, 100px 70px 0 #9a4719,
+      20px 80px 0 #9a4719, 30px 80px 0 #dc9736, 40px 80px 0 #dc9736,
+      50px 80px 0 #dc9736, 60px 80px 0 #dc9736, 70px 80px 0 #dc9736,
+      80px 80px 0 #dc9736, 90px 80px 0 #9a4719, 30px 90px 0 #9a4719,
+      40px 90px 0 #dc9736, 50px 90px 0 #dc9736, 60px 90px 0 #dc9736,
+      70px 90px 0 #332413, 80px 90px 0 #9a4719, 40px 100px 0 #9a4719,
+      50px 100px 0 #9a4719, 60px 100px 0 #9a4719, 70px 100px 0 #9a4719;
+    height: 10px;
+    width: 10px;
+  }
+  span.highlight {
+    color: $color-brandyRose;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .cookies-disclaimer {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .cookies-disclaimer {
+    width: 90%;
+  }
+}
