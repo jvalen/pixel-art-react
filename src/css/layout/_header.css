@@ -4,6 +4,7 @@ header {
   margin: 1em 0;
   a {
     text-decoration: none;
+    color: inherit;
     &:visited,
     &:hover,
     &:active {
