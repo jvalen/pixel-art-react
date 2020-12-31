@@ -104,7 +104,16 @@ npm run test
 
 #### Help me to improve it :seedling:
 
-Please create a GitHub issue if there is something wrong or to be improved. Pull requests are also welcome, they should be created to the **develop branch**.
+Create a GitHub issue if there is something wrong or to be improved.
+
+Pull requests are also welcome, please take the following requirements as a checklist before opening one:
+
+- [x] The PR does fix a problem or adds a new feature, not just cosmetic or syntactic sugar changes.
+- [x] It would be great to open an issue in advance.
+- [x] The PR should be issued to the **develop** branch.
+- [x] The PR should have a explanation or be related to an issue.
+
+Thank you!
 
 ## License
 
