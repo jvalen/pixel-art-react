@@ -26,8 +26,8 @@ import initialSetup from '../utils/startup';
 import drawHandlersProvider from '../utils/drawHandlersProvider';
 
 export default class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       modalType: null,
       modalOpen: false,
