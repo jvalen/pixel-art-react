@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 import Preview from './Preview';
 import Output from './Output';
 import UsefulData from './UsefulData';
+import LoadImgFile from './LoadImgFile';
 import {
   getDataFromStorage,
   removeProjectFromStorage,
@@ -195,6 +196,12 @@ export default class LoadDrawing extends React.Component {
       case 'extractData': {
         const { frames, columns } = this.props;
         return <UsefulData frames={frames} columns={columns} />;
+      }
+      case 'loadImgFile': {
+        const { actions, frames, columns } = this.props;
+        return (
+          <LoadImgFile frames={frames} columns={columns} actions={actions} />
+        );
       }
       default: {
         const drawings = this.giveMeDrawings();

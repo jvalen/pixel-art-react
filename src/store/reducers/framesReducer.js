@@ -1,6 +1,7 @@
 import { List, Map, fromJS } from 'immutable';
 import shortid from 'shortid';
 import * as types from '../actions/actionTypes';
+import getTimeInterval from '../../utils/intervals';
 
 const createGrid = numCells => {
   let newGrid = List();
@@ -52,22 +53,14 @@ const create = (cellsCount, intervalPercentage) =>
     key: shortid.generate()
   });
 
-const resetIntervals = frameList => {
-  const equalPercentage = 100 / frameList.size;
-
-  return frameList.map((frame, index) => {
-    const percentage =
-      index === frameList.size - 1
-        ? 100
-        : Math.round((index + 1) * equalPercentage * 10) / 10;
-    return Map({
+const resetIntervals = frameList =>
+  frameList.map((frame, index) =>
+    Map({
       grid: frame.get('grid'),
-      interval: percentage,
+      interval: getTimeInterval(index, frameList.size),
       key: frame.get('key')
-    });
-  });
-};
-
+    })
+  );
 const getFrame = (frames, frameId) => {
   const frameList = frames.get('list');
   const frame = frameList.get(frameId);

@@ -110,8 +110,13 @@ const setCustomColor = (palette, { customColor }) => {
   );
 };
 
-const setPalette = (palette, action) =>
-  palette.set('grid', fromJS(action.paletteGridData));
+const setPalette = (palette, action) => {
+  const defaultPalette = action.paletteGridData.length === 0;
+  return palette.set(
+    'grid',
+    fromJS(defaultPalette ? createPaletteGrid() : action.paletteGridData)
+  );
+};
 
 export default function paletteReducer(palette = createPalette(), action) {
   switch (action.type) {
