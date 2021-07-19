@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Picker = ({ type, value, action }) => {
+const Picker = ({ type, value, action, min = 1, max = 0 }) => {
   const pickerType = `picker__${type}`;
   return (
     <div className="picker">
@@ -11,7 +11,9 @@ const Picker = ({ type, value, action }) => {
             <button
               type="button"
               onClick={() => {
-                action(type, 1);
+                if (max === 0 || value < max) {
+                  action(type, 1);
+                }
               }}
               className="button-add"
               id={`picker__add-${type}`}
@@ -21,7 +23,9 @@ const Picker = ({ type, value, action }) => {
             <button
               type="button"
               onClick={() => {
-                action(type, -1);
+                if (min === 0 || value > min) {
+                  action(type, -1);
+                }
               }}
               className="button-remove"
               id={`picker__remove-${type}`}
