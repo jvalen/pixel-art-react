@@ -5,7 +5,9 @@ import styled, { css } from 'styled-components';
 import getTimeInterval from '../utils/intervals';
 import Picker from './Picker';
 import Button from './Button';
+import ValidationMessage from './ValidationMessage';
 import breakpoints from '../utils/breakpoints';
+import drawFileImageToCanvas from '../utils/ImageToCanvas';
 
 const Container = styled.div`
   text-align: center;
@@ -80,7 +82,11 @@ const LoadImgFile = props => {
   const canvasRef = useRef(null);
   const [frameCount, setFrameCount] = useState(1);
   const [pixelSize, setPixelSize] = useState(1);
-  const [validationError, setValidationError] = useState('');
+  const [validationError, setValidationError] = useState({
+    show: false,
+    title: '',
+    message: ''
+  });
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -91,29 +97,40 @@ const LoadImgFile = props => {
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
   }, []);
 
+  const showValidationMessage = validation => {
+    setValidationError({ show: false, title: '', message: '' });
+    if (validation.show) {
+      setValidationError({
+        show: true,
+        title: validation.title,
+        message: validation.message
+      });
+    }
+  };
+
   const onChange = ev => {
     const file = ev.target.files[0];
-    if (canvasRef && file && file.type.match('image.*')) {
-      const reader = new FileReader();
-      const canvas = canvasRef.current;
-      const context = canvas.getContext('2d');
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.style.display = 'none';
-      img.onload = function() {
-        context.canvas.width = img.width;
-        context.canvas.height = img.height;
-        context.drawImage(img, 0, 0);
-        setImageLoaded(true);
-      };
-      reader.readAsDataURL(file);
-      reader.onload = function(evt) {
-        if (evt.target.readyState === FileReader.DONE) {
-          img.src = evt.target.result;
-        }
-      };
+
+    if (canvasRef) {
+      const validationData = drawFileImageToCanvas(
+        file,
+        canvasRef.current,
+        () => setImageLoaded(true)
+      );
+      if (validationData) {
+        setImageLoaded(false);
+        showValidationMessage({
+          show: true,
+          title: 'Error',
+          message:
+            validationData.errorType === 'notImage'
+              ? 'Not a valid image file'
+              : 'There was an error loading the file'
+        });
+      } else {
+        showValidationMessage({ show: false });
+      }
     }
-    // TODO: Show error when file is not image type
   };
 
   const getHeightIntervals = (imageHeight, numberOfFrames) => {
@@ -183,17 +200,21 @@ const LoadImgFile = props => {
     const pixelsWidth = context.width / size;
     const pixelsHeight = context.height / size / frameAmount;
 
-    setValidationError('');
-
     if (!widthPixelsFit || !heightPixelsFit) {
-      setValidationError('No pixel size valid');
+      showValidationMessage({
+        show: true,
+        title: 'Error',
+        message: 'No valid pixel size'
+      });
       return false;
     }
 
     if (pixelsWidth > maxPixelsWidth || pixelsHeight > maxPixelsHeight) {
-      setValidationError(
-        `Error: Max width pixels: ${maxPixelsWidth} VS ${pixelsWidth} - Max height pixels: ${maxPixelsHeight} VS ${pixelsHeight}`
-      );
+      showValidationMessage({
+        show: true,
+        title: 'Error',
+        message: `Max width pixels: ${maxPixelsWidth} VS ${pixelsWidth} - Max height pixels: ${maxPixelsHeight} VS ${pixelsHeight}`
+      });
       return false;
     }
 
@@ -237,7 +258,7 @@ const LoadImgFile = props => {
       <Button type="file" onChange={onChange}>
         BROWSE...
       </Button>
-      <p>{validationError}</p>
+      {validationError.show && <ValidationMessage value={validationError} />}
       <PropertiesContainer imageLoaded={imageLoaded}>
         <LoadedImage>
           <CanvasWrapper>
