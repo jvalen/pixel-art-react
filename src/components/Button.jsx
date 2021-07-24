@@ -84,7 +84,9 @@ const ButtonStyled = styled.button`
   ${ButtonCSS}
 `;
 
-const InputFileLabelStyled = styled.label.attrs({ for: 'load-image-input' })`
+const InputFileLabelStyled = styled.label.attrs({
+  htmlFor: 'load-image-input'
+})`
   ${ButtonCSS}
   cursor: pointer;
 `;
