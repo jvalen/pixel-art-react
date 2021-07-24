@@ -61,27 +61,27 @@ class Modal extends React.Component {
           id: 0
         },
         {
+          value: 'loadImgFile',
+          description: 'Load From Image',
+          labelFor: 'load-img-file',
+          id: 1
+        },
+        {
           value: 'import',
           description: 'Import',
           labelFor: 'import',
-          id: 1
+          id: 2
         },
         {
           value: 'export',
           description: 'Export',
           labelFor: 'export',
-          id: 2
+          id: 3
         },
         {
           value: 'extractData',
           description: 'Useful Data',
           labelFor: 'useful-data',
-          id: 3
-        },
-        {
-          value: 'loadImgFile',
-          description: 'Load Image from File',
-          labelFor: 'load-img-file',
           id: 4
         }
       ];

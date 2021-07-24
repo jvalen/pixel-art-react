@@ -4,7 +4,8 @@ import shortid from 'shortid';
 import styled, { css } from 'styled-components';
 import getTimeInterval from '../utils/intervals';
 import Picker from './Picker';
-import LoadImgButton from './Button';
+import Button from './Button';
+import breakpoints from '../utils/breakpoints';
 
 const Container = styled.div`
   text-align: center;
@@ -13,33 +14,66 @@ const Container = styled.div`
 
 const Title = styled.h2`
   display: block;
-  font-size: 1.5rem;
-  line-height: 2rem;
   text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  top: 0;
+`;
+
+const PickerWrapper = styled.div`
+  background-color: whitesmoke;
+  padding: 2rem;
+  margin: 1rem;
+`;
+
+const PickerTitle = styled(Title)`
+  display: block;
+  text-align: center;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0 0 0.5rem 0;
 `;
 
 const PropertiesContainer = styled.div`
   display: none;
   font-size: 1.5rem;
   line-height: 2rem;
+  padding: 2rem 0;
 
   ${props =>
     props.imageLoaded &&
     css`
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
     `}
 `;
 
 const LoadedImage = styled.div`
-  width: 50%;
+  width: 100%;
   padding: 0 1em;
-  background-color: #e2e2e2;
+
+  @media only screen and (${breakpoints.device.lg}) {
+    width: 50%;
+  }
+`;
+
+const CanvasWrapper = styled.div`
+  margin: 0 auto;
+  background-color: whitesmoke;
+  overflow: scroll;
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 600px;
+  max-height: 600px;
 `;
 
 const LoadSetup = styled.div`
-  width: 50%;
-  padding: 0 1em;
+  width: 100%;
+  padding: 1rem 1em;
+  @media only screen and (${breakpoints.device.lg}) {
+    width: 50%;
+  }
 `;
 
 const LoadImgFile = props => {
@@ -79,6 +113,7 @@ const LoadImgFile = props => {
         }
       };
     }
+    // TODO: Show error when file is not image type
   };
 
   const getHeightIntervals = (imageHeight, numberOfFrames) => {
@@ -101,10 +136,6 @@ const LoadImgFile = props => {
   const generateFrames = (imageContext, numberOfFrames, pixSize = 1) => {
     const { width, height } = imageContext.canvas;
     const heightIntervals = getHeightIntervals(height, numberOfFrames);
-
-    // TODO: Validation | Check exact height intervals (no loose pixels)
-    // TODO: Validation | Only higher than 50 height when multiples images
-
     const frameCollection = [];
 
     heightIntervals.forEach(heightInterval => {
@@ -203,39 +234,45 @@ const LoadImgFile = props => {
   return (
     <Container>
       <Title>Create a project from an image file</Title>
-      <LoadImgButton type="file" onChange={onChange}>
+      <Button type="file" onChange={onChange}>
         BROWSE...
-      </LoadImgButton>
+      </Button>
       <p>{validationError}</p>
       <PropertiesContainer imageLoaded={imageLoaded}>
         <LoadedImage>
-          <canvas
-            className="block mx-auto"
-            width="300"
-            height="300"
-            ref={canvasRef}
-          />
+          <CanvasWrapper>
+            <canvas
+              className="block mx-auto"
+              width="300"
+              height="300"
+              ref={canvasRef}
+            />
+          </CanvasWrapper>
         </LoadedImage>
         <LoadSetup>
-          <h2>Number of Frames</h2>
-          <Picker
-            type="frame-count"
-            value={frameCount}
-            action={(type, behaviour) => {
-              setFrameCount(frameCount + behaviour);
-            }}
-          />
-          <h2>Pixel Size</h2>
-          <Picker
-            type="pixel-size"
-            value={pixelSize}
-            action={(type, behaviour) => {
-              setPixelSize(pixelSize + behaviour);
-            }}
-          />
-          <button type="button" onClick={onClick}>
-            Load from file
-          </button>
+          <PickerWrapper>
+            <PickerTitle>Number of Frames</PickerTitle>
+            <Picker
+              type="frame-count"
+              value={frameCount}
+              action={(type, behaviour) => {
+                setFrameCount(frameCount + behaviour);
+              }}
+            />
+          </PickerWrapper>
+          <PickerWrapper>
+            <PickerTitle>Pixel Size</PickerTitle>
+            <Picker
+              type="pixel-size"
+              value={pixelSize}
+              action={(type, behaviour) => {
+                setPixelSize(pixelSize + behaviour);
+              }}
+            />
+          </PickerWrapper>
+          <Button variant="action" onClick={onClick}>
+            START
+          </Button>
         </LoadSetup>
       </PropertiesContainer>
     </Container>

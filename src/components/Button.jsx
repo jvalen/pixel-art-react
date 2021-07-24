@@ -32,25 +32,25 @@ const textColor = theme.variants('mode', 'variant', {
 
 const bgColor = theme.variants('mode', 'variant', {
   default: { default: colors.mineShaft },
-  info: { default: colors.lotus },
+  action: { default: colors.lotus },
   close: { default: colors.steelblue },
-  action: { default: colors.chathamsBlue },
+  info: { default: colors.chathamsBlue },
   white: { default: colors.alto }
 });
 
 const boxShadowColor = theme.variants('mode', 'variant', {
   default: { default: colors.doveGray },
-  info: { default: colors.buccaneer },
+  action: { default: colors.buccaneer },
   close: { default: colors.sanMarino },
-  action: { default: colors.chambray },
+  info: { default: colors.chambray },
   white: { default: colors.silveChalice }
 });
 
 const bgActiveColor = theme.variants('mode', 'variant', {
   default: { default: colors.tundora },
-  info: { default: colors.cowboy },
+  action: { default: colors.cowboy },
   close: { default: colors.eastBay },
-  action: { default: colors.cloudBurst },
+  info: { default: colors.cloudBurst },
   white: { default: colors.nobel }
 });
 
@@ -98,7 +98,7 @@ const InputFileStyled = styled.input.attrs({
   z-index: -1;
 `;
 
-const Button = ({ children, variant, onChange, type }) => (
+const Button = ({ children, variant, onClick, onChange, type }) => (
   <ThemeProvider theme={{ mode: 'default' }}>
     {type === 'file' ? (
       <>
@@ -108,16 +108,25 @@ const Button = ({ children, variant, onChange, type }) => (
         <InputFileStyled onChange={onChange} />
       </>
     ) : (
-      <ButtonStyled variant={variant}>{children}</ButtonStyled>
+      <ButtonStyled variant={variant} onClick={onClick}>
+        {children}
+      </ButtonStyled>
     )}
   </ThemeProvider>
 );
 Button.propTypes = {
-  variant: PropTypes.oneOf(['default', 'info', 'close', 'action'])
+  variant: PropTypes.oneOf(['default', 'info', 'close', 'action']),
+  onClick(props, ...rest) {
+    if (!props.type) {
+      return PropTypes.func.isRequired(props, ...rest);
+    }
+    return PropTypes.func(props, ...rest);
+  }
 };
 
 Button.defaultProps = {
-  variant: 'default'
+  variant: 'default',
+  onClick: () => {}
 };
 
 export default Button;
