@@ -198,9 +198,14 @@ export default class LoadDrawing extends React.Component {
         return <UsefulData frames={frames} columns={columns} />;
       }
       case 'loadImgFile': {
-        const { actions, frames, columns } = this.props;
+        const { actions, frames, columns, close } = this.props;
         return (
-          <LoadImgFile frames={frames} columns={columns} actions={actions} />
+          <LoadImgFile
+            frames={frames}
+            columns={columns}
+            actions={actions}
+            close={close}
+          />
         );
       }
       default: {

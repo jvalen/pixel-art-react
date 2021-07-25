@@ -15,8 +15,19 @@ const ImageDimensionDisplay = styled.span`
     `}
 `;
 
+const WarningSign = styled.span`
+  margin-right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 3px 14px;
+  display: inline-block;
+  background-color: red;
+  color: white;
+`;
+
 const ImageSizeDisplay = ({ description, width, height }) => (
   <ImageDimensionDisplayContainer>
+    {(width.error || height.error) && <WarningSign>!</WarningSign>}
     {description}
     &nbsp;
     <ImageDimensionDisplay error={width.error}>

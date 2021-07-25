@@ -17,7 +17,7 @@ const Title = styled.h2`
   display: block;
   text-align: center;
   margin-bottom: 2rem;
-  font-size: 1rem;
+  font-size: 1.2em;
   top: 0;
 `;
 
@@ -228,7 +228,7 @@ const LoadImgFile = props => {
   };
 
   const onClick = () => {
-    const { actions } = props;
+    const { actions, close } = props;
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
@@ -255,12 +255,13 @@ const LoadImgFile = props => {
         CanvasByPixelSize.width,
         Math.floor(CanvasByPixelSize.height / frameCount)
       );
+      close();
     }
   };
 
   return (
     <Container>
-      <Title>Create a project from an image file</Title>
+      <Title>Find an image and create a project</Title>
       <Button type="file" onChange={onChange} ariaLabel="Load image file">
         BROWSE...
       </Button>
@@ -345,7 +346,6 @@ const LoadImgFile = props => {
             </PickerInfo>
           </PickerWrapper>
         </LoadSetup>
-        {validationError.show && <ValidationMessage value={validationError} />}
         <Button
           variant={validationError.show ? 'action' : 'proceed'}
           onClick={onClick}
@@ -355,6 +355,7 @@ const LoadImgFile = props => {
         >
           CREATE PROJECT
         </Button>
+        {validationError.show && <ValidationMessage value={validationError} />}
       </PropertiesContainer>
     </Container>
   );
