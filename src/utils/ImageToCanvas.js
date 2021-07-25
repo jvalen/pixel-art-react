@@ -9,7 +9,7 @@ const drawFileImageToCanvas = (file, canvas, imageLoadedCallback) => {
       context.canvas.width = img.width;
       context.canvas.height = img.height;
       context.drawImage(img, 0, 0);
-      imageLoadedCallback();
+      imageLoadedCallback({ w: img.width, h: img.height });
     };
     reader.readAsDataURL(file);
     reader.onload = function(evt) {

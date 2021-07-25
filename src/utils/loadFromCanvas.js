@@ -59,4 +59,13 @@ const generateFrames = (imageContext, numberOfFrames, pixSize = 1) => {
   return fromJS(frameCollection);
 };
 
+export const getCanvasDimensions = canvasRef => {
+  if (canvasRef) {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    return { w: context.canvas.width, h: context.canvas.height };
+  }
+  return { w: 0, h: 0 };
+};
+
 export default generateFrames;

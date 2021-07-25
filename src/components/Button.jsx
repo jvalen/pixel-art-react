@@ -19,7 +19,8 @@ const colors = {
   cloudBurst: '#253c5a',
   alto: '#e0e0e0',
   silveChalice: '#a0a0a0',
-  nobel: '#b7b7b7'
+  nobel: '#b7b7b7',
+  shrub: '#0e8044'
 };
 
 const textColor = theme.variants('mode', 'variant', {
@@ -27,7 +28,8 @@ const textColor = theme.variants('mode', 'variant', {
   action: { default: colors.silver },
   close: { default: colors.silver },
   info: { default: colors.silver },
-  white: { default: 'black' }
+  white: { default: 'black' },
+  proceed: { default: colors.silver }
 });
 
 const bgColor = theme.variants('mode', 'variant', {
@@ -35,7 +37,8 @@ const bgColor = theme.variants('mode', 'variant', {
   action: { default: colors.lotus },
   close: { default: colors.steelblue },
   info: { default: colors.chathamsBlue },
-  white: { default: colors.alto }
+  white: { default: colors.alto },
+  proceed: { default: colors.shrub }
 });
 
 const boxShadowColor = theme.variants('mode', 'variant', {
@@ -43,7 +46,8 @@ const boxShadowColor = theme.variants('mode', 'variant', {
   action: { default: colors.buccaneer },
   close: { default: colors.sanMarino },
   info: { default: colors.chambray },
-  white: { default: colors.silveChalice }
+  white: { default: colors.silveChalice },
+  proceed: { default: colors.nobel }
 });
 
 const bgActiveColor = theme.variants('mode', 'variant', {
@@ -51,7 +55,8 @@ const bgActiveColor = theme.variants('mode', 'variant', {
   action: { default: colors.cowboy },
   close: { default: colors.eastBay },
   info: { default: colors.cloudBurst },
-  white: { default: colors.nobel }
+  white: { default: colors.nobel },
+  proceed: { default: colors.shrub }
 });
 
 const ButtonCSS = css`
@@ -66,6 +71,7 @@ const ButtonCSS = css`
   color: ${textColor};
   background-color: ${bgColor};
   box-shadow: 0 5px 0 0 ${boxShadowColor};
+  margin: 0 auto;
   &:hover,
   &.selected {
     background-color: ${bgActiveColor};
@@ -78,10 +84,28 @@ const ButtonCSS = css`
     box-shadow: 0 1px 0 ${bgActiveColor};
     background-color: ${bgActiveColor};
   }
+
+  ${props => {
+    const widthOptions = { full: '100%', half: '50%', normal: 'auto' };
+    const size = widthOptions[props.size];
+    return (
+      props.size &&
+      css`
+        width: ${size};
+      `
+    );
+  }};
 `;
 
-const ButtonStyled = styled.button`
+const ButtonStyled = styled.button.attrs(props => ({
+  disabled: props.disabled
+}))`
   ${ButtonCSS}
+  ${props =>
+    props.size &&
+    css`
+      opacity: ${props.disabled ? '0.5' : '1'};
+    `};
 `;
 
 const InputFileLabelStyled = styled.label.attrs({
@@ -100,24 +124,45 @@ const InputFileStyled = styled.input.attrs({
   z-index: -1;
 `;
 
-const Button = ({ children, variant, onClick, onChange, type }) => (
+const Button = ({
+  children,
+  variant,
+  onClick,
+  onChange,
+  type,
+  size,
+  disabled = false
+}) => (
   <ThemeProvider theme={{ mode: 'default' }}>
     {type === 'file' ? (
       <>
-        <InputFileLabelStyled variant={variant}>
+        <InputFileLabelStyled variant={variant} size={size}>
           {children}
         </InputFileLabelStyled>
         <InputFileStyled onChange={onChange} />
       </>
     ) : (
-      <ButtonStyled variant={variant} onClick={onClick}>
+      <ButtonStyled
+        variant={variant}
+        onClick={onClick}
+        size={size}
+        disabled={disabled}
+      >
         {children}
       </ButtonStyled>
     )}
   </ThemeProvider>
 );
 Button.propTypes = {
-  variant: PropTypes.oneOf(['default', 'info', 'close', 'action']),
+  variant: PropTypes.oneOf([
+    'default',
+    'info',
+    'close',
+    'action',
+    'white',
+    'proceed'
+  ]),
+  size: PropTypes.oneOf(['normal', 'half', 'full']),
   onClick(props, ...rest) {
     if (!props.type) {
       return PropTypes.func.isRequired(props, ...rest);
@@ -128,6 +173,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   variant: 'default',
+  size: 'normal',
   onClick: () => {}
 };
 

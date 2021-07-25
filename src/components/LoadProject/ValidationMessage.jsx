@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ValidationContainer = styled.div`
-  width: 50%;
+  width: 100%;
   margin: 2rem auto 1rem auto;
   border: 1px solid red;
 `;
