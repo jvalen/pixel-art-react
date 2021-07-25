@@ -261,7 +261,7 @@ const LoadImgFile = props => {
   return (
     <Container>
       <Title>Create a project from an image file</Title>
-      <Button type="file" onChange={onChange}>
+      <Button type="file" onChange={onChange} ariaLabel="Load image file">
         BROWSE...
       </Button>
       <PropertiesContainer imageLoaded={imageLoaded}>
@@ -350,6 +350,7 @@ const LoadImgFile = props => {
           variant={validationError.show ? 'action' : 'proceed'}
           onClick={onClick}
           size="full"
+          ariaLabel="Create a project from the loaded image"
           disabled={validationError.widthError || validationError.heightError}
         >
           CREATE PROJECT

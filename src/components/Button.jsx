@@ -117,7 +117,8 @@ const InputFileLabelStyled = styled.label.attrs({
 
 const InputFileStyled = styled.input.attrs({
   type: 'file',
-  id: 'load-image-input'
+  id: 'load-image-input',
+  role: 'button'
 })`
   opacity: 0;
   position: absolute;
@@ -131,6 +132,7 @@ const Button = ({
   onChange,
   type,
   size,
+  ariaLabel,
   disabled = false
 }) => (
   <ThemeProvider theme={{ mode: 'default' }}>
@@ -139,7 +141,7 @@ const Button = ({
         <InputFileLabelStyled variant={variant} size={size}>
           {children}
         </InputFileLabelStyled>
-        <InputFileStyled onChange={onChange} />
+        <InputFileStyled aria-label={ariaLabel} onChange={onChange} />
       </>
     ) : (
       <ButtonStyled
@@ -147,6 +149,7 @@ const Button = ({
         onClick={onClick}
         size={size}
         disabled={disabled}
+        aria-label={ariaLabel}
       >
         {children}
       </ButtonStyled>
@@ -163,6 +166,7 @@ Button.propTypes = {
     'proceed'
   ]),
   size: PropTypes.oneOf(['normal', 'half', 'full']),
+  ariaLabel: PropTypes.string.isRequired,
   onClick(props, ...rest) {
     if (!props.type) {
       return PropTypes.func.isRequired(props, ...rest);
