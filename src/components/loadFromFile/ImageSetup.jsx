@@ -87,7 +87,7 @@ const ImageSetupSection = ({
       <PickerWrapper>
         <PickerTitle>
           Number of Frames
-          <span data-tooltip="The image will be evenly divided vertically by this value">
+          <span data-tooltip="The image will be divided vertically by this value">
             <PickerInfoIcon className="icon-help" />
           </span>
         </PickerTitle>

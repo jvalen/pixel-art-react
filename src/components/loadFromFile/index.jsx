@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import Button from '../Button';
+import Button from '../common/Button';
 import ValidationMessage from './ValidationMessage';
 import ImageDimensions from './ImageDimensions';
 import ImageSetupSection from './ImageSetup';

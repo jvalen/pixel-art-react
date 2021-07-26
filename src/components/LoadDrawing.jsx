@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import Preview from './Preview';
 import Output from './Output';
 import UsefulData from './UsefulData';
-import LoadFromFile from './LoadFromFile';
+import LoadFromFile from './loadFromFile';
 import {
   getDataFromStorage,
   removeProjectFromStorage,
