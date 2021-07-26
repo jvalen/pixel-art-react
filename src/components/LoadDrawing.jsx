@@ -139,8 +139,8 @@ export default class LoadDrawing extends React.Component {
           <div className="load-drawing">
             <h2>Import your project</h2>
             <p>
-              Please, paste a previously exported code and click on the button
-              &nbsp;
+              Paste a previously exported code in the text field and click on
+              the button &nbsp;
               <b>IMPORT</b>
               &nbsp;
             </p>
@@ -170,7 +170,7 @@ export default class LoadDrawing extends React.Component {
             <p>
               Please save the following text if you wish to import your project
               in the future using the &nbsp;
-              <b>Import Project</b>
+              <b>Import</b>
               &nbsp; button.
             </p>
             <p>
@@ -213,7 +213,7 @@ export default class LoadDrawing extends React.Component {
         const drawingsStored = drawings.length > 0;
         return (
           <div className="load-drawing">
-            <h2>Select one of your awesome drawings</h2>
+            <h2>Select one of your projects stored in the browser</h2>
             <div
               className={`load-drawing__container
                 ${!drawingsStored ? 'empty' : ''}`}
