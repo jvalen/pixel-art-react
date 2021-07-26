@@ -8,6 +8,9 @@ import breakpoints from '../utils/breakpoints';
 import drawFileImageToCanvas from '../utils/ImageToCanvas';
 import generateFrames, { getCanvasDimensions } from '../utils/loadFromCanvas';
 
+const MAX_WIDTH = 100;
+const MAX_HEIGHT = 100;
+
 const Container = styled.div`
   text-align: center;
   padding: 1rem 0;
@@ -138,23 +141,20 @@ const LoadImgFile = props => {
   };
 
   const loadImgValidation = (contextDimensions, size, frameAmount) => {
-    const maxPixelsWidth = 100;
-    const maxPixelsHeight = 100;
-
     const widthPixelsFit = contextDimensions.w % size === 0;
-    const heightPixelsFit = contextDimensions.h % size === 0;
+    const heightPixelsFit = (contextDimensions.h / frameAmount) % size === 0;
 
     const pixelsWidth = contextDimensions.w / size;
     const pixelsHeight = contextDimensions.h / size / frameAmount;
 
-    const maxWidthReached = pixelsWidth > maxPixelsWidth;
-    const maxHeightReached = pixelsHeight > maxPixelsHeight;
+    const maxWidthReached = pixelsWidth > MAX_WIDTH;
+    const maxHeightReached = pixelsHeight > MAX_HEIGHT;
 
     if (!widthPixelsFit || !heightPixelsFit) {
       showValidationMessage({
         show: true,
         title: 'Error',
-        message: 'No valid pixel size. Width and height must be exact.',
+        message: 'No valid frame size. Width and height must be exact.',
         widthError: !widthPixelsFit,
         heightError: !heightPixelsFit
       });
@@ -165,7 +165,7 @@ const LoadImgFile = props => {
       showValidationMessage({
         show: true,
         title: 'Error - Dimension limit reached',
-        message: `Frame size dimensions must no exceed ${maxPixelsWidth}px width by ${maxPixelsHeight}px height. Please increase the pixel size or divide your image in different frames.`,
+        message: `Frame size dimensions must no exceed ${MAX_WIDTH}px width by ${MAX_HEIGHT}px height. Please increase the pixel size or divide your image in different frames.`,
         widthError: maxWidthReached,
         heightError: maxHeightReached
       });
@@ -258,6 +258,18 @@ const LoadImgFile = props => {
     }
   };
 
+  const pickerAction = (property, setProperty) => (type, behaviour) => {
+    const newPickerCount = property.value + behaviour;
+    const pixelValue = property.id === 'frame' ? pixelSize : newPickerCount;
+    const frameValue = property.id === 'frame' ? newPickerCount : frameCount;
+    setProperty(newPickerCount);
+    setResultDimensions(
+      getImageDimensions(getCanvasDimensions(canvasRef), pixelValue, frameValue)
+        .result
+    );
+    loadImgValidation(getCanvasDimensions(canvasRef), pixelValue, frameValue);
+  };
+
   return (
     <Container>
       <Title>Find an image and create a project</Title>
@@ -304,22 +316,10 @@ const LoadImgFile = props => {
             <Picker
               type="frame-count"
               value={frameCount}
-              action={(type, behaviour) => {
-                const newPickerCount = frameCount + behaviour;
-                setFrameCount(newPickerCount);
-                setResultDimensions(
-                  getImageDimensions(
-                    getCanvasDimensions(canvasRef),
-                    pixelSize,
-                    newPickerCount
-                  ).result
-                );
-                loadImgValidation(
-                  getCanvasDimensions(canvasRef),
-                  pixelSize,
-                  newPickerCount
-                );
-              }}
+              action={pickerAction(
+                { value: frameCount, id: 'frame' },
+                setFrameCount
+              )}
             />
           </PickerWrapper>
           <PickerWrapper>
@@ -332,22 +332,10 @@ const LoadImgFile = props => {
             <Picker
               type="pixel-size"
               value={pixelSize}
-              action={(type, behaviour) => {
-                const newPickerCount = pixelSize + behaviour;
-                setPixelSize(newPickerCount);
-                setResultDimensions(
-                  getImageDimensions(
-                    getCanvasDimensions(canvasRef),
-                    newPickerCount,
-                    frameCount
-                  ).result
-                );
-                loadImgValidation(
-                  getCanvasDimensions(canvasRef),
-                  newPickerCount,
-                  frameCount
-                );
-              }}
+              action={pickerAction(
+                { value: pixelSize, id: 'pixel' },
+                setPixelSize
+              )}
             />
           </PickerWrapper>
         </LoadSetup>

@@ -28,8 +28,6 @@ const generateFrames = (imageContext, numberOfFrames, pixSize = 1) => {
     const pixelWidth = pixSize;
     const pixelHeight = pixSize;
 
-    console.log(heightInterval.top, heightInterval.bottom);
-
     const grid = [];
     for (
       let y = heightInterval.top;
