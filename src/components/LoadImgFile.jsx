@@ -22,10 +22,13 @@ const Title = styled.h2`
 `;
 
 const PickerWrapper = styled.div`
-  background-color: whitesmoke;
   padding: 1rem;
   margin: 0 auto 1rem auto;
-  max-width: 300px;
+  width: 100%;
+  padding: 0 1em;
+  @media only screen and (${breakpoints.device.lg}) {
+    width: 50%;
+  }
 `;
 
 const PickerTitle = styled(Title)`
@@ -54,45 +57,42 @@ const PropertiesContainer = styled.div`
   width: 100%;
 
   @media only screen and (${breakpoints.device.md}) {
-    width: 70%;
+    width: 50%;
     margin: 0 auto;
   }
 
   ${props =>
     props.imageLoaded &&
     css`
-      display: flex;
-      flex-wrap: wrap;
-      align-items: start;
+      display: block;
     `}
 `;
 
 const LoadedImage = styled.div`
-  width: 100%;
-  padding: 0 1em;
   margin-bottom: 2rem;
+`;
 
-  @media only screen and (${breakpoints.device.lg}) {
-    width: 50%;
-  }
+const ImageSizeSection = styled.div`
+  background-color: whitesmoke;
+  padding: 1rem 1rem;
 `;
 
 const CanvasWrapper = styled.div`
   margin: 0 auto 2rem;
   background-color: whitesmoke;
   overflow: scroll;
-  min-width: 100px;
+  width: 100%;
   min-height: 100px;
-  max-width: 500px;
   max-height: 300px;
 `;
 
 const LoadSetup = styled.div`
-  width: 100%;
-  padding: 0 1em;
-  @media only screen and (${breakpoints.device.lg}) {
-    width: 50%;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  margin: 0 0 1.5rem;
+  background-color: whitesmoke;
+  padding: 1rem 0;
 `;
 
 const LoadImgFile = props => {
@@ -274,6 +274,8 @@ const LoadImgFile = props => {
               ref={canvasRef}
             />
           </CanvasWrapper>
+        </LoadedImage>
+        <ImageSizeSection>
           <ImageSizeDisplay
             description="Original:"
             width={{ value: imageDimensions.w }}
@@ -290,7 +292,7 @@ const LoadImgFile = props => {
               error: validationError.heightError
             }}
           />
-        </LoadedImage>
+        </ImageSizeSection>
         <LoadSetup>
           <PickerWrapper>
             <PickerTitle>
