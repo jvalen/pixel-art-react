@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import Picker from './Picker';
-import Button from './Button';
-import ValidationMessage from './LoadProject/ValidationMessage';
-import ImageSizeDisplay from './LoadProject/ImageSizeDisplay';
-import breakpoints from '../utils/breakpoints';
-import drawFileImageToCanvas from '../utils/ImageToCanvas';
-import generateFrames, { getCanvasDimensions } from '../utils/loadFromCanvas';
+import Button from '../Button';
+import ValidationMessage from './ValidationMessage';
+import ImageDimensions from './ImageDimensions';
+import ImageSetupSection from './ImageSetup';
+import breakpoints from '../../utils/breakpoints';
+import drawFileImageToCanvas from '../../utils/ImageToCanvas';
+import generateFrames, {
+  getCanvasDimensions
+} from '../../utils/loadFromCanvas';
 
 const MAX_WIDTH = 100;
 const MAX_HEIGHT = 100;
@@ -24,35 +26,7 @@ const Title = styled.h2`
   top: 0;
 `;
 
-const PickerWrapper = styled.div`
-  padding: 1rem;
-  margin: 0 auto 1rem auto;
-  width: 100%;
-  padding: 0 1em;
-  @media only screen and (${breakpoints.device.lg}) {
-    width: 50%;
-  }
-`;
-
-const PickerTitle = styled(Title)`
-  display: block;
-  text-align: center;
-  font-size: 1rem;
-  margin: 0;
-  padding: 0 0 0.5rem 0;
-`;
-
-const PickerInfoIcon = styled.i`
-  position: relative;
-  background-color: #2f5382;
-  color: white;
-  border-radius: 9999px;
-  top: -9px;
-  padding: 0.2rem;
-  margin-left: 0.4rem;
-`;
-
-const PropertiesContainer = styled.div`
+const LoadedImageContainer = styled.div`
   display: none;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -71,15 +45,6 @@ const PropertiesContainer = styled.div`
     `}
 `;
 
-const LoadedImage = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const ImageSizeSection = styled.div`
-  background-color: whitesmoke;
-  padding: 1rem 1rem;
-`;
-
 const CanvasWrapper = styled.div`
   margin: 0 auto 2rem;
   background-color: whitesmoke;
@@ -89,16 +54,7 @@ const CanvasWrapper = styled.div`
   max-height: 300px;
 `;
 
-const LoadSetup = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  margin: 0 0 1.5rem;
-  background-color: whitesmoke;
-  padding: 1rem 0;
-`;
-
-const LoadImgFile = props => {
+const LoadFromFile = props => {
   const canvasRef = useRef(null);
   const [frameCount, setFrameCount] = useState(1);
   const [pixelSize, setPixelSize] = useState(1);
@@ -140,7 +96,7 @@ const LoadImgFile = props => {
     }
   };
 
-  const loadImgValidation = (contextDimensions, size, frameAmount) => {
+  const imgSetupValidation = (contextDimensions, size, frameAmount) => {
     const widthPixelsFit = contextDimensions.w % size === 0;
     const heightPixelsFit = (contextDimensions.h / frameAmount) % size === 0;
 
@@ -180,7 +136,7 @@ const LoadImgFile = props => {
     return true;
   };
 
-  const onChange = ev => {
+  const onLoadImage = ev => {
     const file = ev.target.files[0];
 
     if (canvasRef) {
@@ -191,7 +147,7 @@ const LoadImgFile = props => {
           setImageLoaded(true);
           setImageDimensions(imgDimensions);
           setResultDimensions(imgDimensions);
-          loadImgValidation(
+          imgSetupValidation(
             getCanvasDimensions(canvasRef),
             pixelSize,
             frameCount
@@ -216,23 +172,13 @@ const LoadImgFile = props => {
     }
   };
 
-  const getImageDimensions = (canvasDimensions, pSize, frameAmount) => {
-    const pixelsWidth = Math.round((canvasDimensions.w / pSize) * 100) / 100;
-    const pixelsHeight =
-      Math.round((canvasDimensions.h / pSize / frameAmount) * 100) / 100;
-    return {
-      original: { w: canvasDimensions.w, h: canvasDimensions.h },
-      result: { w: pixelsWidth, h: pixelsHeight }
-    };
-  };
-
-  const onClick = () => {
+  const onCreateProject = () => {
     const { actions, close } = props;
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
     if (
-      loadImgValidation(
+      imgSetupValidation(
         {
           w: context.canvas.width,
           h: context.canvas.height
@@ -258,90 +204,41 @@ const LoadImgFile = props => {
     }
   };
 
-  const pickerAction = (property, setProperty) => (type, behaviour) => {
-    const newPickerCount = property.value + behaviour;
-    const pixelValue = property.id === 'frame' ? pixelSize : newPickerCount;
-    const frameValue = property.id === 'frame' ? newPickerCount : frameCount;
-    setProperty(newPickerCount);
-    setResultDimensions(
-      getImageDimensions(getCanvasDimensions(canvasRef), pixelValue, frameValue)
-        .result
-    );
-    loadImgValidation(getCanvasDimensions(canvasRef), pixelValue, frameValue);
-  };
-
   return (
     <Container>
       <Title>Find an image and create a project</Title>
-      <Button type="file" onChange={onChange} ariaLabel="Load image file">
+      <Button type="file" onChange={onLoadImage} ariaLabel="Load image file">
         BROWSE...
       </Button>
-      <PropertiesContainer imageLoaded={imageLoaded}>
-        <LoadedImage>
-          <CanvasWrapper>
-            <canvas
-              className="block mx-auto"
-              width="300"
-              height="300"
-              ref={canvasRef}
-            />
-          </CanvasWrapper>
-        </LoadedImage>
-        <ImageSizeSection>
-          <ImageSizeDisplay
-            description="Original:"
-            width={{ value: imageDimensions.w }}
-            height={{ value: imageDimensions.h }}
+      <LoadedImageContainer imageLoaded={imageLoaded}>
+        <CanvasWrapper>
+          <canvas
+            className="block mx-auto"
+            width="300"
+            height="300"
+            ref={canvasRef}
           />
-          <ImageSizeDisplay
-            description="Frame size:"
-            width={{
-              value: resultDimensions.w,
-              error: validationError.widthError
-            }}
-            height={{
-              value: resultDimensions.h,
-              error: validationError.heightError
-            }}
-          />
-        </ImageSizeSection>
-        <LoadSetup>
-          <PickerWrapper>
-            <PickerTitle>
-              Number of Frames
-              <span data-tooltip="The image will be evenly divided vertically by this value">
-                <PickerInfoIcon className="icon-help" />
-              </span>
-            </PickerTitle>
-            <Picker
-              type="frame-count"
-              value={frameCount}
-              action={pickerAction(
-                { value: frameCount, id: 'frame' },
-                setFrameCount
-              )}
-            />
-          </PickerWrapper>
-          <PickerWrapper>
-            <PickerTitle>
-              Pixel Size
-              <span data-tooltip="Tweak this value to get a pixel perfect frame size">
-                <PickerInfoIcon className="icon-help" />
-              </span>
-            </PickerTitle>
-            <Picker
-              type="pixel-size"
-              value={pixelSize}
-              action={pickerAction(
-                { value: pixelSize, id: 'pixel' },
-                setPixelSize
-              )}
-            />
-          </PickerWrapper>
-        </LoadSetup>
+        </CanvasWrapper>
+
+        <ImageDimensions
+          imageDimensions={imageDimensions}
+          resultDimensions={resultDimensions}
+          validationError={validationError}
+        />
+
+        <ImageSetupSection
+          canvasRef={canvasRef}
+          frameCount={frameCount}
+          setFrameCount={setFrameCount}
+          pixelSize={pixelSize}
+          setPixelSize={setPixelSize}
+          setResultDimensions={setResultDimensions}
+          imgSetupValidation={imgSetupValidation}
+        />
+
         <Button
           variant={validationError.show ? 'action' : 'proceed'}
-          onClick={onClick}
+          onClick={onCreateProject}
           size="full"
           ariaLabel="Create a project from the loaded image"
           disabled={validationError.widthError || validationError.heightError}
@@ -349,8 +246,8 @@ const LoadImgFile = props => {
           CREATE PROJECT
         </Button>
         {validationError.show && <ValidationMessage value={validationError} />}
-      </PropertiesContainer>
+      </LoadedImageContainer>
     </Container>
   );
 };
-export default LoadImgFile;
+export default LoadFromFile;

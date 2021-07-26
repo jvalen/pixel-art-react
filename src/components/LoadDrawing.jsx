@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import Preview from './Preview';
 import Output from './Output';
 import UsefulData from './UsefulData';
-import LoadImgFile from './LoadImgFile';
+import LoadFromFile from './LoadFromFile';
 import {
   getDataFromStorage,
   removeProjectFromStorage,
@@ -200,7 +200,7 @@ export default class LoadDrawing extends React.Component {
       case 'loadImgFile': {
         const { actions, frames, columns, close } = this.props;
         return (
-          <LoadImgFile
+          <LoadFromFile
             frames={frames}
             columns={columns}
             actions={actions}
