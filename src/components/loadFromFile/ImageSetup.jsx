@@ -17,7 +17,6 @@ const PickerWrapper = styled.div`
   padding: 1rem;
   margin: 0 auto 1rem auto;
   width: 100%;
-  padding: 0 1em;
   @media only screen and (${breakpoints.device.lg}) {
     width: 50%;
   }
