@@ -97,3 +97,7 @@
 @define-extend trash {
   content: '\74';
 }
+
+.icon-help {
+  @mixin icon help;
+}

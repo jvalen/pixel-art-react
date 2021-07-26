@@ -36,15 +36,14 @@ const PickerTitle = styled(Title)`
   padding: 0 0 0.5rem 0;
 `;
 
-const PickerInfo = styled(Title)`
-  display: block;
-  text-align: center;
-  font-size: 0.8rem;
+const PickerInfoIcon = styled.i`
+  position: relative;
+  background-color: #2f5382;
   color: white;
-  background-color: #585858;
-  margin: 1rem 1rem 0;
-  padding: 0.5rem 0.1rem;
-  line-height: 1.2rem;
+  border-radius: 9999px;
+  top: -9px;
+  padding: 0.2rem;
+  margin-left: 0.4rem;
 `;
 
 const PropertiesContainer = styled.div`
@@ -294,7 +293,12 @@ const LoadImgFile = props => {
         </LoadedImage>
         <LoadSetup>
           <PickerWrapper>
-            <PickerTitle>Number of Frames</PickerTitle>
+            <PickerTitle>
+              Number of Frames
+              <span data-tooltip="The image will be evenly divided vertically by this value">
+                <PickerInfoIcon className="icon-help" />
+              </span>
+            </PickerTitle>
             <Picker
               type="frame-count"
               value={frameCount}
@@ -315,12 +319,14 @@ const LoadImgFile = props => {
                 );
               }}
             />
-            <PickerInfo>
-              The image will be evenly divided vertically by this value
-            </PickerInfo>
           </PickerWrapper>
           <PickerWrapper>
-            <PickerTitle>Pixel Size</PickerTitle>
+            <PickerTitle>
+              Pixel Size
+              <span data-tooltip="Tweak this value to get a pixel perfect frame size">
+                <PickerInfoIcon className="icon-help" />
+              </span>
+            </PickerTitle>
             <Picker
               type="pixel-size"
               value={pixelSize}
@@ -341,9 +347,6 @@ const LoadImgFile = props => {
                 );
               }}
             />
-            <PickerInfo>
-              Tweak this value to adjust your image to a pixel perfect image
-            </PickerInfo>
           </PickerWrapper>
         </LoadSetup>
         <Button
