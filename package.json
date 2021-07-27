@@ -32,6 +32,11 @@
     "express"
   ],
   "license": "MIT",
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  },
   "dependencies": {
     "autoprefixer": "^9.7.2",
     "blob-stream": "^0.1.3",
@@ -107,6 +112,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
+    "jest-canvas-mock": "^2.3.1",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
     "stylelint": "^10.1.0",

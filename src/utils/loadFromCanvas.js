@@ -2,26 +2,26 @@ import { fromJS } from 'immutable';
 import shortid from 'shortid';
 import getTimeInterval from './intervals';
 
-const getHeightIntervals = (imageHeight, numberOfFrames) => {
-  const heightPerFrame = Math.floor(imageHeight / numberOfFrames);
+export const getDimensionIntervals = (dimension, numberOfFrames) => {
+  const dimensionPerFrame = Math.floor(dimension / numberOfFrames);
   const intervals = [];
-  let top = 0;
-  let bottom = heightPerFrame;
+  let start = 0;
+  let end = dimensionPerFrame;
   for (let i = 0; i < numberOfFrames; i++) {
     intervals.push({
-      top,
-      bottom,
+      start,
+      end,
       timePercentage: getTimeInterval(i, numberOfFrames)
     });
-    top += heightPerFrame;
-    bottom += heightPerFrame;
+    start += dimensionPerFrame;
+    end += dimensionPerFrame;
   }
   return intervals;
 };
 
 const generateFrames = (imageContext, numberOfFrames, pixSize = 1) => {
   const { width, height } = imageContext.canvas;
-  const heightIntervals = getHeightIntervals(height, numberOfFrames);
+  const heightIntervals = getDimensionIntervals(height, numberOfFrames);
   const frameCollection = [];
 
   heightIntervals.forEach(heightInterval => {
@@ -30,8 +30,8 @@ const generateFrames = (imageContext, numberOfFrames, pixSize = 1) => {
 
     const grid = [];
     for (
-      let y = heightInterval.top;
-      y + pixelHeight <= heightInterval.bottom;
+      let y = heightInterval.start;
+      y + pixelHeight <= heightInterval.end;
       y += pixelWidth
     ) {
       for (let x = 0; x + pixelWidth <= width; x += pixelWidth) {
@@ -54,11 +54,13 @@ const generateFrames = (imageContext, numberOfFrames, pixSize = 1) => {
     });
   });
 
+  console.log(frameCollection);
+
   return fromJS(frameCollection);
 };
 
 export const getCanvasDimensions = canvasRef => {
-  if (canvasRef) {
+  if (canvasRef && canvasRef.current) {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     return { w: context.canvas.width, h: context.canvas.height };
