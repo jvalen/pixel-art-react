@@ -60,7 +60,7 @@
     "postcss-reporter": "^6.0.1",
     "precss": "^2.0.0",
     "prop-types": "^15.7.2",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "react": "^16.8.6",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-addons-shallow-compare": "^15.6.2",
