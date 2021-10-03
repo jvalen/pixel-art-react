@@ -1,7 +1,8 @@
 language: node_js
 node_js:
   - '14'
-
+before_install:
+  - npm i -g npm@7.24.1
 script:
   - npm run lint
   - npm run csslint
