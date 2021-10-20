@@ -6,6 +6,7 @@ import {
 } from 'box-shadow-pixels';
 
 const PIXELART_CSS_CLASS_NAME = 'pixelart-to-css';
+const PIXEL_ANIMATION_CLASS_NAME = 'pixel-animation';
 
 export function generatePixelDrawCss(frame, columns, cellSize, type) {
   return getImageData(frame.get('grid'), {
@@ -29,7 +30,7 @@ export function exportAnimationData(frames, columns, cellSize, duration) {
     pSize: cellSize,
     c: columns,
     duration,
-    cssClassName: PIXELART_CSS_CLASS_NAME
+    cssClassName: PIXEL_ANIMATION_CLASS_NAME
   });
 }
 
