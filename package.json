@@ -13,12 +13,13 @@
     "validate": "npm run lint && npm run csslint && npm run prettier -- --list-different && npm run test",
     "development": "webpack-dev-server --hot",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "deploy:dev": "webpack --config webpack.config.js",
     "server": "node ./src/server/loader",
     "server-debug": "node --inspect ./src/server/loader",
     "start": "npm run server",
-    "postinstall": "NODE_ENV=production webpack -p --config webpack.production.config.js"
+    "postinstall": "NODE_ENV=production webpack --verbose -p --config webpack.production.config.js"
   },
-  "main": "index.js",
+  "main": "deploy/bundle.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jvalen/pixel-art-react"
@@ -61,14 +62,12 @@
     "precss": "^2.0.0",
     "prop-types": "^15.7.2",
     "pug": "^2.0.4",
-    "react": "^16.8.6",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-addons-shallow-compare": "^15.6.2",
     "react-beautiful-dnd": "^12.1.1",
     "react-color": "^2.18.1",
     "react-cookie-consent": "^5.2.0",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.8.6",
     "react-modal": "^3.9.1",
     "react-redux": "^7.1.0",
     "react-transform-hmr": "^1.0.4",
@@ -83,13 +82,7 @@
     "tinykeys": "^1.1.0",
     "twitter": "^1.7.1",
     "url-loader": "^2.0.1",
-    "whatwg-fetch": "^2.0.4"
-  },
-  "engines": {
-    "node": "<15.0.0",
-    "npm": ">=7.0.0"
-  },
-  "devDependencies": {
+    "whatwg-fetch": "^2.0.4",
     "@babel/core": "^7.5.4",
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
@@ -101,6 +94,16 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-react-transform": "^3.0.0",
     "copy-webpack-plugin": "^5.0.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.7.0",
@@ -108,8 +111,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
     "jest-canvas-mock": "^2.3.1",
@@ -118,8 +119,6 @@
     "stylelint": "^10.1.0",
     "stylelint-config-lost": "0.0.3",
     "stylelint-config-recommended": "^2.2.0",
-    "webpack": "^4.35.3",
-    "webpack-cli": "^3.3.6",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-dev-server": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0"
