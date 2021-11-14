@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -11,31 +12,42 @@ module.exports = {
     './src/index.jsx',
   ],
   output: {
-    path: path.join(__dirname, '/build'),
+    path: path.join(__dirname, '/deploy'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    library: "pixel-art-react",
+    libraryTarget: "umd",
+    globalObject: 'this',
+  },
+  externals: {
+    react: "react",
+    'react-dom': "react-dom",
+    reactDOM: "react-dom"
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        // Allow it to run on pixel-art-react for when this is imported as a library
+        exclude: /node_modules\/(?!pixel-art-react)/,
         use: [
           'babel-loader'
         ]
       },
       {
         test:   /\.css$/i,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
             },
-          },
-          'postcss-loader'
-        ]
+            'postcss-loader'
+          ]
+        })
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?v=[\d.]+)?(\?[a-z0-9#-]+)?$/,
@@ -47,7 +59,7 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   devServer: {
-    contentBase: './build'
+    contentBase: './deploy'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -60,6 +72,9 @@ module.exports = {
     new CopyWebpackPlugin([      
       { from: 'src/assets/bmac-icon.svg', to: 'bmac-icon.svg' }
     ]),
+    new ExtractTextPlugin({
+      filename: "css/main.css"
+    }),
   ],
   target: "web",
   stats: false

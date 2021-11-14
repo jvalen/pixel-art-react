@@ -29,7 +29,8 @@ const config = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        // Allow it to run on pixel-art-react for when this is imported as a library
+        exclude: /node_modules\/(?!pixel-art-react)/,
         loader: 'babel-loader'
       },
       {
@@ -59,8 +60,16 @@ const config = {
   output: {
     path: path.join(__dirname, '/deploy'),
     publicPath: '/',
-    filename: 'bundle.js'
-  }
+    filename: 'bundle.js',
+    library: "pixel-art-react",
+    libraryTarget: "umd",
+    globalObject: 'this',
+  },
+  externals: {
+    react: "react",
+    'react-dom': "react-dom",
+    reactDOM: "react-dom"
+  },
 };
 
 module.exports = config;
