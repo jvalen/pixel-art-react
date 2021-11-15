@@ -1,5 +1,8 @@
 import * as actionCreators from '../store/actions/actionCreators';
-import { initStorage, getDataFromStorage } from './storage';
+import {
+  // initStorage,
+  getDataFromStorage
+} from './storage';
 
 /*
   Initial actions to dispatch:
@@ -34,7 +37,7 @@ const initialSetup = (dispatch, storage) => {
     }
   } else {
     // If no data initialize storage
-    initStorage(storage);
+    // initStorage(storage);
   }
 };
 
