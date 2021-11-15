@@ -6,24 +6,32 @@ const path = require('path');
 
 module.exports = {
   mode: "development",
-  devtool: 'cheap-module-source-map',            
-  entry: [
-    './src/utils/polyfills.js',
-    './src/index.jsx',
-  ],
+  devtool: 'cheap-module-source-map',
+  entry: {
+    library: [
+      './src/utils/polyfills.js',
+      './src/lib-index.jsx',
+    ],
+    application: [
+      './src/utils/polyfills.js',
+      './src/index.jsx',
+    ],
+  },
   output: {
     path: path.join(__dirname, '/deploy'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     library: "pixel-art-react",
     libraryTarget: "umd",
     globalObject: 'this',
   },
-  externals: {
-    react: "react",
-    'react-dom': "react-dom",
-    reactDOM: "react-dom"
-  },
+  // Do not set externals because we use this config when running the application.
+  // webpack.production.config.js is when importing as a library.
+  // externals: {
+  //   react: "react",
+  //   'react-dom': "react-dom",
+  //   reactDOM: "react-dom"
+  // },
   module: {
     rules: [
       {
@@ -69,7 +77,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
-    new CopyWebpackPlugin([      
+    new CopyWebpackPlugin([
       { from: 'src/assets/bmac-icon.svg', to: 'bmac-icon.svg' }
     ]),
     new ExtractTextPlugin({

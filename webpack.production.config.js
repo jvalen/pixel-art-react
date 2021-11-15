@@ -5,10 +5,16 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = {
   mode: "production",
-  entry: [
-    './src/utils/polyfills.js',
-    './src/index.jsx',
-  ],
+  entry: {
+    library: [
+      './src/utils/polyfills.js',
+      './src/lib-index.jsx',
+    ],
+    application: [
+      './src/utils/polyfills.js',
+      './src/index.jsx',
+    ],
+  },
   plugins: [
     new CopyWebpackPlugin([
       { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
@@ -60,7 +66,7 @@ const config = {
   output: {
     path: path.join(__dirname, '/deploy'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     library: "pixel-art-react",
     libraryTarget: "umd",
     globalObject: 'this',

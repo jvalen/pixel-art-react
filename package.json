@@ -19,7 +19,7 @@
     "start": "npm run server",
     "postinstall": "NODE_ENV=production webpack --verbose -p --config webpack.production.config.js"
   },
-  "main": "deploy/bundle.js",
+  "main": "deploy/library.bundle.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jvalen/pixel-art-react"
