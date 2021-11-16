@@ -8,11 +8,12 @@ import {
 const PIXELART_CSS_CLASS_NAME = 'pixelart-to-css';
 
 export function generatePixelDrawCss(frame, columns, cellSize, type) {
-  return getImageData(frame.get('grid'), {
+  const imageData = getImageData(frame.get('grid'), {
     format: type,
     pSize: cellSize,
     c: columns
   });
+  return imageData;
 }
 
 export function getCssImageClassOutput(frame, columns, cellSize) {

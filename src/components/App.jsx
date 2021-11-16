@@ -17,6 +17,7 @@ import FramesHandlerContainer from './FramesHandler';
 import PaletteGridContainer from './PaletteGrid';
 import ResetContainer from './Reset';
 import SaveDrawingContainer from './SaveDrawing';
+import MintDrawingContainer from './MintDrawing';
 import NewProjectContainer from './NewProject';
 import SimpleNotificationContainer from './SimpleNotification';
 import SimpleSpinnerContainer from './SimpleSpinner';
@@ -94,6 +95,9 @@ export default class App extends React.Component {
                 <div className="app__mobile--group">
                   <div data-tooltip={helpOn ? 'New project' : null}>
                     <NewProjectContainer />
+                  </div>
+                  <div data-tooltip={helpOn ? 'Mint art' : null}>
+                    <MintDrawingContainer />
                   </div>
                   <div className="app__load-save-container">
                     <button
