@@ -22,11 +22,18 @@ const MintDrawing = props => {
     };
 
     const grid = new Grid(drawingToMint.activeFrame, drawingToMint.columns);
-    if (mintFn(grid.toGridArray())) {
-      props.actions.sendNotification('Drawing minted');
-    } else {
-      props.actions.sendNotification('Error minting');
-    }
+    mintFn(grid.toGridArray())
+      .then(function(result) {
+        if (result) {
+          props.actions.sendNotification('Drawing minted');
+        } else {
+          props.actions.sendNotification('Error minting');
+        }
+      })
+      .catch(function(err) {
+        props.actions.sendNotification('Error minting');
+        console.log('Error minting:', err);
+      });
   };
 
   return (
