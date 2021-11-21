@@ -16,7 +16,7 @@ export default class Grid {
       throw new Error(`y out of bounds [0, ${this.rows - 1}]`);
     }
 
-    return Grid.strToRGBA(this.grid.get(this.rows * y + x));
+    return Grid.strToRGBA(this.grid.get(this.columns * y + x));
   }
 
   static strToRGBA(rgbaStr) {
