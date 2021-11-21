@@ -73,8 +73,8 @@ const getFrame = (frames, frameId) => {
 
 const initFrames = (action = {}) => {
   const options = action.options || {};
-  const columns = parseInt(options.columns, 10) || 24;
-  const rows = parseInt(options.rows, 10) || 30;
+  const columns = parseInt(options.columns, 10) || 10;
+  const rows = parseInt(options.rows, 10) || 10;
   const list = resetIntervals(List([create(columns * rows)]));
   const hoveredIndex = undefined;
   return Map({
