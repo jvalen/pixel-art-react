@@ -12,6 +12,7 @@ ReactDOM.render(
         resolve(true);
       });
     }}
+    frameConfig={{ columns: 24, rows: 30 }}
   />,
   document.getElementById('app')
 );
