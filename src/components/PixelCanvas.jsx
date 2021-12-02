@@ -86,6 +86,12 @@ const mapDispatchToProps = dispatch => ({
   cellAction: cellProps => dispatch(cellAction(cellProps)),
   updateGridBoundariesThrottle: throttle(() => {
     const gridElement = document.getElementsByClassName(gridContainerClass)[0];
+    if (!gridElement) {
+      // In certain scenarios, suchas navigating to a new pre-loaded page, the
+      // `gridContainerClass` value might not be set on any element in the DOM.
+      // In such a case, short-circuit.
+      return;
+    }
     dispatch(updateGridBoundaries(gridElement));
   }, 500),
   applyMove: moveDiff => dispatch(moveDrawing(moveDiff)),
