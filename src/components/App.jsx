@@ -64,7 +64,7 @@ export default class App extends React.Component {
     const { helpOn, modalType, modalOpen } = this.state;
     return (
       <div
-        className="app__main"
+        className="pixel-art-react-container app app__main"
         onMouseUp={this.onMouseUp}
         onTouchEnd={this.onMouseUp}
         onTouchCancel={this.onMouseUp}

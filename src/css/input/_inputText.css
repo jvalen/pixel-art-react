@@ -1,32 +1,34 @@
-@define-mixin inputText {
-  appearance: none;
-  box-shadow: none;
-  border-radius: none;
-  text-align: center;
-  font-size: 1em;
-  color: $color-silver;
-  border: none;
-  width: 100%;
-  background-color: $color-tundora;
-  transition: background-color 0.3s;
+.pixel-art-react-container {
+  @define-mixin inputText {
+    appearance: none;
+    box-shadow: none;
+    border-radius: none;
+    text-align: center;
+    font-size: 1em;
+    color: $color-silver;
+    border: none;
+    width: 100%;
+    background-color: $color-tundora;
+    transition: background-color 0.3s;
 
-  &:focus {
-    color: $color-mineShaft;
-    background-color: $color-dustyGray;
-    outline: none;
+    &:focus {
+      color: $color-mineShaft;
+      background-color: $color-dustyGray;
+      outline: none;
+    }
   }
-}
 
-input[type='text'],
-input[type='number'] {
-  @mixin inputText;
-}
+  input[type='text'],
+  input[type='number'] {
+    @mixin inputText;
+  }
 
-input[type='number'] {
-  -moz-appearance: textfield;
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  input[type='number'] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }

@@ -1,84 +1,86 @@
-.load-drawing {
-  text-align: center;
-  h2 {
-    padding: 2em 0 0;
-    margin-bottom: 0;
-    font-size: 1.2em;
+.pixel-art-react-container {
+  .load-drawing {
     text-align: center;
+    h2 {
+      padding: 2em 0 0;
+      margin-bottom: 0;
+      font-size: 1.2em;
+      text-align: center;
 
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    min-width: auto;
-  }
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      min-width: auto;
+    }
 
-  .load-drawing__container {
-    overflow: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    text-align: center;
+    .load-drawing__container {
+      overflow: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      text-align: center;
 
-    &.empty {
-      overflow-y: hidden;
+      &.empty {
+        overflow-y: hidden;
+        display: block;
+      }
+
+      .load-drawing__drawing {
+        position: relative;
+        border: 3px solid black;
+        cursor: pointer;
+        flex: 0 1 auto;
+        margin: 0.5em;
+        padding-right: 2em;
+
+        .drawing__delete {
+          @mixin icon trash;
+
+          position: absolute;
+          font-size: 1.7em;
+          color: white;
+          top: 0;
+          right: 0;
+          cursor: no-drop;
+          padding: 0.1em;
+          background-color: $color-mineShaft;
+          border: 2px solid black;
+          border-width: 0 0 2px 2px;
+        }
+
+        .preview {
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .load-drawing__export {
+      overflow-x: scroll;
+      width: 100%;
+      margin: 0 auto;
+      background-color: $color-mineShaft;
+      color: $color-silver;
+      padding: 0.5em;
+      text-align: left;
+    }
+
+    .load-drawing__import {
+      font-family: $font-monospace;
       display: block;
+      width: 90%;
+      resize: none;
+      height: 6em;
+      margin: 0 auto;
+      padding: 0.5em;
+      background-color: $color-mineShaft;
+      color: $color-silver;
     }
 
-    .load-drawing__drawing {
-      position: relative;
-      border: 3px solid black;
-      cursor: pointer;
-      flex: 0 1 auto;
-      margin: 0.5em;
-      padding-right: 2em;
+    .import__button {
+      @mixin button red;
 
-      .drawing__delete {
-        @mixin icon trash;
-
-        position: absolute;
-        font-size: 1.7em;
-        color: white;
-        top: 0;
-        right: 0;
-        cursor: no-drop;
-        padding: 0.1em;
-        background-color: $color-mineShaft;
-        border: 2px solid black;
-        border-width: 0 0 2px 2px;
-      }
-
-      .preview {
-        margin: 0 auto;
-      }
+      margin: 1.5em auto;
+      display: table;
     }
-  }
-
-  .load-drawing__export {
-    overflow-x: scroll;
-    width: 100%;
-    margin: 0 auto;
-    background-color: $color-mineShaft;
-    color: $color-silver;
-    padding: 0.5em;
-    text-align: left;
-  }
-
-  .load-drawing__import {
-    font-family: $font-monospace;
-    display: block;
-    width: 90%;
-    resize: none;
-    height: 6em;
-    margin: 0 auto;
-    padding: 0.5em;
-    background-color: $color-mineShaft;
-    color: $color-silver;
-  }
-
-  .import__button {
-    @mixin button red;
-
-    margin: 1.5em auto;
-    display: table;
   }
 }

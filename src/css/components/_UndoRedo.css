@@ -1,22 +1,24 @@
-.undo-redo {
-  lost-utility: clearfix;
+.pixel-art-react-container {
+  .undo-redo {
+    lost-utility: clearfix;
 
-  button {
-    @mixin button gray;
+    button {
+      @mixin button gray;
 
-    lost-column: 1/2 0 0.5em;
-    font-size: 1.2em;
-  }
+      lost-column: 1/2 0 0.5em;
+      font-size: 1.2em;
+    }
 
-  .undo-redo__icon--undo {
-    @mixin icon undo;
+    .undo-redo__icon--undo {
+      @mixin icon undo;
 
-    display: block;
-  }
+      display: block;
+    }
 
-  .undo-redo__icon--redo {
-    @mixin icon redo;
+    .undo-redo__icon--redo {
+      @mixin icon redo;
 
-    display: block;
+      display: block;
+    }
   }
 }

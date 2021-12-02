@@ -1,6 +1,8 @@
-.download-btn {
-  @mixin button brown;
+.pixel-art-react-container {
+  .download-btn {
+    @mixin button brown;
 
-  margin: 1.5em auto;
-  display: table;
+    margin: 1.5em auto;
+    display: table;
+  }
 }

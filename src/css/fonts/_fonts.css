@@ -98,6 +98,8 @@
   content: '\74';
 }
 
-.icon-help {
-  @mixin icon help;
+.pixel-art-react-container {
+  .icon-help {
+    @mixin icon help;
+  }
 }

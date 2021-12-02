@@ -1,30 +1,32 @@
-.radio-selector {
-  border: none;
-  text-align: center;
-  margin: 0 auto;
+.pixel-art-react-container {
+  .radio-selector {
+    border: none;
+    text-align: center;
+    margin: 0 auto;
 
-  label {
-    span {
-      padding: 0.6em 1em;
-      border: 1px solid $color-scorpion;
-      transition: all 0.3s;
-    }
-
-    input {
-      display: none;
-
-      &:checked + span {
-        color: white;
-        background-color: black;
+    label {
+      span {
+        padding: 0.6em 1em;
+        border: 1px solid $color-scorpion;
+        transition: all 0.3s;
       }
 
-      &:not(:checked) + span {
-        &:hover {
-          box-shadow: 0 0 0 2px $color-scorpion inset;
+      input {
+        display: none;
+
+        &:checked + span {
+          color: white;
+          background-color: black;
+        }
+
+        &:not(:checked) + span {
+          &:hover {
+            box-shadow: 0 0 0 2px $color-scorpion inset;
+          }
         }
       }
-    }
 
-    margin: 0 0.5em;
+      margin: 0 0.5em;
+    }
   }
 }

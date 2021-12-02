@@ -1,9 +1,11 @@
-.new-project {
-  button {
-    @mixin button gray;
+.pixel-art-react-container {
+  .new-project {
+    button {
+      @mixin button gray;
 
-    width: 100%;
-    padding: 0.5em;
-    margin-bottom: 0.6em;
+      width: 100%;
+      padding: 0.5em;
+      margin-bottom: 0.6em;
+    }
   }
 }

@@ -1,39 +1,41 @@
-.modal {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  overflow-x: hidden;
-  .modal__header {
-    text-align: right;
-    padding-bottom: 1em;
-    button.close {
-      @mixin button blue;
-      padding: 0.4em 0.7em 0.3em 0.8em;
+.pixel-art-react-container {
+  .modal {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow-x: hidden;
+    .modal__header {
+      text-align: right;
+      padding-bottom: 1em;
+      button.close {
+        @mixin button blue;
+        padding: 0.4em 0.7em 0.3em 0.8em;
+      }
     }
-  }
-  .preview {
-    margin: 0 auto;
-  }
-  .modal__body {
-    overflow: auto;
-  }
-  .modal__preview,
-  .modal__load {
-    .modal__preview--wrapper {
-      margin: 1em auto;
-      display: table;
+    .preview {
+      margin: 0 auto;
     }
-  }
+    .modal__body {
+      overflow: auto;
+    }
+    .modal__preview,
+    .modal__load {
+      .modal__preview--wrapper {
+        margin: 1em auto;
+        display: table;
+      }
+    }
 
-  .modal__load,
-  .modal__preview,
-  .modal__body {
-    fieldset {
-      padding: 1em 0;
+    .modal__load,
+    .modal__preview,
+    .modal__body {
+      fieldset {
+        padding: 1em 0;
 
-      label {
-        margin: 1em 0.5em;
-        display: inline-block;
+        label {
+          margin: 1em 0.5em;
+          display: inline-block;
+        }
       }
     }
   }

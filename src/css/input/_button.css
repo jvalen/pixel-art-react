@@ -1,62 +1,65 @@
-@define-mixin generate-button $color-text, $color-bg, $color-boxshadow,
-  $color-bg-active {
-  background: none;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  padding: 10px;
-  font-size: 1em;
-  text-decoration: none;
-  transition-duration: 0.1s;
-  color: $color-text;
-  background-color: $color-bg;
-  box-shadow: 0 5px 0 0 $color-boxshadow;
+.pixel-art-react-container {
+  @define-mixin generate-button $color-text, $color-bg, $color-boxshadow,
+    $color-bg-active {
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 1em;
+    text-decoration: none;
+    transition-duration: 0.1s;
+    color: $color-text;
+    background-color: $color-bg;
+    box-shadow: 0 5px 0 0 $color-boxshadow;
 
-  &:hover,
-  &.selected {
-    background-color: $color-bg-active;
+    &:hover,
+    &.selected {
+      background-color: $color-bg-active;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: translate(0, 5px);
+      box-shadow: 0 1px 0 $color-bg-active;
+      background-color: $color-bg-active;
+    }
   }
 
-  &:hover {
-    cursor: pointer;
-  }
+  @define-mixin button $color, $font: $font-pixel {
+    @if $color == red {
+      @mixin generate-button $color-silver, $color-tamarillo, $color-darkTan,
+        $color-moccaccino;
+    }
 
-  &:active {
-    transform: translate(0, 5px);
-    box-shadow: 0 1px 0 $color-bg-active;
-    background-color: $color-bg-active;
-  }
-}
+    @if $color == gray {
+      @mixin generate-button $color-silver, $color-mineShaft, $color-doveGray,
+        $color-tundora;
+    }
 
-@define-mixin button $color, $font: $font-pixel {
-  @if $color == red {
-    @mixin generate-button $color-silver, $color-tamarillo, $color-darkTan,
-      $color-moccaccino;
-  }
+    @if $color == brown {
+      @mixin generate-button $color-silver, $color-lotus, $color-buccaneer,
+        $color-cowboy;
+    }
 
-  @if $color == gray {
-    @mixin generate-button $color-silver, $color-mineShaft, $color-doveGray,
-      $color-tundora;
-  }
+    @if $color == blue {
+      @mixin generate-button $color-silver, $color-steelblue, $color-sanMarino,
+        $color-eastBay;
+    }
 
-  @if $color == brown {
-    @mixin generate-button $color-silver, $color-lotus, $color-buccaneer,
-      $color-cowboy;
-  }
+    @if $color == darkblue {
+      @mixin generate-button $color-silver, $color-chathamsBlue, $color-chambray,
+        $color-cloudBurst;
+    }
 
-  @if $color == blue {
-    @mixin generate-button $color-silver, $color-steelblue, $color-sanMarino,
-      $color-eastBay;
-  }
+    @if $color == white {
+      @mixin generate-button black, $color-alto, $color-silveChalice,
+        $color-nobel;
+    }
 
-  @if $color == darkblue {
-    @mixin generate-button $color-silver, $color-chathamsBlue, $color-chambray,
-      $color-cloudBurst;
+    font-family: $font;
   }
-
-  @if $color == white {
-    @mixin generate-button black, $color-alto, $color-silveChalice, $color-nobel;
-  }
-
-  font-family: $font;
 }

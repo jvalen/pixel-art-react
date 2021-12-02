@@ -1,4 +1,4 @@
-#app {
+.pixel-art-react-container.app {
   .app__main-container,
   .app__central-container {
     lost-utility: clearfix;

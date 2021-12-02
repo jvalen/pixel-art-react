@@ -1,5 +1,7 @@
-@define-mixin flex-row-center {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+.pixel-art-react-container {
+  @define-mixin flex-row-center {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
 }

@@ -1,67 +1,69 @@
-.frame {
-  border: 1px solid $color-mineShaft;
-  background-color: $color-silver;
-  color: white;
-  width: 70px;
-  height: 84px;
-  margin: 0 0.3em;
-  flex: 0 0 auto;
-  position: relative;
-  overflow: hidden;
-  opacity: 0.4;
-
-  .delete,
-  .duplicate {
-    position: absolute;
+.pixel-art-react-container {
+  .frame {
+    border: 1px solid $color-mineShaft;
+    background-color: $color-silver;
     color: white;
-    right: 0;
-    background-color: $color-mineShaft;
-    border: 1px solid $color-tundora;
-    padding: 0.1em;
-  }
-
-  .delete {
-    @mixin icon trash;
-
-    font-size: 1.2em;
-    top: 0;
-    border-width: 0 0 2px 2px;
-  }
-
-  .duplicate {
-    @mixin icon duplicate;
-
-    bottom: 23px;
-    border-width: 2px 0 0 2px;
-  }
-
-  .frame__percentage {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 23px;
-    border-top: 2px solid $color-tundora;
-  }
-
-  &.active {
-    border: 2px solid $color-tamarillo;
-    opacity: 1;
-
-    .delete {
-      cursor: no-drop;
-    }
-
-    .duplicate {
-      cursor: copy;
-    }
+    width: 70px;
+    height: 84px;
+    margin: 0 0.3em;
+    flex: 0 0 auto;
+    position: relative;
+    overflow: hidden;
+    opacity: 0.4;
 
     .delete,
     .duplicate {
-      border-color: $color-tamarillo;
+      position: absolute;
+      color: white;
+      right: 0;
+      background-color: $color-mineShaft;
+      border: 1px solid $color-tundora;
+      padding: 0.1em;
+    }
+
+    .delete {
+      @mixin icon trash;
+
+      font-size: 1.2em;
+      top: 0;
+      border-width: 0 0 2px 2px;
+    }
+
+    .duplicate {
+      @mixin icon duplicate;
+
+      bottom: 23px;
+      border-width: 2px 0 0 2px;
     }
 
     .frame__percentage {
-      border-color: $color-tamarillo;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 23px;
+      border-top: 2px solid $color-tundora;
+    }
+
+    &.active {
+      border: 2px solid $color-tamarillo;
+      opacity: 1;
+
+      .delete {
+        cursor: no-drop;
+      }
+
+      .duplicate {
+        cursor: copy;
+      }
+
+      .delete,
+      .duplicate {
+        border-color: $color-tamarillo;
+      }
+
+      .frame__percentage {
+        border-color: $color-tamarillo;
+      }
     }
   }
 }

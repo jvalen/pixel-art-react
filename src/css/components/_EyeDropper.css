@@ -1,7 +1,9 @@
-.eyedropper {
-  @mixin icon eyedropper;
+.pixel-art-react-container {
+  .eyedropper {
+    @mixin icon eyedropper;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

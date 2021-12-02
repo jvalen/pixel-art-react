@@ -1,75 +1,77 @@
-.picker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  label.picker__columns {
-    @mixin icon columns;
-  }
-
-  label.picker__rows {
-    @mixin icon rows;
-  }
-
-  label.picker__columns,
-  label.picker__rows {
-    display: flex;
-    flex: 0 0 100%;
-  }
-
-  label {
-    flex: 0.5;
-    font-size: 2em !important;
-    color: $color-mineShaft;
-    position: relative;
-    margin: 0 auto;
-    text-align: center;
-
-    &::before {
-      display: inline-block;
-      width: 1.5em;
-      text-align: left;
-    }
-  }
-
-  .picker__container,
-  label {
+.pixel-art-react-container {
+  .picker {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+    text-align: center;
 
-  .picker__value,
-  .picker__buttons {
-    flex: 1;
-  }
+    label.picker__columns {
+      @mixin icon columns;
+    }
 
-  .picker__container {
-    font-family: $font-pixel;
-    font-size: 16px;
-    color: $color-silver;
-    background-color: $color-tundora;
-    border: 3px solid $color-boulder;
-    flex: 1;
+    label.picker__rows {
+      @mixin icon rows;
+    }
 
-    button {
+    label.picker__columns,
+    label.picker__rows {
+      display: flex;
+      flex: 0 0 100%;
+    }
+
+    label {
+      flex: 0.5;
+      font-size: 2em !important;
+      color: $color-mineShaft;
+      position: relative;
+      margin: 0 auto;
+      text-align: center;
+
+      &::before {
+        display: inline-block;
+        width: 1.5em;
+        text-align: left;
+      }
+    }
+
+    .picker__container,
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .picker__value,
+    .picker__buttons {
+      flex: 1;
+    }
+
+    .picker__container {
+      font-family: $font-pixel;
+      font-size: 16px;
       color: $color-silver;
-      background-color: $color-mineShaft;
-      border: none;
-      outline: none;
-      display: block;
-      width: 100%;
-      height: 2em;
-      border-left: 3px solid $color-boulder;
-    }
-
-    button:hover {
       background-color: $color-tundora;
-    }
+      border: 3px solid $color-boulder;
+      flex: 1;
 
-    .button-add {
-      border-bottom: 1px solid $color-boulder;
+      button {
+        color: $color-silver;
+        background-color: $color-mineShaft;
+        border: none;
+        outline: none;
+        display: block;
+        width: 100%;
+        height: 2em;
+        border-left: 3px solid $color-boulder;
+      }
+
+      button:hover {
+        background-color: $color-tundora;
+      }
+
+      .button-add {
+        border-bottom: 1px solid $color-boulder;
+      }
     }
   }
 }

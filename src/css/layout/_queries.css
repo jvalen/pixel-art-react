@@ -1,118 +1,120 @@
-@media only screen and (max-width: 1250px) {
-  .app__left-side,
-  .app__right-side {
-    width: 100% !important;
-  }
-}
-
-@media only screen and (max-width: 780px) {
-  .dimensions {
-    label {
-      font-size: 1.5em !important;
-      top: -0.2em;
+.pixel-art-react-container {
+  @media only screen and (max-width: 1250px) {
+    .app__left-side,
+    .app__right-side {
+      width: 100% !important;
     }
   }
-}
 
-@media only screen and (min-width: 730px) {
-  /*
+  @media only screen and (max-width: 780px) {
+    .dimensions {
+      label {
+        font-size: 1.5em !important;
+        top: -0.2em;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 730px) {
+    /*
     Fix small vertical scrollbar glitch for some resolutions
     inside frames-handler
     Detected in Chrome
   */
-  .app__frames-container::-webkit-scrollbar,
-  .app__frames-container div::-webkit-scrollbar {
-    width: 1em !important;
-  }
-}
-
-@media only screen and (max-width: 730px) {
-  .app__copycss-button {
-    margin-top: 1.4em !important;
+    .app__frames-container::-webkit-scrollbar,
+    .app__frames-container div::-webkit-scrollbar {
+      width: 1em !important;
+    }
   }
 
-  .app__central-container {
-    .col-1-4 {
-      &.left {
-        lost-column: none;
+  @media only screen and (max-width: 730px) {
+    .app__copycss-button {
+      margin-top: 1.4em !important;
+    }
 
-        .app__copycss-button {
-          padding: 4px !important;
+    .app__central-container {
+      .col-1-4 {
+        &.left {
+          lost-column: none;
+
+          .app__copycss-button {
+            padding: 4px !important;
+          }
+
+          .palette-grid {
+            margin: 0;
+          }
         }
 
-        .palette-grid {
-          margin: 0;
+        &.right {
+          lost-column: none;
         }
       }
 
-      &.right {
-        lost-column: none;
-      }
-    }
+      .col-2-4 {
+        &.center {
+          lost-column: none;
 
-    .col-2-4 {
-      &.center {
-        lost-column: none;
-
-        .grid-container {
-          margin: 1em auto !important;
+          .grid-container {
+            margin: 1em auto !important;
+          }
         }
       }
     }
-  }
 
-  .app__mobile--container {
-    lost-utility: clearfix;
+    .app__mobile--container {
+      lost-utility: clearfix;
 
-    .app__mobile--group {
-      lost-column: 1/2;
+      .app__mobile--group {
+        lost-column: 1/2;
+      }
+
+      max-width: none;
     }
 
-    max-width: none;
-  }
+    .app__preview-button {
+      margin-top: 1em !important;
+    }
 
-  .app__preview-button {
-    margin-top: 1em !important;
-  }
+    body {
+      width: 100% !important;
+    }
 
-  body {
-    width: 100% !important;
-  }
+    /* Avoid button hover effect in mobile devices */
+    .undo-redo,
+    .app__load-save-container,
+    .new-project,
+    .frames-handler,
+    .app__right-side {
+      button:hover,
+      button.selected {
+        background-color: $color-mineShaft !important;
+      }
+    }
 
-  /* Avoid button hover effect in mobile devices */
-  .undo-redo,
-  .app__load-save-container,
-  .new-project,
-  .frames-handler,
-  .app__right-side {
-    button:hover,
-    button.selected {
-      background-color: $color-mineShaft !important;
+    button.app__copycss-button {
+      &:hover,
+      &.selected {
+        background-color: $color-alto !important;
+      }
+    }
+
+    .app__toggle-help-button {
+      &:hover,
+      &.selected {
+        background-color: $color-chathamsBlue !important;
+      }
+    }
+
+    .load-drawing__import {
+      height: 10em !important;
     }
   }
 
-  button.app__copycss-button {
-    &:hover,
-    &.selected {
-      background-color: $color-alto !important;
+  @media only screen and (max-width: 360px) {
+    button,
+    .dimensions {
+      font-size: 0.8em !important;
     }
-  }
-
-  .app__toggle-help-button {
-    &:hover,
-    &.selected {
-      background-color: $color-chathamsBlue !important;
-    }
-  }
-
-  .load-drawing__import {
-    height: 10em !important;
-  }
-}
-
-@media only screen and (max-width: 360px) {
-  button,
-  .dimensions {
-    font-size: 0.8em !important;
   }
 }

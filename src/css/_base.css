@@ -1,81 +1,74 @@
-html {
+.pixel-art-react-container {
   box-sizing: border-box;
   background-color: $color-scorpion;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-html,
-body {
   position: relative;
   font-family: $font-pixel;
-}
-
-body {
   overflow: auto;
-}
 
-.app-container {
-  height: 100%;
-  width: 90%;
-  margin: 0 auto;
-  padding: 0;
-}
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
 
-h1 {
-  font-size: 2em;
-}
+  .app-container {
+    height: 100%;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+  }
 
-h2 {
-  font-size: 0.8em;
-  padding-right: 1em;
-  display: inline;
-  position: relative;
-  top: -0.9em;
-}
+  h1 {
+    font-size: 2em;
+  }
 
-h3 {
-  font-size: 1em;
-}
+  h2 {
+    font-size: 0.8em;
+    padding-right: 1em;
+    display: inline;
+    position: relative;
+    top: -0.9em;
+  }
 
-.block {
-  display: block;
-}
+  h3 {
+    font-size: 1em;
+  }
 
-.hidden {
-  display: none;
-}
+  .block {
+    display: block;
+  }
 
-.text-center {
-  text-align: center;
-}
+  .hidden {
+    display: none;
+  }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
+  .text-center {
+    text-align: center;
+  }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
+  .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 
-.flex {
-  display: flex;
-}
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
+  .flex {
+    display: flex;
+  }
 
-.flex-col {
-  flex-direction: column;
-}
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
 
-.flex-row {
-  flex-direction: row;
+  .flex-col {
+    flex-direction: column;
+  }
+
+  .flex-row {
+    flex-direction: row;
+  }
 }

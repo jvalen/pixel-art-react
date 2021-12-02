@@ -1,61 +1,63 @@
-header {
-  color: $color-silver;
-  lost-utility: clearfix;
-  margin: 1em 0;
-  a {
-    text-decoration: none;
-    color: inherit;
-    &:visited,
-    &:hover,
-    &:active {
+.pixel-art-react-container {
+  header {
+    color: $color-silver;
+    lost-utility: clearfix;
+    margin: 1em 0;
+    a {
+      text-decoration: none;
       color: inherit;
+      &:visited,
+      &:hover,
+      &:active {
+        color: inherit;
+      }
     }
-  }
-  h1 {
-    margin: 0;
-  }
+    h1 {
+      margin: 0;
+    }
 
-  .header__social {
-    text-align: right;
+    .header__social {
+      text-align: right;
 
-    .header__credits {
-      font-size: 12px;
-      margin-bottom: 0.2em;
+      .header__credits {
+        font-size: 12px;
+        margin-bottom: 0.2em;
 
-      a {
-        color: $color-silver;
-      }
+        a {
+          color: $color-silver;
+        }
 
-      span {
-        color: $color-brandyRose;
-      }
+        span {
+          color: $color-brandyRose;
+        }
 
-      h2 {
-        display: block;
-        font-size: 0.8em;
-        padding-right: 1.3em;
-        position: relative;
-        margin: 0;
-        top: 0;
-      }
+        h2 {
+          display: block;
+          font-size: 0.8em;
+          padding-right: 1.3em;
+          position: relative;
+          margin: 0;
+          top: 0;
+        }
 
-      &:hover {
-        img {
-          transform: scale(1.2);
+        &:hover {
+          img {
+            transform: scale(1.2);
+          }
         }
       }
     }
   }
-}
 
-@media only screen and (max-width: 460px) {
-  header {
-    .col-2-3,
-    .col-1-3 {
-      lost-column: 1/2;
+  @media only screen and (max-width: 460px) {
+    header {
+      .col-2-3,
+      .col-1-3 {
+        lost-column: 1/2;
+      }
     }
-  }
-  h1 {
-    font-size: 1.5em;
+    h1 {
+      font-size: 1.5em;
+    }
   }
 }

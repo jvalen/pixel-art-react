@@ -1,5 +1,7 @@
-.palette-grid {
-  lost-utility: clearfix;
-  text-align: center;
-  margin: 0.5em 0;
+.pixel-art-react-container {
+  .palette-grid {
+    lost-utility: clearfix;
+    text-align: center;
+    margin: 0.5em 0;
+  }
 }

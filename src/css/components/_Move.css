@@ -1,7 +1,9 @@
-.move {
-  @mixin icon move;
+.pixel-art-react-container {
+  .move {
+    @mixin icon move;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

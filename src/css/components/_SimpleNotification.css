@@ -1,32 +1,34 @@
-.simple-notification {
-  background-color: #313131;
-  color: $color-silver;
-  width: 250px;
-  text-align: center;
-  padding: 1em;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  margin-left: -125px;
-  top: 1em;
-  border: 1px solid orange;
-}
+.pixel-art-react-container {
+  .simple-notification {
+    background-color: #313131;
+    color: $color-silver;
+    width: 250px;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    margin-left: -125px;
+    top: 1em;
+    border: 1px solid orange;
+  }
 
-/* ReactCSSTransitionGroup related rules */
-.simple-notification-enter {
-  opacity: 0.01;
-}
+  /* ReactCSSTransitionGroup related rules */
+  .simple-notification-enter {
+    opacity: 0.01;
+  }
 
-.simple-notification-enter.simple-notification-enter-active {
-  opacity: 1;
-  transition: opacity 1000ms ease-in;
-}
+  .simple-notification-enter.simple-notification-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms ease-in;
+  }
 
-.simple-notification-exit {
-  opacity: 1;
-}
+  .simple-notification-exit {
+    opacity: 1;
+  }
 
-.simple-notification-exit.simple-notification-exit-active {
-  opacity: 0.01;
-  transition: opacity 1000ms ease-out;
+  .simple-notification-exit.simple-notification-exit-active {
+    opacity: 0.01;
+    transition: opacity 1000ms ease-out;
+  }
 }

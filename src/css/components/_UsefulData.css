@@ -1,56 +1,58 @@
-.useful-data {
-  text-align: center;
-  .useful-data__rows {
-    border: none;
-    background-color: $color-alto;
-    padding: 1em 0;
-    .checkbox {
-      padding: 0.4em 0;
-    }
-  }
-  .useful-data__export {
-    font-family: $font-monospace;
-    overflow-x: hidden;
-    margin: 1em auto;
-    background-color: $color-mineShaft;
-    color: $color-silver;
-    padding: 0.5em;
-    text-align: left;
-    display: block;
-    width: 100%;
-    resize: none;
-    height: 20em;
-  }
-  .useful-data__options {
-    lost-utility: clearfix;
-    fieldset.useful-data__rows,
-    .useful-data__output {
-      lost-column: 1/2 0 0;
-    }
-    fieldset.useful-data__rows {
-      lost-utility: clearfix;
-      margin: 0;
-      height: 20em;
-      .useful-data__pixel-format,
-      .useful-data__reverse-rows {
-        lost-column: 1/2 0 0;
+.pixel-art-react-container {
+  .useful-data {
+    text-align: center;
+    .useful-data__rows {
+      border: none;
+      background-color: $color-alto;
+      padding: 1em 0;
+      .checkbox {
+        padding: 0.4em 0;
       }
     }
-  }
-}
-
-@media only screen and (max-width: 730px) {
-  .useful-data {
+    .useful-data__export {
+      font-family: $font-monospace;
+      overflow-x: hidden;
+      margin: 1em auto;
+      background-color: $color-mineShaft;
+      color: $color-silver;
+      padding: 0.5em;
+      text-align: left;
+      display: block;
+      width: 100%;
+      resize: none;
+      height: 20em;
+    }
     .useful-data__options {
+      lost-utility: clearfix;
       fieldset.useful-data__rows,
       .useful-data__output {
-        lost-column: 1/1;
+        lost-column: 1/2 0 0;
       }
       fieldset.useful-data__rows {
-        height: auto;
+        lost-utility: clearfix;
+        margin: 0;
+        height: 20em;
         .useful-data__pixel-format,
         .useful-data__reverse-rows {
+          lost-column: 1/2 0 0;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 730px) {
+    .useful-data {
+      .useful-data__options {
+        fieldset.useful-data__rows,
+        .useful-data__output {
           lost-column: 1/1;
+        }
+        fieldset.useful-data__rows {
+          height: auto;
+          .useful-data__pixel-format,
+          .useful-data__reverse-rows {
+            lost-column: 1/1;
+          }
         }
       }
     }

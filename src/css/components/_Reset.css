@@ -1,7 +1,9 @@
-.reset {
-  width: 100%;
-  margin: 0.5em auto;
-  display: table;
+.pixel-art-react-container {
+  .reset {
+    width: 100%;
+    margin: 0.5em auto;
+    display: table;
 
-  @mixin button gray;
+    @mixin button gray;
+  }
 }

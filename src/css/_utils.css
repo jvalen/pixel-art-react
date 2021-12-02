@@ -1,55 +1,57 @@
-/**
+.pixel-art-react-container {
+  /**
  * Tooltip
  */
 
-[data-tooltip] {
-  position: relative;
-  cursor: pointer;
-  text-align: center;
-}
+  [data-tooltip] {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+  }
 
-[data-tooltip]::before,
-[data-tooltip]::after {
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out,
-    transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-  transform: translate3d(0, 0, 0);
-  pointer-events: none;
-  bottom: 100%;
-  left: 50%;
-}
+  [data-tooltip]::before,
+  [data-tooltip]::after {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out,
+      transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    transform: translate3d(0, 0, 0);
+    pointer-events: none;
+    bottom: 100%;
+    left: 50%;
+  }
 
-[data-tooltip]::before {
-  z-index: 1001;
-  border: 6px solid transparent;
-  background: transparent;
-  content: '';
-  margin-left: -6px;
-  margin-bottom: -12px;
-  border-top-color: black;
-  border-top-color: #4caf50;
-}
+  [data-tooltip]::before {
+    z-index: 1001;
+    border: 6px solid transparent;
+    background: transparent;
+    content: '';
+    margin-left: -6px;
+    margin-bottom: -12px;
+    border-top-color: black;
+    border-top-color: #4caf50;
+  }
 
-[data-tooltip]::after {
-  z-index: 1000;
-  padding: 8px;
-  width: 160px;
-  background-color: black;
-  background-color: #4caf50;
-  color: white;
-  content: attr(data-tooltip);
-  font-size: 14px;
-  line-height: 1.2;
-  font-weight: normal;
-  margin-left: -80px;
-}
+  [data-tooltip]::after {
+    z-index: 1000;
+    padding: 8px;
+    width: 160px;
+    background-color: black;
+    background-color: #4caf50;
+    color: white;
+    content: attr(data-tooltip);
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-left: -80px;
+  }
 
-[data-tooltip]:hover::before,
-[data-tooltip]:hover::after,
-[data-tooltip]:focus::before,
-[data-tooltip]:focus::after {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(-12px);
+  [data-tooltip]:hover::before,
+  [data-tooltip]:hover::after,
+  [data-tooltip]:focus::before,
+  [data-tooltip]:focus::after {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-12px);
+  }
 }

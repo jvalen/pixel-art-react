@@ -1,38 +1,40 @@
-.output {
-  position: relative;
-  text-align: center;
-  .copy-to-clipboard__container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    button.copy-to-clipboard {
-      @mixin button brown;
-      padding: 0.1em 0.4em 0em 0.5em;
-      margin: 0.5em 0.5em 0;
-    }
-    span {
-      background-color: $color-shrub;
-      color: white;
-      padding: 0.1em 1.6em;
-      display: none;
-      &.show {
-        display: inline;
+.pixel-art-react-container {
+  .output {
+    position: relative;
+    text-align: center;
+    .copy-to-clipboard__container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      button.copy-to-clipboard {
+        @mixin button brown;
+        padding: 0.1em 0.4em 0em 0.5em;
+        margin: 0.5em 0.5em 0;
+      }
+      span {
+        background-color: $color-shrub;
+        color: white;
+        padding: 0.1em 1.6em;
+        display: none;
+        &.show {
+          display: inline;
+        }
       }
     }
-  }
-  .output__text {
-    font-family: $font-monospace;
-    overflow-x: auto;
-    background-color: $color-mineShaft;
-    color: $color-silver;
-    padding: 3em 0.5em 0;
-    text-align: left;
-    display: block;
-    width: 100%;
-    resize: none;
-    height: 20em;
-  }
-  .output__pre {
-    white-space: pre;
+    .output__text {
+      font-family: $font-monospace;
+      overflow-x: auto;
+      background-color: $color-mineShaft;
+      color: $color-silver;
+      padding: 3em 0.5em 0;
+      text-align: left;
+      display: block;
+      width: 100%;
+      resize: none;
+      height: 20em;
+    }
+    .output__pre {
+      white-space: pre;
+    }
   }
 }

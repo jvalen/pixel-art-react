@@ -1,12 +1,14 @@
-.css-display {
-  position: absolute;
-  top: -1.6em;
-  left: 0;
-  opacity: 0.1;
-  z-index: -1;
-  padding: 1em;
-  margin-top: 1em;
-  color: black;
-  user-select: none;
-  font-size: 0.8em;
+.pixel-art-react-container {
+  .css-display {
+    position: absolute;
+    top: -1.6em;
+    left: 0;
+    opacity: 0.1;
+    z-index: -1;
+    padding: 1em;
+    margin-top: 1em;
+    color: black;
+    user-select: none;
+    font-size: 0.8em;
+  }
 }

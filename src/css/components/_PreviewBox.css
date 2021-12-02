@@ -1,42 +1,44 @@
-.preview-box {
-  & .buttons {
-    @mixin flex-row-center;
-    margin-bottom: 0.5rem;
-    div {
-      padding-left: 0.2em;
+.pixel-art-react-container {
+  .preview-box {
+    & .buttons {
+      @mixin flex-row-center;
+      margin-bottom: 0.5rem;
+      div {
+        padding-left: 0.2em;
+      }
     }
-  }
 
-  & .preview-box__container {
-    @mixin flex-row-center;
-    background-color: $color-back-frames;
-    padding: 0.8em 0 0.8em 0;
-    margin: 0.8em 0;
-    align-items: center;
-  }
+    & .preview-box__container {
+      @mixin flex-row-center;
+      background-color: $color-back-frames;
+      padding: 0.8em 0 0.8em 0;
+      margin: 0.8em 0;
+      align-items: center;
+    }
 
-  .play {
-    @mixin button gray;
-    @mixin icon play;
-  }
+    .play {
+      @mixin button gray;
+      @mixin icon play;
+    }
 
-  .pause {
-    @mixin button brown;
-    @mixin icon pause;
-  }
+    .pause {
+      @mixin button brown;
+      @mixin icon pause;
+    }
 
-  .screen-full {
-    @mixin button gray;
-    @mixin icon screen-full;
-  }
+    .screen-full {
+      @mixin button gray;
+      @mixin icon screen-full;
+    }
 
-  .screen-normal {
-    @mixin button gray;
-    @mixin icon screen-normal;
-  }
+    .screen-normal {
+      @mixin button gray;
+      @mixin icon screen-normal;
+    }
 
-  .frames {
-    @mixin button gray;
-    @mixin icon frames;
+    .frames {
+      @mixin button gray;
+      @mixin icon frames;
+    }
   }
 }

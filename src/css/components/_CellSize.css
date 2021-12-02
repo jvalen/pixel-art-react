@@ -1,15 +1,17 @@
-.cell-size {
-  border: 3px solid $color-boulder;
-  background-color: $color-mineShaft;
-  color: $color-silver;
-  text-align: center;
+.pixel-art-react-container {
+  .cell-size {
+    border: 3px solid $color-boulder;
+    background-color: $color-mineShaft;
+    color: $color-silver;
+    text-align: center;
 
-  label,
-  input {
-    padding-top: 0.2em;
-  }
+    label,
+    input {
+      padding-top: 0.2em;
+    }
 
-  label {
-    display: block;
+    label {
+      display: block;
+    }
   }
 }

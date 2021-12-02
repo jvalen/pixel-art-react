@@ -1,21 +1,23 @@
-.copy-css {
-  h2 {
-    padding: 2em 0 1em;
-    margin-bottom: 0;
-    font-size: 1em;
-    display: block;
-    text-align: center;
+.pixel-art-react-container {
+  .copy-css {
+    h2 {
+      padding: 2em 0 1em;
+      margin-bottom: 0;
+      font-size: 1em;
+      display: block;
+      text-align: center;
 
-    span {
-      color: $color-tamarillo;
+      span {
+        color: $color-tamarillo;
+      }
     }
-  }
 
-  .copy-css__string {
-    overflow-x: scroll;
-    background-color: $color-mineShaft;
-    color: $color-silver;
-    padding: 0.5em;
-    text-align: left;
+    .copy-css__string {
+      overflow-x: scroll;
+      background-color: $color-mineShaft;
+      color: $color-silver;
+      padding: 0.5em;
+      text-align: left;
+    }
   }
 }

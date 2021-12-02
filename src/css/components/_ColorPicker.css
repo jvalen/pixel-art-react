@@ -1,11 +1,13 @@
-.color-picker {
-  .color-picker__button {
-    @mixin icon paint-brush;
+.pixel-art-react-container {
+  .color-picker {
+    .color-picker__button {
+      @mixin icon paint-brush;
 
-    display: block;
-  }
+      display: block;
+    }
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

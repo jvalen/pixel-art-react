@@ -1,7 +1,9 @@
-.bucket {
-  @mixin icon bucket;
+.pixel-art-react-container {
+  .bucket {
+    @mixin icon bucket;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
