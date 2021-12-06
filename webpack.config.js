@@ -58,7 +58,7 @@ module.exports = {
       'process.env.NODE_ENV': '"development"'
     }),
     new CopyWebpackPlugin([      
-      { from: 'src/assets/bmac-icon.svg', to: 'bmac-icon.svg' }
+      { from: 'src/assets/bmac-icon.png', to: 'bmac-icon.png' }
     ]),
   ],
   target: "web",
