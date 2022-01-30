@@ -72,7 +72,15 @@ npm run deploy
 npm run server
 ```
 
-A `config.json` is needed for deployment with the Twitter and express keys.
+A `config.json` is needed for deployment with the express key. For example:
+
+```json
+{
+  "dev": {
+    "EXPRESS_SESSION_SECRET": "1234"
+  }
+}
+```
 
 ## Lint
 
