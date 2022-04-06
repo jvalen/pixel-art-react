@@ -86,7 +86,7 @@
     "whatwg-fetch": "^2.0.4"
   },
   "engines": {
-    "node": "<15.0.0",
+    "node": ">=16.0.0",
     "npm": ">=7.0.0"
   },
   "devDependencies": {
