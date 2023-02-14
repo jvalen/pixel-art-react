@@ -154,6 +154,10 @@ const LoadFromFile = props => {
           );
         }
       );
+
+      setFrameCount(1);
+      setPixelSize(1);
+
       if (imageLoadedData.errorType) {
         setImageLoaded(false);
         showValidationMessage({
