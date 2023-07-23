@@ -1,3 +1,10 @@
+
+<div align="center">
+  <h3 style="color: white;"> ⚠️ Temporary Limited Interaction Notice ⚠️</h3>
+  (Please check <a href="https://github.com/jvalen/pixel-art-react/edit/master/README.md#contributing">Contributing</a>)
+</div>
+<br>
+<br>
 <p align="center">
   <img width="200" src="screenshots/tree-pixelartcss.png">
 </p>
@@ -110,18 +117,24 @@ npm run test
 
 ## Contributing
 
-#### Help me to improve it :seedling:
+<div>
+  <p style="color: white;">
+    ⚠️ <strong>Please Note:</strong> This repository is currently in a temporary idle state due to a refactor and tech upgrade. I am not accepting new Pull Requests or Issues at the moment. Sorry for the inconveniences.
+  </p>
+</div>
 
-Create a GitHub issue if there is something wrong or to be improved.
+~~#### Help me to improve it :seedling:~~
 
-Pull requests are also welcome, please take the following requirements as a checklist before opening one:
+~~Create a GitHub issue if there is something wrong or to be improved.~~
 
-- [x] The PR does fix a problem or adds a new feature, not just cosmetic or syntactic sugar changes.
-- [x] It would be great to open an issue in advance.
-- [x] The PR should be issued to the **develop** branch.
-- [x] The PR should have a explanation or be related to an issue.
+~~Pull requests are also welcome, please take the following requirements as a checklist before opening one:~~
 
-Thank you!
+~~- [x] The PR does fix a problem or adds a new feature, not just cosmetic or syntactic sugar changes.~~
+~~- [x] It would be great to open an issue in advance.~~
+~~- [x] The PR should be issued to the **develop** branch.~~
+~~- [x] The PR should have a explanation or be related to an issue.~~
+
+~~Thank you!~~
 
 ## License
 
