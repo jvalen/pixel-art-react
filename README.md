@@ -1,7 +1,7 @@
 
 <div align="center">
   <h3 style="color: white;"> ⚠️ Temporary Limited Interaction Notice ⚠️</h3>
-  (Please check <a href="https://github.com/jvalen/pixel-art-react/edit/master/README.md#contributing">Contributing</a>)
+  (Please check <a href="https://github.com/jvalen/pixel-art-react#contributing">Contributing</a>)
 </div>
 <br>
 <br>
