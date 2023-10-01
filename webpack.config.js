@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
@@ -27,29 +28,43 @@ module.exports = {
       {
         test:   /\.css$/i,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          'postcss-loader'
-        ]
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?v=[\d.]+)?(\?[a-z0-9#-]+)?$/,
-        loader: 'url-loader?limit=100000&name=./css/[hash].[ext]'
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+          name: './css/[hash].[ext]',
+        },
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      stream: require.resolve("stream-browserify"),
+      util: require.resolve("util"),
+      buffer: require.resolve("buffer/"),
+      assert: require.resolve("assert/"),
+    },
   },
   devServer: {
-    contentBase: './build'
+    static: './build'
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
+        { from: 'src/assets/bmac-icon.png', to: 'bmac-icon.png' }
+      ],
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/main.css',
+    }),
     new HtmlWebpackPlugin({
       template: './build/index.html',
       inject: true
@@ -57,9 +72,10 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
-    new CopyWebpackPlugin([      
-      { from: 'src/assets/bmac-icon.png', to: 'bmac-icon.png' }
-    ]),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+      Buffer: ['buffer', 'Buffer'],
+    }),
   ],
   target: "web",
   stats: false

@@ -1,7 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   mode: "production",
@@ -10,18 +10,24 @@ const config = {
     './src/index.jsx',
   ],
   plugins: [
-    new CopyWebpackPlugin([
-      { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
-      { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
-      { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' },
-      { from: 'src/assets/bmac-icon.png', to: 'bmac-icon.png' }
-    ]),
-    new ExtractTextPlugin({
-      filename: "css/main.css"
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
+        { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
+        { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' },
+        { from: 'src/assets/bmac-icon.png', to: 'bmac-icon.png' }
+      ],
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/main.css',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
-    })
+    }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+      Buffer: ['buffer', 'Buffer'],
+    }),
   ],
   target: "web",
   stats: false,
@@ -34,27 +40,30 @@ const config = {
       },
       {
         test:   /\.css$/i,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-              },
-            },
-            'postcss-loader'
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?v=[\d.]+)?(\?[a-z0-9#-]+)?$/,
-        loader: 'url-loader?limit=100000&name=./css/[hash].[ext]'
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+          name: './css/[hash].[ext]',
+        },
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      stream: require.resolve("stream-browserify"),
+      util: require.resolve("util"),
+      buffer: require.resolve("buffer/"),
+      assert: require.resolve("assert/"),
+    },
   },
   output: {
     path: path.join(__dirname, '/deploy'),
