@@ -1,5 +1,6 @@
 import React from 'react';
 import CookieConsent from 'react-cookie-consent';
+import { Link } from 'react-router-dom';
 import PreviewBox from './PreviewBox';
 import PixelCanvasContainer from './PixelCanvas';
 import CellSizeContainer from './CellSize';
@@ -291,15 +292,15 @@ export default class App extends React.Component {
         >
           By continuing to use this website you are giving consent to cookies
           being used. Thank you.
-          <a
-            href="/cookies"
+          <Link
+            to="/cookies"
             target="_blank"
-            rel="noopener noreferrer nofollow"
             style={{ textDecoration: 'none', color: '#5786c1' }}
+            rel="noopener noreferrer nofollow"
           >
             {' '}
             Learn more
-          </a>
+          </Link>
         </CookieConsent>
         <ModalContainer
           type={modalType}

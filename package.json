@@ -68,6 +68,7 @@
     "react-ga": "^3.3.1",
     "react-modal": "^3.9.1",
     "react-redux": "^7.1.0",
+    "react-router-dom": "^6.16.0",
     "react-transform-hmr": "^1.0.4",
     "react-transition-group": "^2.3.1",
     "redux": "^4.0.4",

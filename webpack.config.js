@@ -76,7 +76,8 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: './public'
+    static: './public',
+    historyApiFallback: true,
   },
   target: "web",
   stats: false
