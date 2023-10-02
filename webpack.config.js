@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = {
@@ -12,9 +13,8 @@ module.exports = {
     './src/index.jsx',
   ],
   output: {
-    path: path.join(__dirname, '/build'),
-    publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: path.join(__dirname, '/public'),
   },
   module: {
     rules: [
@@ -52,10 +52,8 @@ module.exports = {
       assert: require.resolve("assert/"),
     },
   },
-  devServer: {
-    static: './build'
-  },
   plugins: [
+    new Dotenv(),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
@@ -66,8 +64,8 @@ module.exports = {
       filename: 'css/main.css',
     }),
     new HtmlWebpackPlugin({
-      template: './build/index.html',
-      inject: true
+      template: './public/index.dev.html',
+      inject: true,
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
@@ -77,6 +75,9 @@ module.exports = {
       Buffer: ['buffer', 'Buffer'],
     }),
   ],
+  devServer: {
+    static: './public'
+  },
   target: "web",
   stats: false
 };

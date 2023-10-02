@@ -1,6 +1,5 @@
 import { createStore } from 'redux';
 import undoable, { includeAction } from 'redux-undo';
-import { fromJS } from 'immutable';
 import reducer from './reducers/reducer';
 import {
   CHANGE_DIMENSIONS,
@@ -31,32 +30,17 @@ const createIncludedActions = () =>
   ]);
 
 const configureStore = devMode => {
-  let store;
-  if (devMode) {
-    store = createStore(
-      undoable(reducer, {
-        filter: createIncludedActions(),
-        debug: true,
-        ignoreInitialState: true
-      })
-    );
+  const store = createStore(
+    undoable(reducer, {
+      filter: createIncludedActions(),
+      debug: devMode,
+      ignoreInitialState: true
+    })
+  );
 
-    store.dispatch({
-      type: SHOW_SPINNER
-    });
-  } else {
-    const initialState = window.__INITIAL_STATE__;
-    initialState.present = fromJS(initialState.present);
-
-    store = createStore(
-      undoable(reducer, {
-        filter: createIncludedActions(),
-        debug: false,
-        ignoreInitialState: true
-      }),
-      initialState
-    );
-  }
+  store.dispatch({
+    type: SHOW_SPINNER
+  });
 
   return store;
 };
