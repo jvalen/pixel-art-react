@@ -1,8 +1,0 @@
-extends mainLayout.pug
-
-block content
-  script.
-      window.__INITIAL_STATE__ = !{initialState}
-  div(id='app') !{reactOutput}
-block bundle  
-  script(src='bundle.js')
