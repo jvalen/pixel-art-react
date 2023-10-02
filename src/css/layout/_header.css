@@ -30,6 +30,11 @@ header {
         color: $color-brandyRose;
       }
 
+      img {
+        margin: 0 0 0 0.3em;
+        transition: transform 0.2s ease-in-out;
+      }
+
       h2 {
         display: block;
         font-size: 0.8em;

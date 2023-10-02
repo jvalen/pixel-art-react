@@ -56,7 +56,7 @@ const config = {
         { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
         { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
         { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' },
-        { from: 'src/assets/bmac-icon.png', to: 'bmac-icon.png' },
+        { from: 'src/assets/coindrop-img.png', to: 'coindrop-img.png' },
         { from: './public/_redirects', to: './' }
       ],
     }),
