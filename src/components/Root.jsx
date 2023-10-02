@@ -9,7 +9,7 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <Routes>
-        <Route exact path="/" element={<App dispatch={store.dispatch} />} />
+        <Route path="/" element={<App dispatch={store.dispatch} />} />
         <Route path="/cookies" element={<Cookies />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
