@@ -1,4 +1,3 @@
-
 <div align="center">
   <h3 style="color: white;"> ⚠️ Temporary Limited Interaction Notice ⚠️</h3>
   (Please check <a href="https://github.com/jvalen/pixel-art-react#contributing">Contributing</a>)
@@ -71,22 +70,10 @@ npm run development
 
 ## Deploy
 
-Create the final build and run the generated React HTML on the server using SSR.
+Create the production build.
 
 ```bash
 npm run deploy
-
-npm run server
-```
-
-A `config.json` is needed for deployment with the express key. For example:
-
-```json
-{
-  "dev": {
-    "EXPRESS_SESSION_SECRET": "1234"
-  }
-}
 ```
 
 ## Lint
