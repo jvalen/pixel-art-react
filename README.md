@@ -52,7 +52,6 @@ This application has been built with the following technologies:
 - [Redux](http://redux.js.org/): Implements a Flux like architecture.
 - [ImmutableJS](https://facebook.github.io/immutable-js/) Helps to keep the data immutable aiming to avoid side effects.
 - [PostCSS](https://github.com/postcss/postcss) Handle the app CSS.
-- [NodeJS](https://nodejs.org/en/) + [Express](http://expressjs.com/) (Server side to build an universal application, create and serve the generated drawings).
 
 ## Installation
 
@@ -61,8 +60,6 @@ npm install
 ```
 
 ## Development
-
-If you just want to develop the interface with no need of the back-end side.
 
 ```bash
 npm run development
@@ -81,7 +78,7 @@ npm run deploy
 There are several libraries used in the project that help us to keep our codebase healthy:
 
 - [ESlint](https://eslint.org/)
-- [stylelint](https://stylelint.io/)
+- [Stylelint](https://stylelint.io/)
 - [Prettier](https://prettier.io/)
 
 Every time we commit something it will execute the linters and format the staged files if needed.
