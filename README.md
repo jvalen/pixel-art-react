@@ -120,7 +120,7 @@ npm run test
 
 ~~Thank you!~~
 
-## License
+## CopyrightLicense
 
 [MIT](https://opensource.org/licenses/mit-license.php)
-Copyright © 2016 Javier Valencia Romero (@jvalen)
+Copyright © 2016 Isabel Schoeps Thiel (@IST-Github)
