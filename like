@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Like Button</title>
+</head>
+<body>
+  <canvas id="likeCanvas" width="200" height="200" style="border: 1px solid black;"></canvas>
+  <script>
+    const canvas = document.getElementById('likeCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Vẽ hình bàn tay "like" đơn giản
+    function drawLikeButton() {
+      ctx.fillStyle = 'blue';
+      ctx.beginPath();
+      ctx.moveTo(100, 50); // Ngón tay cái
+      ctx.lineTo(130, 30);
+      ctx.lineTo(140, 60);
+      ctx.lineTo(110, 80);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = 'blue'; // Lòng bàn tay
+      ctx.fillRect(70, 80, 40, 70);
+
+      ctx.fillStyle = 'blue'; // Cổ tay
+      ctx.fillRect(70, 150, 20, 30);
+    }
+
+    drawLikeButton();
+  </script>
+</body>
+</html>
