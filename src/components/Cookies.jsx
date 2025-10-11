@@ -19,7 +19,7 @@ const Cookies = () => (
         rel="noreferrer"
         href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
       >
-        Local Storage
+        {' Local Storage '}
       </a>
       to save your drawings and projects, so they remain available even after
       you close the browser.
@@ -38,7 +38,7 @@ const Cookies = () => (
     <p>
       This site uses
       <a target="_blank" rel="noreferrer" href="https://www.goatcounter.com/">
-        GoatCounter
+        {' GoatCounter '}
       </a>
       to collect
       <strong>anonymous</strong>
