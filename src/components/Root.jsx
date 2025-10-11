@@ -10,7 +10,7 @@ const Root = ({ store }) => (
     <Router>
       <Routes>
         <Route path="/" element={<App dispatch={store.dispatch} />} />
-        <Route path="/cookies" element={<Cookies />} />
+        <Route path="/privacy-and-data" element={<Cookies />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

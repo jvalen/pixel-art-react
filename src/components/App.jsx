@@ -290,10 +290,10 @@ export default class App extends React.Component {
           }}
           expires={150}
         >
-          By continuing to use this website you are giving consent to cookies
-          being used. Thank you.
+          By continuing to use this site you agree to Local Storage and
+          anonymous stats. Thank you.
           <Link
-            to="/cookies"
+            to="/privacy-and-data"
             target="_blank"
             style={{ textDecoration: 'none', color: '#5786c1' }}
             rel="noopener noreferrer nofollow"
