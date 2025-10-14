@@ -57,7 +57,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'src/assets/favicon.ico', to: 'favicon.ico' },
-        { from: 'src/assets/coindrop-img.png', to: 'coindrop-img.png' }
+        { from: 'src/assets/coindrop-img.png', to: 'coindrop-img.png' },
+        { from: 'src/assets/tree-pixelartcss.png', to: 'tree-pixelartcss.png' },
       ],
     }),
     new MiniCssExtractPlugin({

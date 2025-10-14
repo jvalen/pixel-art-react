@@ -12,6 +12,7 @@
 @import 'input/_inputText.css';
 @import 'input/_button.css';
 @import 'views/_cookies.css';
+@import 'views/_description.css';
 @import 'views/_notFound.css';
 @import 'components/_PixelGrid.css';
 @import 'components/_SimpleNotification.css';

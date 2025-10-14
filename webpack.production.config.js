@@ -57,6 +57,7 @@ const config = {
         { from: 'src/assets/apple-touch-icon.png', to: 'apple-touch-icon.png' },
         { from: 'src/assets/regular-icon.png', to: 'regular-icon.png' },
         { from: 'src/assets/coindrop-img.png', to: 'coindrop-img.png' },
+        { from: 'src/assets/tree-pixelartcss.png', to: 'tree-pixelartcss.png' },
         { from: './public/_redirects', to: './' }
       ],
     }),
