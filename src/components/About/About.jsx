@@ -7,8 +7,7 @@ const About = () => (
       <title>About | Pixel Art to CSS</title>
     </Helmet>
     <h1>
-      About
-      <span className="highlighted">Pixel Art to CSS</span>
+      About <span className="highlighted">Pixel Art to CSS</span>
     </h1>
     <div className="about-image">
       <img width="150" src="tree-pixelartcss.png" alt="pixelartcss.com" />
@@ -230,11 +229,7 @@ const About = () => (
         <li>
           <strong>Data and Privacy Info</strong>: This site uses LocalStorage
           and GoatCounter,{' '}
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://pixelartcss.com/privacy-and-data"
-          >
+          <a rel="noopener" href="https://pixelartcss.com/privacy-and-data">
             check this out
           </a>{' '}
           to know more about it.
