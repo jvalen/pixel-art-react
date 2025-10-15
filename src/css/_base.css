@@ -21,9 +21,15 @@ body {
 
 .app-container {
   height: 100%;
-  width: 90%;
+  width: 96%;
   margin: 0 auto;
   padding: 0;
+}
+
+@media only screen and (min-width: 780px) {
+  .app-container {
+    width: 90%;
+  }
 }
 
 h1 {
@@ -78,4 +84,51 @@ h3 {
 
 .flex-row {
   flex-direction: row;
+}
+
+.info-route-nav {
+  nav {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: end;
+    gap: 1.6rem;
+
+    a {
+      padding: 0.1rem 0.2rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      font-size: 1rem;
+      color: #bbb;
+      text-transform: uppercase;
+    }
+
+    a:hover {
+      color: #b17e7e;
+    }
+  }
+
+  .counter {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0;
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .info-route-nav {
+    nav {
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .counter {
+      text-align: center;
+      justify-content: center;
+      padding: 0.6rem 0;
+    }
+  }
 }

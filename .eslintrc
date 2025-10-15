@@ -30,6 +30,8 @@
     "no-console": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-props-no-spreading": [0, { "custom": "ignore" }],
+    "react/jsx-no-target-blank": ["error", { "allowReferrer": true }],
+    "react/jsx-one-expression-per-line": "off",
     "jsx-a11y/no-static-element-interactions": 0,
     "jsx-a11y/label-has-for": [
       2,
