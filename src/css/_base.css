@@ -92,14 +92,7 @@ h3 {
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: end;
-    gap: 2rem;
-
-    .counter {
-      display: flex;
-      align-items: center;
-      padding-bottom: 0.3rem;
-      justify-content: flex-end;
-    }
+    gap: 1.6rem;
 
     a {
       padding: 0.1rem 0.2rem;
@@ -115,14 +108,26 @@ h3 {
       color: #b17e7e;
     }
   }
+
+  .counter {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0;
+    justify-content: flex-end;
+    text-align: right;
+  }
 }
 
-@media only screen and (max-width: 886px) {
+@media only screen and (max-width: 730px) {
   .info-route-nav {
     nav {
-      grid-auto-flow: row;
-      justify-content: end;
-      gap: 0.4rem;
+      gap: 1rem;
+    }
+
+    .counter {
+      text-align: center;
+      justify-content: center;
+      padding: 0.6rem 0;
     }
   }
 }
