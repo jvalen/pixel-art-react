@@ -6,6 +6,8 @@ header {
   color: $color-silver;
   margin: 1em 0;
   a {
+    display: inline-block;
+    text-align: center;
     text-decoration: none;
     color: inherit;
     &:visited,
@@ -16,43 +18,6 @@ header {
   }
   h1 {
     margin: 0;
-  }
-
-  .header__social {
-    text-align: right;
-
-    .header__credits {
-      font-size: 12px;
-      margin-bottom: 0.2em;
-
-      a {
-        color: $color-silver;
-      }
-
-      span {
-        color: $color-brandyRose;
-      }
-
-      img {
-        margin: 0 0 0 0.3em;
-        transition: transform 0.2s ease-in-out;
-      }
-
-      h2 {
-        display: block;
-        font-size: 0.8em;
-        padding-right: 1.3em;
-        position: relative;
-        margin: 0;
-        top: 0;
-      }
-
-      &:hover {
-        img {
-          transform: scale(1.2);
-        }
-      }
-    }
   }
 }
 

@@ -122,6 +122,7 @@ h3 {
   .info-route-nav {
     nav {
       gap: 1rem;
+      justify-content: center;
     }
 
     .counter {
