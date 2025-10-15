@@ -92,10 +92,16 @@ h3 {
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: end;
-    gap: 0.5rem;
+    gap: 2rem;
+
+    .counter {
+      display: flex;
+      align-items: center;
+      padding-bottom: 0.3rem;
+      justify-content: flex-end;
+    }
 
     a {
-      margin-left: 1.2rem;
       padding: 0.1rem 0.2rem;
       text-decoration: none;
       font-weight: 500;
@@ -111,11 +117,12 @@ h3 {
   }
 }
 
-@media only screen and (max-width: 730px) {
+@media only screen and (max-width: 886px) {
   .info-route-nav {
     nav {
       grid-auto-flow: row;
       justify-content: end;
+      gap: 0.4rem;
     }
   }
 }
