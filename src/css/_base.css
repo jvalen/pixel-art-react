@@ -85,3 +85,37 @@ h3 {
 .flex-row {
   flex-direction: row;
 }
+
+.info-route-nav {
+  nav {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: end;
+    gap: 0.5rem;
+
+    a {
+      margin-left: 1.2rem;
+      padding: 0.1rem 0.2rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      font-size: 1rem;
+      color: #bbb;
+      text-transform: uppercase;
+    }
+
+    a:hover {
+      color: #b17e7e;
+    }
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .info-route-nav {
+    nav {
+      grid-auto-flow: row;
+      justify-content: end;
+    }
+  }
+}
