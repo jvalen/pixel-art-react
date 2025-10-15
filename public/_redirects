@@ -1,4 +1,6 @@
 / /index.html 200
+/about /index.html 200
+/links /index.html 200
 /cookies /privacy-and-data 301
 /privacy-and-data /index.html 200
 /* /index.html 404
